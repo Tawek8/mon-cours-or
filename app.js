@@ -7,7 +7,7 @@ if(savedDiscount!==null){$('mult').value=savedDiscount}else{
   const oldMultiplier=localStorage.getItem('or-mult');
   if(oldMultiplier!==null){const old=parseNum(oldMultiplier);if(Number.isFinite(old)&&old>=0&&old<=1){$('mult').value=String(Math.round((1-old)*10000)/100).replace('.',',');localStorage.setItem('or-discount',$('mult').value)}}
 }
-function draw(){let discount=parseNum($('mult').value);const reference=[data.instant,data.cpor].filter(v=>typeof v==='number'&&Number.isFinite(v)&&v>0);const lowest=reference.length?Math.min(...reference):null;$('instant').textContent=eur(data.instant);$('cpor').textContent=eur(data.cpor);$('price18').textContent=Number.isFinite(discount)&&discount>=0&&discount<=100&&lowest!==null?eur(lowest/1000*.75*(1-discount/100))+' /g':'— €/g';for(const [id,label] of [...bars,...coins]){const el=$(id);if(el)el.querySelector('.value').textContent=eur(data[id]);}if(data.updatedAt)$('status').textContent='Dernière cotation enregistrée : '+new Date(data.updatedAt).toLocaleString('fr-FR');}
+function draw(){let discount=parseNum($('mult').value);const reference=[data.instant,data.cpor].filter(v=>typeof v==='number'&&Number.isFinite(v)&&v>0);const lowest=reference.length?Math.min(...reference):null;$('instant').textContent=eur(data.instant);$('cpor').textContent=eur(data.cpor);$('price18').textContent=Number.isFinite(discount)&&discount>=0&&discount<=100&&lowest!==null?eur(lowest/1000*.75*(1-discount/100))+' /g':'— €/g';for(const [id,label] of [...bars,...coins]){const el=$(id);if(el)el.querySelector('.value').textContent=eur(data[id]);}if(typeof window.drawBuyPrice==='function')window.drawBuyPrice();if(data.updatedAt){const d=new Date(data.updatedAt);$('last-updated').textContent=Number.isNaN(d.getTime())?'Dernière actualisation : —':'Dernière actualisation : '+d.toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});}}
 function build(target,items){$(target).innerHTML='';for(const [id,label] of items){let el=document.createElement('div');el.className='row';el.id=id;let n=document.createElement('span');n.className='name';n.textContent=label;let v=document.createElement('span');v.className='value';v.textContent='—';el.append(n,v);$(target).append(el)}}build('cotations',[...bars,...coins]);draw();
 $('mult').addEventListener('input',()=>{localStorage.setItem('or-discount',$('mult').value);draw()});
 function validate(obj){if(!obj||typeof obj!=='object'||Array.isArray(obj))throw Error('Format JSON incorrect');const result={};for(const [key,value] of Object.entries(obj)){if(['updatedAt','origin'].includes(key))continue;if(!['instant','cpor',...bars.map(x=>x[0]),...coins.map(x=>x[0])].includes(key))continue;if(value===null||value==='')continue;const n=typeof value==='number'?value:parseNum(value);if(!Number.isFinite(n)||n<=0)throw Error('Cours invalide : '+key);result[key]=n;}return result;}
@@ -17,26 +17,15 @@ async function refreshPrices(){const b=$('refresh');b.disabled=true;b.textConten
 $('refresh').onclick=refreshPrices;
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 
-// Tirer vers le bas pour actualiser, uniquement lorsque la page est en haut.
-(()=>{
- const indicator=$('pull-indicator');let startY=null, distance=0, pulling=false, busy=false;
- document.addEventListener('touchstart',e=>{
-   if(e.touches.length!==1||window.scrollY>3||busy||e.target.closest('input,textarea,button'))return;
-   startY=e.touches[0].clientY;distance=0;pulling=true;
- },{passive:true});
- document.addEventListener('touchmove',e=>{
-   if(!pulling||startY===null)return;
-   distance=Math.max(0,e.touches[0].clientY-startY);
-   if(window.scrollY>3||distance<15){indicator.classList.remove('visible');return;}
-   indicator.textContent=distance>90?'↑ Relâcher pour actualiser':'↓ Tirer pour actualiser';
-   indicator.classList.add('visible');
- },{passive:true});
- document.addEventListener('touchend',async()=>{
-   if(!pulling)return;pulling=false;startY=null;
-   const shouldRefresh=distance>90&&window.scrollY<4;
-   if(shouldRefresh){busy=true;indicator.textContent='↻ Actualisation…';try{await refreshPrices()}finally{busy=false;indicator.classList.remove('visible')}}
-   else indicator.classList.remove('visible');
-   distance=0;
- },{passive:true});
- document.addEventListener('touchcancel',()=>{pulling=false;startY=null;distance=0;indicator.classList.remove('visible')},{passive:true});
-})();
+// Calculateur de prix d'achat : décote libre, taxe fixe de 11,5 %.
+const buyItems=[['cpor','Lingot 1 kg'],...bars,...coins];
+const buySelect=$('buy-product');
+for(const [id,label] of buyItems){const option=document.createElement('option');option.value=id;option.textContent=label;buySelect.append(option)}
+const savedBuyProduct=localStorage.getItem('or-buy-product');
+if(buyItems.some(([id])=>id===savedBuyProduct))buySelect.value=savedBuyProduct;else buySelect.value='coq';
+const savedBuyDiscount=localStorage.getItem('or-buy-discount');if(savedBuyDiscount!==null)$('buy-discount').value=savedBuyDiscount;
+function drawBuy(){const price=data[buySelect.value],raw=$('buy-discount').value,discount=parseNum(raw);$('buy-reference').textContent=eur(price);if(typeof price!=='number'||!Number.isFinite(price)||price<=0||raw.trim()===''||!Number.isFinite(discount)||discount<0||discount>100){$('buy-final').textContent='—';$('buy-tax').textContent='dont — de taxes';return}const discounted=price*(1-discount/100);const tax=discounted*0.115;$('buy-final').textContent=eur(discounted-tax);$('buy-tax').textContent='dont '+eur(tax)+' de taxes'}
+window.drawBuyPrice=drawBuy;
+buySelect.addEventListener('change',()=>{localStorage.setItem('or-buy-product',buySelect.value);drawBuy()});
+$('buy-discount').addEventListener('input',()=>{localStorage.setItem('or-buy-discount',$('buy-discount').value);drawBuy()});
+drawBuy();
