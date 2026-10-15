@@ -4,7 +4,9 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.request import Request, urlopen
 from datetime import datetime, timezone
-import json, os, re, unicodedata
+import json, os, re, unicodedata, time
+from urllib.parse import urlparse
+from datetime import timedelta
 
 ROOT=Path(__file__).resolve().parent
 BASE='https://www.gold.fr'
@@ -105,10 +107,70 @@ def live_prices():
     if not prices:raise ValueError('Aucun cours extrait. '+ ' ; '.join(warnings))
     return {'prices':prices,'updatedAt':datetime.now(timezone.utc).isoformat(),'warnings':warnings,'origin':'Pages publiques de cotation'}
 
+# Spot public: goldprice.dev (USD/oz), conversion EUR via taux FX Frankfurter.
+# Historique: clôtures quotidiennes publiques sur un an, converties au taux de chaque jour.
+SPOT_URL='https://api.goldprice.dev/v1/prices?symbol=XAU-USD-SPOT'
+HISTORY_URL='https://api.goldprice.dev/v1/public/xau-history'
+FX_URL='https://api.frankfurter.dev/v1/latest?base=USD&symbols=EUR'
+FX_HISTORY_URL='https://api.frankfurter.dev/v1/2025-01-01..?base=USD&symbols=EUR'
+OUNCE_GRAMS=31.1034768
+_cache={}
+def json_url(url):
+    req=Request(url,headers={'User-Agent':'MonCoursOr/1.0','Accept':'application/json'})
+    with urlopen(req,timeout=12) as resp:return json.load(resp)
+def cached(key,seconds,loader):
+    item=_cache.get(key)
+    if item and time.time()-item[0]<seconds:return item[1]
+    value=loader();_cache[key]=(time.time(),value);return value
+def spot_live():
+    def load():
+        price=json_url(SPOT_URL)['symbols'][0]
+        if price.get('is_stale'):raise ValueError('Cours spot signalé périmé')
+        usd=float(price['price']);fx=float(json_url(FX_URL)['rates']['EUR'])
+        if not (100<usd<50000 and 0.3<fx<2):raise ValueError('Valeur spot ou change incohérent')
+        return {'price':round(usd*fx*1000/OUNCE_GRAMS,2),'updatedAt':price.get('computed_at'),'source':'goldprice.dev + Frankfurter','delay':'Cours spot potentiellement différé de 15 minutes'}
+    return cached('spot',300,load)
+def history_live():
+    def load():
+        raw=json_url(HISTORY_URL)
+        # Plusieurs formes JSON possibles: pas de fabrication de données en cas de changement.
+        series=raw if isinstance(raw,list) else next((raw[k] for k in ('series','prices','history','data','points') if isinstance(raw.get(k),list)),[])
+        parsed=[]
+        for item in series:
+            if not isinstance(item,dict):continue
+            dt=str(next((item[k] for k in ('date','day','timestamp','time','bar_start') if item.get(k)),''))[:10]
+            v=next((item[k] for k in ('close','price','value','usd_per_oz') if item.get(k) is not None),None)
+            try:
+                usd=float(v)
+                if re.fullmatch(r'\d{4}-\d{2}-\d{2}',dt) and 100<usd<50000:parsed.append((dt,usd))
+            except (TypeError,ValueError):pass
+        if not parsed:raise ValueError('Historique public indisponible ou format inconnu')
+        first=min(dt for dt,_ in parsed)
+        fx_data=json_url('https://api.frankfurter.dev/v1/'+first+'..?base=USD&symbols=EUR')
+        rates=fx_data.get('rates',{})
+        dates=sorted((d,float(r['EUR'])) for d,r in rates.items() if isinstance(r,dict) and r.get('EUR'))
+        if not dates:raise ValueError('Historique des changes indisponible')
+        out=[];idx=0
+        for dt,usd in sorted(set(parsed)):
+            while idx+1<len(dates) and dates[idx+1][0]<=dt:idx+=1
+            if dates[idx][0]>dt:continue
+            rate=dates[idx][1]
+            if .3<rate<2:out.append({'date':dt,'price':round(usd*rate*1000/OUNCE_GRAMS,2)})
+        if len(out)<2:raise ValueError('Historique insuffisant')
+        return {'points':out,'source':'goldprice.dev + Frankfurter','frequency':'Clôtures quotidiennes (pas de données intrajournalières)'}
+    return cached('history',3600,load)
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
     def do_GET(self):
-        if self.path.split('?')[0]!='/api/prices':return super().do_GET()
+        route=self.path.split('?')[0]
+        if route in ('/api/spot','/api/spot-history'):
+            try:
+                data=spot_live() if route=='/api/spot' else history_live();status=200
+            except Exception as e:data={'error':str(e)};status=503
+            payload=json.dumps(data,ensure_ascii=False).encode('utf-8')
+            self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(payload);return
+        if route!='/api/prices':return super().do_GET()
         try:
             f=ROOT/'cotations.json'
             data=json.loads(f.read_text(encoding='utf-8')) if f.exists() else live_prices()
