@@ -9,8 +9,31 @@ else{const old=localStorage.getItem('or-mult');if(old!==null){const n=parseNum(o
 let activeTab='bars',selected=null;
 const savedBuyDiscount=localStorage.getItem('or-buy-discount');if(savedBuyDiscount!==null)$('buy-discount').value=savedBuyDiscount;
 function renderQuotes(){const q=$('search').value.trim().toLocaleLowerCase('fr');const list=(activeTab==='bars'?bars:coins).filter(([,name])=>name.toLocaleLowerCase('fr').includes(q));const root=$('cotations');root.replaceChildren();if(!list.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Aucun produit trouvé';root.append(empty)}for(const [id,name] of list){const price=data[id];const available=typeof price==='number'&&Number.isFinite(price)&&price>0;const button=document.createElement('button');button.type='button';button.className='quote';button.disabled=!available;const title=document.createElement('span');title.className='name';title.textContent=name;const value=document.createElement('span');value.className='value';value.textContent=available?eur(price):'Indisponible';button.append(title,value);if(available){const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='›';button.append(arrow);button.addEventListener('click',()=>openBuy(id,name))}root.append(button)}}
-function drawBuy(){if(!selected)return;const price=data[selected.id];$('buy-reference').textContent=eur(price);const raw=$('buy-discount').value,discount=parseNum(raw);if(typeof price!=='number'||!Number.isFinite(price)||price<=0||raw.trim()===''||!Number.isFinite(discount)||discount<0||discount>100){$('buy-final').textContent='—';$('buy-tax').textContent='dont — de taxes';return}const discounted=price*(1-discount/100),tax=discounted*.115;$('buy-final').textContent=eur(discounted-tax);$('buy-tax').textContent='dont '+eur(tax)+' de taxes'}
-function openBuy(id,name){selected={id,name};$('buy-name').textContent=name;$('cpor-section').hidden=true;document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden=true;document.querySelector('.hero').hidden=true;$('buy-page').hidden=false;$('refresh').closest('.toolbar').hidden=true;$('status').hidden=true;$('editor').hidden=true;drawBuy();history.pushState({buy:id},'', '#achat-'+encodeURIComponent(id));$('buy-page').scrollIntoView({block:'start',behavior:'instant'})}
+function drawBuy(){if(!selected)return;const price=data[selected.id];$('buy-reference').textContent=eur(price);const raw=$('buy-discount').value,discount=parseNum(raw);if(typeof price!=='number'||!Number.isFinite(price)||price<=0||raw.trim()===''||!Number.isFinite(discount)||discount<0||discount>100){$('buy-final').textContent='—';$('buy-tax').textContent='dont — de taxes';drawTax(null);return}const discounted=price*(1-discount/100),tax=discounted*.115;$('buy-final').textContent=eur(discounted-tax);$('buy-tax').textContent='dont '+eur(tax)+' de taxes';drawTax(discounted)}
+function drawTax(gross){
+  const panel=$('tax-compare'),hint=$('tax-hint');
+  const costRaw=$('tax-cost').value,rateRaw=$('tax-rate').value,dateRaw=$('tax-date').value;
+  const cost=parseNum(costRaw),rate=parseNum(rateRaw);
+  const date=dateRaw?new Date(dateRaw+'T12:00:00'):null;
+  const today=new Date();today.setHours(12,0,0,0);
+  if(gross===null||!Number.isFinite(gross)||costRaw.trim()===''||!Number.isFinite(cost)||cost<0||!date||Number.isNaN(date.getTime())||date>today||rateRaw.trim()===''||!Number.isFinite(rate)||rate<0||rate>100){
+    panel.hidden=true;hint.textContent='Renseigne un prix d’acquisition, une date passée et un taux valide pour comparer.';return;
+  }
+  let years=today.getFullYear()-date.getFullYear();
+  if(today.getMonth()<date.getMonth()||(today.getMonth()===date.getMonth()&&today.getDate()<date.getDate()))years--;
+  const allowance=Math.min(100,Math.max(0,years-2)*5)/100;
+  const gain=Math.max(0,gross-cost),pvTax=gain*(1-allowance)*(rate/100),tmpTax=gross*.115;
+  const tmpNet=gross-tmpTax,pvNet=gross-pvTax;
+  $('tax-tmp-net').textContent=eur(tmpNet);
+  $('tax-pv-net').textContent=eur(pvNet);
+  $('tax-pv-amount').textContent=eur(pvTax);
+  $('tax-best').textContent=Math.abs(pvNet-tmpNet)<.005?'Résultat équivalent pour les deux régimes':(pvNet>tmpNet?'Plus-value potentiellement plus avantageuse de ':'Taxe forfaitaire potentiellement plus avantageuse de ')+eur(Math.abs(pvNet-tmpNet));
+  $('tax-years').textContent=years+' année(s) complète(s) de détention · abattement de '+Math.round(allowance*100)+' % sur la plus-value.';
+  panel.hidden=false;hint.textContent='Comparaison indicative sur le prix de rachat après décote, avant taxe.';
+}
+for(const id of ['tax-cost','tax-date','tax-rate'])$(id).addEventListener('input',drawBuy);
+$('tax-toggle').addEventListener('toggle',()=>{if($('tax-toggle').open)drawBuy()});
+function openBuy(id,name){selected={id,name};$('buy-name').textContent=name;$('tax-toggle').open=false;$('tax-cost').value='';$('tax-date').value='';$('cpor-section').hidden=true;document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden=true;document.querySelector('.hero').hidden=true;$('buy-page').hidden=false;$('refresh').closest('.toolbar').hidden=true;$('status').hidden=true;$('editor').hidden=true;drawBuy();history.pushState({buy:id},'', '#achat-'+encodeURIComponent(id));$('buy-page').scrollIntoView({block:'start',behavior:'instant'})}
 function closeBuy(updateHistory=true){selected=null;$('buy-page').hidden=true;$('cpor-section').hidden=false;document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden=false;document.querySelector('.hero').hidden=false;$('refresh').closest('.toolbar').hidden=false;$('status').hidden=false;if(updateHistory&&location.hash.startsWith('#achat-'))history.replaceState(null,'',location.pathname+location.search);$('cpor-section').scrollIntoView({block:'start',behavior:'instant'})}
 $('back').addEventListener('click',()=>closeBuy());window.addEventListener('popstate',()=>{if(selected)closeBuy(false)});
 for(const type of ['bars','coins'])$('tab-'+type).addEventListener('click',()=>{activeTab=type;for(const t of ['bars','coins']){$('tab-'+t).classList.toggle('active',t===type);$('tab-'+t).setAttribute('aria-selected',String(t===type))}$('cotations').scrollTop=0;renderQuotes()});
