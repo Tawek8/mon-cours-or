@@ -54,7 +54,14 @@ PRODUCTS=[
  ('suisse',r'(?:20\s*f\s*(?:suisse|croix)|croix\s*suisse\s*20\s*frs?|vreneli)'),
  ('pesos',r'50\s*pesos'),('krugerrand',r'krugerrand'),
  ('george',r'(?:souverain.*george\s*v|george\s*v.*souverain)'),
- ('elisabeth',r'(?:souverain.*(?:elisabeth|elizabeth)\s*ii|(?:elisabeth|elizabeth)\s*ii.*souverain|(?:elisabeth|elizabeth)\s*ii)')]
+ ('elisabeth',r'(?:souverain.*(?:elisabeth|elizabeth)\s*ii|(?:elisabeth|elizabeth)\s*ii.*souverain|(?:elisabeth|elizabeth)\s*ii)'),
+ ('demi_napoleon',r'(?:demi[ -]?napoleon|10\s*(?:f|francs?)\s*(?:napoleon|or))'),
+ ('demi_souverain',r'(?:demi[ -]?souverain|half\s*sovereign)'),
+ ('florins',r'10\s*florins?'),('tunisie',r'20\s*(?:f|francs?)\s*tunisie'),
+ ('union_latine',r'union\s*latine'),('reichsmark',r'(?:20\s*reichsmarks?|20\s*marks?\s*or)'),
+ ('us20',r'(?:20\s*(?:dollars?|\$)\s*(?:us|or|americain)|double\s*eagle)'),
+ ('us10',r'(?:10\s*(?:dollars?|\$)\s*(?:us|or|americain)|half\s*eagle)'),
+ ('us5',r'(?:5\s*(?:dollars?|\$)\s*(?:us|or|americain)|quarter\s*eagle)')]
 
 def extract_global(html):
     p=HTMLText();p.feed(html);out={}

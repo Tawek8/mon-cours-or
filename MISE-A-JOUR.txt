@@ -1,1 +1,2 @@
-Mise à jour : date complète de dernière actualisation et calculateur de prix d’achat. Remplacer uniquement index.html, app.js et sw.js sur GitHub.
+Mise à jour : onglets Lingots & lingotins / Pièces d'or, recherche, page de calcul au clic, nouvelles pièces, icône Au conservée.
+Remplacer tous les fichiers du ZIP dans GitHub.
