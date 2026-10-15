@@ -1,2 +1,3 @@
-Mise à jour : onglets Lingots & lingotins / Pièces d'or, recherche, page de calcul au clic, nouvelles pièces, icône Au conservée.
-Remplacer tous les fichiers du ZIP dans GitHub.
+Version : OR 18 CARATS en bas de la page, illustrations stylisées des pièces, pages de calcul simplifiées et actualisation par glissement conservée.
+Importer tous les fichiers, y compris le dossier coins, dans GitHub.
+Les images des pièces sont des illustrations vectorielles, pas des photographies fidèles.
