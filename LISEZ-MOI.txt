@@ -1,0 +1,22 @@
+MON COURS DE L'OR - Version de test avec récupération automatique
+
+SUR WINDOWS :
+1. Décompressez le ZIP.
+2. Python 3 doit être installé sur votre PC (python.org).
+3. Double-cliquez sur DEMARRER-WINDOWS.bat.
+4. Dans Chrome ou Edge, ouvrez http://localhost:8080
+5. Cliquez sur Actualiser.
+
+Les cours sont demandés directement aux deux pages Gold.fr depuis le PC.
+Ce connecteur a été écrit mais n'a PAS pu être testé contre les pages
+réelles depuis l'environnement de création. Si le site modifie sa structure
+ou bloque les requêtes, certaines valeurs resteront vides. L'application
+conserve les dernières valeurs enregistrées et affiche les erreurs.
+
+Le bouton de rafraîchissement ne fonctionne pas si index.html est ouvert
+par double-clic : il faut lancer DEMARRER-WINDOWS.bat.
+
+Sur iPhone, l'actualisation nécessitera un hébergement HTTPS avec un serveur
+qui exécute le connecteur. GitHub Pages seul ne peut pas exécuter Python.
+L'application n'est pas encore prête à être installée sur iPhone avec les
+cours automatiques. Ne pas considérer les cours comme une garantie de prix.

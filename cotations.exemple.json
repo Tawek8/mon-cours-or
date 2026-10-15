@@ -1,0 +1,23 @@
+{
+  "prices": {
+    "instant": null,
+    "cpor": null,
+    "bar500": null,
+    "bar250": null,
+    "bar100": null,
+    "bar50": null,
+    "bar20": null,
+    "bar10": null,
+    "bar5": null,
+    "bar2_5": null,
+    "bar1": null,
+    "coq": null,
+    "suisse": null,
+    "pesos": null,
+    "krugerrand": null,
+    "george": null,
+    "elisabeth": null
+  },
+  "updatedAt": null,
+  "warnings": []
+}

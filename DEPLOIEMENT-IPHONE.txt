@@ -1,0 +1,7 @@
+MISE EN LIGNE (GitHub + Render)
+1. Créer un dépôt GitHub public et y déposer le CONTENU du dossier mon-cours-or-iphone (pas le ZIP).
+2. Sur render.com : New > Blueprint, connecter le dépôt GitHub et confirmer le déploiement du fichier render.yaml.
+3. Attendre le déploiement et ouvrir l’adresse https://...onrender.com dans Safari sur iPhone.
+4. Safari > Partager > Sur l’écran d’accueil.
+
+Attention : cette version est publiquement accessible à quiconque connaît son URL. Le service gratuit peut se mettre en veille et prendre du temps à redémarrer. La récupération des cours dépend de Gold.fr et peut échouer.
