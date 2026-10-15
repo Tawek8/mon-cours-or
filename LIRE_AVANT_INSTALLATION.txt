@@ -1,0 +1,5 @@
+VERSION SANS ILLUSTRATIONS
+
+Sur GitHub, remplacer index.html, app.js et sw.js avec les fichiers de ce ZIP.
+Les autres fichiers sont inclus pour reference. Le dossier coins existant peut rester : il ne sera pas utilise.
+Les cours et calculs ne sont pas modifies.
