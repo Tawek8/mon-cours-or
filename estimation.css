@@ -41,3 +41,9 @@
   .est-add-wrap { display:flex; justify-content:flex-start; margin:12px 0 14px; }
   .est-add-wrap #est-add { width:auto; white-space:nowrap; }
 }
+
+@media(min-width:900px){.est-reference{font-size:12px;color:#aab6bf;margin-top:9px}}
+
+#silver-section .value{font-size:16px}#silver-section .name{font-size:14px}
+@media(min-width:900px){#silver-section{grid-column:1 / -1;grid-row:4}main:has(#buy-page:not([hidden])) #silver-section{display:none}}
+@media(max-width:390px){#silver-section .value{font-size:13px}}

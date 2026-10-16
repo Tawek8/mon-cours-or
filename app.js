@@ -50,7 +50,7 @@ function closeBuy(updateHistory=true){selected=null;$('buy-page').hidden=true;$(
 $('back').addEventListener('click',()=>closeBuy());window.addEventListener('popstate',()=>{if(selected)closeBuy(false)});
 for(const type of ['bars','coins'])$('tab-'+type).addEventListener('click',()=>{activeTab=type;for(const t of ['bars','coins']){$('tab-'+t).classList.toggle('active',t===type);$('tab-'+t).setAttribute('aria-selected',String(t===type))}$('cotations').scrollTop=0;renderQuotes()});
 $('buy-discount').addEventListener('input',()=>{localStorage.setItem('or-buy-discount',$('buy-discount').value);drawBuy()});
-function draw(){const raw=$('mult').value,discount=parseNum(raw);const instant=Number.isFinite(spotValue)&&spotValue>0?spotValue:(Number.isFinite(data.instant)&&data.instant>0?data.instant:null),cpor=Number.isFinite(data.cpor)&&data.cpor>0?data.cpor:null;const lowest=instant!==null&&cpor!==null?Math.min(instant,cpor):null;$('instant').textContent=eur(instant);$('price18').textContent=raw.trim()!==''&&Number.isFinite(discount)&&discount>=0&&discount<=100&&lowest!==null?eur(lowest/1000*.75*(1-discount/100))+' /g':'— €/g';renderQuotes();drawBuy();if(data.updatedAt){const d=new Date(data.updatedAt);$('last-updated').textContent=Number.isNaN(d.getTime())?'Dernière actualisation : —':'Dernière actualisation : '+d.toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'})}}
+function draw(){const raw=$('mult').value,discount=parseNum(raw);const instant=Number.isFinite(spotValue)&&spotValue>0?spotValue:(Number.isFinite(data.instant)&&data.instant>0?data.instant:null),cpor=Number.isFinite(data.cpor)&&data.cpor>0?data.cpor:null;const intrinsic=Number.isFinite(data.instant)&&data.instant>0?data.instant:null;const lowest=intrinsic!==null&&cpor!==null?Math.min(intrinsic,cpor):null;$('instant').textContent=eur(instant);$('price18').textContent=raw.trim()!==''&&Number.isFinite(discount)&&discount>=0&&discount<=100&&lowest!==null?eur(lowest/1000*.75*(1-discount/100))+' /g':'— €/g';renderQuotes();drawBuy();window.dispatchEvent(new Event('prices-updated'));if(data.updatedAt){const d=new Date(data.updatedAt);$('last-updated').textContent=Number.isNaN(d.getTime())?'Dernière actualisation : —':'Dernière actualisation : '+d.toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'})}}
 $('mult').addEventListener('input',()=>{localStorage.setItem('or-discount',$('mult').value);draw()});
 const allowed=new Set(['instant',...bars.map(p=>p[0]),...coins.map(p=>p[0])]);
 function validate(obj){if(!obj||typeof obj!=='object'||Array.isArray(obj))throw Error('Format JSON incorrect');const result={};for(const [key,value] of Object.entries(obj)){if(!allowed.has(key)||value===null||value==='')continue;const n=typeof value==='number'?value:parseNum(value);if(!Number.isFinite(n)||n<=0)throw Error('Cours invalide : '+key);result[key]=n}return result}
@@ -111,7 +111,7 @@ document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click'
 async function refreshAll(){
  const b=$('refresh');if(b.disabled)return;
  b.disabled=true;$('refresh-spinner').hidden=false;
- try{await Promise.allSettled([refreshPrices(),loadSpot(),loadSpotHistory()])}
+ try{await Promise.allSettled([refreshPrices(),loadSpot(),loadSpotHistory(),window.refreshSilver?.()])}
  finally{b.disabled=false;$('refresh-spinner').hidden=true}
 }
 loadSpot();loadSpotHistory();

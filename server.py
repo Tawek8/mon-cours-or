@@ -1,4 +1,4 @@
-"""Serveur local et connecteur de cotations (extraction HTML à vérifier sur le PC)."""
+"""Serveur local et connecteur de cotations (extraction HTML Gold.fr)."""
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from html.parser import HTMLParser
@@ -59,19 +59,23 @@ PRODUCTS=[
  ('elisabeth',r'(?:souverain.*(?:elisabeth|elizabeth)\s*ii|(?:elisabeth|elizabeth)\s*ii.*souverain|(?:elisabeth|elizabeth)\s*ii)'),
  ('demi_napoleon',r'(?:demi[ -]?napoleon|10\s*(?:f|francs?)\s*(?:napoleon|or))'),
  ('demi_souverain',r'(?:demi[ -]?souverain|half\s*sovereign)'),
- ('florins',r'10\s*florins?'),('tunisie',r'20\s*(?:f|francs?)\s*tunisie'),
- ('union_latine',r'union\s*latine'),('reichsmark',r'(?:20\s*reichsmarks?|20\s*marks?\s*or)'),
+ ('florins',r'10\s*florins?'),('tunisie',r'20\s*(?:frs?|francs?)\s*tunisie'),
+ ('union_latine',r'union\s*latine'),('reichsmark',r'(?:reichsmarks?|20\s*marks?\s*or)'),
  ('us20',r'(?:20\s*(?:dollars?|\$)\s*(?:us|or|americain)|double\s*eagle)'),
  ('us10',r'(?:10\s*(?:dollars?|\$)\s*(?:us|or|americain)|half\s*eagle)'),
  ('us5',r'(?:5\s*(?:dollars?|\$)\s*(?:us|or|americain)|quarter\s*eagle)')]
 
 def extract_global(html):
+    # Limite observée dans le HTML Gold.fr : ne jamais reprendre un prix non coté.
+    html=html.split('<div id="pieces-non-cotees"',1)[0]
     p=HTMLText();p.feed(html);out={}
     # Le site publie ses cotations aussi dans des blocs HTML, pas seulement des tableaux.
     # Chercher d'abord les libellés de la première liste « pièces cotées ».
     for cells in p.rows:
         if len(cells)<2:continue
-        label=normalize(cells[0]);price=euro(cells[1])
+        # Les tableaux actuels contiennent image, nom, prix, variation, actions.
+        label=normalize(cells[1] if len(cells)>=3 and not cells[0] else cells[0])
+        price=euro(cells[2] if len(cells)>=3 and not cells[0] else cells[1])
         if price is None:continue
         for key,pattern in PRODUCTS:
             if key not in out and re.search(pattern,label):out[key]=price
@@ -89,16 +93,16 @@ def extract_instant(html):
     p=HTMLText();p.feed(html)
     text=' '.join(' '.join(p.parts).split())
     # Valeur intrinsèque et cours boursable sont deux chiffres différents.
-    match=re.search(r'Valeur\s+intrins[eè]que\s*([^€]{1,90}€)',text,re.I)
+    match=re.search(r'Valeur\s+intrins[eè]que\s*(\d[\d\s.,]*€)',text,re.I)
     return euro(match.group(1)) if match else None
 
 def live_prices():
     prices={};warnings=[]
     try:
         x=extract_instant(fetch('/lingot-d-or-1-kg/'))
-        if x is None: warnings.append('Cours instantané non trouvé')
+        if x is None or x <= 0: warnings.append('Valeur intrinsèque Gold.fr non trouvée')
         else:prices['instant']=x
-    except Exception as e:warnings.append('Page instantanée inaccessible : '+str(e)[:100])
+    except Exception as e:warnings.append('Page valeur intrinsèque inaccessible : '+str(e)[:100])
     try:
         values=extract_global(fetch('/cours-or-prix-de-l-or/'))
         prices.update(values)
@@ -160,10 +164,51 @@ def history_live():
         return {'points':out,'source':'goldprice.dev + Frankfurter','frequency':'Clôtures quotidiennes (pas de données intrajournalières)'}
     return cached('history',3600,load)
 
+SILVER_LABELS=[
+ 'Lingot Argent 1Kg','Maple Leaf 1 Oz','Vienna Philharmonic 1 Oz',
+ 'Kangourou 1 Oz','Britannia 1 Oz','American Eagle 1 Oz','Krugerrand Argent 1 Oz',
+ 'China Panda 30g 2025-26','Kookaburra 1 Oz','Koala 1 Oz',
+ 'Kookaburra 1Kg (2008-2018)','Koala Argent 1Kg 2025-2026',
+ '20 Francs Turin en Argent','50 Francs Hercule','5 Francs Semeuse en Argent',
+ '10 Francs Hercule','10 Francs Turin','5 Francs Hercule en Argent (Ecu)',
+ '100 Francs en Argent']
+
+def extract_silver(html):
+    parser=HTMLText();parser.feed(html)
+    products=[]
+    # Lecture exclusive de la cellule qui suit le nom du produit.
+    # Aucun recours au tableau international ni aux variations/primes.
+    for label in SILVER_LABELS:
+        matches=[]
+        for cells in parser.rows:
+            for i,cell in enumerate(cells[:-1]):
+                if normalize(cell)==normalize(label):matches.append(cells[i+1])
+        price=None;status='unavailable'
+        if len(matches)==1:
+            if 'suspendue' in normalize(matches[0]):status='suspended'
+            else:
+                price=euro(matches[0])
+                if price is not None and price>0:status='available'
+                else:price=None
+        products.append({'name':label,'price':price,'status':status})
+    if not any(p['status'] in ('available','suspended') for p in products):
+        raise ValueError('Tableau des cours argent non reconnu')
+    return products
+
+def silver_live():
+    return {'products':extract_silver(fetch('/cours-argent-prix-de-l-argent/')),
+            'updatedAt':datetime.now(timezone.utc).isoformat(),
+            'source':BASE+'/cours-argent-prix-de-l-argent/'}
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
     def do_GET(self):
         route=self.path.split('?')[0]
+        if route=='/api/silver':
+            try:data=silver_live();status=200
+            except Exception as e:data={'error':str(e)};status=503
+            payload=json.dumps(data,ensure_ascii=False).encode('utf-8')
+            self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(payload);return
         if route in ('/api/spot','/api/spot-history'):
             try:
                 data=spot_live() if route=='/api/spot' else history_live();status=200
