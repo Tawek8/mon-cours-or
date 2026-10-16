@@ -47,6 +47,33 @@ main{width:100%;max-width:620px;margin-inline:auto;min-width:0}
 .heading{gap:12px}.heading-refresh{display:flex;align-items:center;justify-content:center;flex:none;width:32px;height:32px}.heading-refresh .refresh-spinner{width:22px;height:22px;margin:0;border-color:rgba(231,193,123,.2);border-top-color:#e7c17b}
 /* Le graphique reste facultatif et fermé à l’ouverture. */
 .spot-chart-details{margin-top:14px;border-top:1px solid #354149;padding-top:14px}.spot-chart-details summary{list-style:none;display:flex;align-items:center;justify-content:space-between;color:#e7c17b;font-size:13px;font-weight:650}.spot-chart-details summary::-webkit-details-marker{display:none}.spot-chart-details summary::after{content:'⌄';font-size:20px}.spot-chart-details[open] summary::after{content:'⌃'}
+
+/* Affichage ordinateur : deux colonnes, sans modifier l'interface iPhone. */
+@media (min-width: 900px) {
+  main {max-width: 1320px; padding: 42px 36px 80px; display:grid;
+    grid-template-columns:minmax(0, 0.9fr) minmax(0, 1.1fr);
+    column-gap:24px; row-gap:0; align-items:start;}
+  .heading {grid-column:1/-1; margin-bottom:22px;}
+  h1 {font-size:34px;}
+  #spot-section {grid-column:1; grid-row:2;}
+  #cpor-section {grid-column:2; grid-row:2 / span 2;}
+  section.hero {grid-column:1; grid-row:3;}
+  #buy-page {grid-column:1/-1; width:min(100%,860px); justify-self:center;}
+  .toolbar, .status, #editor, main > p.small {grid-column:1/-1;}
+  section {margin:0 0 20px; padding:24px;}
+  .quote {padding:14px 3px;}
+  .quote .name {font-size:15px;}
+  .price {font-size:46px;}
+  #spot-chart {height:220px!important;}
+  .spot-chart-details {margin-top:20px;}
+  .tax-field {grid-template-columns:minmax(0,1fr) 190px!important;}
+  .tax-field input[type="date"] {font-size:16px!important; padding:12px!important;}
+  .buy-result {font-size:42px;}
+  .toolbar {margin-top:4px;}
+}
+@media (min-width: 1200px) {
+  main {grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); column-gap:30px;}
+}
 </style></head><body><main><div class="heading"><div><div class="eyebrow" id="last-updated">Dernière actualisation : —</div><h1>Mon Cours de l'Or</h1></div><div class="heading-refresh"><span id="refresh-spinner" class="refresh-spinner" role="status" aria-label="Actualisation en cours" hidden></span></div></div><section id="spot-section"><h2>Cours spot de l’or</h2><div class="row"><span class="name">Or pur · 1 kg</span><span class="value" id="instant">—</span></div><div id="spot-meta" class="small" style="margin-top:9px">Chargement du cours spot…</div><details class="spot-chart-details" id="spot-chart-details"><summary>Afficher le graphique</summary><div class="tabs spot-periods" aria-label="Période du graphique"><button type="button" class="tab active" data-period="7">7 jours</button><button type="button" class="tab" data-period="30">30 jours</button><button type="button" class="tab" data-period="365">1 an</button></div><svg id="spot-chart" role="img" aria-label="Évolution du cours spot de l’or en euros par kilogramme" viewBox="0 0 320 155" preserveAspectRatio="none" style="width:100%;height:155px;display:block"></svg><div id="chart-note" class="small">Chargement de l’historique…</div></details></section><section id="cpor-section"><h2>Cours CPoR</h2><div class="tabs" role="tablist" aria-label="Catégories de cotations"><button id="tab-coins" class="tab active" role="tab" aria-selected="true" type="button">Pièces d'or</button><button id="tab-bars" class="tab" role="tab" aria-selected="false" type="button">Lingots & lingotins</button></div><div id="cotations" class="quotes" aria-live="polite"></div><div class="small">Touchez un produit pour calculer son prix d'achat.</div></section><section class="hero"><div class="eyebrow">OR 18 CARATS</div><div class="price gold" id="price18">— €/g</div><div class="inputs"><label for="mult">Décote (%)</label><input id="mult" inputmode="decimal" value="25" aria-label="Décote (%)"></div></section><section id="buy-page" hidden><button id="back" class="back secondary" type="button">← Retour aux cours</button><div class="eyebrow">CALCUL PRIX D'ACHAT</div><div class="buy-heading"><h2 id="buy-name" class="gold"></h2></div><div class="row"><span class="name">Cours de référence</span><span class="value" id="buy-reference">—</span></div><div class="inputs"><label for="buy-discount">Frais de courtage (%)</label><input id="buy-discount" inputmode="decimal" value="7,5" aria-label="Frais de courtage pour le prix d'achat"></div><div class="buy-divider"></div><div class="muted">PRIX D'ACHAT FINAL</div><div class="buy-result" id="buy-final">—</div><div class="buy-tax" id="buy-tax">dont — de taxes</div>
 <details class="tax-toggle fees-toggle" id="fees-toggle"><summary>Détails des frais de courtage</summary>
 <div class="tax-compare">

@@ -1,0 +1,8 @@
+Mon Cours de l'Or — version responsive PC + iPhone
+
+Sur iPhone : affichage existant conserve.
+Sur ordinateur (largeur >= 900 px) : cours spot a gauche, CPoR a droite, OR 18 CARATS sous le spot.
+Le calcul d'achat utilise une zone centrale plus large.
+Les donnees, le serveur, les formules et les autres fonctions sont inchanges.
+
+INSTALLATION : deposer les fichiers de ce ZIP a la racine du depot GitHub (pas le dossier conteneur).
