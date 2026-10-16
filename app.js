@@ -56,8 +56,8 @@ const allowed=new Set(['instant',...bars.map(p=>p[0]),...coins.map(p=>p[0])]);
 function validate(obj){if(!obj||typeof obj!=='object'||Array.isArray(obj))throw Error('Format JSON incorrect');const result={};for(const [key,value] of Object.entries(obj)){if(!allowed.has(key)||value===null||value==='')continue;const n=typeof value==='number'?value:parseNum(value);if(!Number.isFinite(n)||n<=0)throw Error('Cours invalide : '+key);result[key]=n}return result}
 $('manual').onclick=()=>{const editor=$('editor');editor.hidden=!editor.hidden;$('json').value=JSON.stringify(Object.fromEntries(Object.entries(data).filter(([k])=>allowed.has(k))),null,2);if(!editor.hidden)editor.scrollIntoView({behavior:'smooth'})};
 $('save').onclick=()=>{try{const values=validate(JSON.parse($('json').value));data={...data,...values,updatedAt:new Date().toISOString(),origin:'Saisie manuelle'};localStorage.setItem('or-prices',JSON.stringify(data));$('error').textContent='';$('editor').hidden=true;draw()}catch(e){$('error').textContent=e.message}};
-async function refreshPrices(){const b=$('refresh');b.disabled=true;b.textContent='Actualisation…';$('status').textContent='Connexion à la source des cours…';try{const r=await fetch('/api/prices',{cache:'no-store'});if(!r.ok)throw Error('Service indisponible (HTTP '+r.status+')');const payload=await r.json();const values=validate(payload.prices||{});if(!Object.keys(values).length)throw Error('Aucune cotation vérifiable trouvée');const oldKeys=new Set(Object.keys(data));for(const key of allowed)if(!(key in values))delete data[key];data={...data,...values,updatedAt:payload.updatedAt||new Date().toISOString(),origin:'Mise à jour'};localStorage.setItem('or-prices',JSON.stringify(data));draw();$('status').textContent=payload.warnings?.length?'Actualisé · Certaines cotations sont indisponibles : '+payload.warnings.join(', '):'Cours actualisés.'}catch(e){$('status').textContent='Mise à jour impossible : '+e.message+'. Les derniers cours enregistrés restent affichés.'}finally{b.disabled=false;b.textContent='↻ Actualiser';loadSpot();loadSpotHistory()}}
-$('refresh').onclick=refreshPrices;if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});draw();
+async function refreshPrices(){const b=$('refresh');$('status').textContent='Connexion à la source des cours…';try{const r=await fetch('/api/prices',{cache:'no-store'});if(!r.ok)throw Error('Service indisponible (HTTP '+r.status+')');const payload=await r.json();const values=validate(payload.prices||{});if(!Object.keys(values).length)throw Error('Aucune cotation vérifiable trouvée');const oldKeys=new Set(Object.keys(data));for(const key of allowed)if(!(key in values))delete data[key];data={...data,...values,updatedAt:payload.updatedAt||new Date().toISOString(),origin:'Mise à jour'};localStorage.setItem('or-prices',JSON.stringify(data));draw();$('status').textContent=payload.warnings?.length?'Actualisé · Certaines cotations sont indisponibles : '+payload.warnings.join(', '):'Cours actualisés.'}catch(e){$('status').textContent='Mise à jour impossible : '+e.message+'. Les derniers cours enregistrés restent affichés.'}finally{}}
+$('refresh').onclick=refreshAll;if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});draw();
 
 
 // Actualisation discrète en tirant vers le bas depuis le haut de la page.
@@ -77,7 +77,7 @@ document.addEventListener('touchmove',event=>{
 document.addEventListener('touchend',()=>{
   const shouldRefresh=pullStartY!==null&&pullDistance>=75&&atPageTop();
   pullStartY=null;pullDistance=0;
-  if(shouldRefresh&&!$('refresh').disabled)refreshPrices();
+  if(shouldRefresh&&!$('refresh').disabled)refreshAll();
 },{passive:true});
 document.addEventListener('touchcancel',()=>{pullStartY=null;pullDistance=0;},{passive:true});
 
@@ -107,7 +107,11 @@ async function loadSpotHistory(){
  catch(e){try{spotPoints=JSON.parse(localStorage.getItem('or-spot-history')||'[]')}catch{spotPoints=[]}renderSpotChart();if(spotPoints.length)$('chart-note').textContent+=' · Dernier historique enregistré';}
 }
 document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click',()=>{spotPeriod=Number(b.dataset.period);renderSpotChart()}));
-const oldRefresh=refreshPrices;
-// Le bouton conserve l'actualisation des CPoR et relance aussi le spot et l'historique.
-$('refresh').onclick=async()=>{await Promise.allSettled([oldRefresh(),loadSpot(),loadSpotHistory()])};
+// Actualise toutes les sources avec une roulette visible jusqu'à la fin.
+async function refreshAll(){
+ const b=$('refresh');if(b.disabled)return;
+ b.disabled=true;$('refresh-spinner').hidden=false;
+ try{await Promise.allSettled([refreshPrices(),loadSpot(),loadSpotHistory()])}
+ finally{b.disabled=false;$('refresh-spinner').hidden=true}
+}
 loadSpot();loadSpotHistory();
