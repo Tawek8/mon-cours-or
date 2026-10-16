@@ -45,3 +45,10 @@
 .est-reset-wrap{display:flex;justify-content:flex-end;margin-top:16px}
 .est-reset-wrap button{min-height:44px}
 @media(max-width:899px){.est-reset-wrap button{width:100%}}
+
+.est-date-validate{margin-top:6px;font-size:12px;min-height:36px}
+.est-date-status{font-size:12px;color:#aab6bf;line-height:1.4}
+.est-fields input[type=date],#tax-date{box-sizing:border-box;min-width:0;max-width:100%;width:100%;height:44px;min-height:44px;display:block;-webkit-appearance:none;appearance:none}
+.est-fields input[type=date]::-webkit-date-and-time-value,#tax-date::-webkit-date-and-time-value{text-align:left;min-height:1em}
+.tax-field{min-width:0}#tax-date-validate{margin-top:8px;min-height:44px}#tax-date-status{display:block;margin-top:6px;color:#aab6bf}
+@media(max-width:899px){.est-fields input[type=date]{padding:10px;font-size:16px}.est-date-validate{min-height:44px}.tax-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}

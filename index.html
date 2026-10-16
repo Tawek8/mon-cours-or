@@ -83,7 +83,7 @@ main{width:100%;max-width:620px;margin-inline:auto;min-width:0}
 <details class="tax-toggle" id="tax-toggle"><summary>Comparer TMP et TPV</summary>
 <div class="tax-fields">
 <div class="tax-field"><label for="tax-cost">Prix d’acquisition (€)</label><input id="tax-cost" inputmode="decimal" placeholder="Ex. 400,00" aria-label="Prix d’acquisition"></div>
-<div class="tax-field"><label for="tax-date">Date d’acquisition</label><input id="tax-date" type="date" aria-label="Date d’acquisition"></div>
+<div class="tax-field"><label for="tax-date">Date d’acquisition</label><input id="tax-date" type="date" aria-label="Date d’acquisition"><button type="button" id="tax-date-validate" class="secondary">Valider la date</button><small id="tax-date-status" aria-live="polite"></small></div>
 <div class="tax-field"><span class="tax-rate-label">Taux TPV</span><strong class="tax-rate-fixed">36,2 %</strong></div>
 
 <div class="tax-compare" id="tax-compare" hidden>
@@ -95,5 +95,5 @@ main{width:100%;max-width:620px;margin-inline:auto;min-width:0}
 </div>
 <div class="tax-note" id="tax-hint">Renseigne le prix et la date d’acquisition pour comparer les deux régimes.</div>
 
-</div></details></section><div class="toolbar"><button id="refresh">↻ Actualiser</button><button id="manual" class="secondary">Saisir les cours</button></div><div class="status" id="status" aria-live="polite">Aucun cours chargé. Les prix ne seront pas inventés.</div><section id="editor" hidden><h2>Saisie / importation des cotations</h2><div class="small">Colle un objet JSON de cotations (en euros). Tu peux utiliser ce mode si Gold.fr bloque la récupération automatique. Les valeurs sont enregistrées uniquement sur cet appareil.</div><textarea id="json"></textarea><button id="save">Enregistrer les cours</button><div id="error" class="small"></div></section><p class="small">Cours indicatifs. Vérifie les valeurs avant toute transaction.</p></main><script src="app.js"></script><script src="estimation.js"></script><script src="silver.js"></script><script src="c3e.js"></script><script src="mobile.js"></script></body></html>
+</div></details></section><div class="toolbar"><button id="refresh">↻ Actualiser</button><button id="manual" class="secondary">Saisir les cours</button></div><div class="status" id="status" aria-live="polite">Aucun cours chargé. Les prix ne seront pas inventés.</div><section id="editor" hidden><h2>Saisie / importation des cotations</h2><div class="small">Colle un objet JSON de cotations (en euros). Tu peux utiliser ce mode si Gold.fr bloque la récupération automatique. Les valeurs sont enregistrées uniquement sur cet appareil.</div><textarea id="json"></textarea><button id="save">Enregistrer les cours</button><div id="error" class="small"></div></section><p class="small">Cours indicatifs. Vérifie les valeurs avant toute transaction.</p></main><script src="fiscal.js"></script><script src="app.js"></script><script src="estimation.js"></script><script src="silver.js"></script><script src="c3e.js"></script><script src="mobile.js"></script></body></html>
 

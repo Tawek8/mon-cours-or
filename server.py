@@ -62,8 +62,8 @@ PRODUCTS=[
  ('florins',r'10\s*florins?'),('tunisie',r'20\s*(?:frs?|francs?)\s*tunisie'),
  ('union_latine',r'union\s*latine'),('reichsmark',r'(?:reichsmarks?|20\s*marks?\s*or)'),
  ('us20',r'(?:20\s*(?:dollars?|\$)\s*(?:us|or|americain)|double\s*eagle)'),
- ('us10',r'(?:10\s*(?:dollars?|\$)\s*(?:us|or|americain)|half\s*eagle)'),
- ('us5',r'(?:5\s*(?:dollars?|\$)\s*(?:us|or|americain)|quarter\s*eagle)')]
+ ('us10',r'(?:10\s*(?:dollars?|\$)\s*(?:us|or|americain))'),
+ ('us5',r'(?:5\s*(?:dollars?|\$)\s*(?:us|or|americain))')]
 
 def extract_global(html):
     # Limite observée dans le HTML Gold.fr : ne jamais reprendre un prix non coté.

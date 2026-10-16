@@ -40,3 +40,6 @@ Vérifications : calculs argent et régression or, contrôle syntaxique JavaScri
 
 ## Dernière version : iPhone et recherche
 Consulter MISE-A-JOUR-IPHONE.md pour les deux vues mobiles, les lignes repliables et la recherche de produits sur les deux supports.
+
+## Audit et corrections
+La dernière version est décrite dans AUDIT-CORRECTIONS.md : choix du meilleur net TMP/TPV en comparaison, validation explicite des dates et fiabilisation des saisies.
