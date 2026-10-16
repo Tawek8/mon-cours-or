@@ -43,3 +43,6 @@ Consulter MISE-A-JOUR-IPHONE.md pour les deux vues mobiles, les lignes repliable
 
 ## Audit et corrections
 La dernière version est décrite dans AUDIT-CORRECTIONS.md : choix du meilleur net TMP/TPV en comparaison, validation explicite des dates et fiabilisation des saisies.
+
+## Dernier ajustement de présentation
+DERNIER-AJUSTEMENT.md prévaut sur les descriptions précédentes : estimation initiale vide, validation de date sans bouton supplémentaire, PC limité à l’estimation.

@@ -33,8 +33,10 @@ function drawTax(gross){
  panel.hidden=false;hint.textContent='Le résultat principal utilise le régime le plus avantageux.';return c;
 }
 $('tax-cost').addEventListener('input',drawBuy);
-$('tax-date').addEventListener('input',()=>{taxDatePending=true;$('tax-date-status').textContent='Date à valider';drawBuy()});
-$('tax-date-validate').addEventListener('click',()=>{const field=$('tax-date');if(field.value&&!GoldFiscal.date(field.value)){$('tax-date-status').textContent='Saisir une date complète, valide et non future';return}taxDateCommitted=field.value;taxDatePending=false;$('tax-date-status').textContent=field.value?'Date validée':'Date effacée';drawBuy()});
+$('tax-date').addEventListener('input',()=>{taxDatePending=true;$('tax-date-status').textContent='Date à terminer';drawBuy()});
+function commitTaxDate(){const field=$('tax-date');taxDateCommitted=field.value;taxDatePending=false;$('tax-date-status').textContent=field.value&&!GoldFiscal.date(field.value)?'Saisir une date complète, valide et non future':'';drawBuy()}
+$('tax-date').addEventListener('change',commitTaxDate);
+$('tax-date').addEventListener('blur',commitTaxDate);
 $('tax-toggle').addEventListener('toggle',()=>{if($('tax-toggle').open)drawBuy()});
 function openBuy(id,name){selected={id,name};$('buy-name').textContent=name;$('tax-toggle').open=false;$('fees-toggle').open=false;$('tax-cost').value='';$('tax-date').value='';taxDateCommitted='';taxDatePending=false;$('tax-date-status').textContent='';$('cpor-section').hidden=true;document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden=true;document.querySelector('.hero').hidden=true;$('buy-page').hidden=false;document.querySelector('.toolbar').hidden=true;$('status').hidden=true;$('editor').hidden=true;drawBuy();history.pushState({buy:id},'', '#achat-'+encodeURIComponent(id));$('buy-page').scrollIntoView({block:'start',behavior:'instant'})}
 function closeBuy(updateHistory=true){selected=null;$('buy-page').hidden=true;$('cpor-section').hidden=false;document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden=false;document.querySelector('.hero').hidden=false;document.querySelector('.toolbar').hidden=false;$('status').hidden=false;if(updateHistory&&location.hash.startsWith('#achat-'))history.replaceState(null,'',location.pathname+location.search);$('cpor-section').scrollIntoView({block:'start',behavior:'instant'})}
