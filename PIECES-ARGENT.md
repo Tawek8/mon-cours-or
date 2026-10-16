@@ -27,3 +27,4 @@ Sources :
 Une cotation suspendue ne permet pas une proposition automatique Boursable. La Fonte reste calculable si le C3E est disponible. Les cours mémorisés conservent les limites de récupération décrites dans README.md : aucune validation serveur en direct de Cookson-Clal n’est revendiquée.
 
 Vérification : tests des 18 références dans les deux modes, FC, quantités, prix manuel, arrondi, cotation suspendue et C3E manquant. Régression des calculs or et bijoux argent.
+`nLes pièces argent sont sélectionnées en mode Fonte par défaut. Le mode Boursable reste accessible.
