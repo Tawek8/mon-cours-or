@@ -10,7 +10,18 @@ let activeTab='coins',selected=null;
 let spotValue=null,spotPoints=[],spotPeriod=7;
 const savedBuyDiscount=localStorage.getItem('or-buy-discount');if(savedBuyDiscount!==null)$('buy-discount').value=savedBuyDiscount;
 function renderQuotes(){const list=(activeTab==='bars'?bars:coins);const root=$('cotations');root.replaceChildren();if(!list.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Aucun produit trouvé';root.append(empty)}for(const [id,name] of list){const price=data[id];const available=typeof price==='number'&&Number.isFinite(price)&&price>0;const button=document.createElement('button');button.type='button';button.className='quote';button.disabled=!available;const title=document.createElement('span');title.className='name';title.textContent=name;const value=document.createElement('span');value.className='value';value.textContent=available?eur(price):'Indisponible';button.append(title,value);if(available){const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='›';button.append(arrow);button.addEventListener('click',()=>openBuy(id,name))}root.append(button)}}
-function drawBuy(){if(!selected)return;const price=data[selected.id];$('buy-reference').textContent=eur(price);const raw=$('buy-discount').value,discount=parseNum(raw);if(typeof price!=='number'||!Number.isFinite(price)||price<=0||raw.trim()===''||!Number.isFinite(discount)||discount<0||discount>100){$('buy-final').textContent='—';$('buy-tax').textContent='dont — de taxes';drawTax(null);return}const discounted=price*(1-discount/100),tax=discounted*.115;$('buy-final').textContent=eur(discounted-tax);$('buy-tax').textContent='dont '+eur(tax)+' de taxes';drawTax(discounted)}
+function drawBuy(){if(!selected)return;const price=data[selected.id];$('buy-reference').textContent=eur(price);const raw=$('buy-discount').value,discount=parseNum(raw);if(typeof price!=='number'||!Number.isFinite(price)||price<=0||raw.trim()===''||!Number.isFinite(discount)||discount<0||discount>100){$('buy-final').textContent='—';$('buy-tax').textContent='dont — de taxes';drawFees(null,null);drawTax(null);return}const discounted=price*(1-discount/100),tax=discounted*.115;$('buy-final').textContent=eur(discounted-tax);$('buy-tax').textContent='dont '+eur(tax)+' de taxes';drawFees(price,discount);drawTax(discounted)}
+function drawFees(price,discount){
+  const goldtrade=$('fees-goldtrade'),agency=$('fees-agency'),agencyLabel=$('fees-agency-label'),note=$('fees-note');
+  if(price===null||discount===null){goldtrade.textContent='—';agency.textContent='—';agencyLabel.textContent='Agence';note.hidden=true;return}
+  const goldtradeRate=Math.min(1.5,discount),agencyRate=Math.max(0,discount-1.5);
+  goldtrade.textContent=eur(price*goldtradeRate/100);
+  agency.textContent=eur(price*agencyRate/100);
+  agencyLabel.textContent='Agence ('+String(Math.round(agencyRate*100)/100).replace('.',',')+' %)';
+  $('fees-goldtrade-label').textContent='GoldTrade ('+String(goldtradeRate).replace('.',',')+' %)';
+  note.hidden=discount>=1.5;
+  note.textContent=discount<1.5?'Frais inférieurs à 1,5 % : la part GoldTrade est plafonnée au total des frais.':'';
+}
 function drawTax(gross){
   const panel=$('tax-compare'),hint=$('tax-hint');
   const costRaw=$('tax-cost').value,dateRaw=$('tax-date').value;
@@ -34,7 +45,7 @@ function drawTax(gross){
 }
 for(const id of ['tax-cost','tax-date'])$(id).addEventListener('input',drawBuy);
 $('tax-toggle').addEventListener('toggle',()=>{if($('tax-toggle').open)drawBuy()});
-function openBuy(id,name){selected={id,name};$('buy-name').textContent=name;$('tax-toggle').open=false;$('tax-cost').value='';$('tax-date').value='';$('cpor-section').hidden=true;document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden=true;document.querySelector('.hero').hidden=true;$('buy-page').hidden=false;$('refresh').closest('.toolbar').hidden=true;$('status').hidden=true;$('editor').hidden=true;drawBuy();history.pushState({buy:id},'', '#achat-'+encodeURIComponent(id));$('buy-page').scrollIntoView({block:'start',behavior:'instant'})}
+function openBuy(id,name){selected={id,name};$('buy-name').textContent=name;$('tax-toggle').open=false;$('fees-toggle').open=false;$('tax-cost').value='';$('tax-date').value='';$('cpor-section').hidden=true;document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden=true;document.querySelector('.hero').hidden=true;$('buy-page').hidden=false;$('refresh').closest('.toolbar').hidden=true;$('status').hidden=true;$('editor').hidden=true;drawBuy();history.pushState({buy:id},'', '#achat-'+encodeURIComponent(id));$('buy-page').scrollIntoView({block:'start',behavior:'instant'})}
 function closeBuy(updateHistory=true){selected=null;$('buy-page').hidden=true;$('cpor-section').hidden=false;document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden=false;document.querySelector('.hero').hidden=false;$('refresh').closest('.toolbar').hidden=false;$('status').hidden=false;if(updateHistory&&location.hash.startsWith('#achat-'))history.replaceState(null,'',location.pathname+location.search);$('cpor-section').scrollIntoView({block:'start',behavior:'instant'})}
 $('back').addEventListener('click',()=>closeBuy());window.addEventListener('popstate',()=>{if(selected)closeBuy(false)});
 for(const type of ['bars','coins'])$('tab-'+type).addEventListener('click',()=>{activeTab=type;for(const t of ['bars','coins']){$('tab-'+t).classList.toggle('active',t===type);$('tab-'+t).setAttribute('aria-selected',String(t===type))}$('cotations').scrollTop=0;renderQuotes()});
