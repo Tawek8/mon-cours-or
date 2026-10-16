@@ -33,3 +33,11 @@
   /* Le calcul d'achat d'une cotation remplace temporairement l'estimation. */
   main:has(#buy-page:not([hidden])) #estimation-client { display: none !important; }
 }
+
+/* Ajustements PC : actualisation dans l'en-tête, ajout à la suite des lignes. */
+@media (min-width: 900px) {
+  main > .heading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  main > .heading .pc-top-refresh { margin-left:auto; flex-shrink:0; white-space:nowrap; }
+  .est-add-wrap { display:flex; justify-content:flex-start; margin:12px 0 14px; }
+  .est-add-wrap #est-add { width:auto; white-space:nowrap; }
+}

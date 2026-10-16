@@ -3,7 +3,7 @@
 const coins=[['coq','Napoléon 20 F Coq',5.806],['suisse','Croix Suisse 20 F',5.806],['pesos','50 Pesos',37.5],['krugerrand','Krugerrand',31.1035],['george','Souverain George V',7.322],['elisabeth','Souverain Elisabeth II',7.322],['demi_napoleon','Demi Napoléon 10 F',2.903],['demi_souverain','Demi Souverain',3.661],['florins','10 Florins',6.048],['tunisie','20 Francs Tunisie',5.806],['union_latine','Union Latine',5.806],['reichsmark','20 Reichsmarks',7.168],['us20','20 Dollars US',30.093],['us10','10 Dollars US',15.046],['us5','5 Dollars US',7.523]];
 const bars=[['cpor','Lingot 1 kg',1000],['bar500','Lingotin 500 g',500],['bar250','Lingotin 250 g',250],['bar100','Lingotin 100 g',100],['bar50','Lingotin 50 g',50],['bar20','Lingotin 20 g',20],['bar10','Lingotin 10 g',10],['bar5','Lingotin 5 g',5]];
 const all=[...coins,...bars];let seq=0;const lines=[];
-const root=document.createElement('section');root.id='estimation-client';root.innerHTML='<div class="est-head"><h2>Estimation client</h2><button type="button" id="est-add">＋ Ajouter une ligne</button></div><div id="est-rows"></div><div class="est-summary"><div class="est-totals"><span>Propositions : <b id="est-gross">—</b></span><span>Net à verser au client : <strong id="est-net">—</strong></span></div><details id="est-tax-details"><summary>Détails des taxes et frais</summary><div id="est-breakdown"></div></details></div><p class="est-note">Les cours sont indicatifs. Les calculs sont actualisés à partir des dernières cotations disponibles.</p>';
+const root=document.createElement('section');root.id='estimation-client';root.innerHTML='<div class="est-head"><h2>Estimation client</h2></div><div id="est-rows"></div><div class="est-add-wrap"><button type="button" id="est-add">＋ Ajouter une ligne</button></div><div class="est-summary"><div class="est-totals"><span>Propositions : <b id="est-gross">—</b></span><span>Net à verser au client : <strong id="est-net">—</strong></span></div><details id="est-tax-details"><summary>Détails des taxes et frais</summary><div id="est-breakdown"></div></details></div><p class="est-note">Les cours sont indicatifs. Les calculs sont actualisés à partir des dernières cotations disponibles.</p>';
 const cpor=document.getElementById('cpor-section');cpor.parentNode.insertBefore(root,cpor.nextSibling);
 const $=id=>document.getElementById(id), fmt=v=>Number.isFinite(v)?v.toLocaleString('fr-FR',{style:'currency',currency:'EUR'}):'—', num=v=>{let n=Number(String(v??'').replace(',','.'));return Number.isFinite(n)?Math.max(0,n):0};
 const opt=(value,label)=>`<option value="${value}">${label}</option>`;
@@ -29,5 +29,23 @@ $('est-add').addEventListener('click',()=>{lines.push(newLine());render()});$('e
 $('est-rows').addEventListener('change',e=>{const f=e.target.dataset.field;if(!f)return;const l=lines.find(x=>x.id===Number(e.target.closest('.est-row').dataset.id));if(!l)return;const v=e.target.value;if(f==='product'){l.product=v;l.manual=null;if(v==='bijou'){l.gtax=null}else{l.mode='cpor';l.fees='8'}}else if(f==='titre'){l.titre=v;l.manual=null;l.gtax=null}else if(f==='fiscal')l.fiscal=v;else if(f==='gtax'){l.gtax=v;l.manual=null}else if(f==='fees'){l.fees=v;l.manual=null}else if(f==='manual'){l.manual=v;if(l.product==='bijou'&&reference(l)>0)l.gtax=(100*(1-num(v)/reference(l))).toFixed(2)}else l[f]=v;render()});
 // Actualiser les prix proposés à chaque retour de données sans interférer avec l'application d'origine.
 const observer=new MutationObserver(()=>{if(!root.hidden)render()});const updated=$('last-updated');if(updated)observer.observe(updated,{childList:true,characterData:true,subtree:true});
+// Sur PC seulement, afficher le bouton Actualiser en haut à droite du titre.
+// On déplace le bouton d'origine pour conserver son gestionnaire de clic.
+const refreshButton=document.getElementById('refresh');
+const toolbar=refreshButton?.parentElement;
+const heading=document.querySelector('main > .heading');
+const pcLayout=window.matchMedia('(min-width: 900px)');
+function placeRefresh(){
+  if(!refreshButton||!toolbar||!heading)return;
+  if(pcLayout.matches){
+    heading.appendChild(refreshButton);
+    refreshButton.classList.add('pc-top-refresh');
+  }else{
+    toolbar.insertBefore(refreshButton,toolbar.firstChild);
+    refreshButton.classList.remove('pc-top-refresh');
+  }
+}
+pcLayout.addEventListener('change',placeRefresh);
+placeRefresh();
 lines.push(newLine());render();
 })();
