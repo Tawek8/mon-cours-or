@@ -164,6 +164,33 @@ def history_live():
         return {'points':out,'source':'goldprice.dev + Frankfurter','frequency':'Clôtures quotidiennes (pas de données intrajournalières)'}
     return cached('history',3600,load)
 
+def extract_c3e(html):
+    parser=HTMLText();parser.feed(html)
+    text=' '.join(' '.join(parser.parts).split())
+    # Lecture des seules cellules de la ligne C3E, dans le tableau achat/vente.
+    rows=[cells for cells in parser.rows if any(normalize(c)=='argent c3e' for c in cells)]
+    if len(rows)!=1:raise ValueError('Ligne Argent C3E absente ou ambiguë')
+    row=rows[0];idx=next(i for i,c in enumerate(row) if normalize(c)=='argent c3e')
+    amounts=[c for c in row[idx+1:] if c.strip()]
+    if len(amounts)!=2 or not all(re.fullmatch(r'[\d\s.,]+\s*€/\s*kg',c) for c in amounts):
+        raise ValueError('Colonnes C3E achat/vente non reconnues')
+    # Le prix achat doit rester associé à l'en-tête achat précédant vente.
+    normalized=normalize(text)
+    block=normalized.split('metaux industriels',1)[-1].split('argent c3e',1)[0]
+    if not re.search(r'achat\s+vente',block):raise ValueError('En-tête achat/vente C3E non reconnu')
+    dates=re.findall(r'(?:le|du)\s+(\d{2}/\d{2}/\d{4})',block)
+    if not dates:raise ValueError('Date du cours C3E non trouvée')
+    source_date=datetime.strptime(dates[-1],'%d/%m/%Y').date().isoformat()
+    value=euro(amounts[0])
+    if value is None or value<=0:raise ValueError('Prix achat C3E invalide')
+    return {'price':value,'sourceDate':source_date,'unit':'EUR/kg','side':'achat',
+            'source':'https://www.cookson-clal.com/cours/'}
+
+def c3e_live():
+    req=Request('https://www.cookson-clal.com/cours/',headers={'User-Agent':'Mozilla/5.0','Accept-Language':'fr-FR'})
+    with urlopen(req,timeout=16) as response:html=response.read().decode('utf-8',errors='replace')
+    return {**extract_c3e(html),'updatedAt':datetime.now(timezone.utc).isoformat()}
+
 SILVER_LABELS=[
  'Lingot Argent 1Kg','Maple Leaf 1 Oz','Vienna Philharmonic 1 Oz',
  'Kangourou 1 Oz','Britannia 1 Oz','American Eagle 1 Oz','Krugerrand Argent 1 Oz',
@@ -204,6 +231,11 @@ class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
     def do_GET(self):
         route=self.path.split('?')[0]
+        if route=='/api/c3e':
+            try:data=c3e_live();status=200
+            except Exception as e:data={'error':str(e)};status=503
+            payload=json.dumps(data,ensure_ascii=False).encode('utf-8')
+            self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(payload);return
         if route=='/api/silver':
             try:data=silver_live();status=200
             except Exception as e:data={'error':str(e)};status=503

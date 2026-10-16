@@ -111,7 +111,7 @@ document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click'
 async function refreshAll(){
  const b=$('refresh');if(b.disabled)return;
  b.disabled=true;$('refresh-spinner').hidden=false;
- try{await Promise.allSettled([refreshPrices(),loadSpot(),loadSpotHistory(),window.refreshSilver?.()])}
+ try{await Promise.allSettled([refreshPrices(),loadSpot(),loadSpotHistory(),window.refreshSilver?.(),window.refreshC3e?.()])}
  finally{b.disabled=false;$('refresh-spinner').hidden=true}
 }
 loadSpot();loadSpotHistory();

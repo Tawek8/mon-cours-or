@@ -47,3 +47,5 @@
 #silver-section .value{font-size:16px}#silver-section .name{font-size:14px}
 @media(min-width:900px){#silver-section{grid-column:1 / -1;grid-row:4}main:has(#buy-page:not([hidden])) #silver-section{display:none}}
 @media(max-width:390px){#silver-section .value{font-size:13px}}
+
+.c3e-source{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 16px;font-size:12px;color:#aab6bf}.c3e-source b{color:#e7c17b}
