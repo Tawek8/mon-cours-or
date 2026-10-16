@@ -6,7 +6,7 @@ let data={};try{data=JSON.parse(localStorage.getItem('or-prices')||'{}')}catch{}
 const savedDiscount=localStorage.getItem('or-discount');
 if(savedDiscount!==null)$('mult').value=savedDiscount;
 else{const old=localStorage.getItem('or-mult');if(old!==null){const n=parseNum(old);if(Number.isFinite(n)&&n>=0&&n<=1)$('mult').value=String(Math.round((1-n)*10000)/100).replace('.',',')}}
-let activeTab='bars',selected=null;
+let activeTab='coins',selected=null;
 let spotValue=null,spotPoints=[],spotPeriod=7;
 const savedBuyDiscount=localStorage.getItem('or-buy-discount');if(savedBuyDiscount!==null)$('buy-discount').value=savedBuyDiscount;
 function renderQuotes(){const list=(activeTab==='bars'?bars:coins);const root=$('cotations');root.replaceChildren();if(!list.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Aucun produit trouvé';root.append(empty)}for(const [id,name] of list){const price=data[id];const available=typeof price==='number'&&Number.isFinite(price)&&price>0;const button=document.createElement('button');button.type='button';button.className='quote';button.disabled=!available;const title=document.createElement('span');title.className='name';title.textContent=name;const value=document.createElement('span');value.className='value';value.textContent=available?eur(price):'Indisponible';button.append(title,value);if(available){const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='›';button.append(arrow);button.addEventListener('click',()=>openBuy(id,name))}root.append(button)}}
@@ -28,7 +28,7 @@ function drawTax(gross){
   $('tax-tmp-net').textContent=eur(tmpNet);
   $('tax-pv-net').textContent=eur(pvNet);
   $('tax-pv-amount').textContent=eur(pvTax);
-  $('tax-best').textContent=Math.abs(pvNet-tmpNet)<.005?'Résultat équivalent pour les deux régimes':(pvNet>tmpNet?'Plus-value potentiellement plus avantageuse de ':'Taxe forfaitaire potentiellement plus avantageuse de ')+eur(Math.abs(pvNet-tmpNet));
+  $('tax-best').textContent=Math.abs(pvNet-tmpNet)<.005?'Résultat équivalent pour les deux régimes':(pvNet>tmpNet?'TPV plus avantageuse de ':'TMP plus avantageuse de ')+eur(Math.abs(pvNet-tmpNet));
   $('tax-years').textContent=years+' année(s) complète(s) de détention · abattement de '+Math.round(allowance*100)+' % sur la plus-value.';
   panel.hidden=false;hint.textContent='Comparaison indicative sur le prix de rachat après décote, avant taxe.';
 }
