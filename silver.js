@@ -26,6 +26,7 @@
    const response=await fetch('/api/silver',{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);
    const payload=validate(await response.json());saved=payload;render(payload);
    localStorage.setItem('silver-prices',JSON.stringify(payload));
+   window.dispatchEvent(new Event('prices-updated'));
    status.textContent='Récupérés le '+new Date(payload.updatedAt).toLocaleString('fr-FR')+' · Source : Gold.fr';
   }catch(e){status.textContent='Actualisation argent impossible : '+e.message+(saved?' · Derniers cours enregistrés du '+new Date(saved.updatedAt).toLocaleString('fr-FR'):' · Aucun cours disponible');}
  };

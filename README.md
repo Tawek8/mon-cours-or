@@ -23,7 +23,7 @@ Les cours ne sont pas figés dans ce dépôt. Une erreur de récupération conse
 
 ## Première intégration de l’argent
 
-Encadré de consultation des 19 produits listés sur https://www.gold.fr/cours-argent-prix-de-l-argent/, actualisé avec le bouton Actualiser via /api/silver. Cache local distinct de l’or. Cotations suspendues ou absentes explicitement affichées. Aucune règle de rachat argent ajoutée à ce stade.
+Encadré de consultation des 19 produits listés sur https://www.gold.fr/cours-argent-prix-de-l-argent/, actualisé avec le bouton Actualiser via /api/silver. Cache local distinct de l’or. Cotations suspendues ou absentes explicitement affichées. Les règles de rachat bijoux et pièces argent sont décrites ci-dessous et dans PIECES-ARGENT.md.
 
 Les libellés et la disposition du tableau ont été examinés via la lecture web de Gold.fr. Le téléchargement direct du HTML était indisponible dans cet environnement ; le parseur argent a donc été testé sur des cas de tableau représentatifs, sans validation de bout en bout sur la source en direct. L’application signale une erreur si le tableau n’est pas reconnu et ne fabrique aucune cotation.
 
@@ -36,3 +36,4 @@ Prix par défaut = ARRONDI(C3E × 0,925 × 0,43 / 1000 ; 2). Le prix arrondi ser
 Le bouton Actualiser recharge aussi C3E. En cas d’erreur, le dernier cours enregistré reste identifié par sa date ; sans cours enregistré, les calculs automatiques sont indisponibles. Le cours peut dater d’une séance antérieure, en particulier le week-end.
 
 Vérifications : calculs argent et régression or, contrôle syntaxique JavaScript, cas de lecture C3E achat/vente/date. La ligne C3E a été vérifiée via la lecture web de Cookson-Clal. Le téléchargement direct depuis cet environnement échoue (résolution réseau), donc l’extraction serveur n’a pas pu être validée de bout en bout contre le HTML réel. Aucun résultat de validation en direct n’est revendiqué.
+
