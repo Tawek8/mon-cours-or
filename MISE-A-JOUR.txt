@@ -1,3 +1,1 @@
-Version : OR 18 CARATS en bas de la page, illustrations stylisées des pièces, pages de calcul simplifiées et actualisation par glissement conservée.
-Importer tous les fichiers, y compris le dossier coins, dans GitHub.
-Les images des pièces sont des illustrations vectorielles, pas des photographies fidèles.
+Version PC : GtaX par défaut calculé avec le cours spot et le CPoR du lingot 1 kg, décotes 9K 31 %, 14K 27 %, 18K/22K 25 %. FC 8 % Boursable et 12 % Fonte. Libellés Boursable et FC %. Interface iPhone inchangée.
