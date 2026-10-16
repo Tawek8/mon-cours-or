@@ -37,3 +37,6 @@ Le bouton Actualiser recharge aussi C3E. En cas d’erreur, le dernier cours enr
 
 Vérifications : calculs argent et régression or, contrôle syntaxique JavaScript, cas de lecture C3E achat/vente/date. La ligne C3E a été vérifiée via la lecture web de Cookson-Clal. Le téléchargement direct depuis cet environnement échoue (résolution réseau), donc l’extraction serveur n’a pas pu être validée de bout en bout contre le HTML réel. Aucun résultat de validation en direct n’est revendiqué.
 
+
+## Dernière version : iPhone et recherche
+Consulter MISE-A-JOUR-IPHONE.md pour les deux vues mobiles, les lignes repliables et la recherche de produits sur les deux supports.

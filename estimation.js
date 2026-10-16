@@ -25,12 +25,31 @@ const silverCoins=[
 ];
 const silverCoin=l=>silverCoins.find(p=>p[0]===l.product);
 function defaultFees(l){const p=silverCoin(l);return String(p?p[3]:l.mode==='fonte'?12:8)}
-const all=[...coins,...bars];let seq=0;const lines=[];
+const all=[...coins,...bars];let seq=0;const lines=[];let openLine=null;
 const root=document.createElement('section');root.id='estimation-client';root.innerHTML='<div class="est-head"><h2>Estimation client</h2></div><div id="est-rows"></div><div class="est-add-wrap"><button type="button" id="est-add">＋ Ajouter une ligne</button></div><div class="est-summary"><div class="est-totals"><span>Propositions : <b id="est-gross">—</b></span><span>Net à verser au client : <strong id="est-net">—</strong></span></div><details id="est-tax-details"><summary>Détails des taxes et frais</summary><div id="est-breakdown"></div></details></div><p class="est-note">Les cours sont indicatifs. Les calculs sont actualisés à partir des dernières cotations disponibles.</p>';
 const cpor=document.getElementById('cpor-section');cpor.parentNode.insertBefore(root,cpor.nextSibling);
 const $=id=>document.getElementById(id), fmt=v=>Number.isFinite(v)?v.toLocaleString('fr-FR',{style:'currency',currency:'EUR'}):'—', num=v=>{let n=Number(String(v??'').replace(',','.'));return Number.isFinite(n)?Math.max(0,n):0};
 const opt=(value,label)=>`<option value="${value}">${label}</option>`;
-const catalog=opt('bijou','Bijoux en or')+opt('bijou_argent','Bijoux en argent · 925‰')+'<optgroup label="Or">'+all.map(p=>opt(p[0],p[1])).join('')+'</optgroup><optgroup label="Argent · pièces françaises">'+silverCoins.filter(p=>p[3]===34).map(p=>opt(p[0],p[1])).join('')+'</optgroup><optgroup label="Argent · pièces modernes">'+silverCoins.filter(p=>p[3]===20).map(p=>opt(p[0],p[1])).join('')+'</optgroup>';
+const searchable=[['bijou','Bijoux en or'],['bijou_argent','Bijoux en argent · 925‰'],...all.map(p=>[p[0],p[1]+' · Or']),...silverCoins.map(p=>[p[0],p[1]+' · Argent'])];
+const normalizeSearch=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const catalog=searchable.map(p=>opt(p[0],p[1])).join('');
+function attachSearch(el,l){
+ const select=el.querySelector('[data-field="product"]');select.hidden=true;
+ const wrap=document.createElement('div');wrap.className='product-search';
+ const input=document.createElement('input');input.type='search';input.placeholder='Rechercher un produit…';input.autocomplete='off';input.setAttribute('aria-label','Rechercher un produit');input.setAttribute('role','combobox');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-expanded','false');
+ const list=document.createElement('div');list.id='product-options-'+l.id;list.className='product-options';list.setAttribute('role','listbox');list.hidden=true;input.setAttribute('aria-controls',list.id);
+ const selectedName=()=>searchable.find(p=>p[0]===l.product)?.[1]||'';input.value=selectedName();let matches=[],active=-1;
+ function close(){list.hidden=true;input.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant');input.value=selectedName()}
+ function choose(p){select.value=p[0];select.dispatchEvent(new Event('change',{bubbles:true}))}
+ function mark(){const buttons=list.querySelectorAll('[role="option"]');buttons.forEach((b,i)=>b.setAttribute('aria-selected',String(i===active)));if(buttons[active]){input.setAttribute('aria-activedescendant',buttons[active].id);buttons[active].scrollIntoView({block:'nearest'})}}
+ function show(term){const words=normalizeSearch(term).trim().split(/\s+/).filter(Boolean);matches=searchable.filter(p=>words.every(w=>normalizeSearch(p[1]).includes(w)));active=-1;list.replaceChildren();
+  for(const [i,p] of matches.entries()){const b=document.createElement('button');b.type='button';b.id=list.id+'-'+i;b.setAttribute('role','option');b.setAttribute('aria-selected','false');b.tabIndex=-1;b.textContent=p[1];b.addEventListener('pointerdown',e=>e.preventDefault());b.onclick=()=>choose(p);list.append(b)}
+  if(!matches.length){const empty=document.createElement('div');empty.className='product-empty';empty.textContent='Aucun produit trouvé';list.append(empty)}list.hidden=false;input.setAttribute('aria-expanded','true');
+ }
+ input.onfocus=()=>{input.select();show('')};input.oninput=()=>show(input.value);
+ input.onkeydown=e=>{if(e.key==='Escape'){close();e.preventDefault()}else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();if(list.hidden)show(input.value);if(matches.length){active=(active+(e.key==='ArrowDown'?1:-1)+matches.length)%matches.length;mark()}}else if(e.key==='Enter'){e.preventDefault();if(!list.hidden&&matches.length&&(active>=0||matches.length===1))choose(matches[active>=0?active:0])}};
+ wrap.addEventListener('focusout',e=>{if(!wrap.contains(e.relatedTarget))close()});wrap.append(input,list);select.after(wrap);
+}
 function data(){try{return JSON.parse(localStorage.getItem('or-prices')||'{}')}catch{return {}}}
 function intrinsic(){const v=data().instant;return Number.isFinite(v)&&v>0?v:null}
 function isJewelry(l){return l.product==='bijou'||l.product==='bijou_argent'}
@@ -47,11 +66,17 @@ function input(field,value,label){return `<label>${label}<input data-field="${fi
 function render(){const rows=$('est-rows');rows.replaceChildren();for(const [i,l] of lines.entries()){
 const jewelry=isJewelry(l),r=reference(l),p=price(l),c=calc(l);const gtax=r>0&&p!==null?(l.product==='bijou_argent'&&l.manual===null&&l.gtax===null?57:100*(1-p/r)):null;const el=document.createElement('div');el.className='est-row';el.dataset.id=l.id;
 el.innerHTML=`<div class="est-rowtop"><span class="est-num">${i+1}.</span><select data-field="product" aria-label="Produit">${catalog}</select><button type="button" data-action="remove" class="est-remove" title="Supprimer la ligne">×</button></div>`+(jewelry?`<div class="est-fields est-four"><label>Titrage<select data-field="titre">${l.product==='bijou_argent'?opt('925','925‰'):opt('9','9K · 375‰')+opt('14','14K · 585‰')+opt('18','18K · 750‰')+opt('22','22K · 900‰')}</select></label>${input('weight',l.weight,'Poids total (g)')}${input('manual',l.manual===null?(p===null?'':p.toFixed(2)):l.manual,'Prix proposé €/g')}${input('gtax',gtax===null?'':gtax.toFixed(2),'GtaX %')}</div>`:`<div class="est-mode"><span>Valorisation</span><div><button type="button" data-action="cpor" class="${l.mode==='cpor'?'chosen':''}">Boursable</button><button type="button" data-action="fonte" class="${l.mode==='fonte'?'chosen':''}">Fonte</button></div></div><div class="est-fields est-four">${input('qty',l.qty,'Quantité')}${input('manual',l.manual===null?(p===null?'':p.toFixed(2)):l.manual,'Prix proposé / unité (€)')}${input('fees',l.fees,'FC %')}<label>Fiscalité<select data-field="fiscal">${opt('TMP','TMP')+opt('TPV','TPV')}</select></label></div>${l.fiscal==='TPV'?`<div class="est-fields est-two">${input('cost',l.cost,'Prix d’achat / unité (€)')}<label>Date d’acquisition<input data-field="date" type="date" value="${l.date}"></label></div>`:''}`)+`<div class="est-reference">${silverCoin(l)?(l.mode==='fonte'?'Référence Fonte C3E':'Référence cours Gold.fr'):l.product==='bijou_argent'?'Référence argent C3E achat · 925‰':jewelry||l.mode==='fonte'?'Référence intrinsèque Gold.fr':'Référence CPoR'} : ${fmt(r)}${jewelry?' /g':' / unité'}${!jewelry?' · GtaX : '+(gtax===null?'—':gtax.toFixed(2)+' %'):''}</div><div class="est-rowbottom"><span>Taxe : ${c?fmt(c.tax):'Cours indisponible'}</span><b>Net client : ${c?fmt(c.net):'—'}</b></div>`;
-rows.append(el);el.querySelector('[data-field="product"]').value=l.product;if(jewelry)el.querySelector('[data-field="titre"]').value=l.product==='bijou_argent'?'925':l.titre;else el.querySelector('[data-field="fiscal"]').value=l.fiscal;
+const body=document.createElement('div');body.className='est-line-body';while(el.firstChild)body.append(el.firstChild);
+const detail=document.createElement('details');detail.className='est-line-details';detail.open=window.matchMedia('(min-width: 900px)').matches||openLine===l.id;
+const title=document.createElement('summary');title.className='est-line-title';
+const name=document.createElement('span');name.textContent=(i+1)+'. '+(searchable.find(p=>p[0]===l.product)?.[1]||l.product)+(l.product==='bijou'?' · '+l.titre+'K':'');
+const recap=document.createElement('span');recap.className='est-line-recap';recap.textContent=(jewelry?(l.weight?l.weight+' g':'Poids à saisir'):l.qty+' unité(s)')+' · Net : '+(c?fmt(c.net):'—');title.append(name,recap);detail.append(title,body);el.append(detail);
+detail.addEventListener('toggle',()=>{if(!detail.isConnected||window.matchMedia('(min-width: 900px)').matches)return;if(detail.open){openLine=l.id;rows.querySelectorAll('.est-line-details').forEach(d=>{if(d!==detail)d.open=false})}else if(openLine===l.id)openLine=null});
+rows.append(el);el.querySelector('[data-field="product"]').value=l.product;attachSearch(el,l);if(jewelry)el.querySelector('[data-field="titre"]').value=l.product==='bijou_argent'?'925':l.titre;else el.querySelector('[data-field="fiscal"]').value=l.fiscal;
 }
 summary();}
 function summary(){let gross=0,net=0,fees=0,tax=0,missing=0;const detail=[];for(const [i,l] of lines.entries()){const c=calc(l);if(!c){missing++;continue;}gross+=c.gross;net+=c.net;fees+=c.fees;tax+=c.tax;const name=l.product==='bijou_argent'?`Bijoux argent 925‰ · ${l.weight} g`:l.product==='bijou'?`Bijoux ${l.titre}K · ${l.weight} g`:([...all,...silverCoins].find(p=>p[0]===l.product)?.[1]||l.product)+` · ${l.qty} unité(s)`;detail.push(`<div class="est-tax-item"><div><b>${i+1}. ${name}</b><strong>${fmt(c.tax)}</strong></div><small>${c.explain}</small><small>${c.details}</small></div>`)}$('est-gross').textContent=fmt(gross);$('est-net').textContent=missing?'— (cours manquant)':fmt(net);$('est-breakdown').innerHTML=detail.join('')+`<div class="est-tax-total"><b>Total taxes</b><b>${fmt(tax)}</b></div>`+(missing?`<small>${missing} ligne(s) sans cotation disponible : non comprises dans le total.</small>`:'');}
-$('est-add').addEventListener('click',()=>{lines.push(newLine());render()});$('est-rows').addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b)return;const id=Number(b.closest('.est-row').dataset.id),i=lines.findIndex(l=>l.id===id);if(i<0)return;if(b.dataset.action==='remove')lines.splice(i,1);else {lines[i].mode=b.dataset.action;lines[i].fees=defaultFees(lines[i]);lines[i].manual=null;}render()});
+$('est-add').addEventListener('click',()=>{const line=newLine();lines.push(line);openLine=line.id;render()});$('est-rows').addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b)return;const id=Number(b.closest('.est-row').dataset.id),i=lines.findIndex(l=>l.id===id);if(i<0)return;if(b.dataset.action==='remove'){lines.splice(i,1);if(openLine===id)openLine=lines[Math.min(i,lines.length-1)]?.id??null;}else {lines[i].mode=b.dataset.action;lines[i].fees=defaultFees(lines[i]);lines[i].manual=null;}render()});
 $('est-rows').addEventListener('change',e=>{const f=e.target.dataset.field;if(!f)return;const l=lines.find(x=>x.id===Number(e.target.closest('.est-row').dataset.id));if(!l)return;const v=e.target.value;if(f==='product'){l.product=v;l.manual=null;if(v==='bijou'||v==='bijou_argent'){l.gtax=null}else{l.mode=silverCoin(l)?'fonte':'cpor';l.fees=defaultFees(l)}}else if(f==='titre'){l.titre=v;l.manual=null;l.gtax=null}else if(f==='fiscal')l.fiscal=v;else if(f==='gtax'){l.gtax=v;l.manual=null}else if(f==='fees'){l.fees=v;l.manual=null}else if(f==='manual'){l.manual=l.product==='bijou_argent'||silverCoin(l)?String(cents(num(v))):v;if(isJewelry(l)&&reference(l)>0)l.gtax=(100*(1-price(l)/reference(l))).toFixed(2)}else l[f]=v;render()});
 // Actualiser les prix proposés à chaque retour de données sans interférer avec l'application d'origine.
 const observer=new MutationObserver(()=>{if(!root.hidden)render()});const updated=$('last-updated');if(updated)observer.observe(updated,{childList:true,characterData:true,subtree:true});
@@ -71,9 +96,9 @@ function placeRefresh(){
     refreshButton.classList.remove('pc-top-refresh');
   }
 }
-pcLayout.addEventListener('change',placeRefresh);
+pcLayout.addEventListener('change',()=>{placeRefresh();render()});
 placeRefresh();
 window.addEventListener('prices-updated',()=>render());
-lines.push(newLine());render();
+const line=newLine();lines.push(line);openLine=line.id;render();
 })();
 
