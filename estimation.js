@@ -74,20 +74,21 @@ function grossFromNet(l){
  return gross/count;
 }
 function netUnit(l){const count=GoldFiscal.amount(isJewelry(l)?l.weight:l.qty);if(l.netManual!=null)return GoldFiscal.amount(l.netManual);if(count>0){const c=calc(l);return c?c.net/count:null}const clone={...l,weight:'1',qty:'1'};const c=calc(clone);return c?c.net:null}
-function fcNet(l,c=calc(l)){if(!c||l.product==='bijou_argent'||silverCoin(l))return null;const r=reference(l),count=GoldFiscal.amount(isJewelry(l)?l.weight:l.qty);const ratio=l.product==='bijou'?.9101:l.mode==='fonte'?.94:bars.some(p=>p[0]===l.product)?.988:.985;return r>0?r*count*ratio-c.gross:null}
+function fcNet(l,c=calc(l)){if(!c||l.product==='bijou_argent'||silverCoin(l))return null;const r=reference(l),count=GoldFiscal.amount(isJewelry(l)?l.weight:l.qty);const ratio=l.product==='bijou'?.9101:l.mode==='fonte'?.94:bars.some(p=>p[0]===l.product)?.988:.985;return r>0?cents(r*count*ratio-c.gross):null}
 function netMarkup(l,c){const n=fcNet(l,c);return n===null?'':'<small class="est-fc-net">FC Net : '+fmt(n)+'</small>'}
 function calc(l){
  const unit=price(l),jewelry=isJewelry(l),count=GoldFiscal.amount(jewelry?l.weight:l.qty);
  if(unit===null||!Number.isFinite(unit)||count===null||count<=0||(!jewelry&&!Number.isInteger(count)))return null;
- const gross=unit*count,fees=0;let tax=0,explain='',details='',regime=null;
+ const gross=unit*count,fees=0;let tax=0,explain='',details='',regime=null,taxBase=gross,taxRate=0,taxLabel='Exonération';
  if(jewelry){tax=gross>5000?gross*.065:0;explain=gross>5000?'Bijou : taxe 6,5 %':'Bijou : exonéré (≤ 5 000 €)';details=`Montant du bijou : ${fmt(gross)}`;}
  else{
   const cost=GoldFiscal.amount(l.cost),comparison=l.fiscal==='TPV'?GoldFiscal.compare(gross,cost===null?'':cost*count,l.datePending?'':l.date):GoldFiscal.compare(gross,'','');
-  tax=comparison.tax;regime=comparison.regime;explain=regime==='TPV'?'TPV retenue : plus avantageuse':'TMP retenue : 11,5 %';
+  tax=comparison.tax;regime=comparison.regime;taxLabel=regime;taxRate=regime==='TPV'?.362:.115;taxBase=regime==='TPV'?comparison.gain*(1-comparison.allowance):gross;explain=regime==='TPV'?'TPV retenue : plus avantageuse':'TMP retenue : 11,5 %';
   details=`Base taxable : ${fmt(gross)}`;
   if(l.fiscal==='TPV')details+=comparison.complete?` · TMP : ${fmt(comparison.tmp)} · TPV : ${fmt(comparison.pv)} · Acquisition : ${fmt(comparison.cost)} · Détention : ${comparison.years} an(s) · Abattement : ${Math.round(comparison.allowance*100)} %`:' · TMP appliquée en attendant un prix et une date d’acquisition valides et confirmés';
  }
- const roundedGross=cents(gross),roundedNet=cents(gross-tax);return {gross:roundedGross,fees,tax:cents(roundedGross-roundedNet),net:roundedNet,explain,details,regime};
+ if(jewelry&&gross>5000){taxLabel='Bijoux';taxRate=.065}
+ const roundedGross=cents(gross),roundedNet=cents(gross-tax);return {gross:roundedGross,fees,tax:cents(roundedGross-roundedNet),net:roundedNet,explain,details,regime,taxBase:cents(taxBase),taxRate,taxLabel};
 }
 function newLine(){return {id:++seq,product:'bijou',titre:'18',weight:'',gtax:null,mode:'cpor',qty:'1',fees:'8',fiscal:'TMP',cost:'',date:'',dateDraft:null,datePending:false,manual:null,netManual:null}}
 function input(field,value,label){return `<label>${label}<input data-field="${field}" type="text" inputmode="decimal" value="${escapeHTML(value)}"></label>`}
@@ -116,7 +117,7 @@ function updateLine(l){
  ref.textContent=label+' : '+fmt(r)+(j?' /g':' / unité')+(!j?' · GtaX : '+(g===null?'—':g.toFixed(2)+' %'):'');
 }
 function refreshEstimates(){lines.forEach(updateLine);summary()}
-function summary(){let gross=0,net=0,fees=0,tax=0,missing=0;const detail=[];for(const [i,l] of lines.entries()){const c=calc(l);if(!c){missing++;continue;}gross+=c.gross;net+=c.net;fees+=c.fees;tax+=c.tax;const name=l.product==='bijou_argent'?`Bijoux argent 925‰ · ${escapeHTML(l.weight)} g`:l.product==='bijou'?`Bijoux ${l.titre}K · ${escapeHTML(l.weight)} g`:([...all,...silverCoins].find(p=>p[0]===l.product)?.[1]||l.product)+` · ${escapeHTML(l.qty)} unité(s)`;detail.push(`<div class="est-tax-item"><div><b>${i+1}. ${name}</b><strong>${fmt(c.tax)}</strong></div><small>${c.explain}</small><small>${c.details}</small></div>`)}$('est-gross').textContent=lines.length?fmt(gross):'—';$('est-net').textContent=!lines.length?'—':missing?'— (données incomplètes)':fmt(net);$('est-breakdown').innerHTML=!lines.length?'':detail.join('')+`<div class="est-tax-total"><b>Total taxes</b><b>${fmt(tax)}</b></div>`+(missing?`<small>${missing} ligne(s) incomplète(s) : non comprise(s) dans le total.</small>`:'');}
+function summary(){let gross=0,net=0,fees=0,tax=0,missing=0,fcTotal=0,fcCount=0;const detail=[];for(const [i,l] of lines.entries()){const c=calc(l);if(!c){missing++;continue;}gross+=c.gross;net+=c.net;fees+=c.fees;tax+=c.tax;const fcn=fcNet(l,c);if(fcn!==null){fcTotal+=fcn;fcCount++}const name=l.product==='bijou_argent'?`Bijoux argent 925‰ · ${escapeHTML(l.weight)} g`:l.product==='bijou'?`Bijoux ${l.titre}K · ${escapeHTML(l.weight)} g`:([...all,...silverCoins].find(p=>p[0]===l.product)?.[1]||l.product)+` · ${escapeHTML(l.qty)} unité(s)`;detail.push(`<div class="est-tax-item"><div><b>${i+1}. ${name}</b><strong>${fmt(c.tax)}</strong></div><small>${c.explain}</small><small>${c.details}</small></div>`)}$('est-gross').textContent=lines.length?fmt(gross):'—';$('est-net').textContent=!lines.length?'—':missing?'— (données incomplètes)':fmt(net);$('est-breakdown').innerHTML=!lines.length?'':detail.join('')+`<div class="est-tax-total"><b>Total taxes</b><b>${fmt(tax)}</b></div>`+(missing?`<small>${missing} ligne(s) incomplète(s) : non comprise(s) dans le total.</small>`:'');}
 $('est-reset').addEventListener('click',()=>{lines.length=0;openLine=null;$('est-tax-details').open=false;window.dispatchEvent(new Event('client-reset'));render()});
 $('est-add').addEventListener('click',()=>{const line=newLine();lines.push(line);openLine=line.id;render()});$('est-rows').addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b)return;const id=Number(b.closest('.est-row').dataset.id),i=lines.findIndex(l=>l.id===id);if(i<0)return;if(b.dataset.action==='remove'){lines.splice(i,1);if(openLine===id)openLine=lines[Math.min(i,lines.length-1)]?.id??null;}else {lines[i].mode=b.dataset.action;lines[i].fees=defaultFees(lines[i]);lines[i].manual=null;lines[i].netManual=null;}render()});
 function onFieldChange(e){const f=e.target.dataset.field;if(!f)return;const l=lines.find(x=>x.id===Number(e.target.closest('.est-row').dataset.id));if(!l)return;const v=e.target.value;if(f==='date'){
@@ -129,7 +130,7 @@ function onFieldChange(e){const f=e.target.dataset.field;if(!f)return;const l=li
 $('est-rows').addEventListener('change',onFieldChange);
 $('est-rows').addEventListener('input',e=>{if(['manual','fees','gtax','weight','qty','cost'].includes(e.target.dataset.field))onFieldChange(e)});
 root.addEventListener('focusin',e=>{if(e.target.matches('input[inputmode="decimal"]'))e.target.select()});
-window.GoldEstimate={snapshot:()=>lines.map(l=>({name:searchable.find(p=>p[0]===l.product)?.[1]||l.product,titre:l.product==='bijou'?l.titre+'K':l.product==='bijou_argent'?'925‰':'',mode:isJewelry(l)?'':l.mode==='fonte'?'Fonte':'Boursable',quantity:isJewelry(l)?l.weight+' g':l.qty+' unité(s)',unit:netUnit(l),result:calc(l),percentage:isJewelry(l)?'GtaX':'FC',percent:isJewelry(l)?(reference(l)>0?100*(1-price(l)/reference(l)):null):effectiveFees(l),fcNet:fcNet(l)}))};
+window.GoldEstimate={snapshot:()=>lines.map(l=>({name:searchable.find(p=>p[0]===l.product)?.[1]||l.product,count:GoldFiscal.amount(isJewelry(l)?l.weight:l.qty),titre:l.product==='bijou'?l.titre+'K':l.product==='bijou_argent'?'925‰':'',mode:isJewelry(l)?'':l.mode==='fonte'?'Fonte':'Boursable',quantity:isJewelry(l)?l.weight+' g':l.qty+' unité(s)',unit:netUnit(l),result:calc(l),percentage:isJewelry(l)?'GtaX':'FC',percent:isJewelry(l)?(reference(l)>0?100*(1-price(l)/reference(l)):null):effectiveFees(l),fcNet:fcNet(l)}))};
 // Actualiser les prix proposés à chaque retour de données sans interférer avec l'application d'origine.
 const observer=new MutationObserver(()=>{if(!root.hidden)refreshEstimates()});const updated=$('last-updated');if(updated)observer.observe(updated,{childList:true,characterData:true,subtree:true});
 // Sur PC seulement, afficher le bouton Actualiser en haut à droite du titre.
