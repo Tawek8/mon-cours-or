@@ -15,7 +15,7 @@
 @media print{
  html,body{background:white!important;color:#222!important;margin:0!important;padding:0!important;min-width:0!important}
  body>*:not(#client-print-sheet){display:none!important}
- #client-print-sheet{display:flex!important;flex-direction:column;font:10pt/1.2 Arial,sans-serif;color:#222;background:white;width:180mm;max-width:100%;min-height:266mm;margin:0 auto;box-sizing:border-box;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ #client-print-sheet{display:flex!important;flex-direction:column;font:10pt/1.2 Arial,sans-serif;color:#222;background:white;width:180mm;max-width:100%;min-height:266mm;margin:0 auto;padding-top:10mm;box-sizing:border-box;print-color-adjust:exact;-webkit-print-color-adjust:exact}
  #client-print-sheet *{box-sizing:border-box}
  #client-print-sheet section{background:none;border:0;border-radius:0;padding:0;box-shadow:none;display:block;width:auto;grid-column:auto;grid-row:auto}
  #client-print-sheet header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:3mm;gap:5mm}

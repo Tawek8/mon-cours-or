@@ -24,16 +24,12 @@ function build(rows,now=new Date()){
 }
 document.getElementById('est-print').addEventListener('click',()=>{form.elements.internal.checked=false;document.getElementById('print-error').textContent='';dialog.showModal()});
 document.getElementById('print-cancel').onclick=()=>dialog.close();
-const documents=new Map();
-window.GoldPrintDocument={take:token=>{const html=documents.get(token);documents.delete(token);return html}};
-form.addEventListener('submit',e=>{
+form.addEventListener('submit',async e=>{
  e.preventDefault();const rows=window.GoldEstimate.snapshot();
  if(!rows.length||rows.some(r=>!r.result)){document.getElementById('print-error').textContent='Complète toutes les lignes avant d’imprimer.';return}
- build(rows);const token=(crypto.randomUUID?crypto.randomUUID():Array.from(crypto.getRandomValues(new Uint32Array(4)),n=>n.toString(16)).join(''));documents.clear();documents.set(token,sheet.outerHTML);
- // Le jeton est dans le fragment : aucune coordonnée ni estimation envoyée au serveur.
- const preview=window.open(new URL('print-preview.html#'+token,location.href).href,'_blank');
- if(!preview){documents.delete(token);document.getElementById('print-error').textContent='Autorise l’ouverture de la page d’impression, puis réessaie.';return}
- dialog.close();
+ build(rows);const image=sheet.querySelector('img');
+ try{await image.decode()}catch{document.getElementById('print-error').textContent='Le logo n’a pas pu être chargé. Réessaie après actualisation.';return}
+ dialog.close();window.print();
 });
 document.getElementById('est-reset').addEventListener('click',()=>{form.reset();sheet.replaceChildren()});
 // Conserver le document : certains navigateurs signalent afterprint avant la fin de la capture.
