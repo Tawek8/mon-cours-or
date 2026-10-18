@@ -1,0 +1,37 @@
+.est-fc-net{display:block;text-align:right;color:#9da6ac;font-size:11px;margin-top:5px}.est-reset-wrap{display:flex;justify-content:space-between;gap:12px}
+#client-print-sheet{display:none}
+#client-print-dialog{background:#182229;color:#f4f3ee;border:1px solid #52616b;border-radius:14px;padding:24px;width:min(460px,calc(100% - 30px));max-height:90dvh;overflow:auto}
+#client-print-dialog::backdrop{background:#0009}
+#client-print-dialog h2{margin:0 0 20px;font-size:20px}
+#client-print-dialog label{display:flex;flex-direction:column;gap:7px;margin:12px 0;font-size:14px}
+#client-print-dialog input{box-sizing:border-box;width:100%;padding:12px;font:inherit;font-size:16px;border:1px solid #52616b;border-radius:8px;background:#10171d;color:#fff}
+#client-print-dialog .print-check{flex-direction:row;align-items:center;min-height:44px}
+#client-print-dialog .print-check input{width:20px;height:20px;flex-shrink:0}
+#client-print-dialog .print-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+#print-error{color:#ffc5b9;font-size:13px}
+@page{size:A4 portrait;margin:15mm}
+@media print{
+ html,body{background:white!important;color:#222!important;margin:0!important;padding:0!important;min-width:0!important}
+ body>*:not(#client-print-sheet){display:none!important}
+ #client-print-sheet{display:block!important;font:10pt/1.2 Arial,sans-serif;color:#222;background:white;width:180mm;max-width:100%;box-sizing:border-box;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ #client-print-sheet *{box-sizing:border-box}
+ #client-print-sheet section{background:none;border:0;border-radius:0;padding:0;box-shadow:none;display:block;width:auto;grid-column:auto;grid-row:auto}
+ #client-print-sheet header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1pt solid #b99a5c;padding-bottom:3mm;gap:5mm}
+ #client-print-sheet header img{width:82mm;height:auto;max-height:34mm;object-fit:contain;object-position:left center}
+ #client-print-sheet h1{font:500 17pt Arial,sans-serif;margin:2mm 0 0}
+ #client-print-sheet header>p{font-size:9pt;max-width:55mm;text-align:right}
+ #client-print-sheet .print-customer{margin:4mm 0;overflow-wrap:anywhere}
+ #client-print-sheet .print-customer p{margin:1mm 0}
+ #client-print-sheet table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9pt}
+ #client-print-sheet th,#client-print-sheet td{padding:1mm;text-align:right;border-bottom:.3pt solid #ddd;vertical-align:top;overflow-wrap:anywhere;line-height:1.2}
+ #client-print-sheet th:first-child,#client-print-sheet td:first-child{text-align:left;width:42%}
+ #client-print-sheet th:nth-child(2){width:16%}
+ #client-print-sheet small{display:block;font-size:8pt;color:#666;margin-top:1mm}
+ #client-print-sheet tr{break-inside:avoid}
+ #client-print-sheet thead{display:table-header-group}
+ #client-print-sheet .print-totals{width:70%;margin:4mm 0 0 auto;break-inside:avoid}
+ #client-print-sheet .print-totals p{display:flex;justify-content:space-between;gap:4mm;margin:0;padding:1.5mm 0}
+ #client-print-sheet .print-totals p:last-child{border-top:1pt solid #b99a5c;font-size:12pt;padding-top:3mm}
+ #client-print-sheet footer{border-top:.3pt solid #ddd;margin-top:5mm;padding-top:2mm;font-size:8pt;break-inside:avoid}
+ #client-print-sheet footer p{margin:1mm 0}
+}
