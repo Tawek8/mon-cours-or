@@ -14,3 +14,5 @@ Les totaux additionnent les montants de chaque ligne arrondis au centime.
 Contrôles : dix suites de tests de calcul/interface simulée et parcours d’impression réel dans Edge avec dix lignes et informations internes visibles. Aucun test sur iPhone physique n’a été réalisé.
 
 Présentation inspirée de la facture : taxes par ligne, récapitulatif par régime (base TPV après abattement), total FC Net de l’or dans l’application et à l’impression si option interne cochée.
+
+Règle finale : les FC Net, par ligne et au total, restent uniquement à l’écran pendant la saisie. Aucun FC Net ne figure dans le document imprimé, même lorsque les pourcentages FC / GtaX sont cochés. Le total à l’écran reste sous « Net à verser au client ».

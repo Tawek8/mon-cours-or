@@ -1,4 +1,5 @@
 .est-fc-net{display:block;text-align:right;color:#9da6ac;font-size:11px;margin-top:5px}.est-reset-wrap{display:flex;justify-content:space-between;gap:12px}
+.est-net-block{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.est-net-block .est-fc-net{margin-top:0}
 #client-print-sheet{display:none}
 #client-print-dialog{background:#182229;color:#f4f3ee;border:1px solid #52616b;border-radius:14px;padding:24px;width:min(460px,calc(100% - 30px));max-height:90dvh;overflow:auto}
 #client-print-dialog::backdrop{background:#0009}
@@ -13,14 +14,15 @@
 @media print{
  html,body{background:white!important;color:#222!important;margin:0!important;padding:0!important;min-width:0!important}
  body>*:not(#client-print-sheet){display:none!important}
- #client-print-sheet{display:block!important;font:10pt/1.2 Arial,sans-serif;color:#222;background:white;width:180mm;max-width:100%;box-sizing:border-box;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ #client-print-sheet{display:flex!important;flex-direction:column;font:10pt/1.2 Arial,sans-serif;color:#222;background:white;width:180mm;max-width:100%;min-height:266mm;margin:0 auto;box-sizing:border-box;print-color-adjust:exact;-webkit-print-color-adjust:exact}
  #client-print-sheet *{box-sizing:border-box}
  #client-print-sheet section{background:none;border:0;border-radius:0;padding:0;box-shadow:none;display:block;width:auto;grid-column:auto;grid-row:auto}
- #client-print-sheet header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1pt solid #b99a5c;padding-bottom:3mm;gap:5mm}
+ #client-print-sheet header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:3mm;gap:5mm}
  #client-print-sheet header img{width:82mm;height:auto;max-height:34mm;object-fit:contain;object-position:left center}
- #client-print-sheet h1{font:500 17pt Arial,sans-serif;margin:2mm 0 0}
+ #client-print-sheet h1{font:500 18pt Arial,sans-serif;text-align:center;margin:3mm 0 0;padding-bottom:5mm;border-bottom:1pt solid #b99a5c;width:100%}
  #client-print-sheet header>p{font-size:9pt;max-width:55mm;text-align:right}
  #client-print-sheet .print-customer{margin:4mm 0;overflow-wrap:anywhere}
+ #client-print-sheet .print-customer>strong{font-size:15pt;line-height:1.25}
  #client-print-sheet .print-customer p{margin:1mm 0}
  #client-print-sheet table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9pt}
  #client-print-sheet th,#client-print-sheet td{padding:1mm;text-align:right;border:.5pt solid #777;vertical-align:top;overflow-wrap:anywhere;line-height:1.2}
@@ -41,7 +43,18 @@
  #client-print-sheet .print-totals{width:51%;margin:0;break-inside:avoid}
  #client-print-sheet .print-totals p{display:flex;justify-content:space-between;gap:4mm;margin:0;padding:1.5mm 0}
  #client-print-sheet .print-totals p:nth-child(3){border-top:1pt solid #b99a5c;font-size:11pt;padding-top:3mm}
- #client-print-sheet .print-totals .print-fc-total{font-size:8pt;color:#666;padding-top:3mm}
- #client-print-sheet footer{border-top:.3pt solid #ddd;margin-top:5mm;padding-top:2mm;font-size:8pt;break-inside:avoid}
+ #client-print-sheet footer{border-top:.3pt solid #ddd;margin-top:auto;padding-top:3mm;font-size:8pt;break-inside:avoid}
  #client-print-sheet footer p{margin:1mm 0}
+ #client-print-sheet.print-short h1{margin-top:6mm;padding-bottom:7mm}
+ #client-print-sheet.print-short .print-customer{margin:10mm 0 12mm}
+ #client-print-sheet.print-short>table{font-size:10pt}
+ #client-print-sheet.print-short>table th{padding:3mm 1.5mm}
+ #client-print-sheet.print-short>table td{padding:4mm 1.5mm;vertical-align:middle}
+ #client-print-sheet.print-short[data-line-count="2"]>table tbody tr{height:26mm}
+ #client-print-sheet.print-short[data-line-count="3"]>table tbody tr{height:22mm}
+ #client-print-sheet.print-short[data-line-count="4"]>table tbody tr{height:18mm}
+ #client-print-sheet.print-short .print-recap{margin-top:12mm}
+ #client-print-sheet.print-medium .print-customer{margin:7mm 0}
+ #client-print-sheet.print-medium>table td{padding:2mm 1mm}
+ #client-print-sheet.print-medium .print-recap{margin-top:8mm}
 }
