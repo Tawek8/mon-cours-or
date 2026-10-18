@@ -21,14 +21,14 @@
   }
  }
  try{const raw=localStorage.getItem('silver-prices');if(raw){saved=validate(JSON.parse(raw));render(saved);status.textContent='Derniers cours enregistrés · Récupérés le '+new Date(saved.updatedAt).toLocaleString('fr-FR')}}catch{}
- window.refreshSilver=async()=>{
+ window.refreshSilver=async()=>{window.GoldFreshness?.start('silver');
   try{
    const response=await fetch('/api/silver',{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);
-   const payload=validate(await response.json());saved=payload;render(payload);
+   const payload=validate(await response.json());saved=payload;window.GoldFreshness?.success('silver',payload);render(payload);
    localStorage.setItem('silver-prices',JSON.stringify(payload));
    window.dispatchEvent(new Event('prices-updated'));
    status.textContent='Récupérés le '+new Date(payload.updatedAt).toLocaleString('fr-FR')+' · Source : Gold.fr';
-  }catch(e){status.textContent='Actualisation argent impossible : '+e.message+(saved?' · Derniers cours enregistrés du '+new Date(saved.updatedAt).toLocaleString('fr-FR'):' · Aucun cours disponible');}
+  }catch(e){window.GoldFreshness?.fail('silver');status.textContent='Actualisation argent impossible : '+e.message+(saved?' · Derniers cours enregistrés du '+new Date(saved.updatedAt).toLocaleString('fr-FR'):' · Aucun cours disponible');}
  };
  window.refreshSilver();
 })();
