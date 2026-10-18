@@ -229,6 +229,11 @@ def silver_live():
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
+    def end_headers(self):
+        # Revalider les fichiers de l’application pour les sessions Safari/PWA longues.
+        if not self.path.split('?')[0].startswith('/api/'):
+            self.send_header('Cache-Control','no-cache, must-revalidate')
+        super().end_headers()
     def do_GET(self):
         route=self.path.split('?')[0]
         if route=='/api/c3e':

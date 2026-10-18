@@ -1,6 +1,7 @@
 .est-fc-net{display:block;text-align:right;color:#9da6ac;font-size:11px;margin-top:5px}.est-reset-wrap{display:flex;justify-content:space-between;gap:12px}
 .est-net-block{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.est-net-block .est-fc-net{margin-top:0}
 #client-print-sheet{display:none}
+.app-update{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;background:#26332e;color:#f4f3ee;padding:12px;margin-bottom:14px;border-radius:10px;font-size:14px}.app-update button{width:auto;min-height:44px;padding:8px 14px}.app-update small{flex-basis:100%;color:#c5cfc8;font-size:12px}
 #client-print-dialog{background:#182229;color:#f4f3ee;border:1px solid #52616b;border-radius:14px;padding:24px;width:min(460px,calc(100% - 30px));max-height:90dvh;overflow:auto}
 #client-print-dialog::backdrop{background:#0009}
 #client-print-dialog h2{margin:0 0 20px;font-size:20px}
