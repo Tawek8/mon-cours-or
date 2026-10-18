@@ -1,0 +1,13 @@
+#pc-quick-prices{display:none}
+@media(min-width:900px){
+ #pc-quick-prices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;grid-column:1/-1;grid-row:3;width:100%;margin:0 0 22px;align-items:stretch}
+ #pc-quick-prices>section{grid-area:auto!important;margin:0;min-width:0;width:100%;box-sizing:border-box;background:#141d25;border:1px solid #37444b;border-radius:14px;padding:24px}
+ #pc-quick-prices>section.hero{display:block!important}
+ #pc-quick-prices .eyebrow{color:#e7c17b}
+ #pc-quick-prices .quick-coin-label{display:block;color:#aab6bf;font-size:12px;margin:18px 0 7px}
+ #quick-coin-select{box-sizing:border-box;width:100%;min-height:44px;background:#131d25;color:#fff;border:1px solid #47545e;border-radius:8px;padding:10px;font:inherit}
+ #pc-quick-prices .quick-coin-caption{font-size:12px;color:#aab6bf;margin-top:24px}
+ #pc-quick-prices .price{font-size:42px;overflow-wrap:anywhere}
+ #quick-coin-detail{margin-top:12px;line-height:1.6}
+ main>#status{grid-row:4}
+}

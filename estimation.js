@@ -87,7 +87,7 @@ function discountAlert(l){
  else return null;
  const r=reference(l),p=price(l);if(!(r>0)||p===null||!Number.isFinite(p))return null;
  const discount=100*(1-p/r);if(discount>=threshold-1e-7)return null;
- return {threshold,discount,text:'Attention : décote de '+discount.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:4})+' %, sous le seuil de '+threshold+' %.'};
+ return {threshold,discount,text:'Attention : FC de '+discount.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:4})+' %, sous le seuil de '+threshold+' %.'};
 }
 function updateDiscountAlert(el,l){
  const alert=discountAlert(l);
@@ -96,7 +96,7 @@ function updateDiscountAlert(el,l){
  message.hidden=!alert;message.textContent=alert?.text||'';
  let recap=el.querySelector('.est-line-alert');
  if(!recap){recap=document.createElement('span');recap.className='est-line-alert';el.querySelector('.est-line-title').append(recap)}
- recap.hidden=!alert;recap.textContent=alert?'Attention : décote sous '+alert.threshold+' %':'';
+ recap.hidden=!alert;recap.textContent=alert?'Attention : FC sous '+alert.threshold+' %':'';
  el.classList.toggle('est-below-threshold',!!alert);
 }
 function netMarkup(l,c){const n=fcNet(l,c);return n===null?'':'<small class="est-fc-net">FC Net : '+fmt(n)+'</small>'}
