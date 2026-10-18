@@ -40,6 +40,8 @@
 }
 
 .price18-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.gold-quick-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#price18-titre{background:#131d25;color:#fff;border:1px solid #47545e;border-radius:7px;min-height:44px;padding:8px;font-size:16px;max-width:100%}
 .price18-fields label{font-size:12px;color:#aab6bf;display:flex;flex-direction:column;gap:7px;min-width:0}
 .price18-fields input{width:100%;min-width:0;min-height:44px;font-size:16px}
 .est-reset-wrap{display:flex;justify-content:flex-end;margin-top:16px}
