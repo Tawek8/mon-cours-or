@@ -99,10 +99,10 @@ def extract_instant(html):
 def live_prices():
     prices={};warnings=[]
     try:
-        x=extract_instant(fetch('/lingot-d-or-1-kg/'))
-        if x is None or x <= 0: warnings.append('Valeur intrinsèque Gold.fr non trouvée')
+        x=spot_live()['price']
+        if x is None or x <= 0: warnings.append('Cours BullionVault non trouvé')
         else:prices['instant']=x
-    except Exception as e:warnings.append('Page valeur intrinsèque inaccessible : '+str(e)[:100])
+    except Exception as e:warnings.append('Cours BullionVault inaccessible : '+str(e)[:100])
     try:
         values=extract_global(fetch('/cours-or-prix-de-l-or/'))
         prices.update(values)
@@ -128,12 +128,11 @@ def cached(key,seconds,loader):
     value=loader();_cache[key]=(time.time(),value);return value
 def spot_live():
     def load():
-        price=json_url(SPOT_URL)['symbols'][0]
-        if price.get('is_stale'):raise ValueError('Cours spot signalé périmé')
-        usd=float(price['price']);fx=float(json_url(FX_URL)['rates']['EUR'])
-        if not (100<usd<50000 and 0.3<fx<2):raise ValueError('Valeur spot ou change incohérent')
-        return {'price':round(usd*fx*1000/OUNCE_GRAMS,2),'updatedAt':price.get('computed_at'),'source':'goldprice.dev + Frankfurter','delay':'Cours spot potentiellement différé de 15 minutes'}
-    return cached('spot',300,load)
+        from bullionvault import fetch_quote
+        quote=fetch_quote()
+        return dict(price=quote['price'],updatedAt=quote['quotedAt'],retrievedAt=quote['retrievedAt'],source='BullionVault',unit='EUR/kg',currency='EUR')
+    return cached('spot-bullionvault',10,load)
+
 def history_live():
     def load():
         raw=json_url(HISTORY_URL)

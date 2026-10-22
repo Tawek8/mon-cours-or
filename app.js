@@ -92,13 +92,22 @@ function renderSpotChart(){
  note.textContent=values[0].date.split('-').reverse().join('/')+' → '+values.at(-1).date.split('-').reverse().join('/')+' · Clôtures quotidiennes · Source : goldprice.dev / Frankfurter';
 }
 async function loadSpot(){
- try{const r=await fetch('/api/spot',{cache:'no-store'});if(!r.ok)throw Error('Source spot indisponible');const p=await r.json();if(!Number.isFinite(p.price)||p.price<=0)throw Error('Cours incorrect');spotValue=p.price;localStorage.setItem('or-spot-last',JSON.stringify(p));$('spot-meta').textContent='Spot indicatif · '+(p.updatedAt?new Date(p.updatedAt).toLocaleString('fr-FR')+' · ':'')+'Source : goldprice.dev / Frankfurter · environ 15 min de décalage';draw();}
- catch(e){spotValue=null;$('spot-meta').textContent='Spot indisponible : valeur intrinsèque Gold.fr affichée en secours, si disponible.';draw()}
+ try{const r=await fetch('/api/spot',{cache:'no-store'});if(!r.ok)throw Error('Source spot indisponible');const p=await r.json();if(!Number.isFinite(p.price)||p.price<=0)throw Error('Cours incorrect');spotValue=p.price;localStorage.setItem('or-spot-last',JSON.stringify(p));$('spot-meta').textContent='Spot indicatif · '+(p.updatedAt?new Date(p.updatedAt).toLocaleString('fr-FR')+' · ':'')+'Source : BullionVault · €/kg';draw();}
+ catch(e){spotValue=null;$('spot-meta').textContent='Cours BullionVault indisponible : dernière référence conservée, si disponible.';draw()}
 }
 async function loadSpotHistory(){
- try{const r=await fetch('/api/spot-history',{cache:'no-store'});if(!r.ok)throw Error('Source historique indisponible');const p=await r.json();spotPoints=Array.isArray(p.points)?p.points:[];if(spotPoints.length<2)throw Error('Pas de données');localStorage.setItem('or-spot-history',JSON.stringify(spotPoints));renderSpotChart()}
- catch(e){try{spotPoints=JSON.parse(localStorage.getItem('or-spot-history')||'[]')}catch{spotPoints=[]}renderSpotChart();if(spotPoints.length)$('chart-note').textContent+=' · Dernier historique enregistré';}
+ const details=$('spot-chart-details');
+ if(details.dataset.bullionvaultReady)return;
+ details.dataset.bullionvaultReady='true';
+ $('spot-chart').style.display='none';
+ document.querySelector('.spot-periods').style.display='none';
+ const frame=document.createElement('iframe');frame.id='bullionvault-chart';frame.title='Graphique du cours de l’or BullionVault en euros';frame.style='width:100%;height:440px;border:0;border-radius:10px;background:white;margin-top:12px';frame.loading='lazy';
+ details.insertBefore(frame,$('chart-note'));
+ const open=()=>{if(details.open&&!frame.getAttribute('src'))frame.src='bullionvault-chart.html?v=20261022-bv1'};
+ details.addEventListener('toggle',open);open();
+ $('chart-note').textContent='Graphique interactif BullionVault · EUR · actualisation automatique par le fournisseur.';
 }
+
 document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click',()=>{spotPeriod=Number(b.dataset.period);renderSpotChart()}));
 // Actualise toutes les sources avec une roulette visible jusqu'à la fin.
 async function refreshAll(){
