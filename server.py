@@ -100,9 +100,9 @@ def live_prices():
     prices={};warnings=[]
     try:
         x=spot_live()['price']
-        if x is None or x <= 0: warnings.append('Cours BullionVault non trouvé')
+        if x is None or x <= 0: warnings.append('Cours Kitco non trouvé')
         else:prices['instant']=x
-    except Exception as e:warnings.append('Cours BullionVault inaccessible : '+str(e)[:100])
+    except Exception as e:warnings.append('Cours Kitco inaccessible : '+str(e)[:100])
     try:
         values=extract_global(fetch('/cours-or-prix-de-l-or/'))
         prices.update(values)
@@ -128,40 +128,15 @@ def cached(key,seconds,loader):
     value=loader();_cache[key]=(time.time(),value);return value
 def spot_live():
     def load():
-        from bullionvault import fetch_quote
+        from kitco import fetch_quote
         quote=fetch_quote()
-        return dict(price=quote['price'],updatedAt=quote['quotedAt'],retrievedAt=quote['retrievedAt'],source='BullionVault',unit='EUR/kg',currency='EUR')
-    return cached('spot-bullionvault',10,load)
+        return dict(price=quote['price'],updatedAt=quote['quotedAt'],retrievedAt=quote['retrievedAt'],source='Kitco',basis='Bid',unit='EUR/kg',currency='EUR')
+    return cached('spot-kitco-bid',10,load)
 
-def history_live():
-    def load():
-        raw=json_url(HISTORY_URL)
-        # Plusieurs formes JSON possibles: pas de fabrication de données en cas de changement.
-        series=raw if isinstance(raw,list) else next((raw[k] for k in ('series','prices','history','data','points') if isinstance(raw.get(k),list)),[])
-        parsed=[]
-        for item in series:
-            if not isinstance(item,dict):continue
-            dt=str(next((item[k] for k in ('date','day','timestamp','time','bar_start') if item.get(k)),''))[:10]
-            v=next((item[k] for k in ('close','price','value','usd_per_oz') if item.get(k) is not None),None)
-            try:
-                usd=float(v)
-                if re.fullmatch(r'\d{4}-\d{2}-\d{2}',dt) and 100<usd<50000:parsed.append((dt,usd))
-            except (TypeError,ValueError):pass
-        if not parsed:raise ValueError('Historique public indisponible ou format inconnu')
-        first=min(dt for dt,_ in parsed)
-        fx_data=json_url('https://api.frankfurter.dev/v1/'+first+'..?base=USD&symbols=EUR')
-        rates=fx_data.get('rates',{})
-        dates=sorted((d,float(r['EUR'])) for d,r in rates.items() if isinstance(r,dict) and r.get('EUR'))
-        if not dates:raise ValueError('Historique des changes indisponible')
-        out=[];idx=0
-        for dt,usd in sorted(set(parsed)):
-            while idx+1<len(dates) and dates[idx+1][0]<=dt:idx+=1
-            if dates[idx][0]>dt:continue
-            rate=dates[idx][1]
-            if .3<rate<2:out.append({'date':dt,'price':round(usd*rate*1000/OUNCE_GRAMS,2)})
-        if len(out)<2:raise ValueError('Historique insuffisant')
-        return {'points':out,'source':'goldprice.dev + Frankfurter','frequency':'Clôtures quotidiennes (pas de données intrajournalières)'}
-    return cached('history',3600,load)
+def history_live(period='1'):
+    from bullionvault_history import fetch_history
+    return cached('history-bullionvault-'+period,10,lambda:fetch_history(period))
+
 
 def extract_c3e(html):
     parser=HTMLText();parser.feed(html)
@@ -247,7 +222,7 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(payload);return
         if route in ('/api/spot','/api/spot-history'):
             try:
-                data=spot_live() if route=='/api/spot' else history_live();status=200
+                data=spot_live() if route=='/api/spot' else history_live(__import__('urllib.parse',fromlist=['parse_qs']).parse_qs(urlparse(self.path).query).get('period',['1'])[0]);status=200
             except Exception as e:data={'error':str(e)};status=503
             payload=json.dumps(data,ensure_ascii=False).encode('utf-8')
             self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(payload);return
