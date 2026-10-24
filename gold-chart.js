@@ -1,7 +1,15 @@
 (function () {
   'use strict';
   let last = [],
-    days = 1;
+    days = 1,
+    animated = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)'),
+    color = '#e9bf75';
+  // Animation du point du dernier cours (une seule feuille de style pour le graphique).
+  const style = document.createElement('style');
+  style.textContent =
+    '#spot-chart .sc-pulse{transform-box:fill-box;transform-origin:center;animation:sc-pulse 2.2s ease-out infinite}@keyframes sc-pulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(4);opacity:0}}@media(prefers-reduced-motion:reduce){#spot-chart .sc-pulse{animation:none;opacity:0}}';
+  document.head.append(style);
   function render(points, period) {
     last = points;
     days = period;
@@ -56,6 +64,7 @@
         y2: yy,
         stroke: '#344853',
         'stroke-width': '.7',
+        'stroke-dasharray': '2 5',
       });
       el(
         'text',
@@ -91,6 +100,27 @@
             })
       )
     );
+    // Dégradé, halo, repère de début de période, plus haut / plus bas, dernier cours animé.
+    const defs = el('defs', {});
+    defs.innerHTML =
+      '<linearGradient id="sc-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' +
+      color +
+      '" stop-opacity=".34"/><stop offset=".6" stop-color="' +
+      color +
+      '" stop-opacity=".07"/><stop offset="1" stop-color="' +
+      color +
+      '" stop-opacity="0"/></linearGradient><filter id="sc-glow" x="-5%" y="-20%" width="110%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+    const openY = y(values[0].price);
+    el('line', {
+      x1: left,
+      x2: width - right,
+      y1: openY,
+      y2: openY,
+      stroke: '#8fa4b1',
+      'stroke-width': '.8',
+      'stroke-dasharray': '4 4',
+      opacity: 0.5,
+    });
     let d = '';
     values.forEach((v, i) => (d += (i ? ' L' : 'M') + x(v) + ',' + y(v.price)));
     el('path', {
@@ -105,18 +135,60 @@
         ',' +
         (height - bottom) +
         ' Z',
-      fill: '#e9bf75',
-      'fill-opacity': '.07',
+      fill: 'url(#sc-fill)',
     });
-    el('path', {
+    const line = el('path', {
       d,
       fill: 'none',
-      stroke: '#e9bf75',
-      'stroke-width': 2,
+      stroke: color,
+      'stroke-width': 2.2,
       'stroke-linecap': 'round',
       'stroke-linejoin': 'round',
+      filter: 'url(#sc-glow)',
     });
-    el('circle', { cx: x(values.at(-1)), cy: y(values.at(-1).price), r: 3, fill: '#e9bf75' });
+    if (animated !== period && !reducedMotion.matches) {
+      animated = period;
+      const length = line.getTotalLength();
+      line.style.strokeDasharray = length;
+      line.style.strokeDashoffset = length;
+      line.getBoundingClientRect();
+      line.style.transition = 'stroke-dashoffset 800ms ease-out';
+      line.style.strokeDashoffset = 0;
+    }
+    const prices = values.map(v => v.price);
+    for (const [index, above] of [
+      [prices.indexOf(max), true],
+      [prices.indexOf(min), false],
+    ]) {
+      if (index === values.length - 1 && max !== min) continue;
+      const cx = x(values[index]),
+        cy = y(prices[index]),
+        anchor = cx < left + 60 ? 'start' : cx > width - right - 60 ? 'end' : 'middle';
+      el('circle', { cx, cy, r: 3, fill: '#121d25', stroke: color, 'stroke-width': 1.4 });
+      el(
+        'text',
+        {
+          x: cx,
+          y: above ? cy - 8 : cy + 16,
+          'text-anchor': anchor,
+          fill: '#edf2f5',
+          'font-size': 10,
+          'font-weight': 600,
+        },
+        (above ? '▲ ' : '▼ ') + Math.round(prices[index]).toLocaleString('fr-FR')
+      );
+    }
+    const lastX = x(values.at(-1)),
+      lastY = y(values.at(-1).price);
+    el('circle', { cx: lastX, cy: lastY, r: 3.5, fill: color, class: 'sc-pulse' });
+    el('circle', {
+      cx: lastX,
+      cy: lastY,
+      r: 3.5,
+      fill: color,
+      stroke: '#121d25',
+      'stroke-width': 1.4,
+    });
     const guide = el('line', {
         x1: left,
         x2: left,
@@ -124,6 +196,17 @@
         y2: height - bottom,
         stroke: '#b5c7d3',
         'stroke-width': '.7',
+        'stroke-dasharray': '3 4',
+        opacity: 0,
+      }),
+      halo = el('circle', { cx: left, cy: top, r: 8, fill: color, opacity: 0 }),
+      marker = el('circle', {
+        cx: left,
+        cy: top,
+        r: 4,
+        fill: color,
+        stroke: '#121d25',
+        'stroke-width': 1.4,
         opacity: 0,
       }),
       label = p =>
@@ -152,11 +235,19 @@
         );
       guide.setAttribute('x1', x(point));
       guide.setAttribute('x2', x(point));
-      guide.setAttribute('opacity', 1);
+      guide.setAttribute('opacity', 0.75);
+      for (const dot of [halo, marker]) {
+        dot.setAttribute('cx', x(point));
+        dot.setAttribute('cy', y(point.price));
+      }
+      halo.setAttribute('opacity', 0.22);
+      marker.setAttribute('opacity', 1);
       note.textContent = label(point) + ' · BullionVault';
     };
     chart.onpointerleave = () => {
       guide.setAttribute('opacity', 0);
+      halo.setAttribute('opacity', 0);
+      marker.setAttribute('opacity', 0);
       note.textContent = label(values.at(-1)) + ' · BullionVault';
     };
   }

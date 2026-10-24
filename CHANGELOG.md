@@ -1,5 +1,10 @@
 # Historique
 
+## 24/10/2026 — graphique
+
+- Courbe redessinée : dégradé doré, halo, repère du début de période, plus haut et
+  plus bas, dernier cours animé, point de lecture au doigt ou à la souris.
+
 ## 24/10/2026 — alignement sur GoldApp
 
 - Calculs repris de GoldApp (FC Agence / % GT, décotes argent 20 / 9 / 5 pt,
