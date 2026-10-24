@@ -1,4 +1,79 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Graphique BullionVault</title><style>html,body{margin:0;width:100%;height:100%;font-family:system-ui;background:white}#chart{width:100%;height:100%;min-height:420px}#fallback{padding:16px;font-size:14px;line-height:1.5}a{color:#765000}#jschart_popup{display:inline-block;min-width:24px;min-height:24px}</style></head><body><div id="chart"></div><div id="fallback" hidden>Le graphique n’a pas pu être chargé. <a href="https://or.bullionvault.fr/Cours-De-L-Or.do" target="_blank" rel="noopener">Ouvrir le graphique BullionVault</a></div><script>
-function unavailable(){document.getElementById('chart').hidden=true;document.getElementById('fallback').hidden=false}
-const script=document.createElement('script');script.src='https://or.bullionvault.fr/chart/bullionvaultchart.js';script.onerror=unavailable;script.onload=()=>{try{new BullionVaultChart({bullion:'gold',currency:'EUR',timeframe:'1d',chartType:'line',containerDefinedSize:true,miniChartMode:false,displayLatestPriceLine:true,switchBullion:false,switchCurrency:false,switchTimeframe:true,switchChartType:false,exportButton:true},'chart')}catch(e){console.error(e);unavailable()}};document.head.append(script);
-</script></body></html>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Graphique BullionVault</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        font-family: system-ui;
+        background: white;
+      }
+      #chart {
+        width: 100%;
+        height: 100%;
+        min-height: 420px;
+      }
+      #fallback {
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      a {
+        color: #765000;
+      }
+      #jschart_popup {
+        display: inline-block;
+        min-width: 24px;
+        min-height: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart"></div>
+    <div id="fallback" hidden>
+      Le graphique n’a pas pu être chargé.
+      <a href="https://or.bullionvault.fr/Cours-De-L-Or.do" target="_blank" rel="noopener"
+        >Ouvrir le graphique BullionVault</a
+      >
+    </div>
+    <script>
+      function unavailable() {
+        document.getElementById('chart').hidden = true;
+        document.getElementById('fallback').hidden = false;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://or.bullionvault.fr/chart/bullionvaultchart.js';
+      script.onerror = unavailable;
+      script.onload = () => {
+        try {
+          new BullionVaultChart(
+            {
+              bullion: 'gold',
+              currency: 'EUR',
+              timeframe: '1d',
+              chartType: 'line',
+              containerDefinedSize: true,
+              miniChartMode: false,
+              displayLatestPriceLine: true,
+              switchBullion: false,
+              switchCurrency: false,
+              switchTimeframe: true,
+              switchChartType: false,
+              exportButton: true,
+            },
+            'chart'
+          );
+        } catch (e) {
+          console.error(e);
+          unavailable();
+        }
+      };
+      document.head.append(script);
+    </script>
+  </body>
+</html>

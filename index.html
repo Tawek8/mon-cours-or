@@ -1,99 +1,926 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#121a21"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="GoldApp"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.svg"><title>GoldApp</title><style>
-:root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#edf2f5;background:#121d25}*{box-sizing:border-box}body{margin:0}main{max-width:620px;margin:auto;padding:calc(env(safe-area-inset-top) + 24px) 18px 80px}.eyebrow{font-size:11px;color:#e9bf75;letter-spacing:2px;font-weight:800}.heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}h1{font-size:26px;letter-spacing:-.7px;margin:5px 0 0}h2{font-size:19px;letter-spacing:.2px;margin:0 0 14px}section{margin:14px 0;padding:18px;background:#1b2a34;border:1px solid #344853;border-radius:20px}.hero{background:linear-gradient(145deg,#35301f,#1c252b 65%);border-color:#695733}.muted{color:#b5c7d3;font-size:12px}.price{font-size:42px;letter-spacing:-1px;font-weight:750;margin:13px 0}.gold{color:#e9bf75}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 0;border-bottom:1px solid #344853}.row:last-child{border-bottom:0;padding-bottom:0}.name{font-size:16px;line-height:1.4;flex:1;min-width:0}.value{font-size:20px;white-space:nowrap;letter-spacing:-.4px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}.source{font-size:11px;color:#9eaeb6;margin-top:4px}.inputs{display:flex;align-items:center;gap:12px;margin-top:14px}.inputs label{font-size:13px;flex:1}input{width:110px;border:1px solid #746446;background:#11191f;color:#fff;border-radius:12px;padding:12px;font-size:18px;text-align:center}button{border:0;border-radius:13px;background:#e9bf75;color:#172028;padding:12px 15px;font-size:14px;font-weight:750;cursor:pointer}button.secondary{background:#2d3b45;color:#e8edf0}.status{font-size:12px;color:#afbdc4;margin:12px 2px 22px;line-height:1.6}.links{font-size:12px;line-height:2}a{color:#e9bf75}.small{font-size:11px;color:#9eabb3;line-height:1.5}.toolbar{display:flex;gap:8px}.toolbar button{font-size:12px;padding:10px 12px}details{margin-top:16px}summary{cursor:pointer;color:#e9bf75;font-size:13px}textarea{width:100%;min-height:115px;background:#11191f;color:#e9edf0;border:1px solid #45535d;border-radius:10px;padding:10px;margin:12px 0;font-size:12px}#error{color:#f1b5a7} .buy-select{width:100%;padding:13px 12px;border-radius:12px;background:#11191f;color:#fff;border:1px solid #746446;font-size:16px}.buy-result{font-size:34px;font-weight:750;color:#e9bf75;margin:6px 0;font-variant-numeric:tabular-nums}.buy-divider{height:1px;background:#344853;margin:24px 0}.buy-tax{font-size:14px;color:#b5c7d3}.badge{font-size:11px;color:#e9bf75;border:1px solid #7b6845;padding:5px 8px;border-radius:30px}
-@media(max-width:390px){main{padding-left:12px;padding-right:12px}section{padding:15px}.name{font-size:15px}.value{font-size:18px}.price{font-size:38px}}
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#121a21" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="GoldApp" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <title>GoldApp</title>
+    <style>
+      :root {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: #edf2f5;
+        background: #121d25;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 620px;
+        margin: auto;
+        padding: calc(env(safe-area-inset-top) + 24px) 18px 80px;
+      }
+      .eyebrow {
+        font-size: 11px;
+        color: #e9bf75;
+        letter-spacing: 2px;
+        font-weight: 800;
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+      h1 {
+        font-size: 26px;
+        letter-spacing: -0.7px;
+        margin: 5px 0 0;
+      }
+      h2 {
+        font-size: 19px;
+        letter-spacing: 0.2px;
+        margin: 0 0 14px;
+      }
+      section {
+        margin: 14px 0;
+        padding: 18px;
+        background: #1b2a34;
+        border: 1px solid #344853;
+        border-radius: 20px;
+      }
+      .hero {
+        background: linear-gradient(145deg, #35301f, #1c252b 65%);
+        border-color: #695733;
+      }
+      .muted {
+        color: #b5c7d3;
+        font-size: 12px;
+      }
+      .price {
+        font-size: 42px;
+        letter-spacing: -1px;
+        font-weight: 750;
+        margin: 13px 0;
+      }
+      .gold {
+        color: #e9bf75;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 0;
+        border-bottom: 1px solid #344853;
+      }
+      .row:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+      .name {
+        font-size: 16px;
+        line-height: 1.4;
+        flex: 1;
+        min-width: 0;
+      }
+      .value {
+        font-size: 20px;
+        white-space: nowrap;
+        letter-spacing: -0.4px;
+        font-weight: 700;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .source {
+        font-size: 11px;
+        color: #9eaeb6;
+        margin-top: 4px;
+      }
+      .inputs {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .inputs label {
+        font-size: 13px;
+        flex: 1;
+      }
+      input {
+        width: 110px;
+        border: 1px solid #746446;
+        background: #11191f;
+        color: #fff;
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 18px;
+        text-align: center;
+      }
+      button {
+        border: 0;
+        border-radius: 13px;
+        background: #e9bf75;
+        color: #172028;
+        padding: 12px 15px;
+        font-size: 14px;
+        font-weight: 750;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: #2d3b45;
+        color: #e8edf0;
+      }
+      .status {
+        font-size: 12px;
+        color: #afbdc4;
+        margin: 12px 2px 22px;
+        line-height: 1.6;
+      }
+      .links {
+        font-size: 12px;
+        line-height: 2;
+      }
+      a {
+        color: #e9bf75;
+      }
+      .small {
+        font-size: 11px;
+        color: #9eabb3;
+        line-height: 1.5;
+      }
+      .toolbar {
+        display: flex;
+        gap: 8px;
+      }
+      .toolbar button {
+        font-size: 12px;
+        padding: 10px 12px;
+      }
+      details {
+        margin-top: 16px;
+      }
+      summary {
+        cursor: pointer;
+        color: #e9bf75;
+        font-size: 13px;
+      }
+      textarea {
+        width: 100%;
+        min-height: 115px;
+        background: #11191f;
+        color: #e9edf0;
+        border: 1px solid #45535d;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 12px 0;
+        font-size: 12px;
+      }
+      #error {
+        color: #f1b5a7;
+      }
+      .buy-select {
+        width: 100%;
+        padding: 13px 12px;
+        border-radius: 12px;
+        background: #11191f;
+        color: #fff;
+        border: 1px solid #746446;
+        font-size: 16px;
+      }
+      .buy-result {
+        font-size: 34px;
+        font-weight: 750;
+        color: #e9bf75;
+        margin: 6px 0;
+        font-variant-numeric: tabular-nums;
+      }
+      .buy-divider {
+        height: 1px;
+        background: #344853;
+        margin: 24px 0;
+      }
+      .buy-tax {
+        font-size: 14px;
+        color: #b5c7d3;
+      }
+      .badge {
+        font-size: 11px;
+        color: #e9bf75;
+        border: 1px solid #7b6845;
+        padding: 5px 8px;
+        border-radius: 30px;
+      }
+      @media (max-width: 390px) {
+        main {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+        section {
+          padding: 15px;
+        }
+        .name {
+          font-size: 15px;
+        }
+        .value {
+          font-size: 18px;
+        }
+        .price {
+          font-size: 38px;
+        }
+      }
 
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:#121d25;border-radius:13px;padding:4px;margin:12px 0}.tab{background:transparent;color:#b7c0c5;font-size:12px;padding:12px 5px}.tab.active{background:#e9bf75;color:#172028}.search{display:block;width:100%;margin:10px 0;text-align:left;font-size:15px;padding:12px}.quotes{max-height:none;overflow:visible;overscroll-behavior:auto;scrollbar-width:auto}.quote{width:100%;border-radius:0;border-bottom:1px solid #344853;background:transparent;color:#edf2f5;display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;padding:12px 2px}.quote:last-child{border-bottom:0}.quote .name{font-size:14px}.buy-heading{display:flex;align-items:center;gap:14px}.quote .value{margin-left:auto}.quote .value{font-size:17px;color:#e9bf75}.quote .arrow{color:#e9bf75}.quote:disabled{opacity:.65;cursor:default}.quote:focus-visible,.tab:focus-visible{outline:2px solid #e9bf75}.back{margin-bottom:22px}.empty{padding:18px 4px;color:#b5c7d3;font-size:14px}#buy-page h2{margin:10px 0 20px}#buy-page[hidden],#cpor-section[hidden],.toolbar[hidden]{display:none!important}@media(max-width:390px){.quote .value{font-size:15px}.tab{font-size:11px}}
+      .tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+        background: #121d25;
+        border-radius: 13px;
+        padding: 4px;
+        margin: 12px 0;
+      }
+      .tab {
+        background: transparent;
+        color: #b7c0c5;
+        font-size: 12px;
+        padding: 12px 5px;
+      }
+      .tab.active {
+        background: #e9bf75;
+        color: #172028;
+      }
+      .search {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        text-align: left;
+        font-size: 15px;
+        padding: 12px;
+      }
+      .quotes {
+        max-height: none;
+        overflow: visible;
+        overscroll-behavior: auto;
+        scrollbar-width: auto;
+      }
+      .quote {
+        width: 100%;
+        border-radius: 0;
+        border-bottom: 1px solid #344853;
+        background: transparent;
+        color: #edf2f5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        text-align: left;
+        padding: 12px 2px;
+      }
+      .quote:last-child {
+        border-bottom: 0;
+      }
+      .quote .name {
+        font-size: 14px;
+      }
+      .buy-heading {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .quote .value {
+        margin-left: auto;
+      }
+      .quote .value {
+        font-size: 17px;
+        color: #e9bf75;
+      }
+      .quote .arrow {
+        color: #e9bf75;
+      }
+      .quote:disabled {
+        opacity: 0.65;
+        cursor: default;
+      }
+      .quote:focus-visible,
+      .tab:focus-visible {
+        outline: 2px solid #e9bf75;
+      }
+      .back {
+        margin-bottom: 22px;
+      }
+      .empty {
+        padding: 18px 4px;
+        color: #b5c7d3;
+        font-size: 14px;
+      }
+      #buy-page h2 {
+        margin: 10px 0 20px;
+      }
+      #buy-page[hidden],
+      #cpor-section[hidden],
+      .toolbar[hidden] {
+        display: none !important;
+      }
+      @media (max-width: 390px) {
+        .quote .value {
+          font-size: 15px;
+        }
+        .tab {
+          font-size: 11px;
+        }
+      }
 
-.tax-toggle{margin-top:25px;border-top:1px solid #344853;padding-top:17px}.tax-toggle summary{color:#bfc6ca;font-size:13px;list-style:none;display:flex;justify-content:space-between;align-items:center}.tax-toggle summary::-webkit-details-marker{display:none}.tax-toggle summary:after{content:'⌄';color:#e9bf75;font-size:20px}.tax-toggle[open] summary:after{content:'⌃'}.tax-fields{margin-top:16px;display:grid;gap:13px}.tax-field{display:flex;justify-content:space-between;align-items:center;gap:10px}.tax-field label{font-size:13px;color:#c8d0d4}.tax-field input{width:150px;font-size:15px}.tax-field input[type=date]{width:170px;text-align:left;color-scheme:dark}.tax-compare{border-top:1px solid #344853;margin-top:6px;padding-top:8px}.tax-compare .row{padding:10px 0}.tax-compare .value{font-size:17px}.tax-best{color:#e9bf75;font-size:14px;font-weight:700;margin:13px 0 5px}.tax-note{font-size:11px;color:#b5c7d3;line-height:1.5}.tax-compare[hidden]{display:none!important}
+      .tax-toggle {
+        margin-top: 25px;
+        border-top: 1px solid #344853;
+        padding-top: 17px;
+      }
+      .tax-toggle summary {
+        color: #bfc6ca;
+        font-size: 13px;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .tax-toggle summary::-webkit-details-marker {
+        display: none;
+      }
+      .tax-toggle summary:after {
+        content: '⌄';
+        color: #e9bf75;
+        font-size: 20px;
+      }
+      .tax-toggle[open] summary:after {
+        content: '⌃';
+      }
+      .tax-fields {
+        margin-top: 16px;
+        display: grid;
+        gap: 13px;
+      }
+      .tax-field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .tax-field label {
+        font-size: 13px;
+        color: #c8d0d4;
+      }
+      .tax-field input {
+        width: 150px;
+        font-size: 15px;
+      }
+      .tax-field input[type='date'] {
+        width: 170px;
+        text-align: left;
+        color-scheme: dark;
+      }
+      .tax-compare {
+        border-top: 1px solid #344853;
+        margin-top: 6px;
+        padding-top: 8px;
+      }
+      .tax-compare .row {
+        padding: 10px 0;
+      }
+      .tax-compare .value {
+        font-size: 17px;
+      }
+      .tax-best {
+        color: #e9bf75;
+        font-size: 14px;
+        font-weight: 700;
+        margin: 13px 0 5px;
+      }
+      .tax-note {
+        font-size: 11px;
+        color: #b5c7d3;
+        line-height: 1.5;
+      }
+      .tax-compare[hidden] {
+        display: none !important;
+      }
 
-/* Centrage stable sur iPhone et absence de débordement horizontal */
-html{width:100%;overflow-x:hidden}body{width:100%;min-width:0;overflow-x:hidden}
-main{width:100%;max-width:620px;margin-left:auto;margin-right:auto;min-width:0}
-section{min-width:0;max-width:100%}.heading{min-width:0}.heading>div{min-width:0}
-h1{overflow-wrap:anywhere}.row{min-width:0}.value{max-width:55%;overflow-wrap:anywhere;white-space:normal}
-.tax-field{min-width:0}.tax-rate-label{font-size:13px;color:#c8d0d4}.tax-rate-fixed{color:#edf2f5;font-size:15px}
-@media(max-width:390px){.tax-field input[type=date]{max-width:55%;min-width:0}}
-.spot-periods{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:18px}.spot-periods .tab{font-size:12px}#spot-chart{overflow:visible}#spot-meta{line-height:1.6}
-/* Empêche le champ date iOS et les valeurs calculées d'élargir la page. */
-html,body{max-width:100%;overflow-x:clip}
-main{width:100%;max-width:620px;margin-inline:auto;min-width:0}
-#buy-page,#buy-page *{min-width:0}
-.tax-fields{min-width:0;width:100%}
-.tax-field{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,150px);align-items:center;gap:10px;width:100%;min-width:0}
-.tax-field input,.tax-field input[type=date]{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;font-size:16px}
-.tax-field label,.tax-rate-label{min-width:0;overflow-wrap:anywhere}
-.tax-compare .row{min-width:0;gap:8px}
-.tax-compare .name{min-width:0;overflow-wrap:anywhere}
-.tax-compare .value{min-width:0;max-width:58%;white-space:normal;overflow-wrap:anywhere}
-@media(max-width:390px){.tax-field{grid-template-columns:minmax(0,1fr) minmax(0,135px)}.tax-field input[type=date]{width:100%;max-width:100%;min-width:0}}
+      /* Centrage stable sur iPhone et absence de débordement horizontal */
+      html {
+        width: 100%;
+        overflow-x: hidden;
+      }
+      body {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+      }
+      main {
+        width: 100%;
+        max-width: 620px;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 0;
+      }
+      section {
+        min-width: 0;
+        max-width: 100%;
+      }
+      .heading {
+        min-width: 0;
+      }
+      .heading > div {
+        min-width: 0;
+      }
+      h1 {
+        overflow-wrap: anywhere;
+      }
+      .row {
+        min-width: 0;
+      }
+      .value {
+        max-width: 55%;
+        overflow-wrap: anywhere;
+        white-space: normal;
+      }
+      .tax-field {
+        min-width: 0;
+      }
+      .tax-rate-label {
+        font-size: 13px;
+        color: #c8d0d4;
+      }
+      .tax-rate-fixed {
+        color: #edf2f5;
+        font-size: 15px;
+      }
+      @media (max-width: 390px) {
+        .tax-field input[type='date'] {
+          max-width: 55%;
+          min-width: 0;
+        }
+      }
+      .spot-periods {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 18px;
+      }
+      .spot-periods .tab {
+        font-size: 12px;
+      }
+      #spot-chart {
+        overflow: visible;
+      }
+      #spot-meta {
+        line-height: 1.6;
+      }
+      /* Empêche le champ date iOS et les valeurs calculées d'élargir la page. */
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: clip;
+      }
+      main {
+        width: 100%;
+        max-width: 620px;
+        margin-inline: auto;
+        min-width: 0;
+      }
+      #buy-page,
+      #buy-page * {
+        min-width: 0;
+      }
+      .tax-fields {
+        min-width: 0;
+        width: 100%;
+      }
+      .tax-field {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 150px);
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        min-width: 0;
+      }
+      .tax-field input,
+      .tax-field input[type='date'] {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      .tax-field label,
+      .tax-rate-label {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .tax-compare .row {
+        min-width: 0;
+        gap: 8px;
+      }
+      .tax-compare .name {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .tax-compare .value {
+        min-width: 0;
+        max-width: 58%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+      @media (max-width: 390px) {
+        .tax-field {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 135px);
+        }
+        .tax-field input[type='date'] {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
+      }
 
-/* Formulaire TPV : la largeur du champ date reste dans le cadre sur Safari iOS. */
-#buy-page,#buy-page *{min-width:0}
-#buy-page{width:100%;max-width:100%;overflow:hidden}
-.tax-field{grid-template-columns:minmax(0,1fr) minmax(0,132px)!important}
-.tax-field input[type="date"]{width:100%!important;max-width:100%!important;min-width:0!important;font-size:13px!important;padding:10px 5px!important;text-align:left;display:block;overflow:hidden;-webkit-appearance:none;appearance:none}
-.tax-field input[type="date"]::-webkit-date-and-time-value{text-align:left;min-width:0}
-.tax-field input[type="date"]::-webkit-datetime-edit{padding:0;min-width:0}
-.fees-toggle .row{padding:11px 0}
-.fees-toggle .value{font-size:17px}
-/* Un seul défilement vertical pour toute la page, y compris les cotations. */
-#cotations{max-height:none!important;height:auto!important;overflow:visible!important;overscroll-behavior:auto!important}
-/* Indicateur discret d’actualisation, visible pendant toutes les requêtes. */
-.refresh-spinner{display:inline-block;width:15px;height:15px;margin-left:8px;vertical-align:-3px;border:2px solid rgba(23,32,40,.25);border-top-color:#172028;border-radius:50%;animation:or-spin .75s linear infinite}
-.refresh-spinner[hidden]{display:none!important}
-@keyframes or-spin{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.refresh-spinner{animation-duration:1.6s}}
-/* Roulette dans l’en-tête, visible même avec le geste tirer-vers-le-bas. */
-.heading{gap:12px}.heading-refresh{display:flex;align-items:center;justify-content:center;flex:none;width:32px;height:32px}.heading-refresh .refresh-spinner{width:22px;height:22px;margin:0;border-color:rgba(231,193,123,.2);border-top-color:#e9bf75}
-/* Le graphique reste facultatif et fermé à l’ouverture. */
-.spot-chart-details{margin-top:14px;border-top:1px solid #344853;padding-top:14px}.spot-chart-details summary{list-style:none;display:flex;align-items:center;justify-content:space-between;color:#e9bf75;font-size:13px;font-weight:650}.spot-chart-details summary::-webkit-details-marker{display:none}.spot-chart-details summary::after{content:'⌄';font-size:20px}.spot-chart-details[open] summary::after{content:'⌃'}
+      /* Formulaire TPV : la largeur du champ date reste dans le cadre sur Safari iOS. */
+      #buy-page,
+      #buy-page * {
+        min-width: 0;
+      }
+      #buy-page {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .tax-field {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 132px) !important;
+      }
+      .tax-field input[type='date'] {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        font-size: 13px !important;
+        padding: 10px 5px !important;
+        text-align: left;
+        display: block;
+        overflow: hidden;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .tax-field input[type='date']::-webkit-date-and-time-value {
+        text-align: left;
+        min-width: 0;
+      }
+      .tax-field input[type='date']::-webkit-datetime-edit {
+        padding: 0;
+        min-width: 0;
+      }
+      .fees-toggle .row {
+        padding: 11px 0;
+      }
+      .fees-toggle .value {
+        font-size: 17px;
+      }
+      /* Un seul défilement vertical pour toute la page, y compris les cotations. */
+      #cotations {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        overscroll-behavior: auto !important;
+      }
+      /* Indicateur discret d’actualisation, visible pendant toutes les requêtes. */
+      .refresh-spinner {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-left: 8px;
+        vertical-align: -3px;
+        border: 2px solid rgba(23, 32, 40, 0.25);
+        border-top-color: #172028;
+        border-radius: 50%;
+        animation: or-spin 0.75s linear infinite;
+      }
+      .refresh-spinner[hidden] {
+        display: none !important;
+      }
+      @keyframes or-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .refresh-spinner {
+          animation-duration: 1.6s;
+        }
+      }
+      /* Roulette dans l’en-tête, visible même avec le geste tirer-vers-le-bas. */
+      .heading {
+        gap: 12px;
+      }
+      .heading-refresh {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        width: 32px;
+        height: 32px;
+      }
+      .heading-refresh .refresh-spinner {
+        width: 22px;
+        height: 22px;
+        margin: 0;
+        border-color: rgba(231, 193, 123, 0.2);
+        border-top-color: #e9bf75;
+      }
+      /* Le graphique reste facultatif et fermé à l’ouverture. */
+      .spot-chart-details {
+        margin-top: 14px;
+        border-top: 1px solid #344853;
+        padding-top: 14px;
+      }
+      .spot-chart-details summary {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #e9bf75;
+        font-size: 13px;
+        font-weight: 650;
+      }
+      .spot-chart-details summary::-webkit-details-marker {
+        display: none;
+      }
+      .spot-chart-details summary::after {
+        content: '⌄';
+        font-size: 20px;
+      }
+      .spot-chart-details[open] summary::after {
+        content: '⌃';
+      }
 
-/* Affichage ordinateur : deux colonnes, sans modifier l'interface iPhone. */
-@media (min-width: 900px) {
-  main {max-width: 1320px; padding: 42px 36px 80px; display:grid;
-    grid-template-columns:minmax(0, 0.9fr) minmax(0, 1.1fr);
-    column-gap:24px; row-gap:0; align-items:start;}
-  .heading {grid-column:1/-1; margin-bottom:22px;}
-  h1 {font-size:34px;}
-  #spot-section {grid-column:1; grid-row:2;}
-  #cpor-section {grid-column:2; grid-row:2 / span 2;}
-  section.hero {grid-column:1; grid-row:3;}
-  #buy-page {grid-column:1/-1; width:min(100%,860px); justify-self:center;}
-  .toolbar, .status, #editor, main > p.small {grid-column:1/-1;}
-  section {margin:0 0 20px; padding:24px;}
-  .quote {padding:14px 3px;}
-  .quote .name {font-size:15px;}
-  .price {font-size:46px;}
-  #spot-chart {height:220px!important;}
-  .spot-chart-details {margin-top:20px;}
-  .tax-field {grid-template-columns:minmax(0,1fr) 190px!important;}
-  .tax-field input[type="date"] {font-size:16px!important; padding:12px!important;}
-  .buy-result {font-size:42px;}
-  .toolbar {margin-top:4px;}
-}
-@media (min-width: 1200px) {
-  main {grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); column-gap:30px;}
-}
-</style><link rel="stylesheet" href="estimation.css?v=20261022-kitco2"><link rel="stylesheet" href="mobile.css?v=20261022-kitco2"><link rel="stylesheet" href="print.css?v=20261022-kitco2"><link rel="stylesheet" href="quick-prices.css?v=20261022-kitco2"><link rel="stylesheet" href="pc-theme.css?v=20261022-kitco2"></head><body><main><div class="heading"><div><div class="eyebrow" id="last-updated">Dernière actualisation : —</div><h1>GoldApp</h1></div><div class="heading-refresh"><span id="refresh-spinner" class="refresh-spinner" role="status" aria-label="Actualisation en cours" hidden></span></div></div><section id="spot-section"><h2>Cours spot de l’or</h2><div class="row"><span class="name">Or pur · 1 kg</span><span class="value" id="instant">—</span></div><div id="spot-meta" class="small" style="margin-top:9px">Chargement du cours spot…</div><details class="spot-chart-details" id="spot-chart-details"><summary>Afficher le graphique</summary><div class="tabs spot-periods" aria-label="Période du graphique"><button type="button" class="tab active" data-period="1">1 jour</button><button type="button" class="tab" data-period="7">7 jours</button><button type="button" class="tab" data-period="30">1 mois</button><button type="button" class="tab" data-period="365">1 an</button></div><svg id="spot-chart" role="img" aria-label="Évolution du cours spot de l’or en euros par kilogramme" viewBox="0 0 320 155" preserveAspectRatio="none" style="width:100%;height:155px;display:block"></svg><div id="chart-note" class="small">Chargement de l’historique…</div></details></section><section id="cpor-section"><h2>Cours CPoR</h2><div class="tabs" role="tablist" aria-label="Catégories de cotations"><button id="tab-coins" class="tab active" role="tab" aria-selected="true" type="button">Pièces d'or</button><button id="tab-bars" class="tab" role="tab" aria-selected="false" type="button">Lingots & lingotins</button></div><div id="cotations" class="quotes" aria-live="polite"></div><div class="small">Touchez un produit pour calculer son prix d'achat.</div></section><section class="hero"><div class="eyebrow">ACHAT BIJOUX</div><div class="price gold" id="price18">— €/g</div><div class="inputs"><label for="mult">Décote (%)</label><input id="mult" inputmode="decimal" value="25" aria-label="Décote (%)"></div></section><section id="buy-page" hidden><button id="back" class="back secondary" type="button">← Retour aux cours</button><div class="eyebrow">CALCUL PRIX D'ACHAT</div><div class="buy-heading"><h2 id="buy-name" class="gold"></h2></div><div class="row"><span class="name">Cours de référence</span><span class="value" id="buy-reference">—</span></div><div class="inputs"><label for="buy-discount">Frais de courtage (%)</label><input id="buy-discount" inputmode="decimal" value="8" aria-label="Frais de courtage pour le prix d'achat"></div><div class="buy-divider"></div><div class="muted">PRIX D'ACHAT FINAL</div><div class="buy-result" id="buy-final">—</div><div class="buy-tax" id="buy-tax">dont — de taxes</div>
-<details class="tax-toggle fees-toggle" id="fees-toggle"><summary>Détails des frais de courtage</summary>
-<div class="tax-compare">
-<div class="row"><span class="name" id="fees-goldtrade-label">GoldTrade (1,5 %)</span><span class="value" id="fees-goldtrade">—</span></div>
-<div class="row"><span class="name" id="fees-agency-label">Agence (6 %)</span><span class="value" id="fees-agency">—</span></div>
-</div><div class="tax-note" id="fees-note" hidden></div></details>
-<details class="tax-toggle" id="tax-toggle"><summary>Comparer TMP et TPV</summary>
-<div class="tax-fields">
-<div class="tax-field"><label for="tax-cost">Prix d’acquisition (€)</label><input id="tax-cost" inputmode="decimal" placeholder="Ex. 400,00" aria-label="Prix d’acquisition"></div>
-<div class="tax-field"><label for="tax-date">Date d’acquisition</label><input id="tax-date" type="date" aria-label="Date d’acquisition"><small id="tax-date-status" aria-live="polite"></small></div>
-<div class="tax-field"><span class="tax-rate-label">Taux TPV</span><strong class="tax-rate-fixed">36,2 %</strong></div>
+      /* Affichage ordinateur : deux colonnes, sans modifier l'interface iPhone. */
+      @media (min-width: 900px) {
+        main {
+          max-width: 1320px;
+          padding: 42px 36px 80px;
+          display: grid;
+          grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+          column-gap: 24px;
+          row-gap: 0;
+          align-items: start;
+        }
+        .heading {
+          grid-column: 1/-1;
+          margin-bottom: 22px;
+        }
+        h1 {
+          font-size: 34px;
+        }
+        #spot-section {
+          grid-column: 1;
+          grid-row: 2;
+        }
+        #cpor-section {
+          grid-column: 2;
+          grid-row: 2 / span 2;
+        }
+        section.hero {
+          grid-column: 1;
+          grid-row: 3;
+        }
+        #buy-page {
+          grid-column: 1/-1;
+          width: min(100%, 860px);
+          justify-self: center;
+        }
+        .toolbar,
+        .status,
+        #editor,
+        main > p.small {
+          grid-column: 1/-1;
+        }
+        section {
+          margin: 0 0 20px;
+          padding: 24px;
+        }
+        .quote {
+          padding: 14px 3px;
+        }
+        .quote .name {
+          font-size: 15px;
+        }
+        .price {
+          font-size: 46px;
+        }
+        #spot-chart {
+          height: 220px !important;
+        }
+        .spot-chart-details {
+          margin-top: 20px;
+        }
+        .tax-field {
+          grid-template-columns: minmax(0, 1fr) 190px !important;
+        }
+        .tax-field input[type='date'] {
+          font-size: 16px !important;
+          padding: 12px !important;
+        }
+        .buy-result {
+          font-size: 42px;
+        }
+        .toolbar {
+          margin-top: 4px;
+        }
+      }
+      @media (min-width: 1200px) {
+        main {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          column-gap: 30px;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="estimation.css?v=20261024-goldapp" />
+    <link rel="stylesheet" href="mobile.css?v=20261024-goldapp" />
+    <link rel="stylesheet" href="print.css?v=20261024-goldapp" />
+    <link rel="stylesheet" href="quick-prices.css?v=20261024-goldapp" />
+    <link rel="stylesheet" href="pc-theme.css?v=20261024-goldapp" />
+    <link rel="stylesheet" href="calculs-goldapp.css?v=20261024-goldapp" />
+  </head>
+  <body>
+    <main>
+      <div class="heading">
+        <div>
+          <div class="eyebrow" id="last-updated">Dernière actualisation : —</div>
+          <h1>GoldApp</h1>
+        </div>
+        <div class="heading-refresh">
+          <span
+            id="refresh-spinner"
+            class="refresh-spinner"
+            role="status"
+            aria-label="Actualisation en cours"
+            hidden
+          ></span>
+        </div>
+      </div>
+      <section id="spot-section">
+        <h2>Cours spot de l’or</h2>
+        <div class="row">
+          <span class="name">Or pur · 1 kg</span><span class="value" id="instant">—</span>
+        </div>
+        <div id="spot-meta" class="small" style="margin-top: 9px">Chargement du cours spot…</div>
+        <details class="spot-chart-details" id="spot-chart-details">
+          <summary>Afficher le graphique</summary>
+          <div class="tabs spot-periods" aria-label="Période du graphique">
+            <button type="button" class="tab active" data-period="1">1 jour</button
+            ><button type="button" class="tab" data-period="7">7 jours</button
+            ><button type="button" class="tab" data-period="30">1 mois</button
+            ><button type="button" class="tab" data-period="365">1 an</button>
+          </div>
+          <svg
+            id="spot-chart"
+            role="img"
+            aria-label="Évolution du cours spot de l’or en euros par kilogramme"
+            viewBox="0 0 320 155"
+            preserveAspectRatio="none"
+            style="width: 100%; height: 155px; display: block"
+          ></svg>
+          <div id="chart-note" class="small">Chargement de l’historique…</div>
+        </details>
+      </section>
+      <section id="cpor-section">
+        <h2>Cours CPoR</h2>
+        <div class="tabs" role="tablist" aria-label="Catégories de cotations">
+          <button id="tab-coins" class="tab active" role="tab" aria-selected="true" type="button">
+            Pièces d'or</button
+          ><button id="tab-bars" class="tab" role="tab" aria-selected="false" type="button">
+            Lingots & lingotins
+          </button>
+        </div>
+        <div id="cotations" class="quotes" aria-live="polite"></div>
+        <div class="small">Touchez un produit pour calculer son prix d'achat.</div>
+      </section>
+      <section class="hero">
+        <div class="eyebrow">ACHAT BIJOUX</div>
+        <div class="price gold" id="price18">— €/g</div>
+        <div class="inputs">
+          <label for="mult">Décote (%)</label
+          ><input id="mult" inputmode="decimal" value="25" aria-label="Décote (%)" />
+        </div>
+      </section>
+      <section id="buy-page" hidden>
+        <button id="back" class="back secondary" type="button">← Retour aux cours</button>
+        <div class="eyebrow">CALCUL PRIX D'ACHAT</div>
+        <div class="buy-heading"><h2 id="buy-name" class="gold"></h2></div>
+        <div class="row">
+          <span class="name">Cours de référence</span
+          ><span class="value" id="buy-reference">—</span>
+        </div>
+        <div class="inputs">
+          <label for="buy-discount">Frais de courtage (%)</label
+          ><input
+            id="buy-discount"
+            inputmode="decimal"
+            value="8"
+            aria-label="Frais de courtage pour le prix d'achat"
+          />
+        </div>
+        <div class="buy-divider"></div>
+        <div class="muted">PRIX D'ACHAT FINAL</div>
+        <div class="buy-result" id="buy-final">—</div>
+        <div class="buy-tax" id="buy-tax">dont — de taxes</div>
+        <details class="tax-toggle fees-toggle" id="fees-toggle">
+          <summary>Détails des frais de courtage</summary>
+          <div class="tax-compare">
+            <div class="row">
+              <span class="name" id="fees-goldtrade-label">GoldTrade (1,5 %)</span
+              ><span class="value" id="fees-goldtrade">—</span>
+            </div>
+            <div class="row">
+              <span class="name" id="fees-agency-label">Agence (6 %)</span
+              ><span class="value" id="fees-agency">—</span>
+            </div>
+          </div>
+          <div class="tax-note" id="fees-note" hidden></div>
+        </details>
+        <details class="tax-toggle" id="tax-toggle">
+          <summary>Comparer TMP et TPV</summary>
+          <div class="tax-fields">
+            <div class="tax-field">
+              <label for="tax-cost">Prix d’acquisition (€)</label
+              ><input
+                id="tax-cost"
+                inputmode="decimal"
+                placeholder="Ex. 400,00"
+                aria-label="Prix d’acquisition"
+              />
+            </div>
+            <div class="tax-field">
+              <label for="tax-date">Date d’acquisition</label
+              ><input id="tax-date" type="date" aria-label="Date d’acquisition" /><small
+                id="tax-date-status"
+                aria-live="polite"
+              ></small>
+            </div>
+            <div class="tax-field">
+              <span class="tax-rate-label">Taux TPV</span
+              ><strong class="tax-rate-fixed">36,2 %</strong>
+            </div>
 
-<div class="tax-compare" id="tax-compare" hidden>
-<div class="row"><span class="name">Net après TMP (11,5 %)</span><span class="value" id="tax-tmp-net">—</span></div>
-<div class="row"><span class="name">Net après TPV</span><span class="value" id="tax-pv-net">—</span></div>
-<div class="row"><span class="name">TPV estimée</span><span class="value" id="tax-pv-amount">—</span></div>
-<div class="tax-best" id="tax-best"></div>
-<div class="tax-note" id="tax-years"></div>
-</div>
-<div class="tax-note" id="tax-hint">Renseigne le prix et la date d’acquisition pour comparer les deux régimes.</div>
-
-</div></details></section><div class="toolbar"><button id="refresh">↻ Actualiser</button><button id="manual" class="secondary">Saisir les cours</button></div><div class="status" id="status" aria-live="polite">Aucun cours chargé. Les prix ne seront pas inventés.</div><section id="editor" hidden><h2>Saisie / importation des cotations</h2><div class="small">Colle un objet JSON de cotations (en euros). Tu peux utiliser ce mode si Gold.fr bloque la récupération automatique. Les valeurs sont enregistrées uniquement sur cet appareil.</div><textarea id="json"></textarea><button id="save">Enregistrer les cours</button><div id="error" class="small"></div></section><p class="small">Cours indicatifs. Vérifie les valeurs avant toute transaction.</p></main><script src="fiscal.js?v=20261022-kitco2"></script><script src="freshness.js?v=20261022-kitco2"></script><script src="gold-chart.js?v=20261022-kitco2"></script><script src="app.js?v=20261022-kitco2"></script><script src="estimation.js?v=20261022-kitco2"></script><script src="silver.js?v=20261022-kitco2"></script><script src="c3e.js?v=20261022-kitco2"></script><script src="mobile.js?v=20261022-kitco2"></script><script src="quick-prices.js?v=20261022-kitco2"></script><script src="print.js?v=20261022-kitco2"></script><script src="edit-fields.js?v=20261022-kitco2"></script><script src="update.js?v=20261022-kitco2"></script></body></html>
-
+            <div class="tax-compare" id="tax-compare" hidden>
+              <div class="row">
+                <span class="name">Net après TMP (11,5 %)</span
+                ><span class="value" id="tax-tmp-net">—</span>
+              </div>
+              <div class="row">
+                <span class="name">Net après TPV</span><span class="value" id="tax-pv-net">—</span>
+              </div>
+              <div class="row">
+                <span class="name">TPV estimée</span><span class="value" id="tax-pv-amount">—</span>
+              </div>
+              <div class="tax-best" id="tax-best"></div>
+              <div class="tax-note" id="tax-years"></div>
+            </div>
+            <div class="tax-note" id="tax-hint">
+              Renseigne le prix et la date d’acquisition pour comparer les deux régimes.
+            </div>
+          </div>
+        </details>
+      </section>
+      <div class="toolbar">
+        <button id="refresh">↻ Actualiser</button
+        ><button id="manual" class="secondary">Saisir les cours</button>
+      </div>
+      <div class="status" id="status" aria-live="polite">
+        Aucun cours chargé. Les prix ne seront pas inventés.
+      </div>
+      <section id="editor" hidden>
+        <h2>Saisie / importation des cotations</h2>
+        <div class="small">
+          Colle un objet JSON de cotations (en euros). Tu peux utiliser ce mode si Gold.fr bloque la
+          récupération automatique. Les valeurs sont enregistrées uniquement sur cet appareil.
+        </div>
+        <textarea id="json"></textarea><button id="save">Enregistrer les cours</button>
+        <div id="error" class="small"></div>
+      </section>
+      <p class="small">Cours indicatifs. Vérifie les valeurs avant toute transaction.</p>
+    </main>
+    <script src="fiscal.js?v=20261024-goldapp"></script>
+    <script src="freshness.js?v=20261024-goldapp"></script>
+    <script src="gold-chart.js?v=20261024-goldapp"></script>
+    <script src="app.js?v=20261024-goldapp"></script>
+    <script src="estimation.js?v=20261024-goldapp"></script>
+    <script src="silver.js?v=20261024-goldapp"></script>
+    <script src="c3e.js?v=20261024-goldapp"></script>
+    <script src="mobile.js?v=20261024-goldapp"></script>
+    <script src="alignment.js?v=20261024-goldapp"></script>
+    <script src="quick-prices.js?v=20261024-goldapp"></script>
+    <script src="print.js?v=20261024-goldapp"></script>
+    <script src="edit-fields.js?v=20261024-goldapp"></script>
+    <script src="update.js?v=20261024-goldapp"></script>
+  </body>
+</html>
