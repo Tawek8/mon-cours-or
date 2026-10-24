@@ -1,5 +1,10 @@
 # Historique
 
+## 24/10/2026 — samedi
+
+- Kitco : quand le marché est fermé (week-end, pause quotidienne), le cours de
+  clôture est accepté au lieu d’être refusé ; l’écran indique « Marché fermé ».
+
 ## 24/10/2026 — graphique
 
 - Courbe redessinée : dégradé doré, halo, repère du début de période, plus haut et

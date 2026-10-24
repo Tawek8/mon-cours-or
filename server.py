@@ -229,6 +229,7 @@ def spot_live():
                 basis="Bid",
                 unit="EUR/kg",
                 currency="EUR",
+                marketClosed=quote.get("marketClosed", False),
             )
         except Exception as error:
             errors.append("Kitco : " + str(error)[:100])

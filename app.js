@@ -469,7 +469,9 @@ async function loadSpot() {
       'Spot indicatif · ' +
       (p.updatedAt ? new Date(p.updatedAt).toLocaleString('fr-FR') + ' · ' : '') +
       (p.source === 'Kitco'
-        ? 'Source : Kitco · Bid · €/kg'
+        ? p.marketClosed
+          ? 'Marché fermé · cours de clôture Kitco · Bid · €/kg'
+          : 'Source : Kitco · Bid · €/kg'
         : 'Source : BullionVault · secours, Kitco indisponible · €/kg');
     draw();
   } catch (e) {

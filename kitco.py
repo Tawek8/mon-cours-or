@@ -7,13 +7,33 @@ from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 
 URL = "https://api.kitco.com/adaptor-mobile/v1/precious"
+# Marché Kitco (heure de New York) : fermé du vendredi 17 h au dimanche 18 h,
+# et chaque jour de semaine de 17 h à 18 h.
+CLOSE_HOUR, OPEN_HOUR = 17, 18
 
 
-def parse(payload, retrieved_at=None):
+def last_close(now_ny):
+    """Heure de la dernière clôture si le marché est fermé maintenant, sinon None."""
+    today_close = now_ny.replace(hour=CLOSE_HOUR, minute=0, second=0, microsecond=0)
+    weekday, hour = now_ny.weekday(), now_ny.hour
+    if weekday == 4 and hour >= CLOSE_HOUR:
+        return today_close
+    if weekday == 5:
+        return today_close - timedelta(days=1)
+    if weekday == 6 and hour < OPEN_HOUR:
+        return today_close - timedelta(days=2)
+    if weekday < 4 and CLOSE_HOUR <= hour < OPEN_HOUR:
+        return today_close
+    return None
+
+
+def parse(payload, retrieved_at=None, symbol="AU"):
+    if symbol not in ("AU", "AG", "PT"):
+        raise ValueError("Métal Kitco non pris en charge")
     value = payload["PreciousMetals"]["PM"]
     if (
         not isinstance(value, dict)
-        or value.get("Symbol") != "AU"
+        or value.get("Symbol") != symbol
         or value.get("Currency") != "EUR"
         or value.get("Unit") != "KILO"
     ):
@@ -75,14 +95,20 @@ def parse(payload, retrieved_at=None):
     if now.tzinfo is None:
         raise ValueError("Heure de récupération sans fuseau")
     age = (now - at).total_seconds()
+    closed_at = None
     if not -30 <= age <= 180:
-        raise ValueError("Cours Kitco non récent")
+        # Marché fermé (samedi, nuit du dimanche, pause quotidienne) : le cours de
+        # clôture est le dernier cours officiel ; il reste valable jusqu'à la réouverture.
+        close = last_close(now.astimezone(ny))
+        if close is None or at < close - timedelta(minutes=20) or age > 3 * 86400:
+            raise ValueError("Cours Kitco non récent")
+        closed_at = close.astimezone(timezone.utc).isoformat()
     return dict(
         price=bid,
         prices={"instant": bid},
         unit="EUR/kg",
         currency="EUR",
-        metal="Or",
+        metal={"AU": "Or", "AG": "Argent", "PT": "Platine"}[symbol],
         source="Kitco",
         basis="Bid",
         sourceTimestamp=raw_stamp,
@@ -90,12 +116,16 @@ def parse(payload, retrieved_at=None):
         quotedAt=at.isoformat(),
         retrievedAt=now.isoformat(),
         ageSeconds=round(age, 1),
+        marketClosed=closed_at is not None,
+        closedAt=closed_at,
     )
 
 
-def fetch_quote():
+def fetch_quote(symbol="AU"):
+    if symbol not in ("AU", "AG", "PT"):
+        raise ValueError("Métal Kitco non pris en charge")
     params = dict(
-        symbol="AU",
+        symbol=symbol,
         currency="EUR",
         unit="KILO",
         type="json",
@@ -120,4 +150,4 @@ def fetch_quote():
         raw = gzip.decompress(raw)
         if len(raw) > 1_000_000:
             raise ValueError("Réponse Kitco trop volumineuse")
-    return parse(json.loads(raw))
+    return parse(json.loads(raw), symbol=symbol)
