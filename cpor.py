@@ -57,89 +57,66 @@ def fetch(url):
     return raw.decode("utf-8", errors="replace")
 
 
-def parse(table, napoleon):
-    flat = clean(napoleon)
-    stamp = re.search(
-        r"(?:Mis à jour le|Updated)\s+(\d{1,2})\s*/\s*(\d{1,2})\s*/\s*(\d{4})\s+(?:à|at)\s+(\d{2}:\d{2})",
-        flat,
-        re.I,
-    )
-    if not stamp:
-        raise ValueError("Horodatage CPoR non reconnu")
-    day, month, year, hour = stamp.groups()
-    date = f"{int(day):02d}/{int(month):02d}/{year}"
-    local = datetime.strptime(date + " " + hour, "%d/%m/%Y %H:%M")
-    try:
-        paris = ZoneInfo("Europe/Paris")
-    except ZoneInfoNotFoundError:
-        import calendar
+def parse(table, napoleon=None):
+    """Lire le tableau officiel même si une fiche produit est en panne.
 
-        def last_sunday(month):
-            end = datetime(
-                local.year, month, calendar.monthrange(local.year, month)[1], 3
-            )
-            return end - timedelta(days=(end.weekday() + 1) % 7)
-
-        paris = timezone(
-            timedelta(hours=2 if last_sunday(3) <= local < last_sunday(10) else 1)
-        )
-    at = local.replace(tzinfo=paris)
-    if at.timestamp() > time.time() + 300:
-        raise ValueError("Cotation CPoR future")
-    mapping = {name: (key, index) for name, key, index in ROWS}
-    prices = {}
-    products = []
+    Le tableau publie une date de séance, sans heure de cotation.
+    Une fiche fournie peut servir au contrôle du prix, mais n'est pas requise.
+    """
+    mapping = {name: key for name, key, _ in ROWS}
+    prices, products, dates, seen = {}, [], set(), set()
     for block in re.findall(
         r'<div class="raterow_preview[^\"]*">([\s\S]*?)<div class="raterow_detail">',
         table,
     ):
-
         def cell(cls):
-            m = re.search(r'<div class="col ' + cls + r'">([\s\S]*?)</div>', block)
-            return clean(m[1]) if m else ""
+            match = re.search(r'<div class="col ' + cls + r'">([\s\S]*?)</div>', block)
+            return clean(match[1]) if match else ""
 
         name = cell("col_name")
         if name not in mapping:
             continue
-        key, index = mapping[name]
-        suspended = "Cotation suspendue" in clean(block)
-        if not suspended and date not in cell("col_date"):
-            raise ValueError("Dates CPoR incohérentes entre tableau et Napoléon")
-        match = re.search(r"([\d\s.,]+)\s*€", cell("col_price"))
-        value = float(match[1].replace(" ", "").replace(",", ".")) if match else None
-        if not suspended and not (value and value > 0):
-            raise ValueError("Cours CPoR invalide")
-        product = dict(
-            key=key,
-            name=name,
-            price=str(value) if value else None,
-            date=date,
-            quotedAt=at.isoformat(),
-            quoteSource="CPoR",
-            suspended=suspended,
-        )
-        products.append(product)
-        if value:
+        key = mapping[name]
+        if key in seen:
+            raise ValueError("Cotation CPoR dupliquée")
+        seen.add(key)
+        suspended = "cotation suspendue" in clean(block).lower()
+        date = None
+        value = None
+        if not suspended:
+            stamp = re.search(r"\b(\d{2}/\d{2}/\d{4})\b", cell("col_date"))
+            if not stamp:
+                raise ValueError("Date CPoR absente")
+            session = datetime.strptime(stamp[1], "%d/%m/%Y").date()
+            # La date du jour à Paris peut précéder/suivre la date UTC.
+            if session > (datetime.now(timezone.utc) + timedelta(hours=2)).date():
+                raise ValueError("Cotation CPoR future")
+            date = session.isoformat()
+            dates.add(date)
+            match = re.fullmatch(r"([\d\s.,]+)\s*€", cell("col_price"))
+            if not match:
+                raise ValueError("Cours CPoR invalide")
+            value = float(re.sub(r"\s", "", match[1]).replace(",", "."))
+            if not 0 < value < float("inf"):
+                raise ValueError("Cours CPoR invalide")
             prices[key] = value
-    nap_price = re.search(r'<div class="value">([\s\S]*?)</div>', napoleon)
-    if not nap_price:
-        raise ValueError("Cours du Napoléon absent")
-    raw_price = clean(nap_price[1]).replace(" ", "").replace("€", "").replace(",", ".")
-    if abs(float(raw_price) - prices.get("coq", 0)) > 0.005:
-        raise ValueError("Cours du Napoléon incohérent entre fiche et tableau")
-    if len(products) != len(ROWS) or not all(
-        key in prices for key in ["cpor", "coq", "suisse"]
-    ):
+        products.append(dict(key=key, name=name, price=str(value) if value else None,
+                             date=date, quoteSource="CPoR", suspended=suspended))
+    if len(seen) != len(ROWS) or not all(key in prices for key in ["cpor", "coq", "suisse"]):
         raise ValueError("Tableau CPoR incomplet")
-    return dict(
-        prices=prices,
-        products=products,
-        quotedAt=at.isoformat(),
-        pageDate=date,
-        source="CPoR",
-        updatedAt=datetime.now(timezone.utc).isoformat(),
-        warnings=[],
-    )
+    if len(dates) != 1:
+        raise ValueError("Dates CPoR incohérentes dans le tableau")
+    source_date = next(iter(dates))
+    if napoleon is not None:
+        match = re.search(r'<div class="value">([\s\S]*?)</div>', napoleon)
+        if not match:
+            raise ValueError("Cours du Napoléon absent")
+        raw = re.sub(r"\s", "", clean(match[1])).replace("€", "").replace(",", ".")
+        if abs(float(raw) - prices["coq"]) > 0.005:
+            raise ValueError("Cours du Napoléon incohérent entre fiche et tableau")
+    return dict(prices=prices, products=products, quotedAt=source_date,
+                sourceDate=source_date, pageDate=datetime.strptime(source_date, "%Y-%m-%d").strftime("%d/%m/%Y"),
+                source="CPoR", updatedAt=datetime.now(timezone.utc).isoformat(), warnings=[])
 
 
 def live():
@@ -147,6 +124,6 @@ def live():
     with _lock:
         if _cache and time.monotonic() - _cache[0] < 30:
             return _cache[1]
-        payload = parse(fetch(TABLE), fetch(NAPOLEON))
+        payload = parse(fetch(TABLE))
         _cache = (time.monotonic(), payload)
         return payload
