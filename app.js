@@ -472,7 +472,8 @@ async function loadSpot() {
         ? p.marketClosed
           ? 'Marché fermé · cours de clôture Kitco · Bid · €/kg'
           : 'Source : Kitco · Bid · €/kg'
-        : 'Source : BullionVault · secours, Kitco indisponible · €/kg');
+        : (p.marketClosed ? 'Marché fermé · cours de clôture · ' : '') +
+          'Source : BullionVault · secours, Kitco indisponible · €/kg');
     draw();
   } catch (e) {
     spotValue = null;

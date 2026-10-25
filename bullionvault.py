@@ -53,13 +53,16 @@ def fetch_quote():
     ):
         raise ValueError("Cours ou devise inattendu")
     at = datetime.fromtimestamp(timestamp / 1000, timezone.utc)
-    age = (datetime.now(timezone.utc) - at).total_seconds()
-    if not -30 <= age <= 120:
-        raise ValueError("Cours non récent : " + str(round(age)) + " secondes")
+    now = datetime.now(timezone.utc)
+    age = (now - at).total_seconds()
+    from market import validate_quote
+    closed_at = validate_quote(at, now, 120)
     money = lambda n: str(
         Decimal(str(n)).quantize(Decimal(".01"), rounding=ROUND_HALF_UP)
     )
     return dict(
+        marketClosed=closed_at is not None,
+        closedAt=closed_at,
         source="BullionVault",
         metal="Or",
         currency="EUR",

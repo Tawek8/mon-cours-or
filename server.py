@@ -241,6 +241,7 @@ def spot_live():
                 price=quote["price"],
                 updatedAt=quote["quotedAt"],
                 retrievedAt=quote["retrievedAt"],
+                marketClosed=quote.get("marketClosed", False),
                 source="BullionVault",
                 basis="secours",
                 unit="EUR/kg",

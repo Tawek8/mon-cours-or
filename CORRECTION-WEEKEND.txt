@@ -1,0 +1,7 @@
+Correction du 25/10/2026
+
+Le dernier cours de la séance reste affiché pendant la fermeture avec la mention Marché fermé, pour Kitco et BullionVault. Les cours des séances précédentes et les dates futures restent refusés.
+
+Installation : remplacer le contenu du dépôt hébergé par ce dossier, puis redéployer le serveur Python. Sur iPhone, utiliser Mettre à jour ou fermer et rouvrir l’application.
+
+Validation : 5 tests automatiques réussis et syntaxe JavaScript vérifiée. Aucun déploiement effectué.

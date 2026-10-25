@@ -95,14 +95,8 @@ def parse(payload, retrieved_at=None, symbol="AU"):
     if now.tzinfo is None:
         raise ValueError("Heure de récupération sans fuseau")
     age = (now - at).total_seconds()
-    closed_at = None
-    if not -30 <= age <= 180:
-        # Marché fermé (samedi, nuit du dimanche, pause quotidienne) : le cours de
-        # clôture est le dernier cours officiel ; il reste valable jusqu'à la réouverture.
-        close = last_close(now.astimezone(ny))
-        if close is None or at < close - timedelta(minutes=20) or age > 3 * 86400:
-            raise ValueError("Cours Kitco non récent")
-        closed_at = close.astimezone(timezone.utc).isoformat()
+    from market import validate_quote
+    closed_at = validate_quote(at, now, 180)
     return dict(
         price=bid,
         prices={"instant": bid},
