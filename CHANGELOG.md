@@ -1,5 +1,12 @@
 # Historique
 
+## 28/10/2026 — tirer pour actualiser
+
+- Le bouton « Actualiser » de l’en-tête est remplacé par le geste : tirer l’écran vers le
+  bas depuis le haut. Une pastille suit le doigt (« Relâche pour actualiser »), une roulette
+  tourne en haut à droite pendant l’actualisation. Le geste marche aussi en partant d’une
+  carte produit (pas depuis le graphique, réservé à la lecture des cours).
+
 ## 28/10/2026 — graphique de l’argent
 
 - Choix Or / Argent sur le graphique (historique BullionVault, comme GoldGestion) ;

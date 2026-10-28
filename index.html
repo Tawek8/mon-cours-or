@@ -12,11 +12,14 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon.png" />
     <title>GoldApp</title>
-    <link rel="stylesheet" href="style.css?v=20261028-argent2" />
-    <link rel="stylesheet" href="estimation.css?v=20261028-argent2" />
-    <link rel="stylesheet" href="print.css?v=20261028-argent2" />
+    <link rel="stylesheet" href="style.css?v=20261028-tirer" />
+    <link rel="stylesheet" href="estimation.css?v=20261028-tirer" />
+    <link rel="stylesheet" href="print.css?v=20261028-tirer" />
   </head>
   <body data-view="cours">
+    <div id="pull-indicator" aria-hidden="true">
+      <span class="pull-arrow">↓</span><span class="pull-text">Tire pour actualiser</span>
+    </div>
     <div id="splash" aria-hidden="true">
       <img src="icon.svg" alt="" width="84" height="84" />
       <span>GoldApp</span>
@@ -27,10 +30,15 @@
           <img src="icon.svg" alt="" width="40" height="40" />
           <h1>GoldApp</h1>
         </div>
-        <button id="refresh" type="button" aria-label="Actualiser les cours">
-          <span id="refresh-spinner" class="refresh-spinner" role="status" hidden></span
-          ><span class="refresh-icon" aria-hidden="true">↻</span> Actualiser
-        </button>
+        <span
+          id="refresh-spinner"
+          class="refresh-spinner"
+          role="status"
+          aria-label="Actualisation en cours"
+          hidden
+        ></span>
+        <!-- Actualisation : tirer l’écran vers le bas ; ce bouton invisible reste la commande. -->
+        <button id="refresh" type="button" hidden>Actualiser</button>
       </header>
       <p class="fresh-text" id="last-updated">Kitco : en attente d’actualisation</p>
       <div id="stale-banner" class="stale" role="alert" hidden>
@@ -224,19 +232,19 @@
         </details>
       </section>
     </main>
-    <script src="fiscal.js?v=20261028-argent2"></script>
-    <script src="freshness.js?v=20261028-argent2"></script>
-    <script src="gold-chart.js?v=20261028-argent2"></script>
-    <script src="app.js?v=20261028-argent2"></script>
-    <script src="estimation.js?v=20261028-argent2"></script>
-    <script src="silver.js?v=20261028-argent2"></script>
-    <script src="cours-plus.js?v=20261028-argent2"></script>
-    <script src="c3e.js?v=20261028-argent2"></script>
-    <script src="mobile.js?v=20261028-argent2"></script>
-    <script src="alignment.js?v=20261028-argent2"></script>
-    <script src="quick-prices.js?v=20261028-argent2"></script>
-    <script src="print.js?v=20261028-argent2"></script>
-    <script src="edit-fields.js?v=20261028-argent2"></script>
-    <script src="update.js?v=20261028-argent2"></script>
+    <script src="fiscal.js?v=20261028-tirer"></script>
+    <script src="freshness.js?v=20261028-tirer"></script>
+    <script src="gold-chart.js?v=20261028-tirer"></script>
+    <script src="app.js?v=20261028-tirer"></script>
+    <script src="estimation.js?v=20261028-tirer"></script>
+    <script src="silver.js?v=20261028-tirer"></script>
+    <script src="cours-plus.js?v=20261028-tirer"></script>
+    <script src="c3e.js?v=20261028-tirer"></script>
+    <script src="mobile.js?v=20261028-tirer"></script>
+    <script src="alignment.js?v=20261028-tirer"></script>
+    <script src="quick-prices.js?v=20261028-tirer"></script>
+    <script src="print.js?v=20261028-tirer"></script>
+    <script src="edit-fields.js?v=20261028-tirer"></script>
+    <script src="update.js?v=20261028-tirer"></script>
   </body>
 </html>

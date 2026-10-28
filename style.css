@@ -165,18 +165,10 @@ summary {
   border-radius: 9px;
   display: block;
 }
-#refresh {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-#refresh:disabled .refresh-icon {
-  display: none;
-}
 .refresh-spinner {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  width: 24px;
+  height: 24px;
   border: 2px solid rgba(233, 191, 117, 0.25);
   border-top-color: var(--gold);
   border-radius: 50%;
@@ -197,6 +189,43 @@ summary {
   font-size: 12px;
   white-space: pre-line;
   padding: 10px 0 12px;
+}
+.fresh-text::after {
+  content: '\A↓ Tire l’écran vers le bas pour actualiser';
+  opacity: 0.7;
+}
+
+/* Pastille « tirer pour actualiser » */
+#pull-indicator {
+  position: fixed;
+  z-index: 40;
+  top: env(safe-area-inset-top);
+  left: 50%;
+  transform: translate(-50%, -60px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--field);
+  border: 1px solid #58707d;
+  border-radius: 20px;
+  color: var(--muted);
+  font-size: 13px;
+  box-shadow: 0 6px 20px #0007;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+#pull-indicator.visible {
+  opacity: 1;
+}
+#pull-indicator.ready {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.pull-arrow {
+  display: inline-block;
+  font-size: 16px;
 }
 
 /* Navigation Cours / Rachat : barre d’onglets en bas, au pouce. */

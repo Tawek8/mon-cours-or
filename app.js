@@ -394,10 +394,31 @@ async function refreshPrices() {
 }
 $('refresh').onclick = refreshAll;
 
-// Actualisation discrète en tirant vers le bas depuis le haut de la page.
-// Aucun bandeau ou message supplémentaire n'est affiché.
+// Actualisation en tirant l’écran vers le bas depuis le haut de la page.
+// Une pastille descend avec le doigt ; au-delà du seuil, la relâcher actualise.
+const PULL_THRESHOLD = 75;
 let pullStartY = null,
   pullDistance = 0;
+function paintPull() {
+  const box = $('pull-indicator'),
+    ready = pullDistance >= PULL_THRESHOLD,
+    shift = Math.min(pullDistance, PULL_THRESHOLD * 1.4);
+  box.classList.toggle('visible', pullDistance > 8);
+  box.classList.toggle('ready', ready);
+  box.style.transform = 'translate(-50%, ' + (shift * 0.9 - 30) + 'px)';
+  box.querySelector('.pull-arrow').style.transform =
+    'rotate(' + Math.min(180, (pullDistance / PULL_THRESHOLD) * 180) + 'deg)';
+  box.querySelector('.pull-text').textContent = ready
+    ? 'Relâche pour actualiser'
+    : 'Tire pour actualiser';
+}
+function resetPull() {
+  pullStartY = null;
+  pullDistance = 0;
+  const box = $('pull-indicator');
+  box.classList.remove('visible', 'ready');
+  box.style.transform = '';
+}
 const atPageTop = () => window.scrollY <= 2 && document.documentElement.scrollTop <= 2;
 document.addEventListener(
   'touchstart',
@@ -407,7 +428,7 @@ document.addEventListener(
     if (
       event.touches.length !== 1 ||
       !atPageTop() ||
-      event.target.closest('input,textarea,select,button,[contenteditable="true"]')
+      event.target.closest('input,textarea,select,[contenteditable="true"],#spot-chart')
     )
       return;
     pullStartY = event.touches[0].clientY;
@@ -419,30 +440,27 @@ document.addEventListener(
   event => {
     if (pullStartY === null || event.touches.length !== 1) return;
     if (!atPageTop()) {
-      pullStartY = null;
-      pullDistance = 0;
+      resetPull();
       return;
     }
     pullDistance = Math.max(0, event.touches[0].clientY - pullStartY);
+    paintPull();
   },
   { passive: true }
 );
 document.addEventListener(
   'touchend',
   () => {
-    const shouldRefresh = pullStartY !== null && pullDistance >= 75 && atPageTop();
-    pullStartY = null;
-    pullDistance = 0;
+    const shouldRefresh =
+      pullStartY !== null && pullDistance >= PULL_THRESHOLD && atPageTop();
+    resetPull();
     if (shouldRefresh && !$('refresh').disabled) refreshAll();
   },
   { passive: true }
 );
 document.addEventListener(
   'touchcancel',
-  () => {
-    pullStartY = null;
-    pullDistance = 0;
-  },
+  resetPull,
   { passive: true }
 );
 
