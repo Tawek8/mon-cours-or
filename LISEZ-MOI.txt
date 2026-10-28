@@ -6,6 +6,9 @@ MISE EN LIGNE : déposer le CONTENU de ce dossier à la racine du dépôt GitHub
 Render redéploie tout seul. Sur l'iPhone, rouvrir l'application : un bandeau
 « Mettre à jour » apparaît.
 
+MOT DE PASSE : sur render.com, service mon-cours-or > Environment >
+variable GOLDAPP_PASSWORD. Voir README.md.
+
 ICÔNE : si l'iPhone garde l'ancienne icône, supprimer l'application de l'écran
 d'accueil puis Safari > Partager > Sur l'écran d'accueil.
 

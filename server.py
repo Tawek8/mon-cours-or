@@ -15,13 +15,58 @@ from html.parser import HTMLParser
 from urllib.request import Request, urlopen
 from urllib.parse import urlparse, parse_qs, unquote
 from datetime import datetime, timezone, timedelta
-import json, os, re, unicodedata, time
+from http.cookies import SimpleCookie
+import hashlib, hmac, json, os, re, unicodedata, time
 
 ROOT = Path(__file__).resolve().parent
 BASE = "https://www.gold.fr"
 # Seuls les fichiers de l’application sont publiés (pas le code serveur ni les notes).
 PUBLIC_SUFFIXES = {".html", ".js", ".css", ".png", ".svg", ".webp", ".webmanifest", ".ico", ".jpg"}
 PRIVATE = {"server.py"}
+
+# Mot de passe à l’ouverture : variable d’environnement GOLDAPP_PASSWORD (réglée sur Render).
+# Sans elle, l’application reste ouverte comme avant.
+PASSWORD = os.environ.get("GOLDAPP_PASSWORD", "")
+SESSION_DAYS = 180
+# Fichiers lisibles sans mot de passe, pour l’icône de l’écran d’accueil.
+OPEN_FILES = {"/manifest.webmanifest", "/icon.svg", "/icon.png", "/favicon.ico"}
+LOGIN_PAGE = """<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121d25"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GoldApp">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.png">
+<title>GoldApp</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+background:radial-gradient(60% 40% at 50% 35%,rgba(233,191,117,.12),transparent 70%),#121d25;
+color:#edf2f5;font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+form{width:min(340px,calc(100% - 32px));display:grid;gap:14px;text-align:center}
+img{width:84px;height:84px;margin:0 auto 4px;border-radius:18px;box-shadow:0 10px 40px #0008}
+h1{margin:0;font-size:26px;font-weight:600}p{margin:0;color:#b5c7d3;font-size:14px}
+input{width:100%;min-height:50px;padding:12px 14px;border:1px solid #344853;border-radius:12px;
+background:#101c24;color:#edf2f5;font:inherit;font-size:17px;text-align:center}
+input:focus{outline:2px solid #e9bf75;outline-offset:2px}
+button{min-height:50px;border:0;border-radius:12px;background:#e9bf75;color:#18242b;font:inherit;
+font-weight:650;cursor:pointer}
+.error{color:#ffb3ad}
+</style></head><body>
+<form method="post" action="login">
+<img src="icon.svg" alt="">
+<h1>GoldApp</h1>
+<p>Saisis le mot de passe pour ouvrir l’application.</p>
+<input type="text" name="username" value="GoldApp" autocomplete="username" hidden>
+<input type="password" name="password" autocomplete="current-password" placeholder="Mot de passe" required autofocus>
+__ERROR__
+<button type="submit">Ouvrir</button>
+</form></body></html>"""
+
+
+def session_token():
+    """Jeton de session : dérivé du mot de passe, il change si le mot de passe change."""
+    return hmac.new(PASSWORD.encode(), b"goldapp-session-v1", hashlib.sha256).hexdigest()
 
 
 class HTMLText(HTMLParser):
@@ -333,13 +378,92 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_error(404)
         return None
 
-    def do_HEAD(self):
-        if not public(self.path.split("?")[0]):
+    def authorized(self):
+        if not PASSWORD:
+            return True
+        cookie = SimpleCookie()
+        try:
+            cookie.load(self.headers.get("Cookie", ""))
+        except Exception:
+            return False
+        given = cookie.get("goldapp_session")
+        return bool(given) and hmac.compare_digest(given.value, session_token())
+
+    def send_login(self, status=401, error=""):
+        body = LOGIN_PAGE.replace(
+            "__ERROR__", '<p class="error" role="alert">' + error + "</p>" if error else ""
+        ).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def set_session(self, value, max_age):
+        secure = "; Secure" if self.headers.get("X-Forwarded-Proto") == "https" else ""
+        self.send_header(
+            "Set-Cookie",
+            "goldapp_session=" + value + "; Path=/; Max-Age=" + str(max_age)
+            + "; HttpOnly; SameSite=Lax" + secure,
+        )
+
+    def guard(self, path):
+        """Vrai si la requête peut continuer ; sinon la page de connexion est envoyée."""
+        if self.authorized() or path in OPEN_FILES:
+            return True
+        if path.startswith("/api/"):
+            payload = b'{"error": "Mot de passe requis"}'
+            self.send_response(401)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            self.wfile.write(payload)
+        else:
+            self.send_login()
+        return False
+
+    def do_POST(self):
+        if urlparse(self.path).path != "/login" or not PASSWORD:
             return self.send_error(404)
+        length = min(int(self.headers.get("Content-Length") or 0), 4096)
+        form = parse_qs(self.rfile.read(length).decode("utf-8", "replace"))
+        given = (form.get("password") or [""])[0]
+        if not hmac.compare_digest(given.encode(), PASSWORD.encode()):
+            time.sleep(1)  # Freine les essais en série.
+            return self.send_login(error="Mot de passe incorrect.")
+        self.send_response(303)
+        self.set_session(session_token(), SESSION_DAYS * 86400)
+        self.send_header("Location", "/")
+        self.end_headers()
+
+    def do_HEAD(self):
+        path = self.path.split("?")[0]
+        if not public(path):
+            return self.send_error(404)
+        if not (self.authorized() or path in OPEN_FILES):
+            self.send_response(401)
+            self.end_headers()
+            return None
         return super().do_HEAD()
 
     def do_GET(self):
         url = urlparse(self.path)
+        if url.path == "/logout":
+            self.send_response(303)
+            self.set_session("", 0)
+            self.send_header("Location", "/")
+            self.end_headers()
+            return
+        if url.path == "/login":
+            if self.authorized():
+                self.send_response(303)
+                self.send_header("Location", "/")
+                self.end_headers()
+                return
+            return self.send_login(200)
+        if not self.guard(url.path):
+            return
         if url.path in ROUTES:
             try:
                 data = ROUTES[url.path](parse_qs(url.query))

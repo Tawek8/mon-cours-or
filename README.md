@@ -17,6 +17,14 @@ serveur.
 Mise en page et icône reprises de GoldGestion. L’application est pensée pour l’iPhone
 uniquement.
 
+## Mot de passe
+
+Réglé dans Render : service *mon-cours-or* > **Environment** > variable
+`GOLDAPP_PASSWORD` (jamais dans le dépôt). Render redémarre le service tout seul.
+L’iPhone le retient 180 jours ; « Verrouiller l’application », en bas de l’onglet Cours,
+le redemande. Changer le mot de passe déconnecte tous les appareils. Sans cette variable,
+l’application reste ouverte à tous.
+
 ## Sources des cours
 
 | Cours | Source | Secours |

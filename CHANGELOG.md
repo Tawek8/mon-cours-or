@@ -1,5 +1,13 @@
 # Historique
 
+## 28/10/2026 — mot de passe
+
+- Mot de passe à l’ouverture (variable GOLDAPP_PASSWORD sur Render), retenu 180 jours
+  sur l’iPhone ; « Verrouiller l’application » en bas de l’onglet Cours.
+- Sans mot de passe, ni la page, ni les cours, ni les scripts ne sont lisibles
+  (seule l’icône l’est, pour l’écran d’accueil).
+- Dépôt nettoyé : fins de ligne uniformes (.gitattributes).
+
 ## 28/10/2026 — confort en déplacement
 
 - Onglets Cours / Rachat en bas de l’écran, au pouce.

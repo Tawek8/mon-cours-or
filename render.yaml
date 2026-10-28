@@ -5,4 +5,9 @@ services:
     plan: free
     buildCommand: "echo Ready"
     startCommand: "python server.py"
-    healthCheckPath: /
+    # Fichier lisible sans mot de passe : Render vérifie ainsi que le service répond.
+    healthCheckPath: /icon.svg
+    envVars:
+      # Mot de passe à l’ouverture, à saisir dans Render (jamais dans le dépôt).
+      - key: GOLDAPP_PASSWORD
+        sync: false
