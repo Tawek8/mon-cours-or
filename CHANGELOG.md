@@ -1,5 +1,9 @@
 # Historique
 
+## 28/10/2026 — graphique en premier
+
+- Onglet Cours : le cours de l’or et son graphique en tête, avant la recherche et les favoris.
+
 ## 28/10/2026 — mot de passe
 
 - Mot de passe à l’ouverture (variable GOLDAPP_PASSWORD sur Render), retenu 180 jours

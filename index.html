@@ -12,9 +12,9 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon.png" />
     <title>GoldApp</title>
-    <link rel="stylesheet" href="style.css?v=20261028-mdp" />
-    <link rel="stylesheet" href="estimation.css?v=20261028-mdp" />
-    <link rel="stylesheet" href="print.css?v=20261028-mdp" />
+    <link rel="stylesheet" href="style.css?v=20261028-graph" />
+    <link rel="stylesheet" href="estimation.css?v=20261028-graph" />
+    <link rel="stylesheet" href="print.css?v=20261028-graph" />
   </head>
   <body data-view="cours">
     <div id="splash" aria-hidden="true">
@@ -53,25 +53,7 @@
 
       <!-- Cours : uniquement des cotations, aucun calcul. -->
       <div id="view-cours" class="view">
-        <div class="search-bar">
-          <input
-            id="quote-search"
-            type="search"
-            placeholder="Rechercher : napo, krug, 100 g…"
-            aria-label="Rechercher un produit"
-            autocomplete="off"
-            autocorrect="off"
-            spellcheck="false"
-            enterkeyhint="search"
-          />
-        </div>
-        <p id="search-empty" class="small search-empty" hidden>Aucun produit ne correspond.</p>
-
-        <section class="section" id="favorites-section" hidden>
-          <h2>★ Favoris</h2>
-          <div id="favorites" class="quotes"></div>
-        </section>
-
+        <!-- Le graphique de l’or en premier, dès l’ouverture. -->
         <section class="section" id="spot-section">
           <h2>Or pur · 1 kg</h2>
           <div class="spot-price" id="instant">—</div>
@@ -94,6 +76,25 @@
           ></svg>
           </div>
           <p id="chart-note" class="small">Chargement de l’historique…</p>
+        </section>
+
+        <div class="search-bar">
+          <input
+            id="quote-search"
+            type="search"
+            placeholder="Rechercher : napo, krug, 100 g…"
+            aria-label="Rechercher un produit"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            enterkeyhint="search"
+          />
+        </div>
+        <p id="search-empty" class="small search-empty" hidden>Aucun produit ne correspond.</p>
+
+        <section class="section" id="favorites-section" hidden>
+          <h2>★ Favoris</h2>
+          <div id="favorites" class="quotes"></div>
         </section>
 
         <section class="section" id="cpor-section">
@@ -217,19 +218,19 @@
         </details>
       </section>
     </main>
-    <script src="fiscal.js?v=20261028-mdp"></script>
-    <script src="freshness.js?v=20261028-mdp"></script>
-    <script src="gold-chart.js?v=20261028-mdp"></script>
-    <script src="app.js?v=20261028-mdp"></script>
-    <script src="estimation.js?v=20261028-mdp"></script>
-    <script src="silver.js?v=20261028-mdp"></script>
-    <script src="cours-plus.js?v=20261028-mdp"></script>
-    <script src="c3e.js?v=20261028-mdp"></script>
-    <script src="mobile.js?v=20261028-mdp"></script>
-    <script src="alignment.js?v=20261028-mdp"></script>
-    <script src="quick-prices.js?v=20261028-mdp"></script>
-    <script src="print.js?v=20261028-mdp"></script>
-    <script src="edit-fields.js?v=20261028-mdp"></script>
-    <script src="update.js?v=20261028-mdp"></script>
+    <script src="fiscal.js?v=20261028-graph"></script>
+    <script src="freshness.js?v=20261028-graph"></script>
+    <script src="gold-chart.js?v=20261028-graph"></script>
+    <script src="app.js?v=20261028-graph"></script>
+    <script src="estimation.js?v=20261028-graph"></script>
+    <script src="silver.js?v=20261028-graph"></script>
+    <script src="cours-plus.js?v=20261028-graph"></script>
+    <script src="c3e.js?v=20261028-graph"></script>
+    <script src="mobile.js?v=20261028-graph"></script>
+    <script src="alignment.js?v=20261028-graph"></script>
+    <script src="quick-prices.js?v=20261028-graph"></script>
+    <script src="print.js?v=20261028-graph"></script>
+    <script src="edit-fields.js?v=20261028-graph"></script>
+    <script src="update.js?v=20261028-graph"></script>
   </body>
 </html>

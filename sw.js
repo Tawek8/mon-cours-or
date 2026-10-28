@@ -1,5 +1,5 @@
 // Une seule valeur à changer à chaque version (identique au ?v= de index.html).
-const VERSION = '20261028-mdp';
+const VERSION = '20261028-graph';
 const CACHE = 'mon-or-' + VERSION;
 self.addEventListener('install', e => {
   self.skipWaiting();
