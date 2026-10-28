@@ -1,5 +1,10 @@
 # Historique
 
+## 28/10/2026 — illustrations de l’argent
+
+- Cours de l’Argent : une vignette par pièce et lingot (images de GoldGestion), en cartes
+  comme les cours de l’or.
+
 ## 28/10/2026 — rangement façon GoldGestion
 
 - Deux onglets, Cours et Rachat : les calculs ne sont plus mélangés aux cours.

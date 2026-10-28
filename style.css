@@ -376,7 +376,10 @@ summary {
   color: var(--gold);
   font-size: 20px;
 }
-#silver-section .row .value {
+#silver-quotes {
+  margin-top: 12px;
+}
+#silver-section .quote .value {
   color: var(--silver);
   font-size: 15px;
 }

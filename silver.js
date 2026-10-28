@@ -27,12 +27,53 @@
         throw Error('Cotation argent incorrecte');
     return p;
   }
+  // Illustrations reprises de GoldGestion (vignettes Gold.fr), trouvées d’après le nom.
+  // L’ordre compte : les formats 1 kg avant les 1 once, l’Écu avant les autres Hercule.
+  const pictures = [
+    ['lingot argent', 'lingot.jpg'],
+    ['kookaburra 1kg', 'kookaburra_kg.jpg'],
+    ['koala argent 1kg', 'koala_kg.jpg'],
+    ['maple', 'maple.jpg'],
+    ['vienna', 'vienna.jpg'],
+    ['philharmoni', 'vienna.jpg'],
+    ['kangourou', 'kangourou.jpg'],
+    ['britannia', 'britannia.jpg'],
+    ['eagle', 'eagle.jpg'],
+    ['krugerrand', 'krugerrand.jpg'],
+    ['panda', 'panda.jpg'],
+    ['kookaburra', 'kookaburra.jpg'],
+    ['koala', 'koala.png'],
+    ['20 francs turin', 'turin20.jpg'],
+    ['10 francs turin', 'turin10.jpg'],
+    ['ecu', 'ecu5.jpg'],
+    ['50 francs hercule', 'hercule50.jpg'],
+    ['10 francs hercule', 'hercule10.jpg'],
+    ['semeuse', 'semeuse5.jpg'],
+    ['100 francs', 'franc100.jpg'],
+  ];
+  function picture(name) {
+    const key = name
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '');
+    return pictures.find(([match]) => key.includes(match))?.[1] || null;
+  }
   function render(p) {
     root.replaceChildren();
     const fmt = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
     for (const product of p.products) {
       const row = document.createElement('div');
-      row.className = 'row';
+      row.className = 'quote silver';
+      const file = picture(product.name);
+      if (file) {
+        const img = document.createElement('img');
+        img.className = 'quote-img';
+        img.src = 'img/argent/' + file;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.onerror = () => img.remove();
+        row.append(img);
+      }
       const name = document.createElement('span');
       name.className = 'name';
       name.textContent = product.name;
