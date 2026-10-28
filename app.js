@@ -70,6 +70,7 @@ if (savedBuyDiscount !== null) $('buy-discount').value = savedBuyDiscount;
 function renderQuotes() {
   renderList($('cpor-coins'), coins, false);
   renderList($('cpor-bars'), bars, true);
+  window.dispatchEvent(new Event('quotes-rendered'));
 }
 function renderList(root, list, isBar) {
   root.replaceChildren();
@@ -80,6 +81,8 @@ function renderList(root, list, isBar) {
     button.type = 'button';
     button.className = 'quote';
     button.disabled = !available;
+    button.dataset.key = 'or:' + id;
+    if (available) button.dataset.price = price;
     // Illustration du produit (mêmes images que GoldApp).
     const img = document.createElement('img');
     img.className = 'quote-img' + (isBar ? ' bar' : '');

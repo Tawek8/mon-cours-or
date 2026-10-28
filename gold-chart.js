@@ -10,6 +10,36 @@
   style.textContent =
     '#spot-chart .sc-pulse{transform-box:fill-box;transform-origin:center;animation:sc-pulse 2.2s ease-out infinite}@keyframes sc-pulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(4);opacity:0}}@media(prefers-reduced-motion:reduce){#spot-chart .sc-pulse{animation:none;opacity:0}}';
   document.head.append(style);
+  // Variation sur la période affichée (↑ vert, ↓ rouge), comme dans GoldGestion.
+  function paintVariation(values, period) {
+    const host = document.getElementById('spot-variation');
+    if (!host) return;
+    const first = values[0],
+      lastPoint = values.at(-1);
+    if (values.length < 2 || !(first.price > 0)) {
+      host.hidden = true;
+      return;
+    }
+    const delta = lastPoint.price - first.price,
+      percent = (delta / first.price) * 100,
+      dir = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat',
+      fmt = n =>
+        new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(
+          Math.abs(n)
+        ),
+      sign = dir === 'up' ? '+' : dir === 'down' ? '−' : '';
+    host.dataset.dir = dir;
+    host.textContent =
+      (dir === 'up' ? '↑ ' : dir === 'down' ? '↓ ' : '→ ') +
+      sign +
+      fmt(percent) +
+      ' % · ' +
+      sign +
+      fmt(delta) +
+      ' € sur ' +
+      ({ 1: '1 jour', 7: '7 jours', 30: '1 mois', 365: '1 an' }[period] || period + ' jours');
+    host.hidden = false;
+  }
   function render(points, period) {
     last = points;
     days = period;
@@ -27,6 +57,7 @@
     document
       .querySelectorAll('[data-period]')
       .forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.period) === period)));
+    paintVariation(values, period);
     if (values.length < 2) {
       note.textContent = 'Historique BullionVault insuffisant pour cette période.';
       return;
@@ -243,8 +274,24 @@
       halo.setAttribute('opacity', 0.22);
       marker.setAttribute('opacity', 1);
       note.textContent = label(point) + ' · BullionVault';
+      // Bulle de lecture au-dessus du doigt.
+      const tip = document.getElementById('chart-tip');
+      if (tip) {
+        const [when, price] = label(point).split(' · ');
+        tip.replaceChildren();
+        const strong = document.createElement('strong');
+        strong.textContent = price;
+        tip.append(strong, when);
+        tip.hidden = false;
+        const box = chart.getBoundingClientRect(),
+          half = tip.offsetWidth / 2;
+        tip.style.left = Math.min(box.width - half, Math.max(half, x(point))) + 'px';
+        tip.style.top = Math.max(0, (y(point.price) / height) * box.height - 54) + 'px';
+      }
     };
     chart.onpointerleave = () => {
+      const tip = document.getElementById('chart-tip');
+      if (tip) tip.hidden = true;
       guide.setAttribute('opacity', 0);
       halo.setAttribute('opacity', 0);
       marker.setAttribute('opacity', 0);

@@ -42,7 +42,7 @@
     ['krugerrand', 'krugerrand.jpg'],
     ['panda', 'panda.jpg'],
     ['kookaburra', 'kookaburra.jpg'],
-    ['koala', 'koala.png'],
+    ['koala', 'koala.jpg'],
     ['20 francs turin', 'turin20.jpg'],
     ['10 francs turin', 'turin10.jpg'],
     ['ecu', 'ecu5.jpg'],
@@ -64,6 +64,8 @@
     for (const product of p.products) {
       const row = document.createElement('div');
       row.className = 'quote silver';
+      row.dataset.key = 'ag:' + product.name;
+      if (product.status === 'available') row.dataset.price = product.price;
       const file = picture(product.name);
       if (file) {
         const img = document.createElement('img');
@@ -88,6 +90,7 @@
       row.append(name, value);
       root.append(row);
     }
+    window.dispatchEvent(new Event('quotes-rendered'));
   }
   try {
     const raw = localStorage.getItem('silver-prices');

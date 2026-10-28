@@ -12,11 +12,15 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon.png" />
     <title>GoldApp</title>
-    <link rel="stylesheet" href="style.css?v=20261028-argent" />
-    <link rel="stylesheet" href="estimation.css?v=20261028-argent" />
-    <link rel="stylesheet" href="print.css?v=20261028-argent" />
+    <link rel="stylesheet" href="style.css?v=20261028-plus" />
+    <link rel="stylesheet" href="estimation.css?v=20261028-plus" />
+    <link rel="stylesheet" href="print.css?v=20261028-plus" />
   </head>
   <body data-view="cours">
+    <div id="splash" aria-hidden="true">
+      <img src="icon.svg" alt="" width="84" height="84" />
+      <span>GoldApp</span>
+    </div>
     <main>
       <header class="top">
         <div class="brand">
@@ -29,6 +33,10 @@
         </button>
       </header>
       <p class="fresh-text" id="last-updated">Kitco : en attente d’actualisation</p>
+      <div id="stale-banner" class="stale" role="alert" hidden>
+        <span id="stale-text"></span>
+        <button type="button" id="stale-refresh" class="primary">Actualiser</button>
+      </div>
 
       <nav class="views" aria-label="Navigation">
         <button type="button" data-view="cours" aria-pressed="true">
@@ -45,9 +53,29 @@
 
       <!-- Cours : uniquement des cotations, aucun calcul. -->
       <div id="view-cours" class="view">
+        <div class="search-bar">
+          <input
+            id="quote-search"
+            type="search"
+            placeholder="Rechercher : napo, krug, 100 g…"
+            aria-label="Rechercher un produit"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            enterkeyhint="search"
+          />
+        </div>
+        <p id="search-empty" class="small search-empty" hidden>Aucun produit ne correspond.</p>
+
+        <section class="section" id="favorites-section" hidden>
+          <h2>★ Favoris</h2>
+          <div id="favorites" class="quotes"></div>
+        </section>
+
         <section class="section" id="spot-section">
           <h2>Or pur · 1 kg</h2>
           <div class="spot-price" id="instant">—</div>
+          <div class="spot-variation" id="spot-variation" hidden></div>
           <p id="spot-meta" class="small">Chargement du cours spot…</p>
           <div class="periods" role="group" aria-label="Période du graphique">
             <button type="button" data-period="1" aria-pressed="true">1 jour</button
@@ -55,6 +83,8 @@
             ><button type="button" data-period="30" aria-pressed="false">1 mois</button
             ><button type="button" data-period="365" aria-pressed="false">1 an</button>
           </div>
+          <div class="chart-wrap">
+          <div id="chart-tip" class="chart-tip" hidden></div>
           <svg
             id="spot-chart"
             role="img"
@@ -62,12 +92,13 @@
             viewBox="0 0 320 155"
             preserveAspectRatio="none"
           ></svg>
+          </div>
           <p id="chart-note" class="small">Chargement de l’historique…</p>
         </section>
 
         <section class="section" id="cpor-section">
           <h2>Cours de l’Or</h2>
-          <p class="small">Cotation CPoR en or · « Rachat » : prix net client (FC 8 % par défaut, TMP 11,5 %). Touchez un produit pour le détail.</p>
+          <p class="small">Cotation CPoR en or · « Rachat » : prix net client (FC 8 % par défaut, TMP 11,5 %). Touchez un produit pour le détail, appui long pour l’épingler en favori.</p>
           <h3 class="list-heading">Pièces</h3>
           <div id="cpor-coins" class="quotes" aria-live="polite"></div>
           <h3 class="list-heading">Lingots et lingotins</h3>
@@ -184,18 +215,19 @@
         </details>
       </section>
     </main>
-    <script src="fiscal.js?v=20261028-argent"></script>
-    <script src="freshness.js?v=20261028-argent"></script>
-    <script src="gold-chart.js?v=20261028-argent"></script>
-    <script src="app.js?v=20261028-argent"></script>
-    <script src="estimation.js?v=20261028-argent"></script>
-    <script src="silver.js?v=20261028-argent"></script>
-    <script src="c3e.js?v=20261028-argent"></script>
-    <script src="mobile.js?v=20261028-argent"></script>
-    <script src="alignment.js?v=20261028-argent"></script>
-    <script src="quick-prices.js?v=20261028-argent"></script>
-    <script src="print.js?v=20261028-argent"></script>
-    <script src="edit-fields.js?v=20261028-argent"></script>
-    <script src="update.js?v=20261028-argent"></script>
+    <script src="fiscal.js?v=20261028-plus"></script>
+    <script src="freshness.js?v=20261028-plus"></script>
+    <script src="gold-chart.js?v=20261028-plus"></script>
+    <script src="app.js?v=20261028-plus"></script>
+    <script src="estimation.js?v=20261028-plus"></script>
+    <script src="silver.js?v=20261028-plus"></script>
+    <script src="cours-plus.js?v=20261028-plus"></script>
+    <script src="c3e.js?v=20261028-plus"></script>
+    <script src="mobile.js?v=20261028-plus"></script>
+    <script src="alignment.js?v=20261028-plus"></script>
+    <script src="quick-prices.js?v=20261028-plus"></script>
+    <script src="print.js?v=20261028-plus"></script>
+    <script src="edit-fields.js?v=20261028-plus"></script>
+    <script src="update.js?v=20261028-plus"></script>
   </body>
 </html>

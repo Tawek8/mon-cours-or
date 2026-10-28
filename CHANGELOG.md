@@ -1,8 +1,18 @@
 # Historique
 
+## 28/10/2026 — confort en déplacement
+
+- Onglets Cours / Rachat en bas de l’écran, au pouce.
+- Recherche en haut des cours (« napo », « krug », « 100 g »…).
+- Favoris : appui long sur un produit pour l’épingler en haut des cours.
+- Variation de l’or sur la période (↑ vert / ↓ rouge) et bulle de lecture sur le graphique.
+- Bandeau d’alerte quand le cours de l’or a plus de 30 min.
+- Les prix qui changent à l’actualisation clignotent en vert ou en rouge.
+- Écran d’ouverture ; vignettes d’argent en meilleure qualité, rondes.
+
 ## 28/10/2026 — illustrations de l’argent
 
-- Cours de l’Argent : une vignette par pièce et lingot (images de GoldGestion), en cartes
+- Cours de l’Argent : une vignette par pièce et lingot (images Gold.fr), en cartes
   comme les cours de l’or.
 
 ## 28/10/2026 — rangement façon GoldGestion

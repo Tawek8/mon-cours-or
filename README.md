@@ -7,7 +7,8 @@ serveur.
 
 ## Deux onglets
 
-- **Cours** : or pur 1 kg et son graphique, pièces et lingots CPoR, argent. Sous chaque
+- **Cours** : recherche, favoris (appui long sur un produit), or pur 1 kg avec sa variation
+  et son graphique, pièces et lingots CPoR, argent. Sous chaque
   pièce ou lingot d’or : le prix de **rachat** (prix net client : FC du calcul d’achat,
   8 % par défaut, puis TMP 11,5 %). Toucher un produit ouvre le détail (frais, TMP/TPV).
 - **Rachat** : estimation client multi-lignes et impression, achat bijoux (9K à 22K),
@@ -30,10 +31,13 @@ uniquement.
 
 - `index.html`, `style.css` : page et mise en page (couleurs GoldGestion).
 - `app.js` (cours, prix d’achat), `gold-chart.js`, `silver.js`, `c3e.js`, `freshness.js`.
+- `cours-plus.js` : recherche, favoris, prix qui clignotent, alerte cours périmés,
+  écran d’ouverture.
 - Calculs repris de GoldApp : `estimation.js` + `estimation.css`, `alignment.js`,
   `fiscal.js`, `mobile.js` (onglets, achat bijoux), `quick-prices.js`, `print.js`.
 - Serveur : `server.py` et `kitco.py`, `cpor.py`, `bullionvault*.py`, `market.py`.
 - `icon.svg`, `icon.png`, `favicon.ico` : icône de GoldGestion.
+- `img/cpor/` (or) et `img/argent/` (argent, d’après Gold.fr) : vignettes des produits.
 - `docs/historique/` : anciennes notes de version (non publiées).
 
 ## Nouvelle version
