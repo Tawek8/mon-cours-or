@@ -1,5 +1,10 @@
 # Historique
 
+## 28/10/2026 — graphique de l’argent
+
+- Choix Or / Argent sur le graphique (historique BullionVault, comme GoldGestion) ;
+  le choix est retenu. Pour l’argent, le cours affiché est le dernier point BullionVault.
+
 ## 28/10/2026 — graphique en premier
 
 - Onglet Cours : le cours de l’or et son graphique en tête, avant la recherche et les favoris.

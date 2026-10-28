@@ -791,3 +791,44 @@ body::before {
 .quote.silver[data-key^='ag:Lingot'] .quote-img {
   border-radius: 8px;
 }
+
+/* Choix Or / Argent du graphique */
+.spot-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.metals {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: var(--field);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.metals button {
+  min-height: 34px;
+  padding: 4px 14px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+}
+.metals button[data-metal='gold'][aria-pressed='true'] {
+  background: var(--gold);
+  color: var(--ink);
+}
+.metals button[data-metal='silver'][aria-pressed='true'] {
+  background: var(--silver);
+  color: var(--ink);
+}
+#spot-section[data-metal='silver'] h2 {
+  color: var(--silver);
+}
+#spot-section[data-metal='silver'] {
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(208, 218, 229, 0.08), transparent 60%),
+    var(--surface);
+}

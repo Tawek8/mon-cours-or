@@ -12,9 +12,9 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon.png" />
     <title>GoldApp</title>
-    <link rel="stylesheet" href="style.css?v=20261028-graph" />
-    <link rel="stylesheet" href="estimation.css?v=20261028-graph" />
-    <link rel="stylesheet" href="print.css?v=20261028-graph" />
+    <link rel="stylesheet" href="style.css?v=20261028-argent2" />
+    <link rel="stylesheet" href="estimation.css?v=20261028-argent2" />
+    <link rel="stylesheet" href="print.css?v=20261028-argent2" />
   </head>
   <body data-view="cours">
     <div id="splash" aria-hidden="true">
@@ -55,7 +55,13 @@
       <div id="view-cours" class="view">
         <!-- Le graphique de l’or en premier, dès l’ouverture. -->
         <section class="section" id="spot-section">
-          <h2>Or pur · 1 kg</h2>
+          <div class="spot-head">
+            <h2 id="spot-title">Or pur · 1 kg</h2>
+            <div class="metals" role="group" aria-label="Métal du graphique">
+              <button type="button" data-metal="gold" aria-pressed="true">Or</button
+              ><button type="button" data-metal="silver" aria-pressed="false">Argent</button>
+            </div>
+          </div>
           <div class="spot-price" id="instant">—</div>
           <div class="spot-variation" id="spot-variation" hidden></div>
           <p id="spot-meta" class="small">Chargement du cours spot…</p>
@@ -218,19 +224,19 @@
         </details>
       </section>
     </main>
-    <script src="fiscal.js?v=20261028-graph"></script>
-    <script src="freshness.js?v=20261028-graph"></script>
-    <script src="gold-chart.js?v=20261028-graph"></script>
-    <script src="app.js?v=20261028-graph"></script>
-    <script src="estimation.js?v=20261028-graph"></script>
-    <script src="silver.js?v=20261028-graph"></script>
-    <script src="cours-plus.js?v=20261028-graph"></script>
-    <script src="c3e.js?v=20261028-graph"></script>
-    <script src="mobile.js?v=20261028-graph"></script>
-    <script src="alignment.js?v=20261028-graph"></script>
-    <script src="quick-prices.js?v=20261028-graph"></script>
-    <script src="print.js?v=20261028-graph"></script>
-    <script src="edit-fields.js?v=20261028-graph"></script>
-    <script src="update.js?v=20261028-graph"></script>
+    <script src="fiscal.js?v=20261028-argent2"></script>
+    <script src="freshness.js?v=20261028-argent2"></script>
+    <script src="gold-chart.js?v=20261028-argent2"></script>
+    <script src="app.js?v=20261028-argent2"></script>
+    <script src="estimation.js?v=20261028-argent2"></script>
+    <script src="silver.js?v=20261028-argent2"></script>
+    <script src="cours-plus.js?v=20261028-argent2"></script>
+    <script src="c3e.js?v=20261028-argent2"></script>
+    <script src="mobile.js?v=20261028-argent2"></script>
+    <script src="alignment.js?v=20261028-argent2"></script>
+    <script src="quick-prices.js?v=20261028-argent2"></script>
+    <script src="print.js?v=20261028-argent2"></script>
+    <script src="edit-fields.js?v=20261028-argent2"></script>
+    <script src="update.js?v=20261028-argent2"></script>
   </body>
 </html>

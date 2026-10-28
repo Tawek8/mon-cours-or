@@ -2,9 +2,10 @@
   'use strict';
   let last = [],
     days = 1,
+    metal = 'gold',
+    color = '#e9bf75',
     animated = null;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)'),
-    color = '#e9bf75';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   // Animation du point du dernier cours (une seule feuille de style pour le graphique).
   const style = document.createElement('style');
   style.textContent =
@@ -40,9 +41,11 @@
       ({ 1: '1 jour', 7: '7 jours', 30: '1 mois', 365: '1 an' }[period] || period + ' jours');
     host.hidden = false;
   }
-  function render(points, period) {
+  function render(points, period, chosenMetal = metal) {
     last = points;
     days = period;
+    metal = chosenMetal;
+    color = metal === 'silver' ? '#d0dae5' : '#e9bf75';
     const chart = document.getElementById('spot-chart'),
       note = document.getElementById('chart-note');
     if (!chart) return;
@@ -177,8 +180,8 @@
       'stroke-linejoin': 'round',
       filter: 'url(#sc-glow)',
     });
-    if (animated !== period && !reducedMotion.matches) {
-      animated = period;
+    if (animated !== metal + period && !reducedMotion.matches) {
+      animated = metal + period;
       const length = line.getTotalLength();
       line.style.strokeDasharray = length;
       line.style.strokeDashoffset = length;
@@ -299,5 +302,5 @@
     };
   }
   window.GoldSpotChart = { render };
-  new ResizeObserver(() => render(last, days)).observe(document.getElementById('spot-chart'));
+  new ResizeObserver(() => render(last, days, metal)).observe(document.getElementById('spot-chart'));
 })();

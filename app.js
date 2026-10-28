@@ -64,7 +64,9 @@ else {
 let selected = null;
 let spotValue = null,
   spotPoints = [],
-  spotPeriod = 1;
+  spotPeriod = 1,
+  spotMetal = localStorage.getItem('goldapp-chart-metal') === 'silver' ? 'silver' : 'gold',
+  goldMeta = 'Chargement du cours spot…';
 const savedBuyDiscount = localStorage.getItem('or-buy-discount');
 if (savedBuyDiscount !== null) $('buy-discount').value = savedBuyDiscount;
 function renderQuotes() {
@@ -284,7 +286,7 @@ function draw() {
     cpor = Number.isFinite(data.cpor) && data.cpor > 0 ? data.cpor : null;
   const intrinsic = Number.isFinite(data.instant) && data.instant > 0 ? data.instant : null;
   const lowest = intrinsic !== null && cpor !== null ? Math.min(intrinsic, cpor) : null;
-  $('instant').textContent = eur(instant);
+  if (spotMetal === 'gold') $('instant').textContent = eur(instant);
   $('price18').textContent =
     raw.trim() !== '' &&
     Number.isFinite(discount) &&
@@ -446,7 +448,27 @@ document.addEventListener(
 
 // Graphique SVG natif, sans bibliothèque ni valeurs fictives.
 function renderSpotChart() {
-  window.GoldSpotChart.render(spotPoints, spotPeriod);
+  window.GoldSpotChart.render(spotPoints, spotPeriod, spotMetal);
+  paintSpotHeader();
+}
+// En-tête du cadre : Kitco pour l’or ; dernier point BullionVault pour l’argent.
+function paintSpotHeader() {
+  const silver = spotMetal === 'silver',
+    lastPoint = spotPoints.at(-1);
+  $('spot-section').dataset.metal = spotMetal;
+  $('spot-title').textContent = silver ? 'Argent pur · 1 kg' : 'Or pur · 1 kg';
+  document
+    .querySelectorAll('[data-metal]')
+    .forEach(b => b.setAttribute('aria-pressed', String(b.dataset.metal === spotMetal)));
+  if (silver) {
+    $('instant').textContent = lastPoint ? eur(lastPoint.price) : '—';
+    $('spot-meta').textContent = lastPoint
+      ? 'BullionVault · ' + new Date(lastPoint.date).toLocaleString('fr-FR') + ' · €/kg'
+      : 'Cours de l’argent BullionVault indisponible.';
+  } else {
+    $('spot-meta').textContent = goldMeta;
+    draw();
+  }
 }
 
 async function loadSpot() {
@@ -457,7 +479,7 @@ async function loadSpot() {
     if (!Number.isFinite(p.price) || p.price <= 0) throw Error('Cours incorrect');
     spotValue = p.price;
     localStorage.setItem('or-spot-last', JSON.stringify(p));
-    $('spot-meta').textContent =
+    goldMeta =
       'Spot indicatif · ' +
       (p.updatedAt ? new Date(p.updatedAt).toLocaleString('fr-FR') + ' · ' : '') +
       (p.source === 'Kitco'
@@ -466,40 +488,49 @@ async function loadSpot() {
           : 'Source : Kitco · Bid · €/kg'
         : (p.marketClosed ? 'Marché fermé · cours de clôture · ' : '') +
           'Source : BullionVault · secours, Kitco indisponible · €/kg');
+    if (spotMetal === 'gold') $('spot-meta').textContent = goldMeta;
     draw();
   } catch (e) {
     spotValue = null;
-    $('spot-meta').textContent =
+    goldMeta =
       'Cours Kitco et BullionVault indisponibles : dernière référence conservée, si disponible.';
+    if (spotMetal === 'gold') $('spot-meta').textContent = goldMeta;
     draw();
   }
 }
 let historyBusy = false;
+// Historique gardé par métal et par période (clés de l’or inchangées).
+const historyKey = (metal, period) => 'or-bv-history-' + (metal === 'silver' ? 'ag-' : '') + period;
 async function loadSpotHistory() {
-  const requested = spotPeriod;
+  const requested = spotPeriod,
+    metal = spotMetal,
+    stale = () => requested !== spotPeriod || metal !== spotMetal;
   try {
-    const r = await fetch('/api/spot-history?period=' + requested, { cache: 'no-store' });
+    const r = await fetch('/api/spot-history?period=' + requested + '&metal=' + metal, {
+      cache: 'no-store',
+    });
     if (!r.ok) throw Error('Historique BullionVault indisponible');
     const p = await r.json();
     if (
       p.source !== 'BullionVault' ||
       p.unit !== 'EUR/kg' ||
       String(p.period) !== String(requested) ||
+      (p.metal || 'gold') !== metal ||
       !Array.isArray(p.points)
     )
       throw Error('Source historique inattendue');
-    if (requested !== spotPeriod) return;
+    if (stale()) return;
     spotPoints = p.points;
     localStorage.setItem(
-      'or-bv-history-' + requested,
+      historyKey(metal, requested),
       JSON.stringify({ points: spotPoints, updatedAt: p.updatedAt })
     );
     renderSpotChart();
   } catch (e) {
-    if (requested !== spotPeriod) return;
+    if (stale()) return;
     try {
       spotPoints =
-        JSON.parse(localStorage.getItem('or-bv-history-' + requested) || 'null')?.points || [];
+        JSON.parse(localStorage.getItem(historyKey(metal, requested)) || 'null')?.points || [];
     } catch {
       spotPoints = [];
     }
@@ -516,6 +547,24 @@ document.querySelectorAll('[data-period]').forEach(b =>
     loadSpotHistory();
   })
 );
+document.querySelectorAll('[data-metal]').forEach(b =>
+  b.addEventListener('click', () => {
+    if (b.dataset.metal === spotMetal) return;
+    spotMetal = b.dataset.metal;
+    localStorage.setItem('goldapp-chart-metal', spotMetal);
+    // Dernier historique connu tout de suite, puis actualisation.
+    try {
+      spotPoints =
+        JSON.parse(localStorage.getItem(historyKey(spotMetal, spotPeriod)) || 'null')?.points ||
+        [];
+    } catch {
+      spotPoints = [];
+    }
+    renderSpotChart();
+    loadSpotHistory();
+  })
+);
+paintSpotHeader();
 // Actualise toutes les sources avec une roulette visible jusqu'à la fin.
 async function refreshAll() {
   const b = $('refresh');

@@ -300,10 +300,12 @@ def spot_live():
     return cached("spot", 10, load)
 
 
-def history_live(period="1"):
+def history_live(period="1", metal="gold"):
     from bullionvault_history import fetch_history
 
-    return cached("history-bullionvault-" + period, 60, lambda: fetch_history(period))
+    return cached(
+        "history-bullionvault-" + metal + "-" + period, 60, lambda: fetch_history(period, metal)
+    )
 
 
 def live_prices():
@@ -350,7 +352,9 @@ ROUTES = {
     "/api/c3e": lambda query: cached("c3e", 60, c3e_live),
     "/api/silver": lambda query: cached("silver", 60, silver_live),
     "/api/spot": lambda query: spot_live(),
-    "/api/spot-history": lambda query: history_live(query.get("period", ["1"])[0]),
+    "/api/spot-history": lambda query: history_live(
+        query.get("period", ["1"])[0], query.get("metal", ["gold"])[0]
+    ),
 }
 
 

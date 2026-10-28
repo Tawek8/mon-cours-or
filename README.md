@@ -33,7 +33,7 @@ l’application reste ouverte à tous.
 | Pièces et lingots | Cotations CPoR (Loomis) | derniers cours conservés |
 | Argent C3E achat (bijoux argent) | Cookson-Clal | derniers cours conservés |
 | Pièces d’argent | Gold.fr | derniers cours conservés |
-| Graphique | BullionVault | dernier historique conservé |
+| Graphiques or et argent | BullionVault | dernier historique conservé |
 
 ## Fichiers
 
