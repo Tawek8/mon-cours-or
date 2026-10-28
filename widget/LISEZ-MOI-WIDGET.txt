@@ -24,12 +24,15 @@ Toucher le widget ouvre GoldApp.
    - Choisir la taille (petit, moyen ou grand), « Ajouter ».
    - Appui long sur le widget > « Modifier le widget » :
        Script    : GoldApp
-       When Interacting : Open URL (le widget ouvre GoldApp)
+       When Interacting : laisser le réglage proposé (le script ouvre GoldApp tout seul)
        Parameter : vide (or, 1 jour), ou par exemple « argent », « or 7 », « argent 30 »,
                    « or 365 ». Le grand widget montre l'or ET l'argent.
 
 BON À SAVOIR
 - L'iPhone décide quand rafraîchir le widget : en général toutes les 15 à 30 minutes.
 - Si GoldApp ne répond pas (serveur endormi, pas de réseau), le widget garde le dernier
-  relevé et affiche ⚠ devant l'heure.
+  relevé et affiche ⚠ devant l'heure ; il se remet à jour au rafraîchissement suivant.
+- Le tout premier affichage peut échouer si le serveur dort : ouvre GoldApp une fois
+  pour le réveiller, puis appuie sur ▶ dans Scriptable.
+- iOS 14 minimum (widgets).
 - Changer la clé sur Render oblige à la changer aussi dans le script.

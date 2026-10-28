@@ -31,6 +31,7 @@ const METAL = words.includes('argent') ? 'silver' : 'gold';
 const PERIOD = String(words.find(w => PERIODS[w]) || '1');
 const FAMILY = config.widgetFamily || 'medium';
 
+const last = list => list[list.length - 1];
 const euros = (n, decimals = 0) =>
   n.toLocaleString('fr-FR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) +
   ' €';
@@ -43,10 +44,12 @@ async function load() {
   try {
     const request = new Request(ADRESSE + '/api/widget?period=' + PERIOD);
     request.headers = { 'X-Widget-Key': CLE };
-    // Le serveur gratuit peut mettre une minute à se réveiller.
-    request.timeoutInterval = 60;
+    // iOS coupe un widget qui tarde (env. 30 s) : au-delà de 25 s, dernier relevé gardé.
+    request.timeoutInterval = 25;
     const data = await request.loadJSON();
-    if (request.response.statusCode !== 200) throw new Error(data.error || 'Erreur serveur');
+    const status = request.response.statusCode;
+    if (status === 403) throw new Error('Clé refusée par GoldApp');
+    if (status !== 200) throw new Error(data.error || 'Erreur serveur (' + status + ')');
     files.writeString(cachePath, JSON.stringify(data));
     return { data, stale: false };
   } catch (error) {
@@ -54,6 +57,12 @@ async function load() {
       return { data: JSON.parse(files.readString(cachePath)), stale: true, error };
     return { data: null, stale: true, error };
   }
+}
+
+function problem() {
+  if (CLE.startsWith('COLLE-ICI')) return 'Colle la clé du widget en haut du script.';
+  if (!/^https:\/\/[^/]+$/.test(ADRESSE)) return 'Adresse à vérifier : https://… sans « / » final.';
+  return null;
 }
 
 // ---- Courbe dessinée ----
@@ -103,7 +112,7 @@ function curve(points, width, height, hex, withLabels) {
 
   // Dernier cours.
   const lx = x(prices.length - 1),
-    ly = y(prices.at(-1));
+    ly = y(last(prices));
   dc.setFillColor(new Color(hex, 0.3));
   dc.fillEllipse(new Rect(lx - 6, ly - 6, 12, 12));
   dc.setFillColor(new Color(hex));
@@ -141,7 +150,7 @@ function block(stack, metalData, metal, compact) {
   text(stack, euros(metalData.price), Font.boldSystemFont(compact ? 20 : 24), C.text, 0.5);
   // Variation sur la courbe elle-même (BullionVault), comme dans GoldApp.
   const first = metalData.points[0][1],
-    delta = metalData.points.at(-1)[1] - first,
+    delta = last(metalData.points)[1] - first,
     percent = (delta / first) * 100,
     sign = delta > 0 ? '+' : delta < 0 ? '−' : '';
   text(
@@ -157,7 +166,13 @@ function block(stack, metalData, metal, compact) {
 }
 
 function footer(widget, data, stale) {
-  const when = new Date(data?.gold?.quotedAt || data?.updatedAt || Date.now());
+  const points = data?.[METAL]?.points,
+    when = new Date(
+      (METAL === 'gold' && data?.gold?.quotedAt) ||
+        (points?.length ? last(points)[0] : null) ||
+        data?.updatedAt ||
+        Date.now()
+    );
   const t = widget.addText(
     (stale ? '⚠ ' : '') +
       PERIODS[PERIOD] +
@@ -171,7 +186,8 @@ function footer(widget, data, stale) {
 }
 
 async function build() {
-  const { data, stale } = await load();
+  const setup = problem();
+  const { data, stale, error } = setup ? { data: null, stale: true } : await load();
   const widget = new ListWidget();
   const gradient = new LinearGradient();
   gradient.colors = [C.bg1, C.bg2];
@@ -184,8 +200,14 @@ async function build() {
   if (!data) {
     text(widget, 'GoldApp', Font.semiboldSystemFont(13), new Color(C.gold));
     widget.addSpacer(6);
-    text(widget, 'Cours indisponibles.', Font.systemFont(12), C.text);
-    text(widget, 'Vérifie l’adresse et la clé du script.', Font.systemFont(10), C.muted, 0.7);
+    text(widget, setup ? 'Réglage à finir' : 'Cours indisponibles', Font.systemFont(12), C.text);
+    text(
+      widget,
+      setup || (error ? error.message : '') || 'Réessaie dans quelques minutes.',
+      Font.systemFont(10),
+      C.muted,
+      0.6
+    );
     return widget;
   }
   const main = data[METAL],
@@ -195,7 +217,7 @@ async function build() {
   if (FAMILY === 'small') {
     block(widget, main, METAL, true);
     widget.addSpacer(4);
-    if (hasCurve(main)) widget.addImage(curve(main.points, 130, 46, hex, false));
+    if (hasCurve(main)) widget.addImage(curve(main.points, 112, 40, hex, false));
     widget.addSpacer();
     footer(widget, data, stale);
   } else if (FAMILY === 'large') {
@@ -204,7 +226,7 @@ async function build() {
       widget.addSpacer(4);
       if (hasCurve(data[metal]))
         widget.addImage(
-          curve(data[metal].points, 310, 92, metal === 'silver' ? C.silver : C.gold, true)
+          curve(data[metal].points, 284, 62, metal === 'silver' ? C.silver : C.gold, true)
         );
       widget.addSpacer(8);
     }
@@ -216,12 +238,12 @@ async function build() {
     row.centerAlignContent();
     const left = row.addStack();
     left.layoutVertically();
-    left.size = new Size(122, 0);
+    left.size = new Size(118, 0);
     block(left, main, METAL, false);
     row.addSpacer(8);
     if (hasCurve(main)) {
-      const image = row.addImage(curve(main.points, 180, 100, hex, true));
-      image.imageSize = new Size(180, 100);
+      const image = row.addImage(curve(main.points, 160, 92, hex, true));
+      image.imageSize = new Size(160, 92);
     }
     widget.addSpacer();
     footer(widget, data, stale);

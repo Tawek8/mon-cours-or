@@ -5,6 +5,8 @@
 - Widget d’écran d’accueil (app Scriptable) : cours de l’or ou de l’argent avec sa
   courbe et sa variation ; trois tailles, période au choix. Voir widget/LISEZ-MOI-WIDGET.txt.
 - /api/widget : lecture seule des cours, ouverte par une clé à part (GOLDAPP_WIDGET_KEY).
+- Relecture du widget : compatible iOS 14+, tailles ajustées pour l’iPhone SE, messages
+  clairs (clé à coller, clé refusée), délai court pour garder le dernier relevé.
 
 ## 28/10/2026 — tirer pour actualiser
 
