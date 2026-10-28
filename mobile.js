@@ -1,22 +1,18 @@
 (() => {
   'use strict';
-  const main = document.querySelector('main'),
-    heading = main.querySelector('.heading');
-  const nav = document.createElement('nav');
-  nav.className = 'mobile-tabs';
-  nav.setAttribute('aria-label', 'Navigation');
-  nav.innerHTML =
-    '<button type="button" data-mobile-tab="cours" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16M7 14l4-5 4 3 5-7"/></svg>Cours</button><button type="button" data-mobile-tab="estimation" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h1M12 11h1M16 11h.1M8 15h1M12 15h1M16 15h.1M8 18h1M12 18h1M16 18h.1"/></svg>Rachat</button>';
-  heading.after(nav);
-  document.body.dataset.mobileTab = 'cours';
+  // Deux vues : Cours (cotations seules) et Rachat (tous les calculs).
+  const nav = document.querySelector('.views');
   nav.addEventListener('click', e => {
-    const b = e.target.closest('[data-mobile-tab]');
+    const b = e.target.closest('[data-view]');
     if (!b) return;
     if (typeof selected !== 'undefined' && selected) closeBuy();
-    document.body.dataset.mobileTab = b.dataset.mobileTab;
+    document.body.dataset.view = b.dataset.view;
+    document.getElementById('view-cours').hidden = b.dataset.view !== 'cours';
+    document.getElementById('view-rachat').hidden = b.dataset.view !== 'rachat';
     nav.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    window.scrollTo({ top: 0, behavior: 'instant' });
   });
-  const hero = main.querySelector('.hero'),
+  const hero = document.querySelector('.hero'),
     info = document.createElement('div');
   info.className = 'price18-info';
   const jewelryHeading = document.createElement('div');
@@ -52,8 +48,6 @@
   hero.append(info);
   const discountControls = hero.querySelector('.inputs');
   info.querySelector('details').append(discountControls);
-  const silver = document.getElementById('silver-section');
-  if (silver) main.insertBefore(hero, silver);
   const proposed = document.getElementById('price18-proposed'),
     gtax = document.getElementById('price18-gtax'),
     discountInput = document.getElementById('mult');

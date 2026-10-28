@@ -1,0 +1,2095 @@
+<!doctype html>
+<html lang="fr-FR" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cotation &amp; Produits - FX, Gold and Services</title>
+    <meta name="google-site-verification" content="5MfR7Dk84-FXXZuq98ngk3uzGg30N5zYU_erjmg_j0c" />
+
+        <script type="text/javascript" src="https://cdn.cookielaw.org/consent/aaf8a6e0-e89f-4a07-b392-ea23859c24a6/OtAutoBlock.js"></script>
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="aaf8a6e0-e89f-4a07-b392-ea23859c24a6"></script>
+    <script type="text/javascript">function OptanonWrapper(){}</script>
+    
+    <script>document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, 'js');</script>
+
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	
+	<title>Cotation &amp; Produits - FX, Gold and Services</title>
+	<link rel="canonical" href="https://www.loomis-fxgs.fr/fr/or/cotation-produits/" />
+	<meta property="og:locale" content="fr_FR" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Cotation &amp; Produits - FX, Gold and Services" />
+	<meta property="og:url" content="https://www.loomis-fxgs.fr/fr/or/cotation-produits/" />
+	<meta property="og:site_name" content="FX, Gold and Services" />
+	<meta property="article:modified_time" content="2021-06-09T15:13:12+00:00" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebPage","@id":"https:\/\/www.loomis-fxgs.fr\/fr\/or\/cotation-produits\/","url":"https:\/\/www.loomis-fxgs.fr\/fr\/or\/cotation-produits\/","name":"Cotation & Produits - FX, Gold and Services","isPartOf":{"@id":"https:\/\/www.loomis-fxgs.fr\/fr\/#website"},"datePublished":"2021-04-22T06:36:52+00:00","dateModified":"2021-06-09T15:13:12+00:00","breadcrumb":{"@id":"https:\/\/www.loomis-fxgs.fr\/fr\/or\/cotation-produits\/#breadcrumb"},"inLanguage":"fr-FR","potentialAction":[{"@type":"ReadAction","target":["https:\/\/www.loomis-fxgs.fr\/fr\/or\/cotation-produits\/"]}]},{"@type":"BreadcrumbList","@id":"https:\/\/www.loomis-fxgs.fr\/fr\/or\/cotation-produits\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https:\/\/www.loomis-fxgs.fr\/fr\/"},{"@type":"ListItem","position":2,"name":"Or","item":"https:\/\/www.loomis-fxgs.fr\/fr\/or\/"},{"@type":"ListItem","position":3,"name":"Cotation &#038; Produits"}]},{"@type":"WebSite","@id":"https:\/\/www.loomis-fxgs.fr\/fr\/#website","url":"https:\/\/www.loomis-fxgs.fr\/fr\/","name":"FX, Gold and Services","description":"Or : Informations, Cotations et Guides sur l&#039;Or","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/www.loomis-fxgs.fr\/fr\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"fr-FR"}]}</script>
+	
+
+
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.loomis-fxgs.fr/api/oembed/1.0/embed?url=https%3A%2F%2Fwww.loomis-fxgs.fr%2Ffr%2For%2Fcotation-produits%2F&#038;lang=fr" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.loomis-fxgs.fr/api/oembed/1.0/embed?url=https%3A%2F%2Fwww.loomis-fxgs.fr%2Ffr%2For%2Fcotation-produits%2F&#038;format=xml&#038;lang=fr" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='contact-form-7-css' href='https://www.loomis-fxgs.fr/app/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7' media='all' />
+<link rel='stylesheet' id='nbcpf-intlTelInput-style-css' href='https://www.loomis-fxgs.fr/app/plugins/country-phone-field-contact-form-7/assets/css/intlTelInput.min.css?ver=7.1.3' media='all' />
+<link rel='stylesheet' id='nbcpf-countryFlag-style-css' href='https://www.loomis-fxgs.fr/app/plugins/country-phone-field-contact-form-7/assets/css/countrySelect.min.css?ver=7.1.3' media='all' />
+<link rel='stylesheet' id='app-css' href='https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/css/app.css?v=20220419&#038;ver=7.1.3' media='all' />
+<script id="jquery-core-js" src="https://www.loomis-fxgs.fr/wp/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://www.loomis-fxgs.fr/wp/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<link rel="https://api.w.org/" href="https://www.loomis-fxgs.fr/api/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.loomis-fxgs.fr/api/wp/v2/pages/1306" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.loomis-fxgs.fr/wp/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1.3" />
+<link rel='shortlink' href='https://www.loomis-fxgs.fr/?p=1306' />
+<link rel="icon" href="https://www.loomis-fxgs.fr/app/uploads/cropped-Fichier-5@600x-8-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.loomis-fxgs.fr/app/uploads/cropped-Fichier-5@600x-8-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.loomis-fxgs.fr/app/uploads/cropped-Fichier-5@600x-8-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.loomis-fxgs.fr/app/uploads/cropped-Fichier-5@600x-8-270x270.png" />
+</head>
+<body class="wp-singular page-template page-template-page-or-cours page-template-page-or-cours-php page page-id-1306 page-child parent-pageid-1268 wp-theme-loomisfxgs"><header class="pageheader nocover">
+
+		<div class="assistance">
+		<div class="wrap">
+			<a href="https://www.loomis-fxgs.fr/fr/assistance/" class="link"><strong>Assistance et réclamations</strong></a>
+			<div class="phone">
+				<span class="phone_title">Ligne directe</span>
+				<span class="phone_number">01 49 70 55 00</span>
+			</div>
+		</div>
+	</div>
+    
+	
+
+  <div class="wrap">
+    <a class="brandlogo" href="https://www.loomis-fxgs.fr/fr/">FX, Gold and Services</a>
+    
+	<a href="#" class="mobile_open_header_menu"><span>Menu</span></a>
+
+	<div class="headermenu">
+		<nav class="headernav">
+			<div class="menu-menu-principal-fr-container"><ul id="menu-menu-principal-fr" class="nav"><li id="menu-item-1772" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1772 page-presentation"><a href="https://www.loomis-fxgs.fr/fr/presentation/">Présentation</a></li>
+<li id="menu-item-1773" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1773 page-devise"><a href="https://www.loomis-fxgs.fr/fr/devises/">Devises</a></li>
+<li id="menu-item-1774" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-1774 page-or"><a href="https://www.loomis-fxgs.fr/fr/or/">Or</a></li>
+<li id="menu-item-1778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1778 page-contact"><a href="https://www.loomis-fxgs.fr/fr/contact/">Contact</a></li>
+</ul></div>		</nav>
+
+		<nav class="headerlang">
+			
+			<div class="langtoggle left">
+								<span class="toggle-label">FR</span>
+				
+								<a href="https://www.loomis-fxgs.fr/en/" class="toggle-switch"></a>
+				
+								<a href="https://www.loomis-fxgs.fr/en/" class="toggle-label toggle-label-off">EN</a>
+							</div>
+		</nav>
+	</div>
+
+  </div>
+</header>
+<div class="content nocover">
+
+
+    
+
+    <!--div class="banner_or_pro_part">
+        Vous êtes particulier ?
+        <a href="?pp=part">Page particulier</a>
+    </div-->
+
+    <section class="pageintro_textcenter">
+        <div class="wrap">
+
+            <span class="propart">Professionnels</span>
+            <h1 class="title with_propart">Cotation &#038; Produits</h1>
+            <div class="subtitle">Lingots, Lingotins Or et pièces d’or côtés </div>
+
+                        <div class="trend">
+                <div class="trend_title">
+                    Tendance Once d&rsquo;or Londres AM                </div>
+
+                                <div class="trend_value down">
+                    4&nbsp;083,85&nbsp;$                </div>
+                <div class="trend_updated">
+                    au 22/10/2026 à 14:30                </div>
+            </div>
+                        
+
+                    </div>
+    </section>
+
+    <section class="devisecours sectioncourstable">
+
+        
+        
+        <form action="" method="get" id="form_change_date">
+            <h2 class="title">
+                Cotation du                <span class="date" id="js-ajaxdatereplace">25/10/2026</span>
+            </h2>
+            <a href="#" class="datepicker-link datepickermodal_open" class="btn">Changer de date</a>
+        </form>
+
+        
+        <div id="ajax_reload_zone">
+            <div class="rate_table">
+           
+            
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/icone_produit_or_1-lingot.png" alt="Lingot">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingot</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color asc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    115&nbsp;650,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl asc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1792" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1792">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1792" data-alertproductname="&lt;strong&gt;Lingot&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1792">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingot/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Icone_Produit_or_2-Lingotin_500g.png" alt="Lingotin oR ® 500g">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingotin</strong> oR <sup class="copy">®</sup> 500g                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    61&nbsp;000,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1800" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1800">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1800" data-alertproductname="&lt;strong&gt;Lingotin&lt;/strong&gt; oR &lt;sup class=&quot;copy&quot;&gt;®&lt;/sup&gt; 500g">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1800">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingotin-or-500g/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Icone_Produit_or_3-Lingotin_250g.png" alt="Lingotin oR ® 250g">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingotin</strong> oR <sup class="copy">®</sup> 250g                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color asc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    30&nbsp;900,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl asc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1802" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1802">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1802" data-alertproductname="&lt;strong&gt;Lingotin&lt;/strong&gt; oR &lt;sup class=&quot;copy&quot;&gt;®&lt;/sup&gt; 250g">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1802">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingotin-or-250g/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Icone_Produit_or_4-Lingotin_100g.png" alt="Lingotin oR ® 100g">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingotin</strong> oR <sup class="copy">®</sup> 100g                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    12&nbsp;380,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1804" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1804">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1804" data-alertproductname="&lt;strong&gt;Lingotin&lt;/strong&gt; oR &lt;sup class=&quot;copy&quot;&gt;®&lt;/sup&gt; 100g">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1804">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingotin-or-100g/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Icone_Produit_or_5-Lingotin_50g.png" alt="Lingotin oR ® 50g">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingotin</strong> oR <sup class="copy">®</sup> 50g                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    6&nbsp;220,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1806" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1806">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1806" data-alertproductname="&lt;strong&gt;Lingotin&lt;/strong&gt; oR &lt;sup class=&quot;copy&quot;&gt;®&lt;/sup&gt; 50g">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1806">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingotin-or-50g/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Icone_Produit_or_6-Lingotin_Once_CPOR.png" alt="Lingotin Once CPoR">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingotin</strong> Once CPoR                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color asc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    3&nbsp;885,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl asc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1814" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1814">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1814" data-alertproductname="&lt;strong&gt;Lingotin&lt;/strong&gt; Once CPoR">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1814">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingotin-once-cpor/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Icone_Produit_or_7-Lingotin_20g.png" alt="Lingotin oR ® 20g">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingotin</strong> oR <sup class="copy">®</sup> 20g                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    2&nbsp;535,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1808" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1808">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1808" data-alertproductname="&lt;strong&gt;Lingotin&lt;/strong&gt; oR &lt;sup class=&quot;copy&quot;&gt;®&lt;/sup&gt; 20g">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1808">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingotin-or-20g/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Icone_Produit_or_8-Lingotin_10g.png" alt="Lingotin oR ® 10g">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingotin</strong> oR <sup class="copy">®</sup> 10g                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    1&nbsp;270,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1810" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1810">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1810" data-alertproductname="&lt;strong&gt;Lingotin&lt;/strong&gt; oR &lt;sup class=&quot;copy&quot;&gt;®&lt;/sup&gt; 10g">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1810">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingotin-or-10g/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Icone_Produit_or_9-Lingotin_5g.png" alt="Lingotin oR ® 5g">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Lingotin</strong> oR <sup class="copy">®</sup> 5g                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    590,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1812" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1812">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1812" data-alertproductname="&lt;strong&gt;Lingotin&lt;/strong&gt; oR &lt;sup class=&quot;copy&quot;&gt;®&lt;/sup&gt; 5g">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1812">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/lingotin-or-5g/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Napoleon_20_MarianneCoq_A-150x150.png" alt="20 Francs Napoléon">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>20 Francs Napoléon</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    700,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1816" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1816">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1816" data-alertproductname="&lt;strong&gt;20 Francs Napoléon&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1816">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/20-francs-napoleon/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/FrancsSuisse_20_Vreneli_A-150x150.png" alt="20 Francs Suisse">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>20 Francs Suisse</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    700,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1818" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1818">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1818" data-alertproductname="&lt;strong&gt;20 Francs Suisse&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1818">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/20-francs-suisse/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/UnionLatine_Autriche_FrancoisJoseph_A-150x150.png" alt="Union latine">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Union latine</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color asc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    694,90&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl asc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1820" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1820">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1820" data-alertproductname="&lt;strong&gt;Union latine&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1820">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/union-latine/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Souverain_GB_GeorgesIII_A-150x150.png" alt="Souverain">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Souverain</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    865,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1822" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1822">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1822" data-alertproductname="&lt;strong&gt;Souverain&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1822">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/souverain/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Dollars_20_USA_Statue_A-150x150.png" alt="20 Dollars">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>20 Dollars</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color equal">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    3&nbsp;749,75&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl equal"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1824" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1824">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1824" data-alertproductname="&lt;strong&gt;20 Dollars&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1824">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/20-dollars/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Dollars_10_USA_Indien_A-150x150.png" alt="10 Dollars">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>10 Dollars</strong>                            </div>
+                                                            <div class="col col_suspend">
+                                                                            Cotation suspendue                                                                    </div>
+                                <div class="col col_trend">
+                                </div>
+                                <div class="col col_btn">
+                                <a href="https://www.loomis-fxgs.fr/produit/10-dollars/" class="permalink">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1826" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1826">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1826" data-alertproductname="&lt;strong&gt;10 Dollars&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1826">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/10-dollars/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Pesos_50_Mexique_A-150x150.png" alt="50 Pesos">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>50 Pesos</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color equal">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    4&nbsp;429,75&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl equal"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1828" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1828">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1828" data-alertproductname="&lt;strong&gt;50 Pesos&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1828">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/50-pesos/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Florins_10_Hollande_GuillaumeIII_A-150x150.png" alt="10 Florins Hollandais">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>10 Florins Hollandais</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color asc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    700,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl asc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1830" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1830">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1830" data-alertproductname="&lt;strong&gt;10 Florins Hollandais&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1830">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/10-florins-hollandais/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Krugerrand_SudAfrique_A-150x150.png" alt="Krugerrand Sud Afrique">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Krugerrand Sud Afrique</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    3&nbsp;865,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1798" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1798">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1798" data-alertproductname="&lt;strong&gt;Krugerrand Sud Afrique&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1798">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/krugerrand-sud-afrique/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Napoleon_10_MarianneCoq_A-150x150.png" alt="10 Francs Napoléon">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>10 Francs Napoléon</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    380,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1832" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1832">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1832" data-alertproductname="&lt;strong&gt;10 Francs Napoléon&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1832">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/10-francs-napoleon/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/FrancsTunisien_20_A-150x150.png" alt="20 Francs Tunisie">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>20 Francs Tunisie</strong>                            </div>
+                                                            <div class="col col_suspend">
+                                                                            Cotation suspendue                                                                    </div>
+                                <div class="col col_trend">
+                                </div>
+                                <div class="col col_btn">
+                                <a href="https://www.loomis-fxgs.fr/produit/20-francs-tunisie/" class="permalink">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1834" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1834">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1834" data-alertproductname="&lt;strong&gt;20 Francs Tunisie&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1834">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/20-francs-tunisie/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Souverain_GB_ElisabethII_A-150x150.png" alt="Souverain Elisabeth II">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Souverain Elisabeth II</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color equal">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    903,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl equal"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1836" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1836">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1836" data-alertproductname="&lt;strong&gt;Souverain Elisabeth II&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1836">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/souverain-elisabeth-ii/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/DemiSouverain_GeorgesIIII_A-150x150.png" alt="Demi Souverain">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>Demi Souverain</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    448,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1838" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1838">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1838" data-alertproductname="&lt;strong&gt;Demi Souverain&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1838">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/demi-souverain/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/Dollars_5_USA_Sioux_A-150x150.png" alt="5 Dollars US">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>5 Dollars US</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color desc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    970,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl desc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1840" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1840">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1840" data-alertproductname="&lt;strong&gt;5 Dollars US&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1840">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/5-dollars-us/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                                <div class="raterow">
+                    <div class="raterow_preview raterow_preview_goldproduct">
+                        <div class="wrap">
+                            <div class="col col_image">
+                                                                    <img src="https://www.loomis-fxgs.fr/app/uploads/ReichMark_20_Prusse_Guillaume1er_A-150x150.png" alt="20 Reich Mark">
+                                                            </div>
+                            <div class="col col_name">
+                                <strong>20 Reich Mark</strong>                            </div>
+                                                            <div class="col col_date">
+                                    Cotation du <span class="color asc">23/10/2026</span> :
+                                </div>
+                                <div class="col col_price">
+                                    830,00&nbsp;€                                </div>
+                                <div class="col col_trend">
+                                    <span class="indicator xl asc"></span>                                </div>
+                                <div class="col col_btn">
+                                    <a href="#" class="open_details">+</a>
+                                </div>
+                                                        
+
+                        </div>
+
+                    </div>
+
+                    <div class="raterow_detail">
+
+                        <div class="graph_wrapper">
+                            <canvas id="goldproduct_graph_1842" width="580" height="250" class="dark"></canvas>
+                        </div>
+                        
+                        <form action="" method="post" class="detail_chart_form" data-chart="goldproduct_graph_1842">
+
+                            <div class="radio-list text-white">
+                                                                <label title="6 mois">
+                                    <input type="radio" name="format" value="6months" checked>
+                                    <span></span>
+                                    <div class="legend">6M</div>
+                                </label>
+                                                                <label title="1 an">
+                                    <input type="radio" name="format" value="1year" >
+                                    <span></span>
+                                    <div class="legend">1A</div>
+                                </label>
+                                                                <label title="2 ans">
+                                    <input type="radio" name="format" value="2years" >
+                                    <span></span>
+                                    <div class="legend">2A</div>
+                                </label>
+                                                                <label title="5 ans">
+                                    <input type="radio" name="format" value="5years" >
+                                    <span></span>
+                                    <div class="legend">5A</div>
+                                </label>
+                                                            </div>
+
+                            <a href="#" class="alert-link alertmodal_open" data-alertproductid="1842" data-alertproductname="&lt;strong&gt;20 Reich Mark&lt;/strong&gt;">
+                                <span class="svgwrapper"><svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg></span>
+                                Créer une alerte                            </a>
+
+                            <input type="hidden" name="productid" value="1842">
+                            <input type="hidden" name="action" value="loomis_load_chart_gold">
+                        </form>
+                        
+                        <a href="https://www.loomis-fxgs.fr/produit/20-reich-mark/" class="btn btn-arrow btn-red">Détail produit</a>
+                            
+                    </div>
+                </div>
+                            </div>
+
+        </div>
+
+    </section>
+
+
+<div id="datepickermodal">
+    <button type="button" class="datepickermodal_close">Fermer</button>
+
+    <form action="" method="get">
+        <input type="hidden" name="date" id="input_datepicker" value="2026-10-25">
+        <div id="input_datepicker_container"></div>
+        <button type="submit" class="btn-submit">Valider</button>
+    </form>
+
+</div>
+</div>
+
+
+
+
+
+<footer class="pagefooter">
+	<div class="wrap">
+
+		<nav class="footersocial">
+
+							<a href="https://www.linkedin.com/company/loomis-fxgs-France" class="linkedin">
+					LinkedIn
+				</a>
+			
+							<a href="https://twitter.com/cpordevises" class="twitter">
+					Twitter
+				</a>
+			
+							<a href="mailto:fxgs.contact@loomis.com" class="email">
+					Email
+				</a>
+			
+		</nav>
+		
+		<nav class="footernav">
+		<div class="menu-menu-principal-fr-container"><ul id="menu-menu-principal-fr-1" class="nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1772 page-presentation"><a href="https://www.loomis-fxgs.fr/fr/presentation/">Présentation</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1773 page-devise"><a href="https://www.loomis-fxgs.fr/fr/devises/">Devises</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-1774 page-or"><a href="https://www.loomis-fxgs.fr/fr/or/">Or</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1778 page-contact"><a href="https://www.loomis-fxgs.fr/fr/contact/">Contact</a></li>
+</ul></div>		</nav>
+
+	</div>
+
+  	<div class="wrap">
+
+		<a href="https://www.loomis.fr" target="_blank" class="footer-loomis">
+		<svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-footer-loomis"></use></svg>		</a>
+
+		<div class="copyright">
+			&copy; Loomis FX, Gold and Services - 2026<br>
+			
+			<a rel="privacy-policy" href="https://www.loomis-fxgs.fr/fr/donnees-personnelles/">Politique d’utilisation des données personnelles</a>
+<a href="https://www.loomis-fxgs.fr/fr/gestion-cookies/">Politique de gestion des cookies</a>
+<a href="https://www.loomis-fxgs.fr/fr/mentions-legales/">Mentions légales</a>
+<a href="https://www.loomis-fxgs.fr/fr/conditions-generales-de-ventre-cgv/">Conditions Générales de Vente (CGV)</a>
+<a href="https://www.loomis-fxgs.fr/fr/conditions-generales-dachat-cga/">Conditions Générales d’Achat (CGA)</a>
+<a href="https://www.loomis-fxgs.fr/fr/publications-reglementaires/">Publications réglementaires</a>
+
+			<a id="ot-sdk-btn" class="ot-sdk-show-settings">Gestion des cookies</a>
+		</div>
+
+  	</div>
+
+	
+</footer>
+<div id="alertmodal">
+    <button type="button" class="alertmodal_close modal_close_btn">Fermer</button>
+
+    <div class="modal-title-icon svgwrapper">
+        <svg><use xlink:href="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/images/spritemap.svg#sprite-alert-link"></use></svg>    </div>
+    <h2 class="modal-title">Créer une alerte<br>sur ce produit</h2>
+    <h3 class="modal-subtitle js-product-title"></h3>
+
+    <form action="" method="post" id="alert_form">
+        
+        <div class="fieldgroup">
+            <label for="alert_email">Adresse email</label>
+            <input type="email" name="email" value="" autocomplete="on" class="input_email" required>
+        </div>
+
+        <label class="mainradio radio xl">
+            <input type="radio" name="alert_type" value="freq" checked>
+            <span class="radio_label bold">Paramétrer une alerte régulière</span>
+        </label>
+
+        <div class="fieldgroups_freq">
+            <div class="fieldgroup">
+                <label>Périodicité</label>
+            </div>
+            <div class="fieldgroup">
+                <label class="radio xl">
+                    <input type="radio" name="alert_freq" value="day" checked>
+                    <span class="radio_label">Quotidienne</span>
+                    
+                    <input type="hidden" name="alert_freq_day" value="*">
+                </label>
+            </div>
+            <div class="fieldgroup">
+                <label class="radio xl left">
+                    <input type="radio" name="alert_freq" value="week">
+                    <span class="radio_label">Hebdomadaire</span>
+                </label>
+                <select name="alert_freq_week" class="pretty">
+                                            <option value="Mon" selected>Lundi</option>
+                                            <option value="Tue" >Mardi</option>
+                                            <option value="Wed" >Mercredi</option>
+                                            <option value="Thu" >Jeudi</option>
+                                            <option value="Fri" >Vendredi</option>
+                                            <option value="Sat" >Samedi</option>
+                                            <option value="Sun" >Dimanche</option>
+                                    </select>
+            </div>
+            <div class="fieldgroup">
+                <label class="radio xl left">
+                    <input type="radio" name="alert_freq" value="month">
+                    <span class="radio_label">Mensuelle</span>
+                </label>
+                <select name="alert_freq_month" class="pretty">
+                                        <option value="1" selected>1</option>
+                                        <option value="2" >2</option>
+                                        <option value="3" >3</option>
+                                        <option value="4" >4</option>
+                                        <option value="5" >5</option>
+                                        <option value="6" >6</option>
+                                        <option value="7" >7</option>
+                                        <option value="8" >8</option>
+                                        <option value="9" >9</option>
+                                        <option value="10" >10</option>
+                                        <option value="11" >11</option>
+                                        <option value="12" >12</option>
+                                        <option value="13" >13</option>
+                                        <option value="14" >14</option>
+                                        <option value="15" >15</option>
+                                        <option value="16" >16</option>
+                                        <option value="17" >17</option>
+                                        <option value="18" >18</option>
+                                        <option value="19" >19</option>
+                                        <option value="20" >20</option>
+                                        <option value="21" >21</option>
+                                        <option value="22" >22</option>
+                                        <option value="23" >23</option>
+                                        <option value="24" >24</option>
+                                        <option value="25" >25</option>
+                                        <option value="26" >26</option>
+                                        <option value="27" >27</option>
+                                        <option value="28" >28</option>
+                                        <option value="29" >29</option>
+                                        <option value="30" >30</option>
+                                        <option value="31" >31</option>
+                                    </select>
+            </div>
+        </div>
+
+        <hr>
+
+        <label class="mainradio radio xl">
+            <input type="radio" name="alert_type" value="minmax">
+            <span class="radio_label bold">Paramétrer une alerte sur un seuil</span>
+        </label>
+        
+
+        <div class="fieldgroups_minmax" style="display:none;">
+            <span class="notice">Recevoir une alerte lorsque le cours dépasse ces indices :</span>
+            <div class="fieldgroup">
+                <div class="left">
+                    <label>Valeur minimum :</label>
+                    <input type="number" name="min" value="" min="0" step="0.01" autocomplete="off">
+                </div>
+                <div class="right">
+                    <label>Valeur maximum :</label>
+                    <input type="number" name="max" value="" min="0" step="0.01" autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <div class="agree_zone">
+            <input type="checkbox" name="agree" value="1" id="agree_checkbox">
+            <label class="small" for="agree_checkbox">
+                En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées par Loomis FXGS pour traiter ma demande.<br>
+                Pour plus de détails, et notamment les modalités d'exercice des droits, veuillez consulter la page <a class="privacy-policy-link" href="https://www.loomis-fxgs.fr/fr/donnees-personnelles/" rel="privacy-policy">Politique d&rsquo;utilisation des données personnelles</a>.            </label>
+        </div>
+
+        <input type="hidden" name="product_id" value="" class="js-product-id">
+        <input type="hidden" name="action" value="loomis_create_product_alert">
+
+        <div class="btn_wrapper">
+            <button type="submit" class="btn btn-black">Valider</button>
+        </div>
+    </form>
+
+    <div id="alert_response">
+        Merci, votre alerte est enregistrée    </div>
+
+    <div class="ajax_debug"></div>
+
+</div>
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp/wp-*.php","/wp/wp-admin/*","/app/uploads/*","/app/*","/app/plugins/*","/app/themes/loomisfxgs/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="wp-hooks-js" src="https://www.loomis-fxgs.fr/wp/wp-includes/js/dist/hooks.min.js?ver=f0f188028580e8dc1255"></script>
+<script id="wp-i18n-js" src="https://www.loomis-fxgs.fr/wp/wp-includes/js/dist/i18n.min.js?ver=1dfe7db3940c23ea9216"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script id="swv-js" src="https://www.loomis-fxgs.fr/app/plugins/contact-form-7/includes/swv/js/index.js?ver=6.1.7"></script>
+<script id="contact-form-7-js-translations">
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "contact-form-7", {"translation-revision-date":"2026-09-29 08:22:41+0000","generator":"GlotPress\/4.1.0","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural-forms":"nplurals=2; plural=n > 1;","lang":"fr"},"This contact form is placed in the wrong place.":["Ce formulaire de contact est plac\u00e9 dans un mauvais endroit."],"Error:":["Erreur\u00a0:"]}},"comment":{"reference":"includes\/js\/index.js"}} );
+//# sourceURL=contact-form-7-js-translations
+</script>
+<script id="contact-form-7-js-before">
+var wpcf7 = {
+    "api": {
+        "root": "https:\/\/www.loomis-fxgs.fr\/api\/",
+        "namespace": "contact-form-7\/v1"
+    }
+};
+//# sourceURL=contact-form-7-js-before
+</script>
+<script id="contact-form-7-js" src="https://www.loomis-fxgs.fr/app/plugins/contact-form-7/includes/js/index.js?ver=6.1.7"></script>
+<script id="nbcpf-intlTelInput-script-js" src="https://www.loomis-fxgs.fr/app/plugins/country-phone-field-contact-form-7/assets/js/intlTelInput.min.js?ver=7.1.3"></script>
+<script id="nbcpf-countryFlag-script-js-extra">
+var nbcpf = {"ajaxurl":"https://www.loomis-fxgs.fr/wp/wp-admin/admin-ajax.php"};
+//# sourceURL=nbcpf-countryFlag-script-js-extra
+</script>
+<script id="nbcpf-countryFlag-script-js" src="https://www.loomis-fxgs.fr/app/plugins/country-phone-field-contact-form-7/assets/js/countrySelect.min.js?ver=7.1.3"></script>
+<script id="nbcpf-countryFlag-script-js-after">
+		(function($) {
+			$(function() {
+				$(".wpcf7-countrytext").countrySelect({
+					defaultCountry: "fr",preferredCountries: ["FR"],
+				});
+				$(".wpcf7-phonetext").intlTelInput({
+					autoHideDialCode: true,
+					autoPlaceholder: true,
+					nationalMode: false,
+					separateDialCode: true,
+					hiddenInput: "full_number",
+					initialCountry: "fr",	
+				});
+
+				$(".wpcf7-phonetext").each(function () {
+					var hiddenInput = $(this).attr('name');
+					//console.log(hiddenInput);
+					var dial_code = $(this).siblings(".flag-container").find(".selected-flag .selected-dial-code").text();
+					$("input[name="+hiddenInput+"-country-code]").val(dial_code);
+				});
+				
+				$(".wpcf7-phonetext").on("countrychange", function() {
+					// do something with iti.getSelectedCountryData()
+					//console.log(this.value);
+					var hiddenInput = $(this).attr("name");
+					var dial_code = $(this).siblings(".flag-container").find(".selected-flag .selected-dial-code").text();
+					$("input[name="+hiddenInput+"-country-code]").val(dial_code);
+					
+				});
+					
+					var isMobile = /Android.+Mobile|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+					$(".wpcf7-phonetext").on("keyup", function() {
+						var dial_code = $(this).siblings(".flag-container").find(".selected-flag .selected-dial-code").text();
+						
+						var value   = $(this).val();
+						if(value == "+")
+							$(this).val("");
+						else if(value.indexOf("+") == "-1")
+							$(this).val(dial_code + value);
+						else if(value.indexOf("+") > 0)
+							$(this).val(dial_code + value.substring(dial_code.length));
+					});$(".wpcf7-countrytext").on("keyup", function() {
+					var country_name = $(this).siblings(".flag-dropdown").find(".country-list li.active span.country-name").text();
+					if(country_name == "")
+					var country_name = $(this).siblings(".flag-dropdown").find(".country-list li.highlight span.country-name").text();
+					
+					var value   = $(this).val();
+					//console.log(country_name, value);
+					$(this).val(country_name + value.substring(country_name.length));
+				});
+				
+			});
+		})(jQuery);
+//# sourceURL=nbcpf-countryFlag-script-js-after
+</script>
+<script id="app-js-extra">
+var themeajax = {"ajaxurl":"https://www.loomis-fxgs.fr/ajax","currentlanguage":"fr_FR"};
+//# sourceURL=app-js-extra
+</script>
+<script id="app-js" src="https://www.loomis-fxgs.fr/app/themes/loomisfxgs/build/js/app.js?v=20220419&#038;ver=7.1.3"></script>
+<script id="google-recaptcha-js" src="https://www.google.com/recaptcha/api.js?render=6LdSFtAaAAAAAGU3KOoEVTrIY6cE0yJSEZZyy1pp&#038;ver=3.0"></script>
+<script id="wp-polyfill-js" src="https://www.loomis-fxgs.fr/wp/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0"></script>
+<script id="wpcf7-recaptcha-js-before">
+var wpcf7_recaptcha = {
+    "sitekey": "6LdSFtAaAAAAAGU3KOoEVTrIY6cE0yJSEZZyy1pp",
+    "actions": {
+        "homepage": "homepage",
+        "contactform": "contactform"
+    }
+};
+//# sourceURL=wpcf7-recaptcha-js-before
+</script>
+<script id="wpcf7-recaptcha-js" src="https://www.loomis-fxgs.fr/app/plugins/contact-form-7/modules/recaptcha/index.js?ver=6.1.7"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://www.loomis-fxgs.fr/wp/wp-includes/js/wp-emoji-release.min.js?ver=7.1.3"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://www.loomis-fxgs.fr/wp/wp-includes/js/wp-emoji-loader.min.js
+</script>
+</body>
+</html>

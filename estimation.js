@@ -97,8 +97,8 @@
   root.id = 'estimation-client';
   root.innerHTML =
     '<div class="est-head"><h2>Estimation client</h2></div><div id="est-rows"></div><div class="est-add-wrap"><button type="button" id="est-add">＋ Ajouter une ligne</button></div><div class="est-summary"><div class="est-totals"><span>Proposition d’achat Hors Taxes : <b id="est-gross">—</b></span><span class="est-net-block"><span>Net à verser au client : <strong id="est-net">—</strong></span><small id="est-fc-total" class="est-fc-net"></small></span></div><details id="est-tax-details"><summary>Détails des taxes et frais</summary><div id="est-breakdown"></div></details></div><p class="est-note">Les cours sont indicatifs. Les calculs sont actualisés à partir des dernières cotations disponibles.</p><div class="est-reset-wrap"><button type="button" id="est-reset" class="secondary">Réinitialiser</button><button type="button" id="est-print">Imprimer</button></div>';
-  const cpor = document.getElementById('cpor-section');
-  cpor.parentNode.insertBefore(root, cpor.nextSibling);
+  root.className = 'section';
+  document.getElementById('view-rachat').prepend(root);
   const $ = id => document.getElementById(id),
     fmt = v =>
       Number.isFinite(v) ? v.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }) : '—',
@@ -686,7 +686,7 @@
       while (el.firstChild) body.append(el.firstChild);
       const detail = document.createElement('details');
       detail.className = 'est-line-details';
-      detail.open = window.matchMedia('(min-width: 900px)').matches || openLine === l.id;
+      detail.open = openLine === l.id;
       const title = document.createElement('summary');
       title.className = 'est-line-title';
       const name = document.createElement('span');
@@ -699,7 +699,7 @@
       detail.append(title, body);
       el.append(detail);
       detail.addEventListener('toggle', () => {
-        if (!detail.isConnected || window.matchMedia('(min-width: 900px)').matches) return;
+        if (!detail.isConnected) return;
         if (detail.open) {
           openLine = l.id;
           rows.querySelectorAll('.est-line-details').forEach(d => {
@@ -1067,27 +1067,6 @@
   });
   const updated = $('last-updated');
   if (updated) observer.observe(updated, { childList: true, characterData: true, subtree: true });
-  // Sur PC seulement, afficher le bouton Actualiser en haut à droite du titre.
-  // On déplace le bouton d'origine pour conserver son gestionnaire de clic.
-  const refreshButton = document.getElementById('refresh');
-  const toolbar = refreshButton?.parentElement;
-  const heading = document.querySelector('main > .heading');
-  const pcLayout = window.matchMedia('(min-width: 900px)');
-  function placeRefresh() {
-    if (!refreshButton || !toolbar || !heading) return;
-    if (pcLayout.matches) {
-      heading.appendChild(refreshButton);
-      refreshButton.classList.add('pc-top-refresh');
-    } else {
-      toolbar.insertBefore(refreshButton, toolbar.firstChild);
-      refreshButton.classList.remove('pc-top-refresh');
-    }
-  }
-  pcLayout.addEventListener('change', () => {
-    placeRefresh();
-    render();
-  });
-  placeRefresh();
   window.addEventListener('prices-updated', refreshEstimates);
   render();
 })();

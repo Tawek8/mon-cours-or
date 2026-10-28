@@ -1,7 +1,0 @@
-Correction du 25/10/2026 - CPoR et week-end
-
-Cause reproduite : la fiche Napoleon Loomis renvoie HTTP 500, alors que le tableau officiel fonctionne. Le serveur lit maintenant directement le tableau avec controles des produits, prix, dates et suspensions.
-
-Verification reelle : 23 cours recuperes (spot inclus). 10 Dollars et 20 Francs Tunisie suspendus chez Loomis. 10 tests automatiques reussis.
-
-Installation : remplacer les fichiers du depot par le contenu de ce dossier puis redeployer le service Python. Le correctif essentiel est cpor.py. Les corrections Kitco/BullionVault sont incluses. Recharger ensuite l application. Aucun deploiement effectue par cette livraison.

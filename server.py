@@ -20,7 +20,7 @@ import json, os, re, unicodedata, time
 ROOT = Path(__file__).resolve().parent
 BASE = "https://www.gold.fr"
 # Seuls les fichiers de l’application sont publiés (pas le code serveur ni les notes).
-PUBLIC_SUFFIXES = {".html", ".js", ".css", ".png", ".svg", ".webp", ".webmanifest"}
+PUBLIC_SUFFIXES = {".html", ".js", ".css", ".png", ".svg", ".webp", ".webmanifest", ".ico"}
 PRIVATE = {"server.py"}
 
 

@@ -1,5 +1,5 @@
 // Une seule valeur à changer à chaque version (identique au ?v= de index.html).
-const VERSION = '20261025-cpor';
+const VERSION = '20261028-range';
 const CACHE = 'mon-or-' + VERSION;
 self.addEventListener('install', e => {
   self.skipWaiting();
@@ -10,29 +10,28 @@ self.addEventListener('install', e => {
         c.addAll(
           [
             './',
-            './gold-chart.js',
-            './pc-theme.css',
             './index.html',
-            './edit-fields.js',
-            './quick-prices.js',
-            './quick-prices.css',
-            './freshness.js',
-            './app.js',
-            './fiscal.js',
-            './estimation.js',
+            './style.css',
             './estimation.css',
+            './print.css',
+            './fiscal.js',
+            './freshness.js',
+            './gold-chart.js',
+            './app.js',
+            './estimation.js',
             './silver.js',
             './c3e.js',
             './mobile.js',
             './alignment.js',
-            './calculs-goldapp.css',
-            './mobile.css',
-            './update.js',
+            './quick-prices.js',
             './print.js',
-            './print.css',
+            './edit-fields.js',
+            './update.js',
             './logo-cndo.png',
             './manifest.webmanifest',
             './icon.svg',
+            './icon.png',
+            './favicon.ico',
           ]
             .flatMap(url => (/\.(js|css)$/.test(url) ? [url, url + '?v=' + VERSION] : [url]))
             .map(url => new Request(url, { cache: 'reload' }))

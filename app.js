@@ -61,23 +61,18 @@ else {
       $('mult').value = String(Math.round((1 - n) * 10000) / 100).replace('.', ',');
   }
 }
-let activeTab = 'coins',
-  selected = null;
+let selected = null;
 let spotValue = null,
   spotPoints = [],
   spotPeriod = 1;
 const savedBuyDiscount = localStorage.getItem('or-buy-discount');
 if (savedBuyDiscount !== null) $('buy-discount').value = savedBuyDiscount;
 function renderQuotes() {
-  const list = activeTab === 'bars' ? bars : coins;
-  const root = $('cotations');
+  renderList($('cpor-coins'), coins, false);
+  renderList($('cpor-bars'), bars, true);
+}
+function renderList(root, list, isBar) {
   root.replaceChildren();
-  if (!list.length) {
-    const empty = document.createElement('div');
-    empty.className = 'empty';
-    empty.textContent = 'Aucun produit trouvé';
-    root.append(empty);
-  }
   for (const [id, name] of list) {
     const price = data[id];
     const available = typeof price === 'number' && Number.isFinite(price) && price > 0;
@@ -87,7 +82,7 @@ function renderQuotes() {
     button.disabled = !available;
     // Illustration du produit (mêmes images que GoldApp).
     const img = document.createElement('img');
-    img.className = 'quote-img' + (activeTab === 'bars' ? ' bar' : '');
+    img.className = 'quote-img' + (isBar ? ' bar' : '');
     img.src = 'img/cpor/' + id + '.webp';
     img.alt = '';
     img.loading = 'lazy';
@@ -99,6 +94,14 @@ function renderQuotes() {
     const value = document.createElement('span');
     value.className = 'value';
     value.textContent = available ? eur(price) : 'Indisponible';
+    // Réponse immédiate à « combien vous le rachetez ? » : FC du calcul d’achat, puis TMP.
+    const buyback = available ? quickBuyback(price) : null;
+    if (buyback !== null) {
+      const buy = document.createElement('small');
+      buy.className = 'buyback';
+      buy.textContent = 'Rachat ' + eur(buyback);
+      value.append(buy);
+    }
     button.append(title, value);
     if (available) {
       const arrow = document.createElement('span');
@@ -109,6 +112,11 @@ function renderQuotes() {
     }
     root.append(button);
   }
+}
+function quickBuyback(price) {
+  const discount = parseNum($('buy-discount').value);
+  if (!Number.isFinite(discount) || discount < 0 || discount > 100) return null;
+  return price * (1 - discount / 100) * (1 - 0.115);
 }
 function drawBuy() {
   if (!selected) return;
@@ -236,25 +244,18 @@ function openBuy(id, name) {
   taxDateCommitted = '';
   taxDatePending = false;
   $('tax-date-status').textContent = '';
-  $('cpor-section').hidden = true;
-  document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden = true;
-  document.querySelector('.hero').hidden = true;
+  $('view-cours').hidden = true;
+  document.querySelector('.views').hidden = true;
   $('buy-page').hidden = false;
-  document.querySelector('.toolbar').hidden = true;
-  $('status').hidden = true;
-  $('editor').hidden = true;
   drawBuy();
   history.pushState({ buy: id }, '', '#achat-' + encodeURIComponent(id));
-  $('buy-page').scrollIntoView({ block: 'start', behavior: 'instant' });
+  window.scrollTo({ top: 0, behavior: 'instant' });
 }
 function closeBuy(updateHistory = true) {
   selected = null;
   $('buy-page').hidden = true;
-  $('cpor-section').hidden = false;
-  document.querySelector('section:not(#cpor-section):not(#buy-page)').hidden = false;
-  document.querySelector('.hero').hidden = false;
-  document.querySelector('.toolbar').hidden = false;
-  $('status').hidden = false;
+  $('view-cours').hidden = false;
+  document.querySelector('.views').hidden = false;
   if (updateHistory && location.hash.startsWith('#achat-'))
     history.replaceState(null, '', location.pathname + location.search);
   $('cpor-section').scrollIntoView({ block: 'start', behavior: 'instant' });
@@ -263,18 +264,9 @@ $('back').addEventListener('click', () => closeBuy());
 window.addEventListener('popstate', () => {
   if (selected) closeBuy(false);
 });
-for (const type of ['bars', 'coins'])
-  $('tab-' + type).addEventListener('click', () => {
-    activeTab = type;
-    for (const t of ['bars', 'coins']) {
-      $('tab-' + t).classList.toggle('active', t === type);
-      $('tab-' + t).setAttribute('aria-selected', String(t === type));
-    }
-    $('cotations').scrollTop = 0;
-    renderQuotes();
-  });
 $('buy-discount').addEventListener('input', () => {
   localStorage.setItem('or-buy-discount', $('buy-discount').value);
+  renderQuotes();
   drawBuy();
 });
 function draw() {
@@ -341,16 +333,14 @@ function validate(obj) {
   }
   return result;
 }
-$('manual').onclick = () => {
-  const editor = $('editor');
-  editor.hidden = !editor.hidden;
+$('editor').addEventListener('toggle', () => {
+  if (!$('editor').open) return;
   $('json').value = JSON.stringify(
     Object.fromEntries(Object.entries(data).filter(([k]) => allowed.has(k))),
     null,
     2
   );
-  if (!editor.hidden) editor.scrollIntoView({ behavior: 'smooth' });
-};
+});
 $('save').onclick = () => {
   try {
     const values = validate(JSON.parse($('json').value));
@@ -358,7 +348,7 @@ $('save').onclick = () => {
     window.GoldFreshness?.success('gold', data);
     localStorage.setItem('or-prices', JSON.stringify(data));
     $('error').textContent = '';
-    $('editor').hidden = true;
+    $('editor').open = false;
     draw();
   } catch (e) {
     $('error').textContent = e.message;
@@ -395,7 +385,6 @@ async function refreshPrices() {
       'Mise à jour impossible : ' +
       e.message +
       '. Les derniers cours enregistrés restent affichés.';
-  } finally {
   }
 }
 $('refresh').onclick = refreshAll;
@@ -557,8 +546,7 @@ window.addEventListener('client-reset', () => {
 setInterval(() => {
   if (
     !document.hidden &&
-    $('spot-chart-details').open &&
-    document.body.dataset.mobileTab !== 'estimation' &&
+    document.body.dataset.view === 'cours' &&
     !historyBusy
   ) {
     historyBusy = true;

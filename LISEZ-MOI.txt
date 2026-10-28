@@ -1,12 +1,12 @@
-MON COURS DE L'OR
+GOLDAPP
 
-Voir README.md (sources des cours, calculs, déploiement) et CHANGELOG.md.
+Voir README.md (onglets, sources des cours, mise en ligne) et CHANGELOG.md.
 
-SUR WINDOWS :
-1. Décompressez le ZIP.
-2. Python 3 doit être installé sur votre PC (python.org).
-3. Double-cliquez sur DEMARRER-WINDOWS.bat.
-4. Dans Chrome ou Edge, ouvrez http://localhost:8080
-5. Cliquez sur Actualiser.
+MISE EN LIGNE : déposer le CONTENU de ce dossier à la racine du dépôt GitHub ;
+Render redéploie tout seul. Sur l'iPhone, rouvrir l'application : un bandeau
+« Mettre à jour » apparaît.
+
+ICÔNE : si l'iPhone garde l'ancienne icône, supprimer l'application de l'écran
+d'accueil puis Safari > Partager > Sur l'écran d'accueil.
 
 Les cours ne sont pas une garantie de prix : vérifiez-les avant toute transaction.

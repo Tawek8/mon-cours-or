@@ -1,5 +1,18 @@
 # Historique
 
+## 28/10/2026 — rangement façon GoldGestion
+
+- Deux onglets, Cours et Rachat : les calculs ne sont plus mélangés aux cours.
+- Cours : pièces et lingots affichés ensemble en cartes, avec le prix de rachat sous
+  chaque produit ; graphique de l’or toujours visible.
+- Icône, couleurs et en-tête de GoldGestion.
+- iPhone uniquement : la mise en page PC (qui masquait les cours) est supprimée, ainsi
+  que DEMARRER-WINDOWS.bat.
+- Six feuilles de style empilées remplacées par style.css et estimation.css.
+- Notes de version rangées dans docs/historique/ ; fichiers inutilisés retirés
+  (bullionvault-chart.html, print-preview.html, print-view.js, print-document.css,
+  cotations.exemple.json).
+
 ## 24/10/2026 — samedi
 
 - Kitco : quand le marché est fermé (week-end, pause quotidienne), le cours de

@@ -2,8 +2,9 @@
   'use strict';
   const section = document.createElement('section');
   section.id = 'silver-section';
+  section.className = 'section';
   section.innerHTML =
-    '<h2>Cours de l’argent</h2><p class="small">Cotations des pièces et lingots · €/produit</p><div id="silver-quotes"></div><p id="silver-status" class="small" aria-live="polite">Chargement des cours d’argent…</p><a class="small" href="https://www.gold.fr/cours-argent-prix-de-l-argent/" target="_blank" rel="noopener">Source : Gold.fr</a>';
+    '<h2>Cours de l’Argent</h2><p class="small">Cotations des pièces et lingots · €/produit</p><div id="silver-quotes"></div><p id="silver-status" class="small" aria-live="polite">Chargement des cours d’argent…</p><a class="small" href="https://www.gold.fr/cours-argent-prix-de-l-argent/" target="_blank" rel="noopener">Source : Gold.fr</a>';
   const anchor = document.getElementById('cpor-section');
   anchor.after(section);
   const root = section.querySelector('#silver-quotes'),

@@ -1,44 +1,45 @@
-# Mon Cours de l’Or
+# GoldApp
 
-Version web et iPhone de la Proposition de rachat de GoldApp, hébergée sur Render
-(`render.yaml`). Usage personnel : aucune donnée client n’est stockée sur le serveur.
+Application iPhone (ajoutée à l’écran d’accueil depuis Safari) pour suivre les cours de
+l’or et répondre en déplacement à « combien vous rachetez ce produit ? ». Hébergée sur
+Render (`render.yaml`) à partir du dépôt GitHub. Aucune donnée client n’est stockée sur le
+serveur.
 
-## Démarrage
+## Deux onglets
 
-- Render : déposer le contenu de ce dossier à la racine du dépôt GitHub ; Render lance
-  `python server.py` (aucun module supplémentaire).
-- Windows : double-cliquer sur `DEMARRER-WINDOWS.bat`, puis ouvrir http://localhost:8080.
+- **Cours** : or pur 1 kg et son graphique, pièces et lingots CPoR, argent. Sous chaque
+  pièce ou lingot d’or : le prix de **rachat** (prix net client : FC du calcul d’achat,
+  8 % par défaut, puis TMP 11,5 %). Toucher un produit ouvre le détail (frais, TMP/TPV).
+- **Rachat** : estimation client multi-lignes et impression, achat bijoux (9K à 22K),
+  prix rapide d’une pièce d’or.
 
-## Sources des cours (identiques à GoldApp)
+Mise en page et icône reprises de GoldGestion. L’application est pensée pour l’iPhone
+uniquement.
+
+## Sources des cours
 
 | Cours | Source | Secours |
 |---|---|---|
-| Or pur · 1 kg (valeur intrinsèque, fonte, bijoux) | Kitco, cours Bid en €/kg | BullionVault (marché ouvert 24 h/24), signalé à l’écran |
-| Pièces et lingots boursables | Cotations CPoR (Loomis) | derniers cours conservés |
+| Or pur · 1 kg | Kitco, cours Bid en €/kg | BullionVault, signalé à l’écran |
+| Pièces et lingots | Cotations CPoR (Loomis) | derniers cours conservés |
 | Argent C3E achat (bijoux argent) | Cookson-Clal | derniers cours conservés |
-| Pièces d’argent | Gold.fr (comme GoldApp) | derniers cours conservés |
+| Pièces d’argent | Gold.fr | derniers cours conservés |
 | Graphique | BullionVault | dernier historique conservé |
 
-Le serveur garde chaque cours quelques secondes en cache (30 s pour l’or et le CPoR,
-60 s pour l’argent) pour ne pas solliciter les sites à chaque actualisation.
+## Fichiers
 
-## Calculs
+- `index.html`, `style.css` : page et mise en page (couleurs GoldGestion).
+- `app.js` (cours, prix d’achat), `gold-chart.js`, `silver.js`, `c3e.js`, `freshness.js`.
+- Calculs repris de GoldApp : `estimation.js` + `estimation.css`, `alignment.js`,
+  `fiscal.js`, `mobile.js` (onglets, achat bijoux), `quick-prices.js`, `print.js`.
+- Serveur : `server.py` et `kitco.py`, `cpor.py`, `bullionvault*.py`, `market.py`.
+- `icon.svg`, `icon.png`, `favicon.ico` : icône de GoldGestion.
+- `docs/historique/` : anciennes notes de version (non publiées).
 
-Les fichiers de calcul (`estimation.js`, `alignment.js`, `fiscal.js`) sont ceux de
-GoldApp : détail FC Agence / % GT, décotes argent, or dentaire, lingots personnalisés,
-alignement bijoux. Pour une mise à jour, recopier ces fichiers depuis
-`Programme/goldapp/` de GoldApp, puis changer `VERSION` dans `sw.js` et le `?v=` de
-`index.html`.
+## Nouvelle version
 
-## Fichiers publiés
-
-Le serveur ne publie que les fichiers de l’application (`.html`, `.js`, `.css`,
-images). Le code serveur, `render.yaml` et les notes de `docs/` ne sont pas accessibles
-depuis Internet.
+Changer `VERSION` dans `sw.js` et les `?v=` de `index.html` (même valeur).
 
 ## Tests
 
-    python -m unittest tests.test_server
-    for t in tests/js/*.js; do node "$t"; done
-
-Les anciennes notes de version sont rangées dans `docs/historique/`.
+    python -m unittest discover -s tests -t .

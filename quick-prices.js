@@ -1,15 +1,8 @@
 (() => {
   'use strict';
-  const main = document.querySelector('main'),
-    hero = main.querySelector('.hero'),
-    estimate = document.getElementById('estimation-client');
-  const marker = document.createComment('Emplacement mobile du prix 18K');
-  hero.before(marker);
-  const group = document.createElement('div');
-  group.id = 'pc-quick-prices';
-  estimate.after(group);
+  const group = document.getElementById('view-rachat');
   const panel = document.createElement('section');
-  panel.className = 'quick-coin-card';
+  panel.className = 'section quick-coin-card';
   panel.innerHTML =
     '<div class="eyebrow">PIÈCES D’OR</div><div class="quick-coin-controls"><label class="quick-coin-label" for="quick-coin-select">Pièce<select id="quick-coin-select"></select></label><label class="quick-fees-label" for="quick-coin-fees">FC (%)<input id="quick-coin-fees" type="text" inputmode="decimal" value="8" aria-describedby="quick-coin-detail"></label></div><div class="quick-coin-result"><div class="quick-coin-caption">Prix net client / pièce</div><div id="quick-coin-net" class="price gold" aria-live="polite">—</div></div><div id="quick-coin-detail" class="small" aria-live="polite"></div>';
   group.append(panel);
@@ -57,20 +50,13 @@
           eur(comparison.tax) +
           ')';
   }
-  const pc = window.matchMedia('(min-width: 900px)');
-  function place() {
-    if (pc.matches) group.insertBefore(hero, panel);
-    else marker.after(hero);
-  }
   fees.addEventListener('input', update);
   fees.addEventListener('focus', () => fees.select());
   window.addEventListener('client-reset', () => {
     fees.value = '8';
     update();
   });
-  pc.addEventListener('change', place);
   select.addEventListener('change', update);
   window.addEventListener('prices-updated', update);
-  place();
   update();
 })();

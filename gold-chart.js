@@ -26,7 +26,7 @@
     );
     document
       .querySelectorAll('[data-period]')
-      .forEach(b => b.classList.toggle('active', Number(b.dataset.period) === period));
+      .forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.period) === period)));
     if (values.length < 2) {
       note.textContent = 'Historique BullionVault insuffisant pour cette période.';
       return;

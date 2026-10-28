@@ -1,1 +1,14 @@
-{"name":"GoldApp","short_name":"GoldApp","start_url":"./","display":"standalone","background_color":"#10171d","theme_color":"#10171d","lang":"fr","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "GoldApp",
+  "short_name": "GoldApp",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#121d25",
+  "theme_color": "#121d25",
+  "lang": "fr",
+  "icons": [
+    { "src": "icon.png", "sizes": "256x256", "type": "image/png" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

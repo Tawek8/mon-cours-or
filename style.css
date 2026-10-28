@@ -1,0 +1,557 @@
+/* GoldApp — mise en page iPhone, couleurs et composants de GoldGestion. */
+:root {
+  color-scheme: dark;
+  --bg: #121d25;
+  --surface: #1b2a34;
+  --raised: #20313b;
+  --line: #344853;
+  --field: #101c24;
+  --text: #edf2f5;
+  --muted: #b5c7d3;
+  --gold: #e9bf75;
+  --silver: #d0dae5;
+  --ink: #18242b;
+  --up: #8fdfb0;
+  --down: #ff9ca4;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    15px/1.45 -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    system-ui,
+    sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+main {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + 14px) 16px calc(env(safe-area-inset-bottom) + 40px);
+}
+[hidden] {
+  display: none !important;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1 {
+  font-size: 22px;
+  font-weight: 600;
+}
+h2 {
+  font-size: 17px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+a {
+  color: var(--gold);
+}
+.small,
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.eyebrow {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+.gold {
+  color: var(--gold);
+}
+
+/* Champs et boutons */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+input,
+select,
+textarea {
+  background: var(--field);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 0;
+  min-height: 44px;
+  font-size: 16px;
+}
+textarea {
+  width: 100%;
+  min-height: 115px;
+  margin: 10px 0;
+  font-size: 13px;
+}
+button {
+  cursor: pointer;
+  background: #233640;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-height: 44px;
+  font-weight: 600;
+  font-size: 14px;
+}
+button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+button.primary,
+#est-add,
+#client-print-dialog button[type='submit'],
+#est-print {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+}
+button.secondary,
+#est-reset {
+  background: #344b59;
+  border-color: #6b8594;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-size: 13px;
+}
+
+/* En-tête (comme la barre du haut de GoldGestion) */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand img {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  display: block;
+}
+#refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+#refresh:disabled .refresh-icon {
+  display: none;
+}
+.refresh-spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(233, 191, 117, 0.25);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .refresh-spinner {
+    animation-duration: 1.6s;
+  }
+}
+.fresh-text {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: pre-line;
+  padding: 10px 0 12px;
+}
+
+/* Navigation Cours / Rachat */
+.views {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px;
+  margin-bottom: 14px;
+  background: var(--field);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.views button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+}
+.views button[aria-pressed='true'] {
+  background: var(--gold);
+  color: var(--ink);
+}
+.views svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Cadres */
+.section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 0 0 14px;
+  min-width: 0;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+.row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.name {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+}
+.value {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.inputs label {
+  flex: 1;
+  font-size: 13px;
+  color: var(--muted);
+}
+.inputs input {
+  width: 110px;
+  text-align: center;
+}
+
+/* Cours : or spot et graphique */
+#spot-section {
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(233, 191, 117, 0.08), transparent 60%),
+    var(--surface);
+}
+.spot-price {
+  font-size: 32px;
+  font-weight: 650;
+  letter-spacing: -0.6px;
+  font-variant-numeric: tabular-nums;
+  margin: 2px 0 4px;
+}
+.periods {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  padding-top: 14px;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.periods button {
+  min-height: 38px;
+  padding: 6px;
+  font-size: 13px;
+  background: var(--field);
+  color: var(--muted);
+}
+.periods button[aria-pressed='true'] {
+  background: #344b59;
+  border-color: #6b8594;
+  color: var(--gold);
+}
+#spot-chart {
+  display: block;
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+  overflow: visible;
+  touch-action: pan-y;
+}
+#chart-note {
+  min-height: 34px;
+  margin-top: 4px;
+}
+
+/* Cours : listes de produits (cartes de GoldGestion) */
+.list-heading {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  margin: 16px 0 8px;
+}
+.quote {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  margin: 0 0 8px;
+  text-align: left;
+  background: #1c2d37;
+  border: 1px solid #344b58;
+  border-radius: 10px;
+  color: var(--text);
+  font-weight: 400;
+}
+.quote:last-child {
+  margin-bottom: 0;
+}
+.quote:disabled {
+  opacity: 0.6;
+}
+.quote .quote-img {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  object-fit: contain;
+  background: #12212a;
+  border-radius: 8px;
+  padding: 3px;
+}
+.quote .name {
+  font-weight: 600;
+}
+.quote .value {
+  color: var(--gold);
+  font-size: 16px;
+}
+.quote .arrow {
+  color: var(--gold);
+  font-size: 20px;
+}
+#silver-section .row .value {
+  color: var(--silver);
+  font-size: 15px;
+}
+.status {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0 2px 14px;
+}
+.manual summary {
+  font-size: 14px;
+}
+.manual .small {
+  margin-top: 10px;
+}
+#error {
+  color: #f1b5a7;
+}
+.footnote {
+  text-align: center;
+}
+
+/* Rachat : bijoux et pièces d’or */
+.hero .price,
+.quick-coin-card .price {
+  font-size: 30px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  margin: 8px 0 0;
+  overflow-wrap: anywhere;
+}
+.gold-quick-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.price18-fields,
+.quick-coin-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 14px 0 10px;
+}
+.quick-coin-controls {
+  grid-template-columns: minmax(0, 1fr) 90px;
+}
+.price18-fields label,
+.quick-coin-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  min-width: 0;
+}
+.price18-fields input,
+.quick-coin-controls input,
+.quick-coin-controls select {
+  width: 100%;
+}
+#quick-coin-fees[aria-invalid='true'] {
+  border-color: #f2b88a;
+}
+.price18-info .row {
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+.price18-info details {
+  margin-top: 4px;
+}
+.quick-coin-result {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.quick-coin-caption {
+  font-size: 12px;
+  color: var(--muted);
+}
+#quick-coin-detail {
+  margin-top: 6px;
+}
+
+/* Prix d’achat d’un produit */
+.back {
+  margin-bottom: 18px;
+}
+.buy-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 10px;
+}
+.buy-heading .buy-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+.buy-heading h2 {
+  font-size: 20px;
+  margin: 0;
+}
+.buy-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 20px 0 14px;
+}
+.buy-result {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.buy-tax {
+  font-size: 14px;
+  color: var(--muted);
+}
+.tax-toggle {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.tax-fields {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+.tax-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 140px);
+  align-items: center;
+  gap: 10px;
+}
+.tax-field label,
+.tax-rate-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+.tax-field input {
+  width: 100%;
+  text-align: center;
+}
+.tax-field input[type='date'] {
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: left;
+  font-size: 14px;
+  padding: 10px 6px;
+}
+#tax-date-status {
+  grid-column: 1 / -1;
+  color: var(--muted);
+}
+.tax-compare {
+  border-top: 1px solid var(--line);
+  margin-top: 6px;
+  padding-top: 6px;
+}
+.tax-best {
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 700;
+  margin: 12px 0 4px;
+}
+.tax-note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.quote .buyback {
+  display: block;
+  margin-top: 2px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+}
