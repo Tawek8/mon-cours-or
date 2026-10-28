@@ -1,0 +1,35 @@
+WIDGET GOLDAPP (écran d'accueil de l'iPhone)
+
+Cours de l'or ou de l'argent avec sa courbe, posé sur l'écran d'accueil.
+Toucher le widget ouvre GoldApp.
+
+1. LA CLÉ DU WIDGET (sur render.com)
+   Service mon-cours-or > Environment > + Add Environment Variable :
+     Key   : GOLDAPP_WIDGET_KEY
+     Value : une longue suite de lettres et de chiffres au hasard (30 caractères ou plus),
+             différente du mot de passe de l'application.
+   Save and deploy. Cette clé ne permet que de lire les cours.
+
+2. LE SCRIPT (sur l'iPhone)
+   - Installer l'app gratuite « Scriptable » depuis l'App Store.
+   - Sur GitHub, ouvrir widget/GoldApp-widget.js, bouton « Copy raw file ».
+   - Dans Scriptable : « + » en haut à droite, coller, puis renommer le script « GoldApp ».
+   - En haut du script, remplacer :
+       ADRESSE : l'adresse de GoldApp (celle ouverte dans Safari, sans « / » à la fin) ;
+       COLLE-ICI-LA-CLE-DU-WIDGET : la clé de l'étape 1 (garder les guillemets).
+   - Appuyer sur ▶ : un aperçu du widget doit s'afficher.
+
+3. LE WIDGET (écran d'accueil)
+   - Appui long sur l'écran d'accueil > « Modifier » > « Ajouter un widget » > Scriptable.
+   - Choisir la taille (petit, moyen ou grand), « Ajouter ».
+   - Appui long sur le widget > « Modifier le widget » :
+       Script    : GoldApp
+       When Interacting : Open URL (le widget ouvre GoldApp)
+       Parameter : vide (or, 1 jour), ou par exemple « argent », « or 7 », « argent 30 »,
+                   « or 365 ». Le grand widget montre l'or ET l'argent.
+
+BON À SAVOIR
+- L'iPhone décide quand rafraîchir le widget : en général toutes les 15 à 30 minutes.
+- Si GoldApp ne répond pas (serveur endormi, pas de réseau), le widget garde le dernier
+  relevé et affiche ⚠ devant l'heure.
+- Changer la clé sur Render oblige à la changer aussi dans le script.

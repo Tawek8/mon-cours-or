@@ -1,5 +1,11 @@
 # Historique
 
+## 28/10/2026 — widget iPhone
+
+- Widget d’écran d’accueil (app Scriptable) : cours de l’or ou de l’argent avec sa
+  courbe et sa variation ; trois tailles, période au choix. Voir widget/LISEZ-MOI-WIDGET.txt.
+- /api/widget : lecture seule des cours, ouverte par une clé à part (GOLDAPP_WIDGET_KEY).
+
 ## 28/10/2026 — tirer pour actualiser
 
 - Le bouton « Actualiser » de l’en-tête est remplacé par le geste : tirer l’écran vers le

@@ -25,6 +25,12 @@ L’iPhone le retient 180 jours ; « Verrouiller l’application », en bas de l
 le redemande. Changer le mot de passe déconnecte tous les appareils. Sans cette variable,
 l’application reste ouverte à tous.
 
+## Widget iPhone
+
+Cours et courbe sur l’écran d’accueil grâce à l’app Scriptable : script
+`widget/GoldApp-widget.js`, mode d’emploi `widget/LISEZ-MOI-WIDGET.txt`. Le widget lit
+`/api/widget` avec sa propre clé (`GOLDAPP_WIDGET_KEY` sur Render), sans le mot de passe.
+
 ## Sources des cours
 
 | Cours | Source | Secours |

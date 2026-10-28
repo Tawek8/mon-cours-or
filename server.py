@@ -28,6 +28,9 @@ PRIVATE = {"server.py"}
 # Sans elle, l’application reste ouverte comme avant.
 PASSWORD = os.environ.get("GOLDAPP_PASSWORD", "")
 SESSION_DAYS = 180
+# Clé du widget iPhone (Scriptable) : lecture seule des cours, sans le mot de passe.
+# Variable GOLDAPP_WIDGET_KEY sur Render ; sans elle, /api/widget est fermé.
+WIDGET_KEY = os.environ.get("GOLDAPP_WIDGET_KEY", "")
 # Fichiers lisibles sans mot de passe, pour l’icône de l’écran d’accueil.
 OPEN_FILES = {"/manifest.webmanifest", "/icon.svg", "/icon.png", "/favicon.ico"}
 LOGIN_PAGE = """<!doctype html>
@@ -300,6 +303,40 @@ def spot_live():
     return cached("spot", 10, load)
 
 
+def thin(points, limit=120):
+    """Allège une courbe pour le widget : au plus `limit` points, le dernier conservé."""
+    if len(points) <= limit:
+        return points
+    step = len(points) / limit
+    kept = [points[int(i * step)] for i in range(limit - 1)]
+    return kept + [points[-1]]
+
+
+def widget_live(period="1"):
+    """Cours et courbes de l’or et de l’argent, en un seul appel, pour le widget."""
+    if period not in ("1", "7", "30", "365"):
+        raise ValueError("Période non disponible")
+    result = dict(period=period, updatedAt=datetime.now(timezone.utc).isoformat())
+    for metal in ("gold", "silver"):
+        try:
+            history = history_live(period, metal)
+            points = [[p["date"], round(p["price"], 2)] for p in history["points"]]
+            result[metal] = dict(points=thin(points), price=points[-1][1], source="BullionVault")
+        except Exception as error:
+            result[metal] = dict(error=str(error)[:160])
+    try:
+        spot = spot_live()
+        result["gold"].update(
+            price=spot["price"],
+            source=spot["source"],
+            quotedAt=spot.get("updatedAt"),
+            marketClosed=bool(spot.get("marketClosed")),
+        )
+    except Exception:
+        pass
+    return result
+
+
 def history_live(period="1", metal="gold"):
     from bullionvault_history import fetch_history
 
@@ -352,6 +389,7 @@ ROUTES = {
     "/api/c3e": lambda query: cached("c3e", 60, c3e_live),
     "/api/silver": lambda query: cached("silver", 60, silver_live),
     "/api/spot": lambda query: spot_live(),
+    "/api/widget": lambda query: widget_live(query.get("period", ["1"])[0]),
     "/api/spot-history": lambda query: history_live(
         query.get("period", ["1"])[0], query.get("metal", ["gold"])[0]
     ),
@@ -412,8 +450,24 @@ class Handler(SimpleHTTPRequestHandler):
             + "; HttpOnly; SameSite=Lax" + secure,
         )
 
+    def widget_allowed(self):
+        given = self.headers.get("X-Widget-Key", "")
+        return bool(WIDGET_KEY) and hmac.compare_digest(given.encode(), WIDGET_KEY.encode())
+
     def guard(self, path):
         """Vrai si la requête peut continuer ; sinon la page de connexion est envoyée."""
+        if path == "/api/widget":
+            # Le widget n’a que sa clé : ni la session, ni le mot de passe ne l’ouvrent.
+            if self.widget_allowed():
+                return True
+            time.sleep(1)
+            payload = b'{"error": "Cle du widget absente ou incorrecte"}'
+            self.send_response(403)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            self.wfile.write(payload)
+            return False
         if self.authorized() or path in OPEN_FILES:
             return True
         if path.startswith("/api/"):
