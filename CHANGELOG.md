@@ -1,5 +1,10 @@
 # Historique
 
+## 29/10/2026 — widget plein
+
+- La courbe du widget remplit tout l’espace libre : taille réelle du widget selon le modèle
+  d’iPhone (du SE au Pro Max), au lieu de dimensions fixes.
+
 ## 28/10/2026 — widget iPhone
 
 - Widget d’écran d’accueil (app Scriptable) : cours de l’or ou de l’argent avec sa

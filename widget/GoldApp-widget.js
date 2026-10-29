@@ -129,6 +129,40 @@ function curve(points, width, height, hex, withLabels) {
   return dc.getImage();
 }
 
+// ---- Taille réelle du widget selon l’iPhone (points) : la courbe remplit l’espace ----
+// [largeur écran, hauteur écran, petit, largeur moyen/grand, hauteur grand]
+const WIDGET_SIZES = [
+  [440, 956, 170, 364, 382],
+  [430, 932, 170, 364, 382],
+  [428, 926, 170, 364, 382],
+  [414, 896, 169, 360, 379],
+  [414, 736, 159, 348, 357],
+  [402, 874, 162, 345, 363],
+  [393, 852, 158, 338, 354],
+  [390, 844, 158, 338, 354],
+  [375, 812, 155, 329, 345],
+  [360, 780, 155, 329, 345],
+  [375, 667, 148, 321, 324],
+  [320, 568, 141, 292, 311],
+];
+function widgetSize(family) {
+  const screen = Device.screenSize(),
+    w = Math.round(Math.min(screen.width, screen.height)),
+    h = Math.round(Math.max(screen.width, screen.height)),
+    [, , small, wide, tall] = WIDGET_SIZES.find(r => r[0] === w && r[1] === h) || [
+      0, 0, 158, 338, 354,
+    ];
+  if (family === 'small') return new Size(small, small);
+  if (family === 'large') return new Size(wide, tall);
+  return new Size(wide, small);
+}
+// Ajoute une courbe affichée exactement à la taille dessinée.
+function addCurve(stack, points, width, height, hex, withLabels) {
+  const image = stack.addImage(curve(points, width, height, hex, withLabels));
+  image.imageSize = new Size(width, height);
+  return image;
+}
+
 // ---- Widget ----
 function text(stack, value, font, color, scale = 0.6) {
   const t = stack.addText(value);
@@ -212,23 +246,27 @@ async function build() {
   }
   const main = data[METAL],
     hex = METAL === 'silver' ? C.silver : C.gold,
-    hasCurve = m => m && !m.error && m.points?.length > 1;
+    hasCurve = m => m && !m.error && m.points?.length > 1,
+    size = widgetSize(FAMILY),
+    // Espace utile, une fois retirées les marges, le texte et la ligne du bas.
+    inner = { w: size.width - 28, h: size.height - 22 },
+    FOOT = 13;
 
   if (FAMILY === 'small') {
     block(widget, main, METAL, true);
     widget.addSpacer(4);
-    if (hasCurve(main)) widget.addImage(curve(main.points, 112, 40, hex, false));
+    if (hasCurve(main))
+      addCurve(widget, main.points, inner.w, Math.max(30, inner.h - 52 - 8 - FOOT), hex, false);
     widget.addSpacer();
     footer(widget, data, stale);
   } else if (FAMILY === 'large') {
-    for (const metal of ['gold', 'silver']) {
+    const curveH = Math.max(50, Math.floor((inner.h - FOOT - 2 * 60 - 2 * 4 - 10) / 2));
+    for (const [i, metal] of ['gold', 'silver'].entries()) {
       block(widget, data[metal], metal, false);
       widget.addSpacer(4);
       if (hasCurve(data[metal]))
-        widget.addImage(
-          curve(data[metal].points, 284, 62, metal === 'silver' ? C.silver : C.gold, true)
-        );
-      widget.addSpacer(8);
+        addCurve(widget, data[metal].points, inner.w, curveH, metal === 'silver' ? C.silver : C.gold, true);
+      if (!i) widget.addSpacer(10);
     }
     widget.addSpacer();
     footer(widget, data, stale);
@@ -241,10 +279,8 @@ async function build() {
     left.size = new Size(118, 0);
     block(left, main, METAL, false);
     row.addSpacer(8);
-    if (hasCurve(main)) {
-      const image = row.addImage(curve(main.points, 160, 92, hex, true));
-      image.imageSize = new Size(160, 92);
-    }
+    if (hasCurve(main))
+      addCurve(row, main.points, inner.w - 118 - 8, inner.h - FOOT - 4, hex, true);
     widget.addSpacer();
     footer(widget, data, stale);
   }
