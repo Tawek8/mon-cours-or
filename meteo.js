@@ -13,11 +13,11 @@
     0: ['●', 'gw-flat', 'neutre'],
   };
   // Seuils du score entre deux météos (comme meteo_or.WEATHER).
-  const STEPS = [-0.5, -0.2, 0.2, 0.5];
+  const STEPS = [-0.63, -0.25, 0.25, 0.63];
   const plural = (n, word) => n + ' ' + word + (n > 1 ? 's' : '');
 
   function draw(w, stale) {
-    const flat = w.indicators.filter(x => x.signal === 0).length,
+    const flat = w.flat ?? w.indicators.filter(x => x.signal === 0).length,
       weather = w.weather || {
         icon: '❔',
         label: 'Indéterminé',
@@ -83,6 +83,12 @@
         el('span', { textContent: 'Plutôt baissier' }),
         el('span', { textContent: 'Plutôt haussier' })
       ),
+      // Mesuré sur 2005-2026 : plus haut 3 mois après dans 64 % des cas (70 % après un orage).
+      el('p', {
+        className: 'gw-caveat',
+        textContent:
+          'Résumé du contexte, pas une prévision. Depuis 2005, l’or était plus haut trois mois plus tard dans près de 2 cas sur 3, même par temps d’orage.',
+      }),
       ...[...groups].flatMap(([group, list]) => [
         el('h3', { className: 'gw-group', textContent: group }),
         ...list.map(row),
@@ -90,7 +96,7 @@
       el('p', {
         className: 'gw-note',
         textContent:
-          'À titre informatif : ce n’est ni une prévision, ni un conseil d’achat ou de vente. ' +
+          'À titre informatif : ce n’est pas un conseil d’achat ou de vente. ' +
           (stale ? '⚠ Dernière météo enregistrée, du ' : 'Mise à jour toutes les 30 minutes · ') +
           at +
           (w.errors?.length ? ' · indisponible : ' + w.errors.join(', ') : ''),

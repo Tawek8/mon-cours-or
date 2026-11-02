@@ -11,8 +11,8 @@ serveur.
   et son graphique, pièces et lingots CPoR, argent. Sous chaque
   pièce ou lingot d’or : le prix de **rachat** (prix net client : FC du calcul d’achat,
   8 % par défaut, puis TMP 11,5 %). Toucher un produit ouvre le détail (frais, TMP/TPV).
-- **Météo** : météo de l’or, résumé des indices de tendance (à titre informatif), comme
-  dans GoldGestion. Sources : BullionVault et Yahoo Finance (dollar, euro, taux, VIX).
+- **Météo** : météo de l’or, résumé des indices de tendance (pas une prévision, voir
+  CHANGELOG). Dollar et euro y sont de simples repères, contrairement à GoldGestion. Sources : BullionVault et Yahoo Finance (dollar, euro, taux, VIX).
 - **Rachat** : estimation client multi-lignes et impression, achat bijoux (9K à 22K),
   prix rapide d’une pièce d’or.
 

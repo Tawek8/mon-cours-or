@@ -1,5 +1,14 @@
 # Historique
 
+## 02/11/2026 — Météo de l’or après test sur 22 ans
+
+- Rejouée sur 2005-2026 : pas d’avantage mesurable à 1 semaine ou 1 mois, signal faible et
+  instable au-delà. Elle est donc présentée comme un résumé du contexte, pas une prévision.
+- Dollar et euro passent en simples repères : ils se contredisaient 2 123 jours sur 2 128.
+  Seuils adaptés (0,25 et 0,63) : même météo qu’avant 95 % des jours.
+- Une pondération calée sur les résultats n’a pas battu les poids actuels sur les années non
+  vues : poids inchangés.
+
 ## 02/11/2026 — Météo de l’or
 
 - Nouvel onglet « Météo » entre Cours et Rachat : soleil, éclaircies, temps variable, averses

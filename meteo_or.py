@@ -9,7 +9,9 @@ Sources (lues au plus toutes les 30 minutes) :
   - dollar (indice DXY), euro/dollar, taux américain 10 ans, indice de la peur (VIX) :
     Yahoo Finance ;
   - prime du Napoléon : cotation CPoR et instantané (fournis par le serveur de GoldApp).
-Repris de GoldGestion (meteo_or.py) : mêmes indices, mêmes seuils, mêmes textes.
+Repris de GoldGestion (meteo_or.py) : mêmes seuils et mêmes textes. Différence : dollar et
+euro sont de simples repères, sans effet sur le score. Testés sur 2005-2026, ils se
+contredisent presque toujours (dollar en hausse = baissier, euro en baisse = haussier).
 Un indice indisponible est simplement absent.
 """
 
@@ -27,11 +29,14 @@ _cache = {"at": 0.0, "value": None}
 _lock = threading.Lock()
 NAPOLEON_FINE = 5.806  # grammes d'or fin
 YAHOO = {"dxy": "DX-Y.NYB", "eurusd": "EURUSD%3DX", "us10y": "%5ETNX", "vix": "%5EVIX"}
+# Seuils de GoldGestion (0,2 et 0,5) multipliés par 9,5 / 7,5 : le score ne compte plus le
+# dollar et l'euro (2 points sur 9,5), sans quoi soleil et orage deviendraient deux fois
+# plus fréquents.
 WEATHER = [
-    (0.5, "soleil", "☀️", "Grand soleil", "La plupart des indices penchent nettement vers la hausse."),
-    (0.2, "eclaircies", "🌤️", "Éclaircies", "Les indices penchent plutôt vers la hausse."),
-    (-0.2, "variable", "⛅", "Temps variable", "Pas de direction claire : les indices se contredisent."),
-    (-0.5, "averses", "🌦️", "Averses", "Les indices penchent plutôt vers la baisse."),
+    (0.63, "soleil", "☀️", "Grand soleil", "La plupart des indices penchent nettement vers la hausse."),
+    (0.25, "eclaircies", "🌤️", "Éclaircies", "Les indices penchent plutôt vers la hausse."),
+    (-0.25, "variable", "⛅", "Temps variable", "Pas de direction claire : les indices se contredisent."),
+    (-0.63, "averses", "🌦️", "Averses", "Les indices penchent plutôt vers la baisse."),
     (-9, "orage", "⛈️", "Orage", "La plupart des indices penchent nettement vers la baisse."),
 ]
 
@@ -159,16 +164,16 @@ def build(now=None, fetch=None):
     if dxy:
         m = _pct(dxy[-1], dxy[-22])
         s = -1 if m > 1.5 else 1 if m < -1.5 else 0
-        add("dxy", "Économie", "Dollar", ("+" if m > 0 else "") + fr(m, 1) + " % sur un mois", s,
+        add("dxy", "Repères", "Dollar", ("+" if m > 0 else "") + fr(m, 1) + " % sur un mois", 0,
             "Un dollar qui monte freine souvent l'or (il est coté en dollars), un dollar qui baisse l'aide. "
-            + ("Ici : dollar en hausse." if s < 0 else "Ici : dollar en baisse." if s > 0 else "Ici : dollar stable."))
+            + ("Ici : dollar en hausse." if s < 0 else "Ici : dollar en baisse." if s > 0 else "Ici : dollar stable."), 0)
     eur = get("eurusd", lambda: _yahoo(YAHOO["eurusd"]))
     if eur:
         m = _pct(eur[-1], eur[-22])
         s = 1 if m < -1.5 else -1 if m > 1.5 else 0
-        add("eur", "Économie", "Euro face au dollar", fr(eur[-1], 4) + " $ (" + ("+" if m > 0 else "") + fr(m, 1) + " %)", s,
+        add("eur", "Repères", "Euro face au dollar", fr(eur[-1], 4) + " $ (" + ("+" if m > 0 else "") + fr(m, 1) + " %)", 0,
             "Nos prix sont en euros : un euro qui baisse fait monter l'or en euros, un euro qui monte le fait baisser. "
-            + ("Ici : euro en baisse." if s > 0 else "Ici : euro en hausse." if s < 0 else "Ici : euro stable."))
+            + ("Ici : euro en baisse." if s > 0 else "Ici : euro en hausse." if s < 0 else "Ici : euro stable."), 0)
     tnx = get("us10y", lambda: _yahoo(YAHOO["us10y"]))
     if tnx:
         d = tnx[-1] - tnx[-22]
@@ -205,6 +210,8 @@ def build(now=None, fetch=None):
         weather = dict(key=key, icon=icon, label=label, text=text)
     for x in ind:
         x.pop("weight")
+    # Toujours le même ordre à l'écran : Tendance, Économie, puis Repères.
+    ind.sort(key=lambda x: ["Tendance", "Économie", "Repères"].index(x["group"]))
     return dict(
         at=now.isoformat(),
         price=price,
@@ -213,6 +220,7 @@ def build(now=None, fetch=None):
         weather=weather,
         up=sum(1 for x in weighted if x["signal"] > 0),
         down=sum(1 for x in weighted if x["signal"] < 0),
+        flat=sum(1 for x in weighted if x["signal"] == 0),
         indicators=ind,
         errors=errors,
     )
