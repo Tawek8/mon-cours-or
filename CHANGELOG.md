@@ -1,5 +1,10 @@
 # Historique
 
+## 02/11/2026 — Frais d’achat par défaut
+
+- Or : 4 % sur le lingot 1 kg, 7,5 % sur les autres pièces et lingots (cours, détail, prix
+  rapide, estimation client). Un frais modifié dans le détail ne vaut que pour ce détail.
+
 ## 02/11/2026 — Météo de l’or après test sur 22 ans
 
 - Rejouée sur 2005-2026 : pas d’avantage mesurable à 1 semaine ou 1 mois, signal faible et

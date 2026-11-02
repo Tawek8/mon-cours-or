@@ -84,10 +84,10 @@
     return c && r > 0 && count > 0 ? cents((r * count * gtRate(l)) / 100) : null;
   }
   function defaultFees(l) {
-    if (l.product === 'cpor') return '8';
+    if (l.product === 'cpor') return '4';
     if (isDiverse(l)) return l.product === 'divers_argent' ? '34' : '12';
     const p = silverCoin(l);
-    return String(p ? p[3] : l.mode === 'fonte' ? 12 : 8);
+    return String(p ? p[3] : l.mode === 'fonte' ? 12 : '7,5');
   }
   const all = [...coins, ...bars];
   let seq = 0;
@@ -633,7 +633,7 @@
       gtax: null,
       mode: 'cpor',
       qty: '1',
-      fees: '8',
+      fees: '7,5',
       fiscal: 'TMP',
       cost: '',
       date: '',

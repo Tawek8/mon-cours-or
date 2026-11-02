@@ -67,8 +67,9 @@ let spotValue = null,
   spotPeriod = 1,
   spotMetal = localStorage.getItem('goldapp-chart-metal') === 'silver' ? 'silver' : 'gold',
   goldMeta = 'Chargement du cours spot…';
-const savedBuyDiscount = localStorage.getItem('or-buy-discount');
-if (savedBuyDiscount !== null) $('buy-discount').value = savedBuyDiscount;
+// Frais par défaut : 4 % sur le lingot 1 kg, 7,5 % sur le reste de l’or.
+const defaultBuyFee = id => (id === 'cpor' ? '4' : '7,5');
+localStorage.removeItem('or-buy-discount');
 function renderQuotes() {
   renderList($('cpor-coins'), coins, false);
   renderList($('cpor-bars'), bars, true);
@@ -100,7 +101,7 @@ function renderList(root, list, isBar) {
     value.className = 'value';
     value.textContent = available ? eur(price) : 'Indisponible';
     // Réponse immédiate à « combien vous le rachetez ? » : FC du calcul d’achat, puis TMP.
-    const buyback = available ? quickBuyback(price) : null;
+    const buyback = available ? quickBuyback(id, price) : null;
     if (buyback !== null) {
       const buy = document.createElement('small');
       buy.className = 'buyback';
@@ -118,9 +119,8 @@ function renderList(root, list, isBar) {
     root.append(button);
   }
 }
-function quickBuyback(price) {
-  const discount = parseNum($('buy-discount').value);
-  if (!Number.isFinite(discount) || discount < 0 || discount > 100) return null;
+function quickBuyback(id, price) {
+  const discount = parseNum(defaultBuyFee(id));
   return price * (1 - discount / 100) * (1 - 0.115);
 }
 function drawBuy() {
@@ -231,6 +231,7 @@ $('tax-toggle').addEventListener('toggle', () => {
 });
 function openBuy(id, name) {
   selected = { id, name };
+  $('buy-discount').value = defaultBuyFee(id);
   $('buy-name').textContent = name;
   let picture = document.querySelector('.buy-heading .buy-img');
   if (!picture) {
@@ -269,11 +270,7 @@ $('back').addEventListener('click', () => closeBuy());
 window.addEventListener('popstate', () => {
   if (selected) closeBuy(false);
 });
-$('buy-discount').addEventListener('input', () => {
-  localStorage.setItem('or-buy-discount', $('buy-discount').value);
-  renderQuotes();
-  drawBuy();
-});
+$('buy-discount').addEventListener('input', drawBuy);
 function draw() {
   const raw = $('mult').value,
     discount = parseNum(raw);

@@ -10,7 +10,7 @@ serveur.
 - **Cours** : recherche, favoris (appui long sur un produit), or pur 1 kg avec sa variation
   et son graphique, pièces et lingots CPoR, argent. Sous chaque
   pièce ou lingot d’or : le prix de **rachat** (prix net client : FC du calcul d’achat,
-  8 % par défaut, puis TMP 11,5 %). Toucher un produit ouvre le détail (frais, TMP/TPV).
+  7,5 % par défaut, 4 % sur le lingot 1 kg, puis TMP 11,5 %). Toucher un produit ouvre le détail (frais, TMP/TPV).
 - **Météo** : météo de l’or, résumé des indices de tendance (pas une prévision, voir
   CHANGELOG). Dollar et euro y sont de simples repères, comme dans GoldGestion. Sources : BullionVault et Yahoo Finance (dollar, euro, taux, VIX).
 - **Rachat** : estimation client multi-lignes et impression, achat bijoux (9K à 22K),
