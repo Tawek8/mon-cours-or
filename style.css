@@ -994,12 +994,3 @@ body::before {
   line-height: 1.5;
   color: var(--muted);
 }
-.gw-caveat {
-  margin-top: 12px;
-  padding: 9px 11px;
-  border-left: 3px solid var(--gold);
-  border-radius: 0 8px 8px 0;
-  background: #172630;
-  font-size: 13px;
-  line-height: 1.45;
-}

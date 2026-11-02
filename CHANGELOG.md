@@ -1,5 +1,10 @@
 # Historique
 
+## 02/11/2026 — Onglet Météo allégé
+
+- Retrait de l’encadré « Résumé du contexte, pas une prévision… », qui prenait trop de place
+  sur l’iPhone. La mention « à titre informatif » reste en bas de l’onglet.
+
 ## 02/11/2026 — Frais d’achat par défaut
 
 - Or : 4 % sur le lingot 1 kg, 7,5 % sur les autres pièces et lingots (cours, détail, prix

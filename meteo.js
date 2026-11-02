@@ -83,12 +83,6 @@
         el('span', { textContent: 'Plutôt baissier' }),
         el('span', { textContent: 'Plutôt haussier' })
       ),
-      // Mesuré sur 2005-2026 : plus haut 3 mois après dans 64 % des cas (70 % après un orage).
-      el('p', {
-        className: 'gw-caveat',
-        textContent:
-          'Résumé du contexte, pas une prévision. Depuis 2005, l’or était plus haut trois mois plus tard dans près de 2 cas sur 3, même par temps d’orage.',
-      }),
       ...[...groups].flatMap(([group, list]) => [
         el('h3', { className: 'gw-group', textContent: group }),
         ...list.map(row),
