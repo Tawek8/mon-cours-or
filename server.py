@@ -345,6 +345,18 @@ def history_live(period="1", metal="gold"):
     )
 
 
+def weather_live():
+    """Météo de l’or (gardée 30 min dans meteo_or), page réservée après le mot de passe."""
+    import meteo_or
+
+    def refs():
+        prices = live_prices()["prices"]
+        return {"instant": prices.get("instant"), "quotes": prices}
+
+    meteo_or.refs_loader = refs
+    return meteo_or.weather()
+
+
 def live_prices():
     """Valeur intrinsèque (Kitco / BullionVault) et cotations CPoR (Loomis)."""
 
@@ -389,6 +401,7 @@ ROUTES = {
     "/api/c3e": lambda query: cached("c3e", 60, c3e_live),
     "/api/silver": lambda query: cached("silver", 60, silver_live),
     "/api/spot": lambda query: spot_live(),
+    "/api/weather": lambda query: weather_live(),
     "/api/widget": lambda query: widget_live(query.get("period", ["1"])[0]),
     "/api/spot-history": lambda query: history_live(
         query.get("period", ["1"])[0], query.get("metal", ["gold"])[0]

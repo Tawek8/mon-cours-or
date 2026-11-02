@@ -12,9 +12,9 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon.png" />
     <title>GoldApp</title>
-    <link rel="stylesheet" href="style.css?v=20261028-tirer" />
-    <link rel="stylesheet" href="estimation.css?v=20261028-tirer" />
-    <link rel="stylesheet" href="print.css?v=20261028-tirer" />
+    <link rel="stylesheet" href="style.css?v=20261102-meteo" />
+    <link rel="stylesheet" href="estimation.css?v=20261102-meteo" />
+    <link rel="stylesheet" href="print.css?v=20261102-meteo" />
   </head>
   <body data-view="cours">
     <div id="pull-indicator" aria-hidden="true">
@@ -50,6 +50,12 @@
         <button type="button" data-view="cours" aria-pressed="true">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16M7 14l4-5 4 3 5-7" /></svg
           >Cours
+        </button>
+        <button type="button" data-view="meteo" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 3v2M3 8h2M4.5 4.5 6 6M13 8a5 5 0 0 0-9 3" />
+            <path d="M8 20h9a4 4 0 0 0 .6-8A6 6 0 0 0 6 13a3.5 3.5 0 0 0 2 7Z" /></svg
+          >Météo
         </button>
         <button type="button" data-view="rachat" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -137,6 +143,13 @@
         <p class="small footnote">
           Cours indicatifs. Vérifie les valeurs avant toute transaction.<br /><a href="logout">Verrouiller l’application</a>
         </p>
+      </div>
+
+      <!-- Météo de l’or : indices de tendance, à titre informatif (meteo.js). -->
+      <div id="view-meteo" class="view" hidden>
+        <section class="section gw" id="gold-weather" aria-label="Météo de l’or">
+          <p class="small">Lecture des indices…</p>
+        </section>
       </div>
 
       <!-- Rachat : tous les calculs. estimation.js ajoute l’estimation client en tête. -->
@@ -232,19 +245,20 @@
         </details>
       </section>
     </main>
-    <script src="fiscal.js?v=20261028-tirer"></script>
-    <script src="freshness.js?v=20261028-tirer"></script>
-    <script src="gold-chart.js?v=20261028-tirer"></script>
-    <script src="app.js?v=20261028-tirer"></script>
-    <script src="estimation.js?v=20261028-tirer"></script>
-    <script src="silver.js?v=20261028-tirer"></script>
-    <script src="cours-plus.js?v=20261028-tirer"></script>
-    <script src="c3e.js?v=20261028-tirer"></script>
-    <script src="mobile.js?v=20261028-tirer"></script>
-    <script src="alignment.js?v=20261028-tirer"></script>
-    <script src="quick-prices.js?v=20261028-tirer"></script>
-    <script src="print.js?v=20261028-tirer"></script>
-    <script src="edit-fields.js?v=20261028-tirer"></script>
-    <script src="update.js?v=20261028-tirer"></script>
+    <script src="fiscal.js?v=20261102-meteo"></script>
+    <script src="freshness.js?v=20261102-meteo"></script>
+    <script src="gold-chart.js?v=20261102-meteo"></script>
+    <script src="app.js?v=20261102-meteo"></script>
+    <script src="estimation.js?v=20261102-meteo"></script>
+    <script src="silver.js?v=20261102-meteo"></script>
+    <script src="cours-plus.js?v=20261102-meteo"></script>
+    <script src="meteo.js?v=20261102-meteo"></script>
+    <script src="c3e.js?v=20261102-meteo"></script>
+    <script src="mobile.js?v=20261102-meteo"></script>
+    <script src="alignment.js?v=20261102-meteo"></script>
+    <script src="quick-prices.js?v=20261102-meteo"></script>
+    <script src="print.js?v=20261102-meteo"></script>
+    <script src="edit-fields.js?v=20261102-meteo"></script>
+    <script src="update.js?v=20261102-meteo"></script>
   </body>
 </html>

@@ -1,5 +1,12 @@
 # Historique
 
+## 02/11/2026 — Météo de l’or
+
+- Nouvel onglet « Météo » entre Cours et Rachat : soleil, éclaircies, temps variable, averses
+  ou orage selon les indices de tendance, avec le détail et l’explication de chacun.
+  Mêmes indices, seuils et textes que dans GoldGestion (meteo_or.py, tests repris).
+- Dernière météo gardée sur l’iPhone si les sources ne répondent pas.
+
 ## 29/10/2026 — widget plein
 
 - La courbe du widget remplit tout l’espace libre : taille réelle du widget selon le modèle

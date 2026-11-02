@@ -5,12 +5,14 @@ l’or et répondre en déplacement à « combien vous rachetez ce produit ? ».
 Render (`render.yaml`) à partir du dépôt GitHub. Aucune donnée client n’est stockée sur le
 serveur.
 
-## Deux onglets
+## Trois onglets
 
 - **Cours** : recherche, favoris (appui long sur un produit), or pur 1 kg avec sa variation
   et son graphique, pièces et lingots CPoR, argent. Sous chaque
   pièce ou lingot d’or : le prix de **rachat** (prix net client : FC du calcul d’achat,
   8 % par défaut, puis TMP 11,5 %). Toucher un produit ouvre le détail (frais, TMP/TPV).
+- **Météo** : météo de l’or, résumé des indices de tendance (à titre informatif), comme
+  dans GoldGestion. Sources : BullionVault et Yahoo Finance (dollar, euro, taux, VIX).
 - **Rachat** : estimation client multi-lignes et impression, achat bijoux (9K à 22K),
   prix rapide d’une pièce d’or.
 
@@ -45,6 +47,7 @@ Cours et courbe sur l’écran d’accueil grâce à l’app Scriptable : script
 
 - `index.html`, `style.css` : page et mise en page (couleurs GoldGestion).
 - `app.js` (cours, prix d’achat), `gold-chart.js`, `silver.js`, `c3e.js`, `freshness.js`.
+- `meteo.js` (onglet Météo) et `meteo_or.py` (calcul des indices, repris de GoldGestion).
 - `cours-plus.js` : recherche, favoris, prix qui clignotent, alerte cours périmés,
   écran d’ouverture.
 - Calculs repris de GoldApp : `estimation.js` + `estimation.css`, `alignment.js`,

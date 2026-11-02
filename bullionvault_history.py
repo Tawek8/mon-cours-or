@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 
-PERIODS = {"1": 600, "7": 3600, "30": 14400, "365": 172800}
+PERIODS = {"1": 600, "7": 3600, "30": 14400, "90": 43200, "365": 172800, "1825": 864000}
 METALS = {"gold": "AUX", "silver": "AGX"}
 
 

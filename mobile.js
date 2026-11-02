@@ -7,8 +7,9 @@
     if (!b) return;
     if (typeof selected !== 'undefined' && selected) closeBuy();
     document.body.dataset.view = b.dataset.view;
-    document.getElementById('view-cours').hidden = b.dataset.view !== 'cours';
-    document.getElementById('view-rachat').hidden = b.dataset.view !== 'rachat';
+    for (const view of ['cours', 'meteo', 'rachat'])
+      document.getElementById('view-' + view).hidden = b.dataset.view !== view;
+    window.dispatchEvent(new Event('view-changed'));
     nav.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     window.scrollTo({ top: 0, behavior: 'instant' });
   });

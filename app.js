@@ -596,6 +596,7 @@ async function refreshAll() {
       loadSpotHistory(),
       window.refreshSilver?.(),
       window.refreshC3e?.(),
+      window.refreshMeteo?.(),
     ]);
   } finally {
     b.disabled = false;
