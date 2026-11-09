@@ -8,7 +8,7 @@ Sources (lues au plus toutes les 30 minutes) :
   - or et argent en euros : graphiques BullionVault (comme la page « Cours ») ;
   - dollar (indice DXY), euro/dollar, taux américain 10 ans, indice de la peur (VIX) :
     Yahoo Finance ;
-  - prime du Napoléon : cotation CPoR et instantané (fournis par le serveur de GoldApp).
+  - prime du Napoléon : cotation CPoR et instantané (fournis par le serveur d’OrApp).
 Repris de GoldGestion (meteo_or.py) : mêmes indices, seuils et textes. Dollar et euro sont de
 simples repères, sans effet sur le score. Testés sur 2005-2026, ils se contredisent presque
 toujours (dollar en hausse = baissier, euro en baisse = haussier).

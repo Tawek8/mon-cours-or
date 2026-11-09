@@ -1,12 +1,12 @@
-// GoldApp — widget d’écran d’accueil pour l’app Scriptable (iPhone).
-// Cours de l’or (et de l’argent) avec sa courbe, aux couleurs de GoldApp.
+// OrApp — widget d’écran d’accueil pour l’app Scriptable (iPhone).
+// Cours de l’or (et de l’argent) avec sa courbe, aux couleurs d’OrApp.
 //
 // Installation : voir widget/LISEZ-MOI-WIDGET.txt.
 // Paramètre du widget (facultatif, dans « Parameter ») : « or » ou « argent »,
 // suivi d’une période en jours : 1, 7, 30 ou 365. Exemples : « or », « argent 7 », « or 30 ».
 
 // ---- À remplir une seule fois ----
-const ADRESSE = 'https://mon-cours-or.onrender.com'; // adresse de GoldApp, sans « / » à la fin
+const ADRESSE = 'https://mon-cours-or.onrender.com'; // adresse d’OrApp, sans « / » à la fin
 const CLE = 'COLLE-ICI-LA-CLE-DU-WIDGET'; // même valeur que GOLDAPP_WIDGET_KEY sur Render
 // ----------------------------------
 
@@ -36,7 +36,7 @@ const euros = (n, decimals = 0) =>
   n.toLocaleString('fr-FR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) +
   ' €';
 
-// ---- Données : GoldApp, sinon dernier relevé gardé sur l’iPhone ----
+// ---- Données : OrApp, sinon dernier relevé gardé sur l’iPhone ----
 const files = FileManager.local();
 const cachePath = files.joinPath(files.documentsDirectory(), 'goldapp-widget-' + PERIOD + '.json');
 
@@ -48,7 +48,7 @@ async function load() {
     request.timeoutInterval = 25;
     const data = await request.loadJSON();
     const status = request.response.statusCode;
-    if (status === 403) throw new Error('Clé refusée par GoldApp');
+    if (status === 403) throw new Error('Clé refusée par OrApp');
     if (status !== 200) throw new Error(data.error || 'Erreur serveur (' + status + ')');
     files.writeString(cachePath, JSON.stringify(data));
     return { data, stale: false };
@@ -182,7 +182,7 @@ function block(stack, metalData, metal, compact) {
     return;
   }
   text(stack, euros(metalData.price), Font.boldSystemFont(compact ? 20 : 24), C.text, 0.5);
-  // Variation sur la courbe elle-même (BullionVault), comme dans GoldApp.
+  // Variation sur la courbe elle-même (BullionVault), comme dans OrApp.
   const first = metalData.points[0][1],
     delta = last(metalData.points)[1] - first,
     percent = (delta / first) * 100,
@@ -232,7 +232,7 @@ async function build() {
   widget.refreshAfterDate = new Date(Date.now() + 15 * 60000);
 
   if (!data) {
-    text(widget, 'GoldApp', Font.semiboldSystemFont(13), new Color(C.gold));
+    text(widget, 'OrApp', Font.semiboldSystemFont(13), new Color(C.gold));
     widget.addSpacer(6);
     text(widget, setup ? 'Réglage à finir' : 'Cours indisponibles', Font.systemFont(12), C.text);
     text(

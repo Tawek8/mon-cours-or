@@ -1,4 +1,7 @@
-# GoldApp
+# OrApp
+
+Anciennement GoldApp. Logo dérivé de celui d’Orbis : `icon.svg` (icône),
+`orapp-logo.svg` / `orapp-logo.png` (logo complet).
 
 Application iPhone (ajoutée à l’écran d’accueil depuis Safari) pour suivre les cours de
 l’or et répondre en déplacement à « combien vous rachetez ce produit ? ». Hébergée sur
@@ -16,7 +19,7 @@ serveur.
 - **Rachat** : estimation client multi-lignes et impression, achat bijoux (9K à 22K),
   prix rapide d’une pièce d’or.
 
-Mise en page et icône reprises de GoldGestion. L’application est pensée pour l’iPhone
+Mise en page reprise de GoldGestion. L’application est pensée pour l’iPhone
 uniquement.
 
 ## Mot de passe
@@ -30,7 +33,7 @@ l’application reste ouverte à tous.
 ## Widget iPhone
 
 Cours et courbe sur l’écran d’accueil grâce à l’app Scriptable : script
-`widget/GoldApp-widget.js`, mode d’emploi `widget/LISEZ-MOI-WIDGET.txt`. Le widget lit
+`widget/OrApp-widget.js`, mode d’emploi `widget/LISEZ-MOI-WIDGET.txt`. Le widget lit
 `/api/widget` avec sa propre clé (`GOLDAPP_WIDGET_KEY` sur Render), sans le mot de passe.
 
 ## Sources des cours
@@ -50,10 +53,10 @@ Cours et courbe sur l’écran d’accueil grâce à l’app Scriptable : script
 - `meteo.js` (onglet Météo) et `meteo_or.py` (calcul des indices, repris de GoldGestion).
 - `cours-plus.js` : recherche, favoris, prix qui clignotent, alerte cours périmés,
   écran d’ouverture.
-- Calculs repris de GoldApp : `estimation.js` + `estimation.css`, `alignment.js`,
+- Calculs repris de l’ancienne GoldApp : `estimation.js` + `estimation.css`, `alignment.js`,
   `fiscal.js`, `mobile.js` (onglets, achat bijoux), `quick-prices.js`, `print.js`.
 - Serveur : `server.py` et `kitco.py`, `cpor.py`, `bullionvault*.py`, `market.py`.
-- `icon.svg`, `icon.png`, `favicon.ico` : icône de GoldGestion.
+- `icon.svg`, `icon.png`, `favicon.ico` : icône d’OrApp, tirée du logo d’Orbis.
 - `img/cpor/` (or) et `img/argent/` (argent, d’après Gold.fr) : vignettes des produits.
 - `docs/historique/` : anciennes notes de version (non publiées).
 

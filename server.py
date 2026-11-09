@@ -1,8 +1,8 @@
-"""Serveur de Mon Cours de l’Or : application et cotations, mêmes sources que GoldApp.
+"""Serveur de Mon Cours de l’Or : application et cotations, mêmes sources que l’ancienne GoldApp.
 
 Sources :
   - or pur (valeur intrinsèque) : Kitco Bid en €/kg ; BullionVault en secours ;
-  - pièces et lingots boursables : cotations CPoR (Loomis), comme GoldApp ;
+  - pièces et lingots boursables : cotations CPoR (Loomis), comme l’ancienne GoldApp ;
   - argent : cotations Gold.fr ; argent C3E achat : Cookson-Clal ;
   - graphique : historique BullionVault.
 Chaque source est mise en cache quelques secondes pour ne pas solliciter les sites
@@ -38,9 +38,9 @@ LOGIN_PAGE = """<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#121d25"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="GoldApp">
+<meta name="apple-mobile-web-app-title" content="OrApp">
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.png">
-<title>GoldApp</title>
+<title>OrApp</title>
 <style>
 :root{color-scheme:dark}*{box-sizing:border-box}
 body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
@@ -58,7 +58,7 @@ font-weight:650;cursor:pointer}
 </style></head><body>
 <form method="post" action="login">
 <img src="icon.svg" alt="">
-<h1>GoldApp</h1>
+<h1><span style="color:#e9bf75">Or</span>App</h1>
 <p>Saisis le mot de passe pour ouvrir l’application.</p>
 <input type="text" name="username" value="GoldApp" autocomplete="username" hidden>
 <input type="password" name="password" autocomplete="current-password" placeholder="Mot de passe" required autofocus>

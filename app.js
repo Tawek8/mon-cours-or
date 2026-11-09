@@ -86,7 +86,7 @@ function renderList(root, list, isBar) {
     button.disabled = !available;
     button.dataset.key = 'or:' + id;
     if (available) button.dataset.price = price;
-    // Illustration du produit (mêmes images que GoldApp).
+    // Illustration du produit (mêmes images que l’ancienne GoldApp).
     const img = document.createElement('img');
     img.className = 'quote-img' + (isBar ? ' bar' : '');
     img.src = 'img/cpor/' + id + '.webp';

@@ -1,4 +1,4 @@
-/* GoldApp — mise en page iPhone, couleurs et composants de GoldGestion. */
+/* OrApp — mise en page iPhone, couleurs et composants de GoldGestion. */
 :root {
   color-scheme: dark;
   --bg: #121d25;
@@ -993,4 +993,11 @@ body::before {
   font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
+}
+/* Nom « OrApp » : « Or » doré, « App » argenté, comme le logo. */
+.wordmark .word-or {
+  color: var(--gold);
+}
+.wordmark .word-app {
+  color: #c9d4db;
 }

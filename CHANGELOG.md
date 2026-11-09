@@ -1,5 +1,13 @@
 # Historique
 
+## 09/11/2026 — GoldApp devient OrApp
+
+- Nouveau nom et nouvelle icône, tirée du logo d’Orbis : l’anneau doré et ses trois points,
+  avec une courbe de cours au centre. Logo complet : `orapp-logo.svg` / `orapp-logo.png`.
+- Sur l’iPhone, le nom et l’icône de l’écran d’accueil ne changent qu’en réinstallant l’app
+  (Safari, Partager, Sur l’écran d’accueil). Le widget Scriptable affiche « OrApp » une fois
+  le nouveau script collé.
+
 ## 02/11/2026 — Onglet Météo allégé
 
 - Retrait de l’encadré « Résumé du contexte, pas une prévision… », qui prenait trop de place

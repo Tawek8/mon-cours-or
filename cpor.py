@@ -1,4 +1,4 @@
-"""Cotations CPoR (Loomis) : même source et mêmes contrôles que GoldApp."""
+"""Cotations CPoR (Loomis) : même source et mêmes contrôles que l’ancienne GoldApp."""
 
 import re, json, time, threading, unicodedata
 from html import unescape
