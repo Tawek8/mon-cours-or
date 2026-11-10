@@ -2,8 +2,8 @@
 
 ## 09/11/2026 — GoldApp devient OrApp
 
-- Nouveau nom et nouvelle icône, tirée du logo d’Orbis : l’anneau doré et ses trois points,
-  avec une courbe de cours au centre. Logo complet : `orapp-logo.svg` / `orapp-logo.png`.
+- Nouveau nom et nouvelle icône, celle d’Orbis : l’anneau doré et ses trois points.
+- Logo complet : `orapp-logo.svg` / `orapp-logo.png`.
 - Sur l’iPhone, le nom et l’icône de l’écran d’accueil ne changent qu’en réinstallant l’app
   (Safari, Partager, Sur l’écran d’accueil). Le widget Scriptable affiche « OrApp » une fois
   le nouveau script collé.
