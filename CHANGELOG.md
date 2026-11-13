@@ -1,5 +1,11 @@
 # Historique
 
+## 14/11/2026 — Alerte de cours : variation brusque
+
+- Nouveau réglage « Hausse ou baisse de plus de … % sur 24 h » (par rapport au cours de
+  BullionVault 24 h plus tôt). Contrairement aux seuils, il reste en place après avoir sonné ;
+  une alerte par sens toutes les 20 heures au plus. Commun avec Orbis, notification ntfy.
+
 ## 13/11/2026 — Météo : repère « Inflation attendue »
 
 - Inflation attendue aux États-Unis (obligations indexées TIP face aux obligations

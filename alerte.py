@@ -1,7 +1,9 @@
 """Alerte de cours de l’or, commune avec Orbis (même calcul que alerte_cours.py d’Orbis).
 
-État : above / below (seuils en €/kg), updated (dernier réglage : le plus récent l’emporte),
-hits (dernières alertes [{id, dir, level, price, at}]). Gardé en mémoire et dans un fichier
+État : above / below (seuils en €/kg), move (variation brusque en % sur 24 h, gardée après
+avoir sonné, une alerte par sens au plus toutes les 20 heures), updated (dernier réglage : le
+plus récent l’emporte), hits (dernières alertes [{id, dir, level, price, at}] ; dir up / down
+pour une variation, avec ref : cours 24 h plus tôt, et change : variation en %). Gardé en mémoire et dans un fichier
 temporaire : après un redémarrage de Render, Orbis (qui garde l’état dans le Dropbox) et
 l’iPhone le renvoient au premier échange.
 Le contrôle (check) est appelé toutes les 10 minutes par GitHub Actions (.github/workflows),
@@ -19,6 +21,8 @@ from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 
 KEEP_HITS = 10
+SETTINGS = ("above", "below", "move")
+MOVE_GAP_HOURS = 20
 NTFY = "https://ntfy.sh/"
 FILE = os.path.join(tempfile.gettempdir(), "orapp-alerte.json")
 _lock = threading.Lock()
@@ -50,20 +54,30 @@ def _number(v):
     return round(v, 2)
 
 
+def _move(v):
+    if v in (None, ""):
+        return None
+    v = float(v)
+    if not 0.5 <= v <= 20:
+        raise ValueError("Variation entre 0,5 et 20 % attendue")
+    return round(v, 1)
+
+
 def clean(state):
     """Garde seulement les champs connus, seuils vérifiés."""
     out = {}
-    for k in ("above", "below"):
-        v = _number((state or {}).get(k))
+    for k in SETTINGS:
+        v = (_move if k == "move" else _number)((state or {}).get(k))
         if v:
             out[k] = v
     if isinstance((state or {}).get("updated"), str):
         out["updated"] = state["updated"][:40]
     out["hits"] = [
         dict(id=str(h["id"])[:20], dir=h.get("dir"), level=float(h.get("level") or 0),
-             price=float(h.get("price") or 0), at=str(h.get("at") or "")[:40])
+             price=float(h.get("price") or 0), at=str(h.get("at") or "")[:40],
+             **({"ref": float(h.get("ref") or 0), "change": float(h.get("change") or 0)} if h.get("dir") in ("up", "down") else {}))
         for h in (state or {}).get("hits") or []
-        if isinstance(h, dict) and h.get("id") and h.get("dir") in ("above", "below")
+        if isinstance(h, dict) and h.get("id") and h.get("dir") in ("above", "below", "up", "down")
     ][-KEEP_HITS:]
     return out
 
@@ -72,7 +86,7 @@ def merge(mine, theirs):
     """Réglages du côté réglé le plus récemment ; alertes des deux côtés (sans doublon)."""
     out = dict(mine)
     if (theirs.get("updated") or "") > (mine.get("updated") or ""):
-        for k in ("above", "below"):
+        for k in SETTINGS:
             if theirs.get(k):
                 out[k] = theirs[k]
             else:
@@ -81,23 +95,40 @@ def merge(mine, theirs):
     hits = {h["id"]: h for h in (mine.get("hits") or []) + (theirs.get("hits") or [])}
     out["hits"] = sorted(hits.values(), key=lambda h: h.get("at") or "")[-KEEP_HITS:]
     for h in out["hits"]:
-        if out.get(h.get("dir")) == h.get("level"):
+        if h.get("dir") in ("above", "below") and out.get(h.get("dir")) == h.get("level"):
             out.pop(h["dir"], None)
     return out
 
 
-def apply_price(state, price, at=None):
-    """Seuil passé : alerte ajoutée, seuil retiré. Renvoie l’alerte ou None."""
+def _stamp(iso):
+    try:
+        return datetime.fromisoformat(iso).timestamp()
+    except (TypeError, ValueError):
+        return 0
+
+
+def apply_price(state, price, at=None, ref=None):
+    """Seuil passé : alerte ajoutée, seuil retiré. Variation sur 24 h (par rapport à « ref »)
+    plus forte que « move » : alerte ajoutée, surveillance gardée. Renvoie la dernière alerte."""
+    at = at or now_iso()
+    hit = None
     d = (
         "above" if state.get("above") and price >= state["above"]
         else "below" if state.get("below") and price <= state["below"]
         else None
     )
-    if not d:
-        return None
-    hit = dict(id=uuid.uuid4().hex[:12], dir=d, level=state[d], price=round(price, 2), at=at or now_iso())
-    state.pop(d)
-    state["hits"] = ((state.get("hits") or []) + [hit])[-KEEP_HITS:]
+    if d:
+        hit = dict(id=uuid.uuid4().hex[:12], dir=d, level=state[d], price=round(price, 2), at=at)
+        state.pop(d)
+        state["hits"] = ((state.get("hits") or []) + [hit])[-KEEP_HITS:]
+    change = (price / ref - 1) * 100 if state.get("move") and ref else 0
+    if abs(change) >= (state.get("move") or 100):
+        d = "up" if change > 0 else "down"
+        since = (_stamp(at) or time.time()) - MOVE_GAP_HOURS * 3600
+        if not any(h.get("dir") == d and _stamp(h.get("at")) > since for h in state.get("hits") or []):
+            hit = dict(id=uuid.uuid4().hex[:12], dir=d, level=state["move"], price=round(price, 2),
+                       ref=round(ref, 2), change=round(change, 2), at=at)
+            state["hits"] = ((state.get("hits") or []) + [hit])[-KEEP_HITS:]
     return hit
 
 
@@ -134,6 +165,13 @@ def update(theirs, key):
     return save(merge(state(), clean(theirs)), key)
 
 
+def what(h):
+    """« Or au-dessus de 120 000 €/kg », « Or en hausse de 2,3 % sur 24 h »."""
+    if h["dir"] in ("up", "down"):
+        return "Or en " + ("hausse" if h["dir"] == "up" else "baisse") + " de " + f"{abs(h.get('change') or 0):.1f}".replace(".", ",") + " % sur 24 h"
+    return "Or " + ("au-dessus de " if h["dir"] == "above" else "en dessous de ") + kilo(h["level"])
+
+
 def kilo(v):
     return f"{round(v):,}".replace(",", " ") + " €/kg"
 
@@ -155,8 +193,9 @@ def notify(s, key, post=None):
             age = 0
         if age > 6 * 3600:
             continue
-        title = "Or " + ("au-dessus de " if h["dir"] == "above" else "en dessous de ") + kilo(h["level"])
-        body = "Cours " + kilo(h["price"]) + " (BullionVault). Ouvrir OrApp pour régler une nouvelle alerte."
+        title = what(h)
+        body = ("Cours " + kilo(h["price"]) + (", contre " + kilo(h["ref"]) + " 24 h plus tôt" if h.get("ref") else "")
+                + " (BullionVault). Ouvrir OrApp pour régler une nouvelle alerte.")
         try:
             post(topic, title, body)
             out.append(h["id"])
@@ -188,9 +227,9 @@ def check(price_loader, key):
         return False
     _checked[0] = time.monotonic()
     s = state()
-    if not (s.get("above") or s.get("below")) and all(h["id"] in _sent for h in s["hits"]):
+    if not (s.get("above") or s.get("below") or s.get("move")) and all(h["id"] in _sent for h in s["hits"]):
         return False
-    price, at = price_loader()
-    hit = apply_price(s, price, at)
+    got = price_loader()
+    hit = apply_price(s, got[0], got[1], got[2] if len(got) > 2 else None)
     save(s, key)
     return bool(hit)

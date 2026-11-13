@@ -55,6 +55,22 @@ class AlertTests(unittest.TestCase):
         A.update(dict(hits=[hit]), key)
         self.assertEqual([t for _, t, _ in self.sent], ["Or en dessous de 100 000 €/kg"])
 
+    def test_sharp_move_notifies_and_stays(self):
+        key = A.key_from_password("secret")
+        A.update(dict(move="2", updated="2026-11-13T10:00:00+00:00"), key)
+        now = datetime.now(timezone.utc).isoformat()
+        self.assertFalse(A.check(lambda: (111000.0, now, 110000.0), key))
+        A._checked[0] = 0.0
+        self.assertTrue(A.check(lambda: (107500.0, now, 110000.0), key))
+        self.assertEqual(A.state()["move"], 2.0)
+        self.assertEqual(self.sent[-1][1], "Or en baisse de 2,3 % sur 24 h")
+        self.assertIn("110", self.sent[-1][2])
+        A._checked[0] = 0.0
+        A.check(lambda: (107000.0, now, 110000.0), key)  # même sens, même jour : rien
+        self.assertEqual(len(self.sent), 1)
+        # Venue d'Orbis, une alerte de variation garde ses champs.
+        self.assertEqual(A.clean(dict(hits=[dict(id="m", dir="up", level=2, price=1, ref=1, change=2.5, at=now)]))["hits"][0]["change"], 2.5)
+
     def test_bad_values_refused(self):
         with self.assertRaises(ValueError):
             A.update(dict(above="12"), "k")

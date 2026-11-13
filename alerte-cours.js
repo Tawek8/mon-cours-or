@@ -11,6 +11,11 @@
   };
   const kilo = v => Math.round(v).toLocaleString('fr-FR') + ' €/kg';
   const level = (v, dir) => (dir === 'above' ? 'au-dessus de ' : 'en dessous de ') + kilo(v);
+  const pct = v => (Math.round(v * 10) / 10).toLocaleString('fr-FR') + ' %';
+  // « en hausse de 2,3 % sur 24 h » (variation) ou « au-dessus de 120 000 €/kg » (seuil).
+  const what = h => (h.dir === 'up' || h.dir === 'down'
+    ? 'en ' + (h.dir === 'up' ? 'hausse' : 'baisse') + ' de ' + pct(Math.abs(h.change || 0)) + ' sur 24 h'
+    : level(h.level, h.dir));
   const when = iso =>
     new Date(iso).toLocaleString('fr-FR', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
   const KEY = 'orapp-alerte';
@@ -24,7 +29,7 @@
     if (!r.ok) throw Error(data.error || 'HTTP ' + r.status);
     state = data;
     try {
-      localStorage.setItem(KEY, JSON.stringify({ above: data.above, below: data.below, updated: data.updated, hits: data.hits }));
+      localStorage.setItem(KEY, JSON.stringify({ above: data.above, below: data.below, move: data.move, updated: data.updated, hits: data.hits }));
     } catch {}
     return data;
   }
@@ -58,9 +63,9 @@
       msg.className = 'small ga-bad';
       msg.textContent = text;
     };
-    const send = async (above, below, done) => {
+    const send = async (above, below, move, done) => {
       try {
-        await call({ above, below, updated: new Date().toISOString(), hits: a.hits || [] });
+        await call({ above, below, move, updated: new Date().toISOString(), hits: a.hits || [] });
         draw(done);
       } catch (e) {
         refuse(e.message);
@@ -69,10 +74,15 @@
     const form = el('form', { className: 'ga-form' },
       field('above', 'Au-dessus de'),
       field('below', 'En dessous de'),
+      (() => {
+        const input = el('input', { name: 'move', inputMode: 'decimal', placeholder: '—', value: a.move ? String(a.move).replace('.', ',') : '' });
+        input.setAttribute('aria-label', 'Prévenir si l’or monte ou baisse de plus de (% sur 24 h)');
+        return el('label', {}, el('span', { textContent: 'Hausse ou baisse de plus de' }), input, el('small', { textContent: '% sur 24 h' }));
+      })(),
       el('div', { className: 'ga-buttons' },
         el('button', { type: 'submit', className: 'primary', textContent: 'Enregistrer' }),
-        a.above || a.below
-          ? el('button', { type: 'button', className: 'secondary', textContent: 'Retirer', onclick: () => send(null, null, 'Alerte retirée.') })
+        a.above || a.below || a.move
+          ? el('button', { type: 'button', className: 'secondary', textContent: 'Retirer', onclick: () => send(null, null, null, 'Alerte retirée.') })
           : null));
     form.onsubmit = e => {
       e.preventDefault();
@@ -81,13 +91,16 @@
         return t ? Number(t) : null;
       };
       const above = read('above'),
-        below = read('below');
+        below = read('below'),
+        move = read('move');
       if ([above, below].some(v => v != null && !(v > 1000))) return refuse('Saisir un cours en euros par kilo, par exemple 120 000.');
+      if (move != null && !(move >= 0.5 && move <= 20)) return refuse('Saisir une variation entre 0,5 et 20 %, par exemple 2.');
       if (a.price && above != null && above <= a.price) return refuse('Le cours est déjà au-dessus de ' + kilo(above) + ' : choisir un seuil plus haut.');
       if (a.price && below != null && below >= a.price) return refuse('Le cours est déjà en dessous de ' + kilo(below) + ' : choisir un seuil plus bas.');
-      send(above, below, above || below ? 'Alerte enregistrée, aussi pour les postes d’Orbis.' : 'Alerte retirée.');
+      send(above, below, move, above || below || move ? 'Alerte enregistrée, aussi pour les postes d’Orbis.' : 'Alerte retirée.');
     };
-    const active = [a.above && level(a.above, 'above'), a.below && level(a.below, 'below')].filter(Boolean);
+    const active = [a.above && level(a.above, 'above'), a.below && level(a.below, 'below'),
+      a.move && 'en cas de hausse ou de baisse de plus de ' + pct(a.move) + ' sur 24 h'].filter(Boolean);
     const last = a.hits?.at(-1);
     const copy = el('button', { type: 'button', className: 'secondary', textContent: 'Copier le nom du canal' });
     copy.onclick = async () => {
@@ -106,10 +119,10 @@
       el('p', {
         className: 'small' + (active.length ? ' ga-on' : ''),
         textContent: active.length
-          ? '🔔 Active : prévenir ' + active.join(' ou ') + '. Mêmes seuils sur les postes d’Orbis ; l’alerte sonne une fois.'
-          : 'Aucune alerte en place. Les seuils réglés ici valent aussi pour les postes d’Orbis.',
+          ? '🔔 Active : prévenir ' + active.join(' ou ') + '. Mêmes réglages sur les postes d’Orbis ; un seuil sonne une fois, la variation reste surveillée (une alerte par sens et par jour au plus).'
+          : 'Aucune alerte en place. Les réglages faits ici valent aussi pour les postes d’Orbis.',
       }),
-      last ? el('p', { className: 'small', textContent: 'Dernière alerte : or ' + level(last.level, last.dir) + ', atteint le ' + when(last.at) + ' (' + kilo(last.price) + ').' }) : null,
+      last ? el('p', { className: 'small', textContent: 'Dernière alerte : or ' + what(last) + ', le ' + when(last.at) + ' (' + kilo(last.price) + ').' }) : null,
       a.channel
         ? el('details', { className: 'ga-help' },
             el('summary', { textContent: 'Recevoir l’alerte sur ce téléphone' }),

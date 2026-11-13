@@ -412,9 +412,9 @@ ROUTES = {
 
 
 def alert_price():
-    """Dernier cours de l’or (BullionVault, €/kg) : (prix, moment)."""
+    """Dernier cours de l’or (BullionVault, €/kg) : (prix, moment, cours 24 h plus tôt)."""
     points = history_live("1", "gold")["points"]
-    return points[-1]["price"], points[-1]["date"]
+    return points[-1]["price"], points[-1]["date"], points[0]["price"]
 
 
 def alert_view(with_price):
