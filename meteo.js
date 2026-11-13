@@ -15,6 +15,75 @@
   // Seuils du score entre deux météos (comme meteo_or.WEATHER).
   const STEPS = [-0.63, -0.25, 0.25, 0.63];
   const plural = (n, word) => n + ' ' + word + (n > 1 ? 's' : '');
+  const dayLabel = iso =>
+    new Date(iso + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  // Les 4 dernières semaines : météo de chaque jour ouvré (recalculée par le serveur), puis aujourd'hui.
+  function past(w) {
+    const days = (w.history || []).filter(d => d.weather);
+    if (!days.length || !w.weather) return null;
+    const last = days[days.length - 1];
+    let same = 0;
+    for (let i = days.length - 1; i >= 0 && days[i].weather.key === w.weather.key; i--) same++;
+    const cell = (d, cls, title) => {
+      const c = el('span', { className: cls, textContent: d.weather.icon, title });
+      c.setAttribute('aria-label', title);
+      return c;
+    };
+    return el(
+      'div',
+      { className: 'gw-past' },
+      el(
+        'div',
+        { className: 'gw-strip' },
+        ...days.map(d => cell(d, '', dayLabel(d.day) + ' : ' + d.weather.label)),
+        cell(w, 'today', 'Aujourd’hui : ' + w.weather.label)
+      ),
+      el('p', {
+        textContent:
+          '4 dernières semaines · ' +
+          (last.weather.key !== w.weather.key
+            ? 'a changé : la veille, ' + last.weather.label.toLowerCase()
+            : same >= days.length
+              ? 'le même temps depuis au moins 4 semaines'
+              : 'le même temps depuis ' + (same + 1) + ' jours ouvrés'),
+      })
+    );
+  }
+
+  // « Et ensuite ? » : ce qui a suivi les jours de même météo depuis 2005 (meteo_or.odds).
+  function odds(w) {
+    const rows = (w.odds?.rows || []).filter(r => r.up != null);
+    if (!rows.length || !w.weather) return null;
+    return el(
+      'div',
+      { className: 'gw-odds' },
+      el('h3', { className: 'gw-group', textContent: 'Et ensuite ?' }),
+      ...rows.map(r =>
+        el(
+          'div',
+          { className: 'gw-row' },
+          el('span'),
+          el('strong', { textContent: 'Or plus haut après ' + r.horizon }),
+          el('em', {
+            className: !r.enough ? 'gw-flat' : r.up >= 50 ? 'gw-up' : 'gw-down',
+            textContent: r.up + ' %',
+          }),
+          el('p', {
+            textContent:
+              (r.enough ? '' : 'Trop peu de cas pour conclure · ') +
+              'tous temps confondus : ' + r.allUp + ' %',
+          })
+        )
+      ),
+      el('p', {
+        className: 'gw-note',
+        textContent:
+          'Jours « ' + w.weather.label + ' » depuis ' + String(w.odds.since || '2005').slice(0, 4) +
+          ' : fréquences du passé, pas une prévision. Quand « tous temps confondus » donne presque le même chiffre, la météo change peu de chose.',
+      })
+    );
+  }
 
   function draw(w, stale) {
     const flat = w.flat ?? w.indicators.filter(x => x.signal === 0).length,
@@ -83,6 +152,8 @@
         el('span', { textContent: 'Plutôt baissier' }),
         el('span', { textContent: 'Plutôt haussier' })
       ),
+      past(w),
+      odds(w),
       ...[...groups].flatMap(([group, list]) => [
         el('h3', { className: 'gw-group', textContent: group }),
         ...list.map(row),
@@ -93,7 +164,9 @@
           'À titre informatif : ce n’est pas un conseil d’achat ou de vente. ' +
           (stale ? '⚠ Dernière météo enregistrée, du ' : 'Mise à jour toutes les 30 minutes · ') +
           at +
-          (w.errors?.length ? ' · indisponible : ' + w.errors.join(', ') : ''),
+          ((w.missing || w.errors)?.length
+            ? ' · sans réponse pour l’instant : ' + (w.missing || w.errors).join(', ') + ' (nouvel essai dans 5 min)'
+            : ''),
       })
     );
   }
@@ -113,7 +186,8 @@
       if (!response.ok) throw Error('HTTP ' + response.status);
       const weather = await response.json();
       draw(weather, false);
-      at = Date.now();
+      // Une source n'a pas répondu : relue au bout de 5 minutes (comme le serveur).
+      at = Date.now() - (weather.errors?.length ? 25 * 60000 : 0);
       try {
         localStorage.setItem(KEY, JSON.stringify(weather));
       } catch {}

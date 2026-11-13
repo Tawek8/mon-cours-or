@@ -994,6 +994,30 @@ body::before {
   line-height: 1.5;
   color: var(--muted);
 }
+.gw-past {
+  margin-top: 16px;
+}
+.gw-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  font-size: 15px;
+  line-height: 1.2;
+}
+.gw-strip span {
+  width: 21px;
+  text-align: center;
+  opacity: 0.8;
+}
+.gw-strip span.today {
+  font-size: 20px;
+  opacity: 1;
+}
+.gw-past p {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
 /* Nom « OrApp » : « Or » doré, « App » argenté, comme le logo. */
 .wordmark .word-or {
   color: var(--gold);

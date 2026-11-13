@@ -83,9 +83,158 @@ class WeatherTests(unittest.TestCase):
         self.assertFalse(any(x["key"] in ("dxy", "eur") for x in w["indicators"]))
         self.assertIsNotNone(w["weather"])
 
+    def test_missing_sources_have_plain_names_and_are_retried_sooner(self):
+        from unittest.mock import patch
+
+        def broken():
+            raise OSError("pas de réseau")
+
+        f = fetch(10)
+        del f["us10y"], f["vix"]
+        with patch.dict(M.LOADERS, us10y=broken, vix=broken):
+            w = M.build(NOW, f)
+        self.assertEqual(w["errors"], ["us10y", "vix"])
+        self.assertEqual(w["missing"], ["taux américains", "indice de la peur"])
+        # Gardée 5 minutes seulement quand une source manque, 30 minutes sinon.
+        calls = []
+        with patch.object(M, "build", side_effect=lambda: calls.append(1) or w), patch.object(
+            M, "daily_replay", return_value=[]
+        ), patch.object(M.time, "monotonic") as clock:
+            M._cache.update(at=0.0, value=None)
+            clock.return_value = 1000.0
+            M.weather()
+            clock.return_value = 1000.0 + 4 * 60
+            M.weather()
+            self.assertEqual(len(calls), 1)
+            clock.return_value = 1000.0 + 6 * 60
+            M.weather()
+            self.assertEqual(len(calls), 2)
+            ok = dict(w, errors=[], missing=[])
+            M._cache.update(at=2000.0, value=ok)
+            clock.return_value = 2000.0 + 20 * 60
+            self.assertIs(M.weather(), ok)
+        M._cache.update(at=0.0, value=None)
+
     def test_rsi(self):
         self.assertEqual(M.rsi(list(range(1, 30))), 100.0)
         self.assertAlmostEqual(M.rsi([10, 11] * 10), 50.0, delta=5)
+
+
+def dated(values):
+    """Série Yahoo datée : une valeur par jour ouvré jusqu'à NOW."""
+    out, day = [], NOW
+    for v in reversed(values):
+        while day.weekday() >= 5:
+            day -= timedelta(days=1)
+        out.append((day.replace(hour=14), v))
+        day -= timedelta(days=1)
+    return out[::-1]
+
+
+class HistoryTests(unittest.TestCase):
+    """Météo des derniers jours ouvrés, recalculée avec les séries coupées à la fin du jour."""
+
+    def test_twenty_working_days_oldest_first(self):
+        h = M.build(NOW, fetch(10))["history"]
+        self.assertEqual(len(h), 20)
+        days = [datetime.fromisoformat(d["day"]).date() for d in h]
+        self.assertEqual(days, sorted(days))
+        self.assertTrue(all(d.weekday() < 5 for d in days))
+        self.assertEqual(days[-1], (NOW - timedelta(days=1)).date())  # NOW est un jeudi
+        self.assertTrue(all(d["weather"] for d in h))
+
+    def test_a_past_day_ignores_what_came_after(self):
+        calm = fetch(10)
+        later = fetch(10)
+        cut = NOW - timedelta(days=3)
+        later["gold3m"] = [(at, p * (0.5 if at >= cut else 1)) for at, p in later["gold3m"]]
+        a, b = M.build(NOW, calm)["history"], M.build(NOW, later)["history"]
+        old = [d for d in a if datetime.fromisoformat(d["day"]).date() < cut.date()]
+        self.assertEqual(old, b[: len(old)])
+        self.assertNotEqual(a[-1], b[-1])  # la veille, elle, voit la chute
+
+    def test_storm_then_sun(self):
+        # L'or baisse pendant des mois puis remonte fort sur les 15 derniers jours.
+        f = fetch(-60)
+        turn = NOW - timedelta(days=15)
+        for k in ("gold5a", "gold1a", "gold3m"):
+            low = min(p for at, p in f[k] if at <= turn)
+            f[k] = [(at, p if at <= turn else low + 900 * (at - turn).days) for at, p in f[k]]
+        h = M.build(NOW, f)["history"]
+        self.assertIn(h[0]["weather"]["key"], ("orage", "averses"))
+        self.assertGreater(h[-1]["score"], h[0]["score"])
+
+    def test_dated_yahoo_series_count_in_the_past(self):
+        f = fetch(10)
+        f["us10y"] = dated([4.0] * 40 + [3.0] * 20)  # taux en forte baisse depuis 20 jours ouvrés
+        h = M.build(NOW, f)["history"]
+        old, recent = h[0], h[-1]
+        self.assertLess(old["score"], recent["score"])
+        # Une série sans dates ne peut pas être coupée : absente des jours passés.
+        g = fetch(10, rates=(4.3, 4.0))
+        self.assertEqual(M.build(NOW, g)["history"], M.build(NOW, fetch(10))["history"])
+
+
+class OddsTests(unittest.TestCase):
+    """« Et ensuite ? » : ce qui a suivi les jours de même météo."""
+
+    def days(self, keys, prices):
+        start = datetime(2020, 1, 1).date()
+        return [(start + timedelta(days=i), k, p) for i, (k, p) in enumerate(zip(keys, prices))]
+
+    def test_counts_cases_episodes_and_compares_with_all_days(self):
+        # 70 jours : orage du jour 0 à 9 puis du jour 30 à 39, éclaircies sinon ; prix qui monte
+        # de 1 par jour sauf une chute de 20 au jour 8.
+        keys = ["orage" if i < 10 or 30 <= i < 40 else "eclaircies" for i in range(70)]
+        prices = [100 + i - (20 if i >= 8 else 0) for i in range(70)]
+        o = M.odds("orage", self.days(keys, prices))
+        week = o["rows"][0]
+        self.assertEqual((week["horizon"], week["days"]), ("1 semaine", 5))
+        self.assertEqual(week["cases"], 20)
+        self.assertEqual(week["episodes"], 2)
+        # Jours 3 à 7 : la chute du jour 8 arrive dans les 5 jours → plus bas ; les autres plus hauts.
+        self.assertEqual(week["up"], 75)
+        self.assertFalse(week["enough"])  # moins de 50 cas
+        self.assertGreater(week["allUp"], week["up"])
+        self.assertEqual(o["since"], "2020-01-01")
+        # 3 mois (63 jours) : seuls les 7 premiers jours ont une suite connue.
+        self.assertEqual(o["rows"][2]["cases"], 7)
+
+    def test_unknown_weather_and_short_history(self):
+        o = M.odds("soleil", self.days(["orage"] * 3, [1, 2, 3]))
+        self.assertEqual([r["cases"] for r in o["rows"]], [0, 0, 0])
+        self.assertIsNone(o["rows"][0]["up"])
+        self.assertIsNone(o["rows"][0]["allUp"])
+
+    def test_replay_uses_the_rules_of_the_day(self):
+        # 3 ans de cours journaliers en hausse régulière, euro fixe : temps plutôt beau ;
+        # les jours d'avant le début du rejeu ne sont pas comptés.
+        first = datetime(2018, 1, 1).date()
+        days = [first + timedelta(days=i) for i in range(3 * 365) if (first + timedelta(days=i)).weekday() < 5]
+        f = dict(
+            gold=[(d, 1000 + i) for i, d in enumerate(days)],
+            eurusd=[(first, 1.25)],
+            us10y=[(d, 3.0) for d in days],
+            vix=[(d, 15.0) for d in days],
+        )
+        start = datetime(2019, 6, 3).date()
+        out = M.replay(f, start=start)
+        self.assertEqual(out[0][0], start)
+        self.assertTrue(all(d.weekday() < 5 for d, _, _ in out))
+        self.assertIn(out[-1][1], ("soleil", "eclaircies"))
+        # Or en euros par kilo : dollars l'once ÷ euro × onces par kilo.
+        self.assertAlmostEqual(out[-1][2], (1000 + len(days) - 1) / 1.25 * M.TROY_OUNCES_PER_KG)
+
+    def test_weather_survives_a_failed_replay(self):
+        from unittest.mock import patch
+
+        w = M.build(NOW, fetch(10))
+        with patch.object(M, "build", return_value=dict(w)), patch.object(M, "daily_replay", side_effect=OSError("réseau")):
+            M._cache.update(at=0.0, value=None)
+            got = M.weather()
+        M._cache.update(at=0.0, value=None)
+        self.assertIsNone(got["odds"])
+        self.assertEqual(got["weather"], w["weather"])
 
 
 if __name__ == "__main__":

@@ -1,5 +1,14 @@
 # Historique
 
+## 13/11/2026 — Météo de l’or : historique et « Et ensuite ? »
+
+- Même calcul que la météo d’Orbis : frise des 4 dernières semaines (météo de chaque jour
+  ouvré, recalculée avec les cours de fin de journée) et « Et ensuite ? » : ce qui a suivi,
+  depuis 2005, les jours de même météo (or plus haut après 1 semaine, 1 mois, 3 mois,
+  comparé à tous les jours). Fréquences du passé, pas une prévision.
+- Une source qui ne répond pas est nommée clairement (« taux américains », « indice de la
+  peur »…) et relue au bout de 5 minutes au lieu de 30.
+
 ## 09/11/2026 — GoldApp devient OrApp
 
 - Nouveau nom et nouvelle icône, celle d’Orbis : l’anneau doré et ses trois points.
