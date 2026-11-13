@@ -22,6 +22,7 @@ se contredisent presque toujours (dollar en hausse = baissier, euro en baisse = 
 
 import bisect
 import json
+import random
 import statistics
 import threading
 import time
@@ -307,6 +308,14 @@ TROY_OUNCES_PER_KG = 32.1507466
 ODDS_START = date(2005, 1, 3)
 ODDS_HORIZONS = ((5, "1 semaine"), (21, "1 mois"), (63, "3 mois"))  # jours de bourse
 ODDS_MIN_CASES = 50  # en dessous : trop peu de cas pour conclure
+# Marge d'erreur : épisodes tirés au sort avec remise (les jours d'un même épisode se
+# ressemblent, ils ne comptent pas comme des cas indépendants) ; fourchette où tombe la part
+# « or plus haut » 9 fois sur 10.
+ODDS_DRAWS = 1000
+# Stabilité : même calcul avant et depuis cette date ; écart de plus de 15 points = instable.
+ODDS_SPLIT = date(2016, 1, 1)
+ODDS_STABLE_GAP = 15
+ODDS_STABLE_CASES = 20
 YAHOO_DAILY = {"gold": "GC%3DF", "eurusd": YAHOO["eurusd"], "us10y": YAHOO["us10y"], "vix": YAHOO["vix"]}
 _replay = {"day": None, "value": None}
 
@@ -364,25 +373,62 @@ def replay(fetch=None, start=ODDS_START):
     return out
 
 
+def _interval(groups, seed, draws=ODDS_DRAWS):
+    """Fourchette (5e et 95e centiles, en %) de la part « or plus haut », en tirant au sort
+    des épisodes entiers avec remise. « groups » : [(cas en hausse, cas)] par épisode."""
+    if len(groups) < 2:
+        return None, None
+    rng = random.Random(seed)
+    n, shares = len(groups), []
+    for _ in range(draws):
+        up = total = 0
+        for _ in range(n):
+            u, t = groups[rng.randrange(n)]
+            up += u
+            total += t
+        shares.append(up / total)
+    shares.sort()
+    return round(100 * shares[int(0.05 * draws)]), round(100 * shares[int(0.95 * draws) - 1])
+
+
 def odds(key, days):
     """Ce qui a suivi, depuis le début du rejeu, les jours de météo « key » : pour chaque
     horizon, part des cas où l'or était plus haut, variation médiane, nombre de jours et
-    d'épisodes distincts (les fenêtres se chevauchent) ; la même chose tous temps confondus."""
+    d'épisodes distincts (les fenêtres se chevauchent) ; la même chose tous temps confondus.
+    Fiabilité : fourchette 9 fois sur 10 (low, high), écart net avec tous temps confondus
+    (clear : « tous temps » hors de la fourchette), et même part avant et depuis 2016 (early,
+    late, stable)."""
     keys = [k for _, k, _ in days]
     prices = [p for _, _, p in days]
     rows = []
+    pct = lambda xs: round(100 * sum(1 for m in xs if m > 0) / len(xs)) if xs else None
+    med = lambda xs: round(100 * statistics.median(xs), 1) if xs else None
     for h, label in ODDS_HORIZONS:
-        n = len(days) - h
-        moves = [prices[i + h] / prices[i] - 1 for i in range(max(n, 0))]
+        n = max(len(days) - h, 0)
+        moves = [prices[i + h] / prices[i] - 1 for i in range(n)]
         same = [m for i, m in enumerate(moves) if keys[i] == key]
-        episodes = sum(1 for i in range(max(n, 0)) if keys[i] == key and (i == 0 or keys[i - 1] != key))
-        pct = lambda xs: round(100 * sum(1 for m in xs if m > 0) / len(xs)) if xs else None
-        med = lambda xs: round(100 * statistics.median(xs), 1) if xs else None
+        groups = []
+        for i in range(n):
+            if keys[i] != key:
+                continue
+            if i == 0 or keys[i - 1] != key:
+                groups.append([0, 0])
+            groups[-1][0] += moves[i] > 0
+            groups[-1][1] += 1
+        low, high = _interval(groups, key + str(h))
+        up, all_up = pct(same), pct(moves)
+        early = [m for i, m in enumerate(moves) if keys[i] == key and days[i][0] < ODDS_SPLIT]
+        late = [m for i, m in enumerate(moves) if keys[i] == key and days[i][0] >= ODDS_SPLIT]
+        compared = len(early) >= ODDS_STABLE_CASES and len(late) >= ODDS_STABLE_CASES
         rows.append(dict(
-            horizon=label, days=h, cases=len(same), episodes=episodes, enough=len(same) >= ODDS_MIN_CASES,
-            up=pct(same), median=med(same), allUp=pct(moves), allMedian=med(moves),
+            horizon=label, days=h, cases=len(same), episodes=len(groups), enough=len(same) >= ODDS_MIN_CASES,
+            up=up, median=med(same), allUp=all_up, allMedian=med(moves),
+            low=low, high=high,
+            clear=low is not None and all_up is not None and not low <= all_up <= high,
+            early=pct(early), late=pct(late),
+            stable=(abs(pct(early) - pct(late)) <= ODDS_STABLE_GAP) if compared else None,
         ))
-    return dict(key=key, since=days[0][0].isoformat() if days else None, rows=rows)
+    return dict(key=key, since=days[0][0].isoformat() if days else None, split=ODDS_SPLIT.year, rows=rows)
 
 
 def daily_replay():

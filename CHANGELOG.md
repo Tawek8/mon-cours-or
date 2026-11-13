@@ -1,5 +1,12 @@
 # Historique
 
+## 13/11/2026 — Météo : fiabilité de « Et ensuite ? »
+
+- Chaque pourcentage a sa fourchette (là où il tombe 9 fois sur 10, en tirant au sort des
+  épisodes entiers) ; couleur seulement si l’écart avec « tous temps confondus » est net.
+- Même calcul avant et depuis 2016 : un chiffre qui change de plus de 15 points est signalé
+  « instable ». Même calcul que dans Orbis (meteo_or.py).
+
 ## 13/11/2026 — Alerte de cours, commune avec Orbis
 
 - Onglet Météo : « Alerte de cours » (prévenir si l’or passe au-dessus ou en dessous d’un

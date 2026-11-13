@@ -52,6 +52,17 @@
   }
 
   // « Et ensuite ? » : ce qui a suivi les jours de même météo depuis 2005 (meteo_or.odds).
+  // Conclusion : un écart avec « tous temps confondus » ne compte que s’il sort de la fourchette.
+  function verdict(rows) {
+    const net = rows.filter(r => r.enough && r.clear),
+      shaky = rows.filter(r => r.stable === false);
+    return (
+      (net.length
+        ? 'Écart net avec tous temps confondus après ' + net.map(r => r.horizon).join(', ') + '.'
+        : 'Aucune fourchette ne s’écarte nettement de « tous temps confondus » : ce temps-là ne change rien de sûr.') +
+      (shaky.length ? ' Instable d’une période à l’autre après ' + shaky.map(r => r.horizon).join(', ') + ' : à ne pas croire.' : '')
+    );
+  }
   function odds(w) {
     const rows = (w.odds?.rows || []).filter(r => r.up != null);
     if (!rows.length || !w.weather) return null;
@@ -65,22 +76,26 @@
           { className: 'gw-row' },
           el('span'),
           el('strong', { textContent: 'Or plus haut après ' + r.horizon }),
+          // Couleur seulement si l’écart avec « tous temps confondus » est net (hors fourchette).
           el('em', {
-            className: !r.enough ? 'gw-flat' : r.up >= 50 ? 'gw-up' : 'gw-down',
+            className: !r.enough || !r.clear ? 'gw-flat' : r.up >= r.allUp ? 'gw-up' : 'gw-down',
             textContent: r.up + ' %',
           }),
           el('p', {
             textContent:
               (r.enough ? '' : 'Trop peu de cas pour conclure · ') +
-              'tous temps confondus : ' + r.allUp + ' %',
+              (r.low != null ? 'entre ' + r.low + ' et ' + r.high + ' % 9 fois sur 10 · ' : '') +
+              'tous temps confondus : ' + r.allUp + ' %' +
+              (r.stable === false ? ' · instable : ' + r.early + ' % avant ' + w.odds.split + ', ' + r.late + ' % depuis' : ''),
           })
         )
       ),
       el('p', {
         className: 'gw-note',
         textContent:
-          'Jours « ' + w.weather.label + ' » depuis ' + String(w.odds.since || '2005').slice(0, 4) +
-          ' : fréquences du passé, pas une prévision. Quand « tous temps confondus » donne presque le même chiffre, la météo change peu de chose.',
+          verdict(rows) +
+          ' Jours « ' + w.weather.label + ' » depuis ' + String(w.odds.since || '2005').slice(0, 4) +
+          ' : fréquences du passé, pas une prévision.',
       })
     );
   }

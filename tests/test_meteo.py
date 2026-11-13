@@ -200,6 +200,26 @@ class OddsTests(unittest.TestCase):
         # 3 mois (63 jours) : seuls les 7 premiers jours ont une suite connue.
         self.assertEqual(o["rows"][2]["cases"], 7)
 
+    def test_margin_and_stability(self):
+        # 2 000 jours depuis 2010 : « orage » un jour sur deux par blocs de 5 ; l'or monte
+        # toujours avant 2016 et baisse toujours depuis : fourchette, puis instable.
+        start = datetime(2010, 1, 1).date()
+        days, price = [], 100.0
+        for i in range(4000):
+            d = start + timedelta(days=i)
+            price *= 1.001 if d < M.ODDS_SPLIT else 0.999
+            days.append((d, "orage" if (i // 5) % 2 == 0 else "soleil", price))
+        o = M.odds("orage", days)
+        week = o["rows"][0]
+        self.assertEqual(o["split"], 2016)
+        self.assertLessEqual(week["low"], week["up"])
+        self.assertLessEqual(week["up"], week["high"])
+        self.assertEqual((week["early"], week["late"]), (100, 0))
+        self.assertFalse(week["stable"])
+        self.assertFalse(week["clear"])  # « tous temps » dans la fourchette : pas d'écart net
+        # Même tirage d'une fois sur l'autre (pas de chiffres qui bougent à chaque lecture).
+        self.assertEqual(M.odds("orage", days)["rows"][0]["low"], week["low"])
+
     def test_unknown_weather_and_short_history(self):
         o = M.odds("soleil", self.days(["orage"] * 3, [1, 2, 3]))
         self.assertEqual([r["cases"] for r in o["rows"]], [0, 0, 0])
