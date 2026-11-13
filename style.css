@@ -1018,6 +1018,53 @@ body::before {
   font-size: 12px;
   color: var(--muted);
 }
+/* Alerte de cours (alerte-cours.js) */
+.ga .eyebrow {
+  margin-bottom: 6px;
+}
+.ga-form {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 6px;
+}
+.ga-form label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 130px auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+.ga-form input {
+  width: 100%;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ga-buttons {
+  display: flex;
+  gap: 8px;
+}
+.ga-on {
+  color: var(--gold);
+}
+.ga-bad {
+  color: var(--down);
+}
+.ga-help {
+  margin-top: 12px;
+}
+.ga-help summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-size: 14px;
+}
+.ga-channel {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #11191f;
+  font: 600 15px ui-monospace, Menlo, Consolas, monospace;
+  word-break: break-all;
+}
 /* Nom « OrApp » : « Or » doré, « App » argenté, comme le logo. */
 .wordmark .word-or {
   color: var(--gold);

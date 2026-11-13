@@ -1,0 +1,17 @@
+# Alerte de cours : toutes les 10 minutes en semaine (heures de marché, UTC), Render
+# contrôle le cours et prévient l’iPhone (ntfy) si un seuil est passé. Garde aussi le
+# service éveillé (offre gratuite : il s’endort après 15 minutes sans visite).
+# GitHub peut décaler un passage de quelques minutes ; il suspend les tâches planifiées
+# d’un dépôt public resté 60 jours sans commit (les relancer dans l’onglet Actions).
+name: Alerte de cours
+on:
+  schedule:
+    - cron: "*/10 5-21 * * 1-5"
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Contrôle du cours
+        run: curl -fsS --max-time 120 --retry 2 --retry-delay 20 https://mon-cours-or.onrender.com/api/alert/check || true

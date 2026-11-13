@@ -12,9 +12,9 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon.png" />
     <title>OrApp</title>
-    <link rel="stylesheet" href="style.css?v=20261113-meteo" />
-    <link rel="stylesheet" href="estimation.css?v=20261113-meteo" />
-    <link rel="stylesheet" href="print.css?v=20261113-meteo" />
+    <link rel="stylesheet" href="style.css?v=20261113-alerte" />
+    <link rel="stylesheet" href="estimation.css?v=20261113-alerte" />
+    <link rel="stylesheet" href="print.css?v=20261113-alerte" />
   </head>
   <body data-view="cours">
     <div id="pull-indicator" aria-hidden="true">
@@ -150,6 +150,8 @@
         <section class="section gw" id="gold-weather" aria-label="Météo de l’or">
           <p class="small">Lecture des indices…</p>
         </section>
+        <!-- Alerte de cours, commune avec Orbis (alerte-cours.js). -->
+        <section class="section ga" id="gold-alert" aria-label="Alerte de cours" hidden></section>
       </div>
 
       <!-- Rachat : tous les calculs. estimation.js ajoute l’estimation client en tête. -->
@@ -245,20 +247,21 @@
         </details>
       </section>
     </main>
-    <script src="fiscal.js?v=20261113-meteo"></script>
-    <script src="freshness.js?v=20261113-meteo"></script>
-    <script src="gold-chart.js?v=20261113-meteo"></script>
-    <script src="app.js?v=20261113-meteo"></script>
-    <script src="estimation.js?v=20261113-meteo"></script>
-    <script src="silver.js?v=20261113-meteo"></script>
-    <script src="cours-plus.js?v=20261113-meteo"></script>
-    <script src="meteo.js?v=20261113-meteo"></script>
-    <script src="c3e.js?v=20261113-meteo"></script>
-    <script src="mobile.js?v=20261113-meteo"></script>
-    <script src="alignment.js?v=20261113-meteo"></script>
-    <script src="quick-prices.js?v=20261113-meteo"></script>
-    <script src="print.js?v=20261113-meteo"></script>
-    <script src="edit-fields.js?v=20261113-meteo"></script>
-    <script src="update.js?v=20261113-meteo"></script>
+    <script src="fiscal.js?v=20261113-alerte"></script>
+    <script src="freshness.js?v=20261113-alerte"></script>
+    <script src="gold-chart.js?v=20261113-alerte"></script>
+    <script src="app.js?v=20261113-alerte"></script>
+    <script src="estimation.js?v=20261113-alerte"></script>
+    <script src="silver.js?v=20261113-alerte"></script>
+    <script src="cours-plus.js?v=20261113-alerte"></script>
+    <script src="meteo.js?v=20261113-alerte"></script>
+    <script src="alerte-cours.js?v=20261113-alerte"></script>
+    <script src="c3e.js?v=20261113-alerte"></script>
+    <script src="mobile.js?v=20261113-alerte"></script>
+    <script src="alignment.js?v=20261113-alerte"></script>
+    <script src="quick-prices.js?v=20261113-alerte"></script>
+    <script src="print.js?v=20261113-alerte"></script>
+    <script src="edit-fields.js?v=20261113-alerte"></script>
+    <script src="update.js?v=20261113-alerte"></script>
   </body>
 </html>

@@ -1,5 +1,16 @@
 # Historique
 
+## 13/11/2026 — Alerte de cours, commune avec Orbis
+
+- Onglet Météo : « Alerte de cours » (prévenir si l’or passe au-dessus ou en dessous d’un
+  cours en €/kg). Mêmes seuils que dans Orbis : réglés d’un côté, ils valent partout.
+- Notification sur l’iPhone, même OrApp fermée, par l’appli gratuite ntfy (canal secret tiré
+  du mot de passe, affiché dans l’onglet). L’alerte sonne une fois puis le seuil est retiré.
+- Contrôle du cours toutes les 10 minutes en semaine par GitHub Actions
+  (`.github/workflows/alerte-cours.yml`), qui garde aussi le service Render éveillé.
+- `alerte.py` : même calcul que `alerte_cours.py` d’Orbis ; Orbis échange avec `/api/alert`
+  grâce à une clé tirée du mot de passe (`X-Alert-Key`), jamais le mot de passe lui-même.
+
 ## 13/11/2026 — Météo de l’or : historique et « Et ensuite ? »
 
 - Même calcul que la météo d’Orbis : frise des 4 dernières semaines (météo de chaque jour

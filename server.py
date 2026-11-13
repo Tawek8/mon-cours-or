@@ -31,6 +31,8 @@ SESSION_DAYS = 180
 # Clé du widget iPhone (Scriptable) : lecture seule des cours, sans le mot de passe.
 # Variable GOLDAPP_WIDGET_KEY sur Render ; sans elle, /api/widget est fermé.
 WIDGET_KEY = os.environ.get("GOLDAPP_WIDGET_KEY", "")
+# Alerte de cours commune avec Orbis : clé d’échange tirée du mot de passe (alerte.py).
+ALERT_KEY = __import__("alerte").key_from_password(PASSWORD) if PASSWORD else ""
 # Fichiers lisibles sans mot de passe, pour l’icône de l’écran d’accueil.
 OPEN_FILES = {"/manifest.webmanifest", "/icon.svg", "/icon.png", "/favicon.ico"}
 LOGIN_PAGE = """<!doctype html>
@@ -409,6 +411,26 @@ ROUTES = {
 }
 
 
+def alert_price():
+    """Dernier cours de l’or (BullionVault, €/kg) : (prix, moment)."""
+    points = history_live("1", "gold")["points"]
+    return points[-1]["price"], points[-1]["date"]
+
+
+def alert_view(with_price):
+    """État de l’alerte ; pour l’iPhone (session) : cours actuel et canal ntfy."""
+    import alerte
+
+    out = alerte.state()
+    if with_price:
+        out["channel"] = alerte.channel(ALERT_KEY)
+        try:
+            out["price"] = alert_price()[0]
+        except Exception:
+            pass
+    return out
+
+
 def public(route):
     """Vrai pour un fichier de l’application ; faux pour le code serveur et les notes."""
     path = PurePosixPath(unquote(route))
@@ -467,8 +489,24 @@ class Handler(SimpleHTTPRequestHandler):
         given = self.headers.get("X-Widget-Key", "")
         return bool(WIDGET_KEY) and hmac.compare_digest(given.encode(), WIDGET_KEY.encode())
 
+    def alert_allowed(self):
+        given = self.headers.get("X-Alert-Key", "")
+        return bool(ALERT_KEY) and hmac.compare_digest(given.encode(), ALERT_KEY.encode())
+
+    def send_json(self, data, status=200):
+        payload = json.dumps(data, ensure_ascii=False).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(payload)
+
     def guard(self, path):
         """Vrai si la requête peut continuer ; sinon la page de connexion est envoyée."""
+        if path == "/api/alert/check":
+            return True  # contrôle seul, appelé par GitHub Actions : rien n’en sort
+        if path == "/api/alert" and self.alert_allowed():
+            return True  # Orbis : clé tirée du mot de passe
         if path == "/api/widget":
             # Le widget n’a que sa clé : ni la session, ni le mot de passe ne l’ouvrent.
             if self.widget_allowed():
@@ -495,6 +533,18 @@ class Handler(SimpleHTTPRequestHandler):
         return False
 
     def do_POST(self):
+        if urlparse(self.path).path == "/api/alert":
+            # Réglage des seuils (iPhone ou Orbis) : état fusionné, le plus récent l’emporte.
+            if not self.guard("/api/alert"):
+                return
+            import alerte
+
+            try:
+                length = min(int(self.headers.get("Content-Length") or 0), 50_000)
+                alerte.update(json.loads(self.rfile.read(length) or b"{}"), ALERT_KEY)
+                return self.send_json(alert_view(self.authorized()))
+            except (ValueError, TypeError) as error:
+                return self.send_json({"error": str(error)[:200]}, 400)
         if urlparse(self.path).path != "/login" or not PASSWORD:
             return self.send_error(404)
         length = min(int(self.headers.get("Content-Length") or 0), 4096)
@@ -535,6 +585,16 @@ class Handler(SimpleHTTPRequestHandler):
             return self.send_login(200)
         if not self.guard(url.path):
             return
+        if url.path == "/api/alert":
+            return self.send_json(alert_view(self.authorized()))
+        if url.path == "/api/alert/check":
+            import alerte
+
+            try:
+                alerte.check(alert_price, ALERT_KEY)
+            except Exception:
+                pass
+            return self.send_json({"ok": True})
         if url.path in ROUTES:
             try:
                 data = ROUTES[url.path](parse_qs(url.query))

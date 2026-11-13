@@ -1,5 +1,5 @@
 // Une seule valeur à changer à chaque version (identique au ?v= de index.html).
-const VERSION = '20261113-meteo';
+const VERSION = '20261113-alerte';
 const CACHE = 'mon-or-' + VERSION;
 self.addEventListener('install', e => {
   self.skipWaiting();
@@ -21,6 +21,7 @@ self.addEventListener('install', e => {
             './estimation.js',
             './silver.js',
             './meteo.js',
+            './alerte-cours.js',
             './cours-plus.js',
             './c3e.js',
             './mobile.js',
