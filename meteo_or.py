@@ -42,6 +42,8 @@ SOURCE_NAMES = {
     "us10y": "taux américains",
     "vix": "indice de la peur",
     "refs": "cotation du Napoléon",
+    "tip": "inflation attendue",
+    "ief": "inflation attendue",
 }
 _cache = {"at": 0.0, "value": None}
 _lock = threading.Lock()
@@ -135,6 +137,8 @@ LOADERS = {
     "eurusd": lambda: _yahoo(YAHOO["eurusd"]),
     "us10y": lambda: _yahoo(YAHOO["us10y"]),
     "vix": lambda: _yahoo(YAHOO["vix"]),
+    "tip": lambda: _yahoo("TIP"),
+    "ief": lambda: _yahoo("IEF"),
     "refs": lambda: refs_loader(),
 }
 HISTORY_DAYS = 20  # jours ouvrés
@@ -156,7 +160,7 @@ def build(now=None, fetch=None):
             src[name] = None
     out = compute(now, src)
     out["errors"] = errors
-    out["missing"] = [SOURCE_NAMES.get(e, e) for e in errors]
+    out["missing"] = list(dict.fromkeys(SOURCE_NAMES.get(e, e) for e in errors))
     out["history"] = past(now, src)
     return out
 
@@ -251,6 +255,29 @@ def compute(now, src):
         add("eur", "Repères", "Euro face au dollar", fr(eur[-1], 4) + " $ (" + ("+" if m > 0 else "") + fr(m, 1) + " %)", 0,
             "Nos prix sont en euros : un euro qui baisse fait monter l'or en euros, un euro qui monte le fait baisser. "
             + ("Ici : euro en baisse." if s > 0 else "Ici : euro en hausse." if s < 0 else "Ici : euro stable."), 0)
+    # Inflation attendue aux États-Unis : obligations indexées sur l'inflation (TIP) face aux
+    # obligations classiques de même durée (IEF) ; le rapport monte quand les marchés
+    # attendent plus d'inflation. Repère sans effet sur le score. Mesuré sur 2003-2026 : seule
+    # une nette baisse sur un mois (plus de 1 %) a été suivie, 3 mois après, d'un or plus haut
+    # plus souvent qu'en temps normal (77 %, fourchette 70 à 83 %, contre 64 % ; 76 % avant
+    # 2016, 79 % depuis) ; une hausse n'a rien donné de net.
+    tip, ief = src.get("tip"), src.get("ief")
+    if tip and ief and isinstance(tip[0], tuple) and isinstance(ief[0], tuple):
+        other = {at.date(): v for at, v in ief}
+        ratio = [v / other[at.date()] for at, v in tip if other.get(at.date())]
+    else:
+        ratio = [a / b for a, b in zip(_values(tip) or [], _values(ief) or []) if b]
+    if len(ratio) >= 22:
+        m = _pct(ratio[-1], ratio[-22])
+        add("infl", "Repères", "Inflation attendue (États-Unis)",
+            ("en baisse" if m < -1 else "en hausse" if m > 1 else "stable") + " (" + ("+" if m > 0 else "") + fr(m, 1) + " % sur un mois)", 0,
+            "Ce que les marchés prévoient comme inflation, lu dans les obligations américaines. Sur le long terme, l'or protège "
+            "du recul de la monnaie ; à court terme, l'inflation annonce peu, les marchés l'ayant déjà prise en compte. "
+            + ("Ici : nette baisse, souvent un moment de crainte de récession. Depuis 2003, l'or était plus haut 3 mois après "
+               "dans 77 % des cas (70 à 83 %), contre 64 % en temps normal : fréquence du passé, pas une prévision."
+               if m < -1 else
+               "Ici : nette hausse. Depuis 2003, rien de net sur ce que l'or a fait ensuite." if m > 1 else
+               "Ici : stable, pas de signal."), 0)
     tnx = _values(src.get("us10y"))
     if tnx and len(tnx) >= 22:
         d = tnx[-1] - tnx[-22]

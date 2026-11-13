@@ -27,6 +27,8 @@ def fetch(slope, dxy=(100, 100), eur=(1.10, 1.10), rates=(4.0, 4.0), vix=16):
         us10y=flat(*rates),
         vix=[vix] * 22,
         refs=dict(instant=118000, quotes=dict(coq=720)),
+        tip=None,  # inflation attendue : absente sauf dans InflationTests (pas de réseau)
+        ief=None,
     )
 
 
@@ -129,6 +131,34 @@ def dated(values):
         out.append((day.replace(hour=14), v))
         day -= timedelta(days=1)
     return out[::-1]
+
+
+class InflationTests(unittest.TestCase):
+    """Inflation attendue : repère affiché, sans effet sur le score."""
+
+    def test_falling_expected_inflation_is_shown_without_changing_the_score(self):
+        base = fetch(10)
+        plain = M.build(NOW, base)
+        days = [NOW - timedelta(days=30 - i) for i in range(31)]
+        tip = [(d, 100.0 - 0.1 * i) for i, d in enumerate(days)]  # obligations indexées en baisse
+        ief = [(d, 100.0) for d in days]
+        w = M.build(NOW, dict(base, tip=tip, ief=ief))
+        infl = {x["key"]: x for x in w["indicators"]}["infl"]
+        self.assertEqual(infl["signal"], 0)
+        self.assertEqual(infl["group"], "Repères")
+        self.assertTrue(infl["value"].startswith("en baisse"))
+        self.assertIn("77 %", infl["text"])
+        self.assertEqual(w["score"], plain["score"])
+        # Sources sans réponse : « inflation attendue » nommée une seule fois.
+        from unittest.mock import patch
+
+        def down():
+            raise OSError("réseau")
+
+        with patch.dict(M.LOADERS, tip=down, ief=down):
+            w = M.build(NOW, {k: v for k, v in base.items() if k not in ("tip", "ief")})
+        self.assertEqual(w["missing"], ["inflation attendue"])
+        self.assertNotIn("infl", {x["key"] for x in w["indicators"]})
 
 
 class HistoryTests(unittest.TestCase):

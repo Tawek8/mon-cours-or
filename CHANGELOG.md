@@ -1,5 +1,12 @@
 # Historique
 
+## 13/11/2026 — Météo : repère « Inflation attendue »
+
+- Inflation attendue aux États-Unis (obligations indexées TIP face aux obligations
+  classiques IEF, sur un mois), affichée parmi les repères, sans effet sur le score. Après
+  une nette baisse, l’or était plus haut 3 mois plus tard dans 77 % des cas depuis 2003
+  (70 à 83 %), contre 64 % en temps normal. Même calcul que dans Orbis.
+
 ## 13/11/2026 — Météo : fiabilité de « Et ensuite ? »
 
 - Chaque pourcentage a sa fourchette (là où il tombe 9 fois sur 10, en tirant au sort des
