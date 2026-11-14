@@ -288,6 +288,10 @@ summary {
 .views .view-link {
   text-decoration: none;
 }
+.views svg .dot {
+  fill: currentColor;
+  stroke: none;
+}
 .views button[aria-pressed='true'] {
   color: var(--gold);
 }

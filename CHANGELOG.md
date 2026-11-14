@@ -1,5 +1,11 @@
 # Historique
 
+## 14/11/2026 — Barre du bas : Cours, Météo, Orbiscan, Pièces, Rachat
+
+- Nouvel ordre des boutons : Cours / Météo / Orbiscan / Pièces / Rachat.
+- Le bouton « Scan » s’appelle « Orbiscan », avec une icône reprise de celle d’Orbiscan
+  (cadre, anneau d’Orbis à trois points, trait de scan).
+
 ## 14/11/2026 — Écran d’ouverture : barre dorée horizontale
 
 - L’icône étant au-dessus du nom « Orbismini », la barre dorée passe à l’horizontale, entre les deux.
