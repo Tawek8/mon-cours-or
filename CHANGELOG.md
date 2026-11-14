@@ -1,5 +1,9 @@
 # Historique
 
+## 14/11/2026 — Pièces : bouton « Rechercher »
+
+- Sous les photos de la pièce, « Demander à Claude » devient « Rechercher ».
+
 ## 14/11/2026 — OrApp devient Orbismini ; bouton « Scan » vers Orbiscan
 
 - L’application s’appelle maintenant Orbismini (nom, logo, page de connexion, écran d’accueil).

@@ -1,5 +1,5 @@
 // Onglet « Pièces » : trouver le poids et le titre d’une pièce peu courante, comme le scanner
-// de pièces d’Orbis. Photo de la face (et du revers) → « Demander à Claude » → pièces du
+// de pièces d’Orbis. Photo de la face (et du revers) → « Rechercher » (Claude) → pièces du
 // catalogue Numista ; ou recherche guidée (mots, pays, année). La fiche vient toujours de
 // Numista ; le prix d’achat indicatif suit le calcul de la ligne « Divers » des tarifs
 // non boursables d’Orbis. Serveur : pieces_scan.py (/api/scan/…).
@@ -200,7 +200,7 @@
         : el('div', {},
             el('p', { className: 'small', textContent: 'Photographie la face, et le revers si tu peux, bien à plat et éclairée.' }),
             el('div', { className: 'cs-shots' }, photoButton('face', 'Face'), photoButton('revers', 'Revers')),
-            el('button', { type: 'button', className: 'primary cs-ask', textContent: busy ? 'Patiente…' : 'Demander à Claude', disabled: !any || busy, onclick: identify }),
+            el('button', { type: 'button', className: 'primary cs-ask', textContent: busy ? 'Patiente…' : 'Rechercher', disabled: !any || busy, onclick: identify }),
             any ? el('button', { type: 'button', className: 'secondary', textContent: 'Effacer les photos',
               onclick: () => { photos.face = photos.revers = null; results = null; say(''); } }) : null,
             el('p', { className: 'small' + (bad ? ' cs-bad' : ''), textContent: message, role: 'status' }),

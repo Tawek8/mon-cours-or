@@ -2,7 +2,7 @@
 (scanner_pieces.py) : même recherche Numista, même question à Claude, mêmes calculs.
 
   - recherche guidée : mots du nom, pays, année → catalogue Numista ;
-  - « Demander à Claude » : photo de la face (et du revers) → jusqu'à 3 pièces possibles,
+  - « Rechercher » (Claude) : photo de la face (et du revers) → jusqu'à 3 pièces possibles,
     cherchées ensuite dans Numista.
 La fiche affichée vient toujours du catalogue Numista, jamais de l'IA. C'est une aide à
 vérifier à la balance et au pied à coulisse : elle ne prouve ni l'authenticité ni le titre.
