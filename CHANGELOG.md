@@ -4,6 +4,7 @@
 
 - Sous les photos de la pièce, « Demander à Claude » devient « Rechercher ».
 - Recherche par le nom : le bouton devient « Chercher ce nom ».
+- Onglet « Pièces » : nouvelle icône, une pièce marquée « ? » dans un cadre photo (au lieu de la loupe).
 
 ## 14/11/2026 — OrApp devient Orbismini ; bouton « Scan » vers Orbiscan
 
