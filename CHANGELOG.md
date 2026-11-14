@@ -3,6 +3,7 @@
 ## 14/11/2026 — Pièces : bouton « Rechercher »
 
 - Sous les photos de la pièce, « Demander à Claude » devient « Rechercher ».
+- Recherche par le nom : le bouton devient « Chercher ce nom ».
 
 ## 14/11/2026 — OrApp devient Orbismini ; bouton « Scan » vers Orbiscan
 

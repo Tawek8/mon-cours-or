@@ -186,7 +186,7 @@
       el('div', { className: 'cs-two' },
         el('input', { name: 'country', placeholder: 'Pays', autocomplete: 'off' }),
         el('input', { name: 'year', placeholder: 'Année', inputMode: 'numeric', autocomplete: 'off' })),
-      el('button', { type: 'submit', className: 'secondary', textContent: 'Rechercher', disabled: busy }));
+      el('button', { type: 'submit', className: 'secondary', textContent: 'Chercher ce nom', disabled: busy }));
     form.onsubmit = e => {
       e.preventDefault();
       search(form);
