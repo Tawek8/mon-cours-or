@@ -180,9 +180,12 @@ summary {
   align-items: center;
   gap: 18px;
 }
+/* Écran d’ouverture : l’icône est au-dessus du nom, la barre devient horizontale entre les deux. */
 #splash .brand-bar {
-  width: 2.5px;
-  height: 73px;
+  width: 73px;
+  height: 2.5px;
+  margin: -4px 0;
+  background: linear-gradient(to right, transparent, #c99a45 17%, #c99a45 81%, transparent);
 }
 .refresh-spinner {
   display: inline-block;

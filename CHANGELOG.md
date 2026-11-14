@@ -1,5 +1,9 @@
 # Historique
 
+## 14/11/2026 — Écran d’ouverture : barre dorée horizontale
+
+- L’icône étant au-dessus du nom « Orbismini », la barre dorée passe à l’horizontale, entre les deux.
+
 ## 14/11/2026 — Pièces : bouton « Rechercher »
 
 - Sous les photos de la pièce, « Demander à Claude » devient « Rechercher ».
