@@ -14,3 +14,8 @@ services:
       # Clé du widget iPhone (Scriptable) : lecture seule des cours.
       - key: GOLDAPP_WIDGET_KEY
         sync: false
+      # Scanner de pièces (onglet Scan) : clé Anthropic (Claude) et clé Numista (catalogue).
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: NUMISTA_API_KEY
+        sync: false

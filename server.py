@@ -533,6 +533,23 @@ class Handler(SimpleHTTPRequestHandler):
         return False
 
     def do_POST(self):
+        if urlparse(self.path).path == "/api/scan/identify":
+            # Scanner de pièces : photos (JPEG en base64) → pièces possibles (pieces_scan.py).
+            if not self.guard("/api/scan/identify"):
+                return
+            import base64
+            import pieces_scan
+
+            try:
+                length = int(self.headers.get("Content-Length") or 0)
+                if length > 15_000_000:
+                    raise ValueError("Photos trop lourdes.")
+                body = json.loads(self.rfile.read(length) or b"{}")
+                photos = [(str(p.get("side") or "face"), base64.b64decode(str(p.get("data") or ""), validate=True))
+                          for p in (body.get("photos") or [])[:2] if isinstance(p, dict)]
+                return self.send_json(pieces_scan.identify(pieces_scan.FOLDER, photos))
+            except (ValueError, TypeError) as error:
+                return self.send_json({"error": str(error)[:300]}, 400)
         if urlparse(self.path).path == "/api/alert":
             # Réglage des seuils (iPhone ou Orbis) : état fusionné, le plus récent l’emporte.
             if not self.guard("/api/alert"):
@@ -587,6 +604,20 @@ class Handler(SimpleHTTPRequestHandler):
             return
         if url.path == "/api/alert":
             return self.send_json(alert_view(self.authorized()))
+        if url.path in ("/api/scan/state", "/api/scan/search", "/api/scan/coin"):
+            # Scanner de pièces : clés présentes, recherche dans Numista, fiche d'une pièce.
+            import pieces_scan
+
+            q = {k: v[0] for k, v in parse_qs(url.query).items()}
+            try:
+                if url.path == "/api/scan/state":
+                    return self.send_json(pieces_scan.keys_state())
+                if url.path == "/api/scan/search":
+                    return self.send_json(dict(results=pieces_scan.search(
+                        pieces_scan.FOLDER, q.get("q"), q.get("country"), q.get("year"))))
+                return self.send_json(pieces_scan.details(pieces_scan.FOLDER, q.get("id", ""), q.get("year")))
+            except ValueError as error:
+                return self.send_json({"error": str(error)[:300]}, 400)
         if url.path == "/api/alert/check":
             import alerte
 

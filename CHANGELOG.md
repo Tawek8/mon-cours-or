@@ -1,5 +1,13 @@
 # Historique
 
+## 14/11/2026 — Onglet « Scan » : scanner de pièces
+
+- Nouvel onglet entre Cours et Météo, repris du scanner de pièces d’Orbis : photo de la face
+  (et du revers) → « Demander à Claude » → pièces du catalogue Numista ; ou recherche par le
+  nom, le pays et l’année. Fiche Numista (métal, titre, poids, diamètre, métal fin, tirage) et
+  prix d’achat indicatif (calcul de la ligne « Divers » des tarifs non boursables d’Orbis).
+- Clés à saisir dans Render : ANTHROPIC_API_KEY et NUMISTA_API_KEY (jamais dans le dépôt).
+
 ## 14/11/2026 — Cours : écran épuré, courbe sur 5 et 10 ans, bande de Bollinger
 
 - Première ligne « Kitco : cours » retirée (le cours est déjà dans le cadre) ; sous le cours,

@@ -1,5 +1,5 @@
 // Une seule valeur à changer à chaque version (identique au ?v= de index.html).
-const VERSION = '20261114-courbe';
+const VERSION = '20261114-scan';
 const CACHE = 'mon-or-' + VERSION;
 self.addEventListener('install', e => {
   self.skipWaiting();
@@ -22,6 +22,7 @@ self.addEventListener('install', e => {
             './silver.js',
             './meteo.js',
             './alerte-cours.js',
+            './scan.js',
             './cours-plus.js',
             './c3e.js',
             './mobile.js',

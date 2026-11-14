@@ -12,9 +12,9 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon.png" />
     <title>OrApp</title>
-    <link rel="stylesheet" href="style.css?v=20261114-courbe" />
-    <link rel="stylesheet" href="estimation.css?v=20261114-courbe" />
-    <link rel="stylesheet" href="print.css?v=20261114-courbe" />
+    <link rel="stylesheet" href="style.css?v=20261114-scan" />
+    <link rel="stylesheet" href="estimation.css?v=20261114-scan" />
+    <link rel="stylesheet" href="print.css?v=20261114-scan" />
   </head>
   <body data-view="cours">
     <div id="pull-indicator" aria-hidden="true">
@@ -50,6 +50,13 @@
         <button type="button" data-view="cours" aria-pressed="true">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16M7 14l4-5 4 3 5-7" /></svg
           >Cours
+        </button>
+        <button type="button" data-view="scan" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16" />
+            <circle cx="12" cy="12" r="4.5" />
+            <path d="M10.4 12h3.2" /></svg
+          >Scan
         </button>
         <button type="button" data-view="meteo" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -148,6 +155,11 @@
         <p class="small footnote">
           Cours indicatifs. Vérifie les valeurs avant toute transaction.<br /><a href="logout">Verrouiller l’application</a>
         </p>
+      </div>
+
+      <!-- Scanner de pièces, comme dans Orbis (scan.js, pieces_scan.py). -->
+      <div id="view-scan" class="view" hidden>
+        <section class="section cs" id="coin-scan" aria-label="Scanner une pièce"></section>
       </div>
 
       <!-- Météo de l’or : indices de tendance, à titre informatif (meteo.js). -->
@@ -252,21 +264,22 @@
         </details>
       </section>
     </main>
-    <script src="fiscal.js?v=20261114-courbe"></script>
-    <script src="freshness.js?v=20261114-courbe"></script>
-    <script src="gold-chart.js?v=20261114-courbe"></script>
-    <script src="app.js?v=20261114-courbe"></script>
-    <script src="estimation.js?v=20261114-courbe"></script>
-    <script src="silver.js?v=20261114-courbe"></script>
-    <script src="cours-plus.js?v=20261114-courbe"></script>
-    <script src="meteo.js?v=20261114-courbe"></script>
-    <script src="alerte-cours.js?v=20261114-courbe"></script>
-    <script src="c3e.js?v=20261114-courbe"></script>
-    <script src="mobile.js?v=20261114-courbe"></script>
-    <script src="alignment.js?v=20261114-courbe"></script>
-    <script src="quick-prices.js?v=20261114-courbe"></script>
-    <script src="print.js?v=20261114-courbe"></script>
-    <script src="edit-fields.js?v=20261114-courbe"></script>
-    <script src="update.js?v=20261114-courbe"></script>
+    <script src="fiscal.js?v=20261114-scan"></script>
+    <script src="freshness.js?v=20261114-scan"></script>
+    <script src="gold-chart.js?v=20261114-scan"></script>
+    <script src="app.js?v=20261114-scan"></script>
+    <script src="estimation.js?v=20261114-scan"></script>
+    <script src="silver.js?v=20261114-scan"></script>
+    <script src="cours-plus.js?v=20261114-scan"></script>
+    <script src="meteo.js?v=20261114-scan"></script>
+    <script src="alerte-cours.js?v=20261114-scan"></script>
+    <script src="scan.js?v=20261114-scan"></script>
+    <script src="c3e.js?v=20261114-scan"></script>
+    <script src="mobile.js?v=20261114-scan"></script>
+    <script src="alignment.js?v=20261114-scan"></script>
+    <script src="quick-prices.js?v=20261114-scan"></script>
+    <script src="print.js?v=20261114-scan"></script>
+    <script src="edit-fields.js?v=20261114-scan"></script>
+    <script src="update.js?v=20261114-scan"></script>
   </body>
 </html>

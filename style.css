@@ -255,7 +255,7 @@ summary {
   right: 0;
   bottom: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   padding: 6px max(16px, calc((100vw - 560px) / 2)) calc(env(safe-area-inset-bottom) + 6px);
   background: rgba(16, 28, 36, 0.92);
   -webkit-backdrop-filter: blur(14px);
@@ -1112,3 +1112,36 @@ body::before {
 .wordmark .word-app {
   color: #c9d4db;
 }
+
+/* Scanner de pièces (scan.js) */
+.cs-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0 12px; }
+.cs-shot { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 130px;
+  border: 1px dashed #58707d; border-radius: 14px; background: var(--field); color: var(--muted); font-size: 13px; cursor: pointer; }
+.cs-shot.taken { border-style: solid; border-color: #6b8594; }
+.cs-shot img { width: 92px; height: 92px; object-fit: cover; border-radius: 50%; }
+.cs-cam { font-size: 30px; }
+.cs-ask { width: 100%; margin-bottom: 8px; }
+.cs .secondary { width: 100%; margin-top: 4px; }
+.cs-bad { color: #ff9ca4; }
+.cs-hits { display: grid; gap: 8px; margin-top: 10px; }
+.cs-hit { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center; width: 100%; padding: 9px; text-align: left;
+  background: var(--field); border: 1px solid var(--line); border-radius: 12px; color: var(--text); }
+.cs-hit img, .cs-noimg { width: 56px; height: 56px; object-fit: contain; border-radius: 8px; background: #0b151b; display: grid; place-items: center; color: var(--muted); }
+.cs-hit b { display: block; font-size: 14px; }
+.cs-hit small { color: var(--muted); font-size: 12px; }
+.cs-more { margin-top: 14px; }
+.cs-more summary { color: var(--gold); font-size: 14px; cursor: pointer; }
+.cs-search { display: grid; gap: 8px; margin-top: 10px; }
+.cs-two { display: grid; grid-template-columns: 1fr 110px; gap: 8px; }
+.cs-sheet h3 { margin: 10px 0 2px; font-size: 18px; color: var(--text); }
+.cs-faces { display: flex; justify-content: center; gap: 12px; }
+.cs-faces img { width: 120px; height: 120px; object-fit: contain; border-radius: 50%; background: #0b151b; }
+.cs-row { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.cs-row span { color: var(--muted); }
+.cs-row b { text-align: right; }
+.cs-price { display: grid; gap: 2px; margin: 12px 0; padding: 12px 14px; border-radius: 12px; background: rgba(233, 191, 117, 0.1); border: 1px solid rgba(233, 191, 117, 0.35); }
+.cs-price span { color: var(--muted); font-size: 13px; }
+.cs-price b { color: var(--gold); font-size: 24px; }
+.cs-price small { color: var(--muted); font-size: 12px; }
+.cs-warn { color: #e9bf75; }
+.cs-sheet a { display: block; margin: 8px 0; color: var(--gold); }
