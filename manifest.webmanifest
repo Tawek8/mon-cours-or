@@ -1,6 +1,6 @@
 {
-  "name": "OrApp",
-  "short_name": "OrApp",
+  "name": "Orbismini",
+  "short_name": "Orbismini",
   "start_url": "./",
   "display": "standalone",
   "orientation": "portrait",

@@ -128,7 +128,7 @@
             el('summary', { textContent: 'Recevoir l’alerte sur ce téléphone' }),
             el('p', { className: 'small', textContent:
               'Installe l’appli gratuite « ntfy » depuis l’App Store, touche « + », puis abonne-toi au canal ci-dessous (serveur ntfy.sh, celui par défaut). ' +
-              'La notification arrive même OrApp fermée. Le cours est contrôlé toutes les 10 minutes en semaine.' }),
+              'La notification arrive même Orbismini fermée. Le cours est contrôlé toutes les 10 minutes en semaine.' }),
             el('p', { className: 'ga-channel', textContent: a.channel }),
             copy)
         : null,

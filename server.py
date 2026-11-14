@@ -40,9 +40,9 @@ LOGIN_PAGE = """<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#121d25"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="OrApp">
+<meta name="apple-mobile-web-app-title" content="Orbismini">
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.png">
-<title>OrApp</title>
+<title>Orbismini</title>
 <style>
 :root{color-scheme:dark}*{box-sizing:border-box}
 body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
@@ -60,7 +60,7 @@ font-weight:650;cursor:pointer}
 </style></head><body>
 <form method="post" action="login">
 <img src="icon.svg" alt="">
-<h1><span style="color:#e9bf75">Or</span>App</h1>
+<h1><span style="color:#e9bf75">Orbis</span>mini</h1>
 <p>Saisis le mot de passe pour ouvrir l’application.</p>
 <input type="text" name="username" value="GoldApp" autocomplete="username" hidden>
 <input type="password" name="password" autocomplete="current-password" placeholder="Mot de passe" required autofocus>

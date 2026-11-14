@@ -1,4 +1,6 @@
-# OrApp
+# Orbismini
+
+(anciennement OrApp ; dépôt et service Render gardent le nom mon-cours-or)
 
 Anciennement GoldApp. Logo dérivé de celui d’Orbis : `icon.svg` (icône),
 `orapp-logo.svg` / `orapp-logo.png` (logo complet).

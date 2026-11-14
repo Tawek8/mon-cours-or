@@ -1,4 +1,4 @@
-// Onglet « Scan » : trouver le poids et le titre d’une pièce peu courante, comme le scanner
+// Onglet « Pièces » : trouver le poids et le titre d’une pièce peu courante, comme le scanner
 // de pièces d’Orbis. Photo de la face (et du revers) → « Demander à Claude » → pièces du
 // catalogue Numista ; ou recherche guidée (mots, pays, année). La fiche vient toujours de
 // Numista ; le prix d’achat indicatif suit le calcul de la ligne « Divers » des tarifs

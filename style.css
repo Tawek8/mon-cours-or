@@ -261,14 +261,15 @@ summary {
   right: 0;
   bottom: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 6px max(16px, calc((100vw - 560px) / 2)) calc(env(safe-area-inset-bottom) + 6px);
+  grid-template-columns: repeat(5, 1fr);
+  padding: 6px max(10px, calc((100vw - 560px) / 2)) calc(env(safe-area-inset-bottom) + 6px);
   background: rgba(16, 28, 36, 0.92);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   border-top: 1px solid var(--line);
 }
-.views button {
+.views button,
+.views .view-link {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -280,6 +281,9 @@ summary {
   background: transparent;
   color: var(--muted);
   font-size: 12px;
+}
+.views .view-link {
+  text-decoration: none;
 }
 .views button[aria-pressed='true'] {
   color: var(--gold);
@@ -1111,7 +1115,7 @@ body::before {
   font: 600 15px ui-monospace, Menlo, Consolas, monospace;
   word-break: break-all;
 }
-/* Nom « OrApp » : « Or » doré, « App » argenté, comme le logo. */
+/* Nom « Orbismini » : « Orbis » doré, « mini » argenté, comme le logo. */
 .wordmark .word-or {
   color: var(--gold);
 }

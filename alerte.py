@@ -195,7 +195,7 @@ def notify(s, key, post=None):
             continue
         title = what(h)
         body = ("Cours " + kilo(h["price"]) + (", contre " + kilo(h["ref"]) + " 24 h plus tôt" if h.get("ref") else "")
-                + " (BullionVault). Ouvrir OrApp pour régler une nouvelle alerte.")
+                + " (BullionVault). Ouvrir Orbismini pour régler une nouvelle alerte.")
         try:
             post(topic, title, body)
             out.append(h["id"])

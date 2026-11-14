@@ -1,4 +1,4 @@
-"""Scanner de pièces (onglet « Scan » d'OrApp), repris du scanner de pièces d'Orbis
+"""Scanner de pièces (onglet « Pièces » d'Orbismini), repris du scanner de pièces d'Orbis
 (scanner_pieces.py) : même recherche Numista, même question à Claude, mêmes calculs.
 
   - recherche guidée : mots du nom, pays, année → catalogue Numista ;

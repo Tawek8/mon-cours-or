@@ -1,5 +1,14 @@
 # Historique
 
+## 14/11/2026 — OrApp devient Orbismini ; bouton « Scan » vers Orbiscan
+
+- L’application s’appelle maintenant Orbismini (nom, logo, page de connexion, écran d’accueil).
+- Nouveau bouton « Scan » à droite de « Rachat » : il ouvre Orbiscan, la page du relais du PC
+  (http://orbiscan.local:8790/t). Pièces d’identité, RIB et pièces : les photos vont directement
+  du téléphone au PC par le Wi-Fi du magasin, jamais par internet. Ne marche que sur le Wi-Fi
+  d’un PC Orbis. L’icône Orbiscan reste utilisable par les collaborateurs.
+- L’onglet du scanner de pièces (Claude et Numista) s’appelle maintenant « Pièces ».
+
 ## 14/11/2026 — Barre d’onglets qui remontait sur l’onglet Scan
 
 - Chaque onglet est au moins aussi haut que l’écran : sur l’onglet Scan, trop court, Safari
