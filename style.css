@@ -247,6 +247,12 @@ summary {
   font-size: 16px;
 }
 
+/* Chaque onglet au moins aussi haut que l’écran : sur un onglet court (Scan), Safari
+   rouvrait sa barre d’adresse et la barre d’onglets remontait au-dessus. */
+.view {
+  min-height: 100vh;
+}
+
 /* Navigation Cours / Rachat : barre d’onglets en bas, au pouce. */
 .views {
   position: fixed;

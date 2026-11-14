@@ -1,5 +1,10 @@
 # Historique
 
+## 14/11/2026 — Barre d’onglets qui remontait sur l’onglet Scan
+
+- Chaque onglet est au moins aussi haut que l’écran : sur l’onglet Scan, trop court, Safari
+  réaffichait sa barre d’adresse et la barre d’onglets du bas remontait.
+
 ## 14/11/2026 — Onglet « Scan » : scanner de pièces
 
 - Nouvel onglet entre Cours et Météo, repris du scanner de pièces d’Orbis : photo de la face
