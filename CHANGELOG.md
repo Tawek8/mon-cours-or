@@ -1,5 +1,13 @@
 # Historique
 
+## 14/11/2026 — Cours : écran épuré, courbe sur 5 et 10 ans, bande de Bollinger
+
+- Première ligne « Kitco : cours » retirée (le cours est déjà dans le cadre) ; sous le cours,
+  la source seulement ; sous la courbe, plus de cours répété (il s’affiche en touchant la courbe).
+- Logo : barre dorée verticale entre l’anneau et le nom, reprise du logo d’Orbis.
+- Courbe : périodes 5 ans et 10 ans (points de 10 jours et d’un mois de BullionVault).
+- Bouton « Bollinger » : moyenne des 20 derniers points ± 2 écarts-types, en bleu.
+
 ## 14/11/2026 — Alerte de cours : variation brusque
 
 - Nouveau réglage « Hausse ou baisse de plus de … % sur 24 h » (par rapport au cours de

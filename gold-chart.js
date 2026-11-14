@@ -38,8 +38,24 @@
       sign +
       fmt(delta) +
       ' € sur ' +
-      ({ 1: '1 jour', 7: '7 jours', 30: '1 mois', 365: '1 an' }[period] || period + ' jours');
+      ({ 1: '1 jour', 7: '7 jours', 30: '1 mois', 365: '1 an', 1825: '5 ans', 3650: '10 ans' }[period] || period + ' jours');
     host.hidden = false;
+  }
+  // Bande de Bollinger : moyenne des 20 derniers points ± 2 écarts-types, calculée sur tout
+  // l'historique reçu (la bande existe dès le début de la période quand il y en a assez).
+  const BOLL_N = 20,
+    BOLL_K = 2,
+    STEP = { 1: '10 minutes', 7: '1 heure', 30: '4 heures', 365: '2 jours', 1825: '10 jours', 3650: '1 mois' };
+  let bollinger = localStorage.getItem('orapp-bollinger') === '1';
+  function bands(points) {
+    const out = new Map();
+    for (let i = BOLL_N - 1; i < points.length; i++) {
+      const w = points.slice(i - BOLL_N + 1, i + 1).map(p => p.price),
+        mean = w.reduce((a, b) => a + b, 0) / BOLL_N,
+        sd = Math.sqrt(w.reduce((a, b) => a + (b - mean) ** 2, 0) / BOLL_N);
+      out.set(points[i], { mid: mean, up: mean + BOLL_K * sd, low: mean - BOLL_K * sd });
+    }
+    return out;
   }
   function render(points, period, chosenMetal = metal) {
     last = points;
@@ -54,9 +70,12 @@
     if (width < 80) return;
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - period);
-    const values = points.filter(
-      p => new Date(p.date) >= cutoff && Number.isFinite(p.price) && p.price > 0
-    );
+    const clean = points.filter(p => Number.isFinite(p.price) && p.price > 0),
+      values = clean.filter(p => new Date(p.date) >= cutoff),
+      band = bollinger ? bands(clean) : new Map(),
+      shown = values.filter(v => band.has(v));
+    const toggle = document.getElementById('bollinger');
+    if (toggle) toggle.setAttribute('aria-pressed', String(bollinger));
     document
       .querySelectorAll('[data-period]')
       .forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.period) === period)));
@@ -70,8 +89,8 @@
       right = 10,
       top = 13,
       bottom = 30,
-      min = Math.min(...values.map(v => v.price)),
-      max = Math.max(...values.map(v => v.price)),
+      min = Math.min(...values.map(v => v.price), ...shown.map(v => band.get(v).low)),
+      max = Math.max(...values.map(v => v.price), ...shown.map(v => band.get(v).up)),
       pad = Math.max(1, (max - min) * 0.12),
       start = new Date(values[0].date).getTime(),
       end = new Date(values.at(-1).date).getTime(),
@@ -128,10 +147,8 @@
               hour: '2-digit',
               minute: '2-digit',
             })
-          : new Date(values[index].date).toLocaleDateString('fr-FR', {
-              day: '2-digit',
-              month: 'short',
-            })
+          : new Date(values[index].date).toLocaleDateString('fr-FR',
+              period >= 1825 ? { month: 'short', year: 'numeric' } : { day: '2-digit', month: 'short' })
       )
     );
     // Dégradé, halo, repère de début de période, plus haut / plus bas, dernier cours animé.
@@ -155,6 +172,13 @@
       'stroke-dasharray': '4 4',
       opacity: 0.5,
     });
+    if (shown.length > 1) {
+      const path = key => shown.map((v, i) => (i ? 'L' : 'M') + x(v) + ',' + y(band.get(v)[key])).join(' ');
+      const back = shown.slice().reverse().map(v => 'L' + x(v) + ',' + y(band.get(v).low)).join(' ');
+      el('path', { d: path('up') + ' ' + back + ' Z', fill: '#9cc8f2', opacity: 0.1 });
+      for (const key of ['up', 'low']) el('path', { d: path(key), fill: 'none', stroke: '#9cc8f2', 'stroke-width': 1, opacity: 0.55 });
+      el('path', { d: path('mid'), fill: 'none', stroke: '#9cc8f2', 'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: 0.7 });
+    }
     let d = '';
     values.forEach((v, i) => (d += (i ? ' L' : 'M') + x(v) + ',' + y(v.price)));
     el('path', {
@@ -189,12 +213,15 @@
       line.style.transition = 'stroke-dashoffset 800ms ease-out';
       line.style.strokeDashoffset = 0;
     }
-    const prices = values.map(v => v.price);
+    // Plus haut et plus bas de la courbe (la bande de Bollinger peut dépasser).
+    const prices = values.map(v => v.price),
+      top1 = Math.max(...prices),
+      low1 = Math.min(...prices);
     for (const [index, above] of [
-      [prices.indexOf(max), true],
-      [prices.indexOf(min), false],
+      [prices.indexOf(top1), true],
+      [prices.indexOf(low1), false],
     ]) {
-      if (index === values.length - 1 && max !== min) continue;
+      if (index === values.length - 1 && top1 !== low1) continue;
       const cx = x(values[index]),
         cy = y(prices[index]),
         anchor = cx < left + 60 ? 'start' : cx > width - right - 60 ? 'end' : 'middle';
@@ -257,7 +284,12 @@
           maximumFractionDigits: 2,
         }).format(p.price) +
         ' €/kg';
-    note.textContent = label(values.at(-1)) + ' · BullionVault';
+    // Sous la courbe : la source (et la bande) ; la date et le cours s'affichent en touchant la courbe.
+    const rest = () =>
+      bollinger
+        ? 'Bande de Bollinger : moyenne des 20 derniers points (1 point = ' + STEP[period] + ') ± 2 écarts-types · BullionVault'
+        : 'Courbe BullionVault · touche la courbe pour lire un cours';
+    note.textContent = rest();
     chart.onpointermove = e => {
       const target = Math.min(
           width - right,
@@ -276,7 +308,6 @@
       }
       halo.setAttribute('opacity', 0.22);
       marker.setAttribute('opacity', 1);
-      note.textContent = label(point) + ' · BullionVault';
       // Bulle de lecture au-dessus du doigt.
       const tip = document.getElementById('chart-tip');
       if (tip) {
@@ -298,9 +329,13 @@
       guide.setAttribute('opacity', 0);
       halo.setAttribute('opacity', 0);
       marker.setAttribute('opacity', 0);
-      note.textContent = label(values.at(-1)) + ' · BullionVault';
     };
   }
   window.GoldSpotChart = { render };
+  document.getElementById('bollinger')?.addEventListener('click', () => {
+    bollinger = !bollinger;
+    localStorage.setItem('orapp-bollinger', bollinger ? '1' : '0');
+    render(last, days, metal);
+  });
   new ResizeObserver(() => render(last, days, metal)).observe(document.getElementById('spot-chart'));
 })();

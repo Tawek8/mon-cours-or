@@ -165,6 +165,25 @@ summary {
   border-radius: 9px;
   display: block;
 }
+/* Barre dorée du logo d’Orbis (couleur, fondu et proportions relevés sur orbis-logo.png) :
+   87 % de la hauteur de l’anneau, entre l’anneau et le nom. */
+.brand-bar {
+  display: block;
+  flex: none;
+  width: 1.5px;
+  height: 35px;
+  margin: 0 -2px 0 -3px;
+  background: linear-gradient(to bottom, transparent, #c99a45 17%, #c99a45 81%, transparent);
+}
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+#splash .brand-bar {
+  width: 2.5px;
+  height: 73px;
+}
 .refresh-spinner {
   display: inline-block;
   width: 24px;
@@ -333,16 +352,17 @@ summary {
 }
 .periods {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 5px;
   padding-top: 14px;
   margin-top: 12px;
   border-top: 1px solid var(--line);
 }
 .periods button {
   min-height: 38px;
-  padding: 6px;
+  padding: 6px 2px;
   font-size: 13px;
+  white-space: nowrap;
   background: var(--field);
   color: var(--muted);
 }
@@ -362,6 +382,26 @@ summary {
 #chart-note {
   min-height: 34px;
   margin-top: 4px;
+}
+.chart-foot {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.chip-toggle {
+  flex: none;
+  min-height: 30px;
+  padding: 4px 12px;
+  font-size: 12.5px;
+  border-radius: 999px;
+  background: var(--field);
+  color: var(--muted);
+}
+.chip-toggle[aria-pressed='true'] {
+  background: #344b59;
+  border-color: #6b8594;
+  color: #9cc8f2;
 }
 
 /* Cours : listes de produits (cartes de GoldGestion) */

@@ -305,9 +305,7 @@ function draw() {
     Number.isFinite(quote.price) &&
     quote.price > 0 &&
     Number.isFinite(at.getTime())
-      ? (quote.source === 'Kitco' ? 'Kitco : ' : 'BullionVault (secours Kitco) : ') +
-        eur(quote.price) +
-        '/kg\nDernière actualisation : ' +
+      ? 'Dernière actualisation : ' +
         at.toLocaleString('fr-FR', {
           timeZone: 'Europe/Paris',
           day: '2-digit',
@@ -317,7 +315,7 @@ function draw() {
           minute: '2-digit',
           hourCycle: 'h23',
         })
-      : 'Kitco : en attente d’actualisation';
+      : 'En attente d’actualisation';
 }
 $('mult').addEventListener('input', () => {
   localStorage.setItem('or-discount', $('mult').value);
@@ -477,9 +475,7 @@ function paintSpotHeader() {
     .forEach(b => b.setAttribute('aria-pressed', String(b.dataset.metal === spotMetal)));
   if (silver) {
     $('instant').textContent = lastPoint ? eur(lastPoint.price) : '—';
-    $('spot-meta').textContent = lastPoint
-      ? 'BullionVault · ' + new Date(lastPoint.date).toLocaleString('fr-FR') + ' · €/kg'
-      : 'Cours de l’argent BullionVault indisponible.';
+    $('spot-meta').textContent = lastPoint ? 'BullionVault' : 'Cours de l’argent BullionVault indisponible.';
   } else {
     $('spot-meta').textContent = goldMeta;
     draw();
@@ -495,14 +491,11 @@ async function loadSpot() {
     spotValue = p.price;
     localStorage.setItem('or-spot-last', JSON.stringify(p));
     goldMeta =
-      'Spot indicatif · ' +
-      (p.updatedAt ? new Date(p.updatedAt).toLocaleString('fr-FR') + ' · ' : '') +
-      (p.source === 'Kitco'
+      p.source === 'Kitco'
         ? p.marketClosed
-          ? 'Marché fermé · cours de clôture Kitco · Bid · €/kg'
-          : 'Source : Kitco · Bid · €/kg'
-        : (p.marketClosed ? 'Marché fermé · cours de clôture · ' : '') +
-          'Source : BullionVault · secours, Kitco indisponible · €/kg');
+          ? 'Marché fermé · clôture Kitco (prix acheteur)'
+          : 'Kitco (prix acheteur)'
+        : (p.marketClosed ? 'Marché fermé · clôture ' : '') + 'BullionVault (Kitco indisponible)';
     if (spotMetal === 'gold') $('spot-meta').textContent = goldMeta;
     draw();
   } catch (e) {

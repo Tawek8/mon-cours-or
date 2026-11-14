@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 
-PERIODS = {"1": 600, "7": 3600, "30": 14400, "90": 43200, "365": 172800, "1825": 864000}
+PERIODS = {"1": 600, "7": 3600, "30": 14400, "90": 43200, "365": 172800, "1825": 864000, "3650": 2592000}
 METALS = {"gold": "AUX", "silver": "AGX"}
 
 
@@ -64,7 +64,7 @@ def fetch_history(period="1", metal="gold"):
         if (
             not isinstance(stamp, (int, float))
             or not math.isfinite(stamp)
-            or not 1577836800000 <= stamp <= time.time() * 1000 + 300000
+            or not 946684800000 <= stamp <= time.time() * 1000 + 300000
         ):
             raise ValueError("Horodatage du graphique invalide")
         date = datetime.fromtimestamp(stamp / 1000, timezone.utc).isoformat()

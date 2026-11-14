@@ -12,22 +12,22 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon.png" />
     <title>OrApp</title>
-    <link rel="stylesheet" href="style.css?v=20261114-variation" />
-    <link rel="stylesheet" href="estimation.css?v=20261114-variation" />
-    <link rel="stylesheet" href="print.css?v=20261114-variation" />
+    <link rel="stylesheet" href="style.css?v=20261114-courbe" />
+    <link rel="stylesheet" href="estimation.css?v=20261114-courbe" />
+    <link rel="stylesheet" href="print.css?v=20261114-courbe" />
   </head>
   <body data-view="cours">
     <div id="pull-indicator" aria-hidden="true">
       <span class="pull-arrow">↓</span><span class="pull-text">Tire pour actualiser</span>
     </div>
     <div id="splash" aria-hidden="true">
-      <img src="icon.svg" alt="" width="84" height="84" />
+      <span class="brand-mark"><img src="icon.svg" alt="" width="84" height="84" /><i class="brand-bar" aria-hidden="true"></i></span>
       <span class="wordmark"><span class="word-or">Or</span><span class="word-app">App</span></span>
     </div>
     <main>
       <header class="top">
         <div class="brand">
-          <img src="icon.svg" alt="" width="40" height="40" />
+          <img src="icon.svg" alt="" width="40" height="40" /><i class="brand-bar" aria-hidden="true"></i>
           <h1 class="wordmark"><span class="word-or">Or</span><span class="word-app">App</span></h1>
         </div>
         <span
@@ -40,7 +40,7 @@
         <!-- Actualisation : tirer l’écran vers le bas ; ce bouton invisible reste la commande. -->
         <button id="refresh" type="button" hidden>Actualiser</button>
       </header>
-      <p class="fresh-text" id="last-updated">Kitco : en attente d’actualisation</p>
+      <p class="fresh-text" id="last-updated">En attente d’actualisation</p>
       <div id="stale-banner" class="stale" role="alert" hidden>
         <span id="stale-text"></span>
         <button type="button" id="stale-refresh" class="primary">Actualiser</button>
@@ -80,10 +80,12 @@
           <div class="spot-variation" id="spot-variation" hidden></div>
           <p id="spot-meta" class="small">Chargement du cours spot…</p>
           <div class="periods" role="group" aria-label="Période du graphique">
-            <button type="button" data-period="1" aria-pressed="true">1 jour</button
-            ><button type="button" data-period="7" aria-pressed="false">7 jours</button
+            <button type="button" data-period="1" aria-pressed="true" aria-label="1 jour">1 j</button
+            ><button type="button" data-period="7" aria-pressed="false" aria-label="7 jours">7 j</button
             ><button type="button" data-period="30" aria-pressed="false">1 mois</button
-            ><button type="button" data-period="365" aria-pressed="false">1 an</button>
+            ><button type="button" data-period="365" aria-pressed="false">1 an</button
+            ><button type="button" data-period="1825" aria-pressed="false">5 ans</button
+            ><button type="button" data-period="3650" aria-pressed="false">10 ans</button>
           </div>
           <div class="chart-wrap">
           <div id="chart-tip" class="chart-tip" hidden></div>
@@ -95,7 +97,10 @@
             preserveAspectRatio="none"
           ></svg>
           </div>
-          <p id="chart-note" class="small">Chargement de l’historique…</p>
+          <div class="chart-foot">
+            <p id="chart-note" class="small">Chargement de l’historique…</p>
+            <button type="button" id="bollinger" class="chip-toggle" aria-pressed="false">Bollinger</button>
+          </div>
         </section>
 
         <div class="search-bar">
@@ -247,21 +252,21 @@
         </details>
       </section>
     </main>
-    <script src="fiscal.js?v=20261114-variation"></script>
-    <script src="freshness.js?v=20261114-variation"></script>
-    <script src="gold-chart.js?v=20261114-variation"></script>
-    <script src="app.js?v=20261114-variation"></script>
-    <script src="estimation.js?v=20261114-variation"></script>
-    <script src="silver.js?v=20261114-variation"></script>
-    <script src="cours-plus.js?v=20261114-variation"></script>
-    <script src="meteo.js?v=20261114-variation"></script>
-    <script src="alerte-cours.js?v=20261114-variation"></script>
-    <script src="c3e.js?v=20261114-variation"></script>
-    <script src="mobile.js?v=20261114-variation"></script>
-    <script src="alignment.js?v=20261114-variation"></script>
-    <script src="quick-prices.js?v=20261114-variation"></script>
-    <script src="print.js?v=20261114-variation"></script>
-    <script src="edit-fields.js?v=20261114-variation"></script>
-    <script src="update.js?v=20261114-variation"></script>
+    <script src="fiscal.js?v=20261114-courbe"></script>
+    <script src="freshness.js?v=20261114-courbe"></script>
+    <script src="gold-chart.js?v=20261114-courbe"></script>
+    <script src="app.js?v=20261114-courbe"></script>
+    <script src="estimation.js?v=20261114-courbe"></script>
+    <script src="silver.js?v=20261114-courbe"></script>
+    <script src="cours-plus.js?v=20261114-courbe"></script>
+    <script src="meteo.js?v=20261114-courbe"></script>
+    <script src="alerte-cours.js?v=20261114-courbe"></script>
+    <script src="c3e.js?v=20261114-courbe"></script>
+    <script src="mobile.js?v=20261114-courbe"></script>
+    <script src="alignment.js?v=20261114-courbe"></script>
+    <script src="quick-prices.js?v=20261114-courbe"></script>
+    <script src="print.js?v=20261114-courbe"></script>
+    <script src="edit-fields.js?v=20261114-courbe"></script>
+    <script src="update.js?v=20261114-courbe"></script>
   </body>
 </html>
